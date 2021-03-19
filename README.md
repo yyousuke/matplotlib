@@ -1,5 +1,5 @@
 # 気象データ解析のためのmatplotlibの使い⽅
-http://ebcrpa.jamstec.go.jp/~yyousuke/matplotlib/の2020年3月19日時点のアーカイブです
+http://ebcrpa.jamstec.go.jp/~yyousuke/matplotlib/ の2020年3月19日時点のアーカイブです
 Webページとして表示する場合には、先にダウンロードかクローンしてローカルで開いてください。
 
 2021年1月5日版のファイルは以下です。
