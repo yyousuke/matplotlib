@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="author" content="山下陽介 (Yousuke Yamashita)" />
+<link rel="icon" href="/~yyousuke/yousuke/favicon.ico" type="image/x-icon" />
+<!-- Mobile Internet Explorer allows us to activate ClearType technology for smoothing fonts for easy reading -->
+<meta http-equiv="cleartype" content="on" />
+<!-- Specify whether or not telephone numbers in the HTML content should appear as hypertext links -->
+<meta name="format-detection" content="telephone=no" />
+<!-- Changes the logical window size used when displaying a page mobile browsers -->
+<meta name = "viewport" content = "width = device-width, initial-scale=1, user-scalable=yes" />
+
+<meta name="robots" content="all" />
+<meta name="http-equiv" content="X-Robots-Tag : all" />
+<meta name="googlebot" content="all" />
+<meta name="description" content="" />
+<meta name="keywords" content="python matplotlib Basemap 気象データ" />
+<link href="design.css" rel="stylesheet" type="text/css" />
+<title>気象データ解析のためのmatplotlibの使い⽅</title>
+</head>
+
+<body link="#0000FF" vlink="#0000FF">
+<div id="link">
+<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v3.3"></script>
+<div class="fb-share-button" data-href="http://ebcrpa.jamstec.go.jp/~yyousuke/matplotlib/index.html" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Febcrpa.jamstec.go.jp%2F%7Eyyousuke%2Fmatplotlib%2Findex.html&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">シェア</a></div>
+</div>
+<div id="nesting">
+<a href="/~yyousuke">ホーム</a> &gt; matplotlibの使い⽅
+</div>
+<article>
+<center><h1 id="top">気象データ解析のためのmatplotlibの使い⽅</h1></center>
+
+<br />
+
+<div id="text2">
+<p>&nbsp; 近年、python上でデータを可視化するためのmatplotlibが普及してきていますが、地図上へのプロットなど、気象分野に特化した情報をまとめたものがほとんどなかったため、このようなページを作成しました。ここでは、pythonやmatplotlibを使ったことがない段階のチュートリアルから始め、matplotlibを使って実際の気象データを使った作図を行うところまで段階的に解説しています。また、matplotlibを使う際のTIPSなども順次追加していきたいと思っています。このページの情報で、気象分野におけるmatplotlibの普及や効率的な利用が進めば幸いです。</p>
+<p>作成者：山下陽介（NIES←JAMSTEC）</p>
+</div>
+<br />
+<hr />
+
+<h3><div class="headline2" id="matplotlib">気象データ解析のためのmatplotlibの使い⽅</div></h3>
+<div class="contents">
+<p><h3>（2021年1月5日版）</h3></p>
+<ul class="list1">
+<li><a href="./matplotlib-1.pdf" target="_blank">１章　はじめに</a>（PDFファイル）</li>
+<li><a href="./matplotlib-2.pdf" target="_blank">２章　matplotlibの導入</a>（PDFファイル）</li>
+<li><a href="./matplotlib-3.pdf" target="_blank">３章　matplotlibの基本</a>（PDFファイル）</li>
+<li><a href="./matplotlib-4.pdf" target="_blank">４章　折れ線グラフ、棒グラフ、ヒストグラム、散布図</a>（PDFファイル）</li>
+<li><a href="./matplotlib-5.pdf" target="_blank">５章　様々な１次元・２次元プロット</a>（PDFファイル）</li>
+<li><a href="./matplotlib-6.pdf " target="_blank">６章　Basemapの利用</a>（PDFファイル）</li>
+<li><a href="./matplotlib-7.pdf " target="_blank">７章　cartopyの利用</a>（PDFファイル）</li>
+<li><a href="./met_sample.zip" target="_blank">サンプルプログラム</a>（ZIPファイル）</li>
+</ul>
+</div>
+<br />
+
+<h3><div class="headline2" id="tips">matplotlibを使う際のTIPS</div></h3>
+<div class="contents">
+<ul class="list1">
+<li><a href="./matplotlib.html">グラフ作図のTIPS</a></li>
+<li><a href="./basemap.html">BasemapのTIPS</a></li>
+<li><a href="./cartopy.html">cartopyのTIPS</a></li>
+<li><a href="./metdata.html">気象データ処理のTIPS</a></li>
+<!--
+  <li><a href="./matplotlib-install.html">matplotlib導入のTIPS</a></li>
+-->
+</ul>
+</div>
+<br />
+
+<h3><div class="headline2" id="tutorial">チュートリアル</div></h3>
+<div class="contents">
+<ul class="list1">
+<li><a href="./matplotlib-tutorial.html">matplotlibのチュートリアル</a></li>
+</ul>
+</div>
+<br />
+
+<h3><div class="headline2" id="tutorial">番外編</div></h3>
+<div class="contents">
+<ul class="list1">
+<li><a href="./wpr_colab.html">ウィンドプロファイラ作図</a></li>
+</ul>
+</div>
+<br />
+
+<h3><div class="headline2">更新・エラー情報</div></h3>
+<div class="contents">
+<ul class="list1">
+<li><a href="./info.html#20210224">気象庁HP更新に伴うサンプルプログラムの動作確認について（2021/02/24）</li>
+<li><a href="./info.html#20201127">macOS Big Sur対応について（2020/11/27）</li>
+<li><a href="./matplotlib-tutorial.html">matplotlibのチュートリアル</a>を公開しました（2020/10/03）</li>
+<li><a href="./info.html#20200725">Basemapをインポートできない不具合の解決方法（2020/07/25）</a></li>
+<li><a href="./matplotlib-2.pdf" target="_blank">「２章　matplotlibの導入」</a>をpython3.8用に書き換えました（2020/05/31）</li>
+<li>cartopyのTIPSを追加しました（2020/03/20）</li>
+<li><a href="./matplotlib-7.pdf" target="_blank">「７章　cartopyの利用」</a>の暫定版を公開しました（2020/02/23）</li>
+<li><a href="met_sample.zip" target="_blank">Pandas1.0.0以降に対応した修正版のサンプルプログラム</a>を公開しました（2020/02/23）</li>
+<li><a href="./info.html#20200205">Pandas1.0.0のDataFrameで.ix廃止（2020/02/05）</a></li>
+<li><a href="./info.html#20200201">解決法：正射投影図法で北緯45度より北側を中心にした場合の不具合（2020/02/01）</a></li>
+<li><a href="./info.html#20191212">正射投影図法で北緯45度より北側を中心にした場合の不具合（2019/12/12）</a></li>
+<li><a href="./matplotlib-2.pdf" target="_blank">「２章　matplotlibの導入」</a>をMac OSX Catalina+python3.7用に書き換え（2019/12/10）</li>
+<li>python3.7/3.6での動作確認を終えたサンプルプログラムに更新（2019/12/10）</li>
+<li><a href="./info.html#20191108">Basemap1.2.1で一連の不具合解消（2019/11/08）</a></li>
+<li>気象データ処理のTIPSを追加しました（2019/09/22）</li>
+<li><a href="./info.html#20190830">ログプロットの不具合がmatplotlib3.1.1で解消（2019/08/30）</a></li>
+<li><a href="./info.html#20190822">MacPorts更新後のBasemapでtriオプション使用不可（2019/08/22）</a></li>
+<li>BasemapのTIPSを追加しました（2019/06/16）</li>
+<li><a href="./info.html#20190523">MacPorts更新後のBasemapエラー（2019/05/23）</a></li>
+</ul>
+</div>
+<br />
+
+
+<small><a href="#top">[top]</a></small> <br />
+<hr />
+
+</article>
+<footer>
+<p>最終更新日：2021/02/24</p>
+<p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
+</footer>
+</body>
+</html>

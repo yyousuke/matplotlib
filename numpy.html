@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="author" content="山下陽介 (Yousuke Yamashita)" />
+<link rel="icon" href="/~yyousuke/yousuke/favicon.ico" type="image/x-icon" />
+<!-- Mobile Internet Explorer allows us to activate ClearType technology for smoothing fonts for easy reading -->
+<meta http-equiv="cleartype" content="on" />
+<!-- Specify whether or not telephone numbers in the HTML content should appear as hypertext links -->
+<meta name="format-detection" content="telephone=no" />
+<!-- Changes the logical window size used when displaying a page mobile browsers -->
+<meta name = "viewport" content = "width = device-width, initial-scale=1, user-scalable=yes" />
+
+<meta name="robots" content="all" />
+<meta name="http-equiv" content="X-Robots-Tag : all" />
+<meta name="googlebot" content="all" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link href="design.css" rel="stylesheet" type="text/css" />
+<title>気象データ解析のためのmatplotlibの使い⽅</title>
+</head>
+
+<body link="#0000FF" vlink="#0000FF">
+
+<div id="nesting">
+<a href="/~yyousuke">ホーム</a> &gt; <a href="index.html">matplotlibの使い⽅</a> &gt; Numpy
+</div>
+<article>
+<center><h1 id="top">NumpyのTIPS</h1></center>
+<br />
+
+<!-- 目次 -->
+<h2 id="contents">目次</h2>
+<div class="contents">
+  <!--  Numpyの数学関数 -->
+  <ul class="list1"><li><a href="#math">Numpyの数学関数</a>
+  </li></ul>
+  <!--  Numpyの統計処理 -->
+  <ul class="list1"><li><a href="#stat">Numpyの統計処理</a>
+  </li></ul>
+  <!--  Numpyの配列 -->
+  <ul class="list1"><li><a href="#array_1">Numpyの配列</a>
+    <ul class="list2">
+      <li><a href="#array_1_1">配列ndarrayの作成</a></li>
+      <li><a href="#array_1_2">配列の要素の入れ替え</a></li>
+      <li><a href="#array_1_3">Numpy配列成分の演算</a></li>
+     </ul>
+  </li></ul>
+</div>
+
+<small><a href="#top">[top]</a></small> <br />
+<br />
+<hr width="105%" />
+<br />
+
+<!-- ここから本文 -->
+<!-- Numpyの数学関数 -->
+<h3><div class="headline1" id="math">Numpyの数学関数</div></h3>
+<div class="text1">
+<ul class="list1">
+<li>Numpyの主要な数学関数一覧</li>
+<img src="./tables/Table3-5-5.png" width="600" alt="Table" /><br /><br />
+</ul>
+</div>
+<br />
+<br />
+
+<!-- Numpyの統計処理 -->
+<h3><div class="headline1" id="stat">Numpyの統計処理</div></h3>
+<div class="text1">
+<ul class="list1">
+<li>統計処理のインスタンスメソッド一覧（dataがインスタンスの場合）</li>
+<img src="./tables/Table4-2-1.png" width="600" alt="Table" /><br /><br />
+</ul>
+<p>dataがPandasのSeriesやNumpyのndarrayの場合</p>
+<p>median、skew、kurtosisは、PandasのSeriesのみで利用可能</p>
+</div>
+<br />
+<br />
+
+<!-- Numpyの配列 -->
+<h3><div class="headline1" id="array_1">Numpyの配列</div></h3>
+<h4><div class="headline2" id="array_1_1">配列ndarrayの作成</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>配列ndarrayの作成（既存のデータから）<br />
+入力データvarはlistなど
+<pre>
+np.array(var)
+</pre>
+</li>
+<li>配列ndarrayの作成（定数）<br />
+配列全部を同じ値に初期化する
+<pre>
+np.zeros((ndim, kdim, jdim, idim)) # 全ての要素が0
+np.ones((ndim, kdim, jdim, idim)) # 全ての要素が1
+</pre>
+<p>idim：経度方向のグリッド数、jdim：緯度方向のグリッド数、kdim：高度方向のグリッド数、ndim：時間方向のグリッド数</p>
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="array_1_2">配列の要素の入れ替え</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>配列の転置<br />
+varが２次元の行列の場合、次のいずれでも可能
+<pre>
+var = var.T
+var = np.transpose(var)
+</pre>
+</li>
+<li>配列の成分入れ替え<br />
+配列varの成分を3、0、2、1の順に入れ替える
+<pre>
+var = var.transpose(3, 0, 2, 1)
+</pre>
+</li>
+<li>内積<br />
+配列x、yの内積を計算する
+<pre>
+np.dot(x, y)
+</pre>
+</li>
+</ul>
+</div>
+<br />
+<br />
+
+<h4><div class="headline2" id="array_1_3">Numpy配列成分の演算</div></h4>
+<div class="text1">
+Numpyの機能で演算できる場合は、極力そちらを使う。
+<ul class="list1">
+<li>経度、緯度方向のループを回す場合<br />
+itertoolsを使うと高速化できる
+<pre>
+import itertools
+i_list = np.arange(idim)
+j_list = np.arange(jdim)
+for ij in itertools.product(i_list, j_list):
+&nbsp; &nbsp;  i = ij[0]
+&nbsp; &nbsp; j = ij[1]
+&nbsp; &nbsp; 処理
+</pre>
+
+</li>
+
+</ul>
+</div>
+<br />
+<br />
+
+
+<br />
+<br />
+<br />
+<br />
+
+
+<small><a href="#top">[top]</a></small> <br />
+<hr width="105%" />
+</article>
+</body>
+<footer>
+<p>最終更新日：2021/01/03</p>
+<p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
+</footer>
+</html>

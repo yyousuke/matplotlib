@@ -1,0 +1,279 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="author" content="山下陽介 (Yousuke Yamashita)" />
+<link rel="icon" href="/~yyousuke/yousuke/favicon.ico" type="image/x-icon" />
+<!-- Mobile Internet Explorer allows us to activate ClearType technology for smoothing fonts for easy reading -->
+<meta http-equiv="cleartype" content="on" />
+<!-- Specify whether or not telephone numbers in the HTML content should appear as hypertext links -->
+<meta name="format-detection" content="telephone=no" />
+<!-- Changes the logical window size used when displaying a page mobile browsers -->
+<meta name = "viewport" content = "width = device-width, initial-scale=1, user-scalable=yes" />
+
+<meta name="robots" content="all" />
+<meta name="http-equiv" content="X-Robots-Tag : all" />
+<meta name="googlebot" content="all" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link href="design.css" rel="stylesheet" type="text/css" />
+<title>気象データ解析のためのmatplotlibの使い⽅</title>
+</head>
+
+<body link="#0000FF" vlink="#0000FF">
+<article>
+<h3><div class="headline1" id="20210224">気象庁HP更新に伴うサンプルプログラムの動作確認について（2021/02/24）</div></h3>
+<div class="text1">
+本日13時に気象庁ホームページが大幅に更新され、各種リンクが変更となりました。
+「気象データ解析のためのmatplotlibの使い⽅」の<a href="./met_sample.zip" target="_blank">サンプルプログラム</a>では、気象庁ホームページのデータをスクレイピングしていることから、ホームページリニューアル後に動作確認を行いました。スクレイピングしているアメダスデータのリンクに変更がないため、現時点でサンプルプログラムが正常に動作することを確認できました。<br />
+一方、imshow_sample2.pyに限っては、ひまわりの可視・赤外画像をダウンロードしており、リニューアルに伴うリンク切れにより、現在は正常にダウンロードを行うことができません。
+</div>
+<br />
+<br />
+
+<h3><div class="headline1" id="20201127">macOS Big Sur対応について（2020/11/27）</div></h3>
+<div class="text1">
+macOS Big Sur対応のMacPortsが11/15に提供開始されました。MacPortsを使いpython3.8の更新をテストしていましたが、現時点で「気象データ解析のためのmatplotlibの使い⽅」の<a href="./met_sample.zip" target="_blank">サンプルプログラム</a>の実行に必要な環境が整っていることを確認できました。<br />
+なおBasemapは修正が行われていませんので、<a href="#20200725">コードの修正</a>が必要です。また、次のような警告が出ることがあります。
+<pre>
+/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pyproj/__init__.py:73: UserWarning: Valid PROJ data directory not found. Either set the path using the environmental variable PROJ_LIB or with `pyproj.datadir.set_data_dir`.
+  warnings.warn(str(err))
+</pre>
+この場合には、
+<pre>
+export PROJ_LIB=/opt/local/lib/proj7/share/proj
+</pre>
+を行います。
+</div>
+<br />
+<br />
+
+<h3><div class="headline1" id="20200725">Basemapをインポートできない不具合の解決方法（2020/07/25）</div></h3>
+<div class="text1">
+2020年7月20日頃のアップデートに伴い、MacPortsでインストールされるmatplotlibがバージョン3.2.2から3.3.0になりました。それに伴いmatplotlib.cbookではdedent関数が削除されました。
+他方、Basemapはバージョン1.2.1のまま更新されないので、mpl_toolkits.basemapをインポートしようとした際に、存在しないdedent関数を呼び出そうとしてエラーが発生します。このエラーはBasemap使用時に不可避な部分で発生しており、<font color="red">既にアップデートが適用されてしまった場合には、修正を行わないとBasemapが使用できません</font>。<br />
+以下は、pythonバージョン3.8の場合に出力されるエラーの内容です。バージョン3.6や3.7でも同様のエラーが発生します。
+<pre>
+File"/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/mpl_toolkits/basemap/__init__.py", line 50, in &lt;module&gt;
+from .proj import Proj
+File"/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/mpl_toolkits/basemap/proj.py", line 6, in &lt;module&gt;
+from matplotlib.cbook import dedent
+ImportError: cannot import name 'dedent' from 'matplotlib.cbook' (/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/matplotlib/cbook/__init__.py)
+</pre>
+<ul class="list1">
+<li>解決法１：Basemap1.2.1のコードを修正<br />
+（MacPortsで導入したpython3.8の場合、/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/mpl_toolkits/basemap/proj.py）の6行目
+<pre>from matplotlib.cbook import dedent</pre>
+を以下のように修正します。パスの3.7の部分はpythonのバージョンによって異なり、バージョン3.6.xなら3.6、バージョン3.7.xなら3.7です。
+<pre>
+try:
+&nbsp; &nbsp; from inspect import cleandoc as dedent
+except ImportError:
+&nbsp; &nbsp; from matplotlib.cbook import dedent
+</pre></li><br />
+<li>解決法２：matplotlibをバージョン3.3.0から3.2.2に戻す<br />
+現在インストールされているバージョンを表示（python3.6ならpy36-matplotlib、3.7ならpy37-matplotlibに変える）
+<pre>
+% port installed py38-matplotlib
+The following ports are currently installed:
+py38-matplotlib @3.2.2_0+cairo+webagg
+py38-matplotlib @3.3.0_1+cairo+webagg (active)
+</pre>
+次のようにバージョン3.3.0を deactivateして、バージョン3.2.2をactivateする。
+<pre>
+% sudo port deactivate py38-matplotlib 3.3.0_1+cairo+webagg
+% sudo port activate py38-matplotlib 3.2.2_0+cairo+webagg
+% port installed py38-matplotlib
+The following ports are currently installed:
+py38-matplotlib @3.2.2_0+cairo+webagg (active)
+py38-matplotlib @3.3.0_1+cairo+webagg
+</pre>
+</li></ul>
+</div>
+<br />
+<br />
+
+<h3><div class="headline1" id="20200205">Pandas1.0.0のDataFrameで.ix廃止（2020/02/05）</div></h3>
+<div class="text1">
+2020年2月最初のMacPortsで導入されるpandas-1.0.0では、以前のバージョン0.7.3までwarningが出るものの使用できたDataFrameの.ixが廃止されました。 <br />
+それに伴い、pythonで.ixを使うプログラムを実行すると、次のようなエラーが発生します。
+<pre>
+"/opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/pandas/core/generic.py", line 5273, in __getattr__
+    return object.__getattribute__(self, name)
+AttributeError: 'DataFrame' object has no attribute 'ix'
+</pre>
+<br />
+＊DataFrameで.ixを利用している場合、<a href="matplotlib.html#matplotlib_2_3">スクリプト実行時のWarning表示を消す</a>に記載された方法で、.locか.ilocに変更する必要があります。<br />
+サンプルプログラムやドキュメントの該当箇所の更新は、しばらくお待ちください。<br />
+<br />
+<font color="red">＊2020/02/23版のサンプルプログラムで対応しました</font>
+</div>
+<br />
+<br />
+
+<h3><div class="headline1" id="20200201">解決法：正射投影図法で北緯45度より北側を中心にした場合の不具合（2020/02/01）</div></h3>
+<div class="text1">
+<a href="#20191212">2019年12月10日頃から発生している正射投影図法で北緯45度より北側を中心にした場合の不具合</a>について、<a href="https://github.com/matplotlib/basemap/issues/484">GitHub</a>に修正方法が記載されたことを、NOAAの方に教えて頂きました。<br />
+Basemap1.2.1のコード（MacPortsで導入したpython3.8の場合、/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/mpl_toolkits/basemap/__init__.py）について、1428行目と1429行目の間に次の１行を挿入する修正を行います。パスの3.7の部分はpythonのバージョンによって異なり、バージョン3.6.xなら3.6、バージョン3.7.xなら3.7です。
+<pre>
+b = np.where(np.isposinf(np.where(np.isneginf(b),-1.e20,b)),1.e20,b)
+</pre>
+</div>
+<br />
+<br />
+
+<h3><div class="headline1" id="20191212">正射投影図法で北緯45度より北側を中心にした場合の不具合（2019/12/12）</div></h3>
+<div class="text1">
+2019年12月10日頃から、Basemapの正射投影図法で作図を行う際に、中心の緯度（lon_0）を北緯45度より北側に指定すると、次のようなエラーでpythonが落ちるようになっています。なお、テストした際のGEOSはバージョン3.8.0、Basemapは1.2.1です（MacPorsで導入される最新版）。
+<pre>
+GEOS_ERROR: b'IllegalArgumentException: CGAlgorithmsDD::orientationIndex encountered NaN/Inf numbers'
+Segmentation fault: 11
+</pre>
+現在のところ、lon_0の範囲を-90から45までにするしか回避方法はありません。<br />
+<br />
+<font color="red">＊Basemapの開発は終了しているので、<a href="#20200201">2020/02/01の修正方法</a>を適用する</font>
+</div>
+<br />
+<br />
+
+<h3><div class="headline1" id="20191108">Basemap1.2.1で一連の不具合解消（2019/11/08）</div></h3>
+<div class="text1">
+2019年10月から11月始め頃のMacPorts更新の際に適用されるBasemapのバージョンが、1.2.0から1.2.1へ更新されました。それにより、Basemapで発生していた以下の不具合が解消されています。<br />
+<a href="#20190523">2019年4月頃から発生しているepsgファイル読み込みの不具合</a><br />
+<a href="#20190822">2019年8月頃から発生しているtriオプションの問題</a><br>
+現時点の最新版であるmatplotlibバージョン3.1.0＋Basemap1.2.1への更新を推奨します。<br />
+python3.6では、py36-matplotlib、py36-matplotlib-basemapのパッケージ名、python3.7では、py37-matplotlib、py37-matplotlib-basemapのパッケージ名です。
+</div>
+<br />
+<br />
+
+<h3><div class="headline1" id="20190830">ログプロットの不具合がmatplotlib3.1.1で解消（2019/08/30）</div></h3>
+<div class="text1">
+2019年5月末から6月始め頃のmatplotlibの更新後（バージョン3.1.0）、y軸をログスケールに取りy軸の値を逆転させた場合（例えば、10 hPaを上端、1000 hPaを下端に取る場合）、正しく設定を行なってもy軸の値が逆転しない（10 hPaが下、1000 hPaが上のまま）という問題が発生していました。なお、ログスケールに設定しない場合には問題は発生していません。この問題は、2019年8月末のmatplotlib-3.1.1への更新時に解消されました。バージョン3.1.0で不具合が発生している場合には、バージョン3.1.1へ更新してください。<br />
+なおMacPortsによる自動更新（port upgrade outdated）を行った場合には、<a href="#20190523">2019年4月頃から発生しているbasemapの問題</a>や<a href="#20190822">Basemapでtriオプション使用不可となる問題</a>が引き続き発生するため、自動更新は推奨されません。
+
+<ul class="list1">
+<li>バージョン3.1.0における不具合：以下の設定を行なってもy軸の値が逆転しない
+<ul class="list2">
+<li>例１：ax.invert_yaxis()を使う
+<pre>
+ax.plot(data_x, pres, color='k')
+ax.set_yscale("log")
+ax.invert_yaxis()
+ax.set_ylim([10, 1000])
+</pre>
+data_x：x軸のデータ、pres：y軸の気圧データ(hPa)
+</li><br />
+<li>例２：plt.gca().invert_yaxis()を使う
+<pre>
+ax.plot(data_x, pres, color='k')
+ax.set_yscale("log")
+plt.gca().invert_yaxis()
+ax.set_ylim([10, 1000])
+</pre></li>
+<li>例３：set_ylimで下端（1000 hPa）を先、上端（10 hPa）を後に書く
+<pre>
+ax.plot(data_x, pres, color='k')
+ax.set_yscale("log")
+ax.set_ylim([1000, 10])
+</pre></li>
+<li>例４：ax.set_ylimで上端と下端を逆転させた値を設定
+<pre>
+ax.plot(data_x, pres, color='k')
+ax.set_ylim(ax.get_ylim()[::-1])
+</pre></li>
+</ul>
+</li>
+</ul>
+</div>
+<br />
+<br />
+
+<h3><div class="headline1" id="20190822">MacPorts更新後のBasemapでtriオプション使用不可（2019/08/22）</div></h3>
+<div class="text1">
+最近のMacPortsの更新でqhullライブラリが更新され、Basemapとの不整合が生じています。そのために、MacPortsで更新（port upgrade outdated）を行うと、Basemapのm.contour()やm.contorf()等でtri=Trueとした場合、以下のエラーが発生します。現時点ではエラー回避のための更新がMacPortsから提供されていないため、更新は推奨されません。<a href="#20190523">2019年４月頃から発生しているbasemap問題</a>も引き続き発生します。
+<pre>
+QH6249 qh_lib_check: Incorrect qhull library called.  Size of qhT for caller is 2792, but for qhull library is 2896.
+QH6256 qhull internal error (qh_lib_check): Cannot continue due to QH6249..  Library 'qhull 7.3.2 (2019.1 2019/06/21)' should use a static qhT (e.g., libqhull.so).  It may be out-of-date.  Exit with 49
+</pre>
+<ul class="list1">
+<li>既にMacPortsの更新を適用してしまった場合のプログラム変更例
+<ul class="list2">
+<li>変更前（lats、lonsが２次元の緯度、経度配列、dが２次元の気象データの場合）
+<pre>
+m = Basemap(オプション)
+lats_1d= np.ravel(lats)
+lons_1d= np.ravel(lons)
+
+m.contour(lons_1d, lats_1d, d, tri=True, colors='blue', linestyles='-')
+</pre>
+tri=Trueの場合には、緯度、経度データを１次元で与えるので、このようにしている
+</li><br />
+<li>変更後
+<pre>
+m = Basemap(オプション)
+
+m.contour(lons, lats, d, tri=True, colors='blue', linestyles='-')
+</pre>
+tri=Trueオプションを使わないように書き換える（この場合には、緯度、経度の配列を２次元で与える）
+</li>
+</ul></li>
+</ul>
+<font color="red">＊basemap1.2.0で不具合が解消された（2019/11/08）</font>
+</div>
+<br />
+<br />
+
+<h3><div class="headline1" id="20190523">MacPorts更新後のBasemapエラー（2019/05/23）</div></h3>
+<div class="text1">
+2019年４月頃のpyprojの更新（バージョン2.1.3）の際、内部で使用されるprojのバージョンが5から6に更新され、同時にpyproj.pyproj_datadirが廃止されています。その影響で、MacPortsで更新（port upgrade outdated）を行うと、Basemapの読み込み時に以下のエラーが発生します。現時点ではエラー回避のコードがMacPortsから提供されていないため、更新は推奨されません。
+<pre>
+Traceback (most recent call last):
+  File "ファイル名", line 9, in &lt;module&gt;
+    from mpl_toolkits.basemap import Basemap
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mpl_toolkits/basemap/__init__.py", line 152, in &lt;module&gt;
+    epsgf = open(os.path.join(pyproj.pyproj_datadir,'epsg'))
+AttributeError: module 'pyproj' has no attribute 'pyproj_datadir'
+</pre>
+<ul class="list1">
+<li>問題点
+<ol class="list2">
+<li>コードの問題点（Basemapのコード未更新に伴うもの）：</li>
+pyproj.pyproj_datadirでディレクトリのパスが取得できない（/opt/local/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mpl_toolkits/basemap/__init__.pyの152行目）
+<pre>epsgf = open(os.path.join(pyproj.pyproj_datadir,'epsg'))</pre>
+ディレクトリのパスはpyproj.pyproj_datadirではなく、pyproj.datadir.get_data_dir()で取得するようになったため
+<li>データの問題点（projのバージョン更新に伴うもの）：</li>
+pyproj.datadir.get_data_dir()で取得されるディレクトリは、/opt/local/lib/proj6/share/proj/になる。その場所にはepsgがないため、単にpyproj.pyproj_datadirの代わりにpyproj.datadir.get_data_dir() と書き換えても、ファイル読み込みでエラーが発生する。<br />
+現時点では、proj5の/opt/local/lib/proj5/share/proj/epsgを利用するしかない
+</ol></li>
+<br />
+<li>既にMacPortsの更新を適用してしまった場合の解決策
+<ul class="list2">
+<li>Basemapコードを変更し、proj5のepsgを使う</li>
+<p>% cd /opt/local/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mpl_toolkits/basemap</p>
+<p>% sudo vi __init__.py</p>
+<pre>
+#epsgf = open(os.path.join(pyproj.pyproj_datadir,'epsg')) # 152行目（元のコード）
+# エラー回避のため、proj5のepsgファイルを読み込み
+pyproj_datadir = "/opt/local/lib/proj5/share/proj/"
+epsgf = open(os.path.join(pyproj_datadir,'epsg'))
+</pre>
+</ul></li>
+</ul>
+<font color="red">＊basemap1.2.0で不具合が解消された（2019/11/08）</font>
+</div>
+<br />
+<br />
+
+<br />
+<br />
+<small><a href="#top">[top]</a></small> <br />
+<hr width="105%"/>
+</article>
+</body>
+<footer>
+<p>最終更新日：2021/02/24</p>
+<p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
+</footer>
+</html>

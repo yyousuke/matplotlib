@@ -1,0 +1,2079 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="author" content="山下陽介 (Yousuke Yamashita)" />
+<link rel="icon" href="/~yyousuke/yousuke/favicon.ico" type="image/x-icon" />
+<!-- Mobile Internet Explorer allows us to activate ClearType technology for smoothing fonts for easy reading -->
+<meta http-equiv="cleartype" content="on" />
+<!-- Specify whether or not telephone numbers in the HTML content should appear as hypertext links -->
+<meta name="format-detection" content="telephone=no" />
+<!-- Changes the logical window size used when displaying a page mobile browsers -->
+<meta name = "viewport" content = "width = device-width, initial-scale=1, user-scalable=yes" />
+
+<meta name="robots" content="all" />
+<meta name="http-equiv" content="X-Robots-Tag : all" />
+<meta name="googlebot" content="all" />
+<meta name="description" content="" />
+<meta name="keywords" content="matplotlib" />
+<link href="design.css" rel="stylesheet" type="text/css" />
+<title>気象データ解析のためのmatplotlibの使い⽅</title>
+</head>
+
+<body link="#0000FF" vlink="#0000FF">
+
+<div id="nesting">
+<a href="/~yyousuke">ホーム</a> &gt; <a href="index.html">matplotlibの使い⽅</a> &gt; グラフ作図のTIPS
+</div>
+<article>
+<center><h1 id="top">matplotlib：グラフ作図のTIPS</h1></center>
+<br />
+<div id="text2">
+<p>作成者：山下陽介（NIES←JAMSTEC）</p>
+</div>
+<hr />
+<br />
+
+<!-- 目次 -->
+
+<h2 id="contents">目次</h2>
+<div class="contents">
+  <!-- matplotlibの基本 -->
+  <ul class="list1"><li><a href="#matplotlib_1">matplotlibの基本</a>
+    <ul class="list2">
+      <li><a href="#matplotlib_1_1">IPython上での起動方法</a></li>
+      <li><a href="#matplotlib_1_2">IPythonの終了方法</a></li>
+      <li><a href="#matplotlib_1_3">matplotlibのモジュール</a></li>
+      <li><a href="#matplotlib_1_4">画面上に表示する</a></li>
+      <li><a href="#matplotlib_1_5">画像ファイルを保存する</a></li>
+      <li><a href="#matplotlib_1_6">matplotlibのデフォルト設定rcParamsを表示する</a></li>
+  </ul>
+  </li></ul>
+  <!-- matplotlib作図スクリプトの基本 -->
+  <ul class="list1"><li><a href="#matplotlib_2">matplotlib作図スクリプトの基本</a>
+    <ul class="list2">
+      <li><a href="#matplotlib_2_1">python3スクリプト</a></li>
+      <li><a href="#matplotlib_2_2">python3スクリプトの実行方法</a></li>
+      <li><a href="#matplotlib_2_3">スクリプト実行時のWarning表示を消す</a></li>
+  </ul>
+  </li></ul>
+  <!-- グラフの基本 -->
+  <ul class="list1"><li><a href="#graph_1">サブプロット</a>
+    <ul class="list2">
+      <li><a href="#graph_1_1">プロットエリアの作成</a></li>
+      <li><a href="#graph_1_2">サブプロットの作成</a></li>
+      <li><a href="#graph_1_3">複数のサブプロットを並べる</a></li>
+      <li><a href="#graph_1_4">サブプロットにタイトルを付ける</a></li>
+      <li><a href="#graph_1_5">サブプロットにx軸、y軸のラベルを付ける</a></li>
+      <li><a href="#graph_1_6">複雑なサブプロットの配置</a></li>
+      <li><a href="#graph_1_7">複数のサブプロットに１つのタイトルを付ける</a></li>
+      <li><a href="#graph_1_8">サブプロットの中に別のサブプロットを配置</a></li>
+      <li><a href="#graph_1_9">２軸グラフを作成する</a></li>
+      <li><a href="#graph_1_10">サブプロットのサイズを調整する</a></li>
+      <li><a href="#graph_1_11">複数のサブプロットを配置した時のx軸、y軸ラベルの付け方</a></li>
+      <li><a href="#graph_1_12">直前に操作したサブプロットの情報を取得する</a></li>
+      <li><a href="#graph_1_13">プロットエリアの作成とサブプロットの作成を同時に行う</a></li>
+    </ul>
+  </li></ul>
+  <!-- 折れ線グラフ -->
+  <ul class="list1"><li><a href="#graph_2">折れ線グラフ</a>
+    <ul class="list2">
+      <li><a href="#graph_2_1">折れ線グラフを描く</a></li>
+      <li><a href="#graph_2_2">折れ線グラフの色を変える</a></li>
+      <li><a href="#graph_2_3">折れ線グラフの線種を変える</a></li>
+      <li><a href="#graph_2_4">折れ線グラフの太さを変える</a></li>
+      <li><a href="#graph_2_5">折れ線グラフのマークを変える</a></li>
+      <li><a href="#graph_2_6">折れ線グラフのマークを塗り潰す</a></li>
+      <li><a href="#graph_2_7">階段状のグラフ</a></li>
+      <li><a href="#graph_2_8">折れ線グラフにx=0、y=0の線を付ける</a></li>
+      <li><a href="#graph_2_9">２つの折れ線グラフの間を塗り潰す</a></li>
+      <li><a href="#graph_2_10">折れ線グラフに凡例を付ける</a></li>
+      <li><a href="#graph_2_11">折れ線グラフにグリッド線を引く</a></li>
+      <li><a href="#graph_2_12">折れ線グラフをログスケールで表示する</a></li>
+    </ul>
+  </li></ul>
+  <!-- 棒グラフ -->
+  <ul class="list1"><li><a href="#graph_3">棒グラフ</a>
+    <ul class="list2">
+      <li><a href="#graph_3_1">棒グラフを描く</a></li>
+      <li><a href="#graph_3_2">棒グラフの色を変える</a></li>
+      <li><a href="#graph_3_3">棒グラフの枠線の色を変える</a></li>      
+      <li><a href="#graph_3_4">棒グラフを半透明にする</a></li>
+      <li><a href="#graph_3_5">棒グラフの幅を変える</a></li>
+      <li><a href="#graph_3_6">棒グラフの枠線を太くする</a></li>
+      <li><a href="#graph_3_7">棒グラフを横に並べる</a></li>
+      <li><a href="#graph_3_8">積み上げ棒グラフを描く</a></li>
+      <li><a href="#graph_3_9">横棒に変える</a></li>
+      <li><a href="#graph_3_10">棒グラフに凡例を付ける</a></li>
+      <li><a href="#graph_3_11">棒グラフにエラーバーを付ける</a></li>
+      <li><a href="#graph_3_12">棒グラフにハッチを付ける</a></li>
+    </ul>
+  </li></ul>
+  <!-- ヒストグラム -->
+  <ul class="list1"><li><a href="#graph_4">ヒストグラム</a>
+    <ul class="list2">
+      <li><a href="#graph_4_1">ヒストグラムを描く</a></li>
+      <li><a href="#graph_4_2">ヒストグラムを塗り潰す色を変える</a></li>
+      <li><a href="#graph_4_3">ヒストグラムの枠線の色を変える</a></li>
+      <li><a href="#graph_4_4">ヒストグラムを半透明にする</a></li>
+      <li><a href="#graph_4_5">ヒストグラムにハッチを付ける</a></li>
+      <li><a href="#graph_4_6">ヒストグラムのビンの間隔を設定する</a></li>
+      <li><a href="#graph_4_7">ヒストグラムに凡例を付ける</a></li>
+      <li><a href="#graph_4_8">ヒストグラムを描く際に合計を１にする</a></li>
+      <li><a href="#graph_4_9">２つのヒストグラムを同時に描く</a></li>
+      <li><a href="#graph_4_10">ヒストグラムを横に並べる</a></li>
+      <li><a href="#graph_4_11">積み上げヒストグラムを描く</a></li>
+      <li><a href="#graph_4_12">ヒストグラムと一緒にカーネル密度推定のグラフを描く</a></li>
+    </ul>
+  </li></ul>
+  <!-- 散布図 -->
+  <ul class="list1"><li><a href="#graph_5">散布図</a>
+    <ul class="list2">
+      <li><a href="#graph_5_1">散布図を描く</a></li>
+      <li><a href="#graph_5_2">散布図のマーカーの大きさと色を変える</a></li>
+      <li><a href="#graph_5_3">散布図のマーカーの種類を変える</a></li>
+      <li><a href="#graph_5_4">散布図のマーカーの色を値に応じて変える</a></li>
+      <li><a href="#graph_5_5">散布図のマーカーの色をログスケールで変える</a></li>
+      <li><a href="#graph_5_6">散布図にカラーバーを付ける</a></li>	
+      <li><a href="#graph_5_7">散布図を描く最小値、最大値の範囲を設定する</a></li>
+      <li><a href="#graph_5_8">散布図に複数のデータを同時に描く</a></li>
+      <li><a href="#graph_5_9">散布図に凡例を付ける</a></li>
+      <li><a href="#graph_5_10">散布図に相関係数を表示する</a></li>
+      <li><a href="#graph_5_11">散布図に回帰式を追加する</a></li>
+    </ul>
+  </li></ul>
+  <!-- 矢羽 -->
+  <ul class="list1"><li><a href="#graph_6">矢羽</a>
+    <ul class="list2">
+      <li><a href="#graph_6_1">矢羽を描く</a></li>
+      <li><a href="#graph_6_2">矢羽の色を変える</a></li>
+      <li><a href="#graph_6_3">矢羽の長さを変える</a></li>
+      <li><a href="#graph_6_4">矢羽のスタイルを調整する</a></li>
+      <li><a href="#graph_6_5">風速の小さい矢羽を描かない</a></li>
+      <li><a href="#graph_6_6">矢羽をノットで描く</a></li>
+    </ul>
+  </li></ul>
+  <!-- 矢印 -->
+  <ul class="list1"><li><a href="#graph_7">矢印</a>
+    <ul class="list2">
+      <li><a href="#graph_7_1">矢印を描く</a></li>
+      <li><a href="#graph_7_2">矢印の色を変える</a></li>
+      <li><a href="#graph_7_3">矢印の幅を変える</a></li>
+      <li><a href="#graph_7_4">矢印の始点の配置方法</a></li>
+      <li><a href="#graph_7_5">矢印の頭の部分の幅や長さを変える</a></li>
+      <li><a href="#graph_7_6">矢印の頭の中心軸部分の長さを変える</a></li>
+    </ul>
+  </li></ul>
+  <!-- 等高線 -->
+  <ul class="list1"><li><a href="#graph_8">等高線</a>
+    <ul class="list2">
+      <li><a href="#graph_8_1">等高線を描く</a></li>
+      <li><a href="#graph_8_2">等高線のx、y軸の縦横比を１：１にする</a></li>
+      <li><a href="#graph_8_3">等高線の色を変える</a></li>
+      <li><a href="#graph_8_4">等高線の幅や線種を変える</a></li>
+      <li><a href="#graph_8_5">等高線を描く値を指定する</a></li>
+      <li><a href="#graph_8_6">等高線にラベルを付ける</a></li>
+      <li><a href="#graph_8_7">等高線のラベルを１つ飛ばしに付ける</a></li>
+      <li><a href="#graph_8_8">等高線の色を値に応じて変える</a></li>
+    </ul>
+  </li></ul>
+  <!-- 陰影 -->
+  <ul class="list1"><li><a href="#graph_9">陰影</a>
+    <ul class="list2">
+      <li><a href="#graph_9_1">陰影を描く</a></li>
+      <li><a href="#graph_9_2">陰影の色を値に応じて変える</a></li>
+      <li><a href="#graph_9_3">陰影を付ける間隔を変える</a></li> 
+      <li><a href="#graph_9_4">陰影を付ける範囲を変更する</a></li>
+      <li><a href="#graph_9_5">陰影にカラーバーを付ける</a></li>
+      <li><a href="#graph_9_6">陰影にハッチを付ける</a></li>
+      <li><a href="#graph_9_7">陰影を描く値をログスケールにする</a></li>
+      <li><a href="#graph_9_8">欠損値を灰色の陰影で塗り潰す</a></li>
+      <li><a href="#graph_9_9">欠損値の周辺を滑らかにしない</a></li>
+    </ul>
+  </li></ul>
+<!-- 箱ひげ図 -->
+  <ul class="list1"><li><a href="#graph_10">箱ひげ図</a>
+    <ul class="list2">
+      <li><a href="#graph_10_1">箱ひげ図を描く</a></li>
+      <li><a href="#graph_10_2">箱ひげ図で最小値から最大値までヒゲを描く</a></li>
+      <li><a href="#graph_10_3">箱ひげ図に平均値を描く</a></li>
+      <li><a href="#graph_10_4">箱ひげ図の平均値のマーカーを変更する</a></li>
+      <li><a href="#graph_10_5">箱ひげ図でpatch_artistを使う</a></li>
+      <li><a href="#graph_10_6">箱ひげ図のヒゲの色や太さを変える</a></li>
+      <li><a href="#graph_10_7">箱ひげ図の箱の色や太さを変える</a></li>
+      <li><a href="#graph_10_8">箱ひげ図の外れ値のマーカーを変更する</a></li>
+    </ul>
+  </li></ul>
+<!-- バイオリンプロット -->
+  <ul class="list1"><li><a href="#graph_11">バイオリンプロット</a>
+    <ul class="list2">
+      <li><a href="#graph_11_1">バイオリンプロットを描く</a></li>
+      <li><a href="#graph_11_2">複数のバイオリンプロットを並べる</a></li>
+      <li><a href="#graph_11_3">バイオリンプロットの横幅を変える</a></li>
+      <li><a href="#graph_11_4">バイオリンプロットに中央値を描く</a></li>
+      <li><a href="#graph_11_5">バイオリンプロットに平均値を描く</a></li>
+      <li><a href="#graph_11_6">バイオリンプロットに最小値と最大値の範囲を表すヒゲを描く</a></li>
+    </ul>
+  </li></ul>
+  <!-- 流線関数 -->
+  <ul class="list1"><li><a href="#graph_12">流線関数</a>
+    <ul class="list2">
+      <li><a href="#graph_12_1">流線関数を描く</a></li>
+      <li><a href="#graph_12_2">流線関数の色を変える</a></li>
+      <li><a href="#graph_12_3">流線関数の間隔や線の幅を変える</a></li>
+      <li><a href="#graph_12_4">流線関数の色を値に応じて変える</a></li>
+    </ul>
+  </li></ul>
+  <!-- 凡例 -->
+  <ul class="list1"><li><a href="#legend_1">凡例</a>
+    <ul class="list2">
+      <li><a href="#legend_1_1">凡例を付ける</a></li>
+      <li><a href="#legend_1_2">凡例の位置を変える</a></li>
+      <li><a href="#legend_1_3">凡例をグラフの外側に出す</a></li>
+      <li><a href="#legend_1_4">凡例の枠線を丸くしない</a></li>
+      <li><a href="#legend_1_5">凡例の不透明度を変える</a></li>
+      <li><a href="#legend_1_6">凡例の枠線の色を変える</a></li>
+      <li><a href="#legend_1_7">凡例の枠内を塗り潰す色を変える</a></li>
+    </ul>
+  </li></ul>
+  <!-- カラーバー -->
+  <ul class="list1"><li><a href="#colorbar_1">カラーバー</a>
+    <ul class="list2">
+      <li><a href="#colorbar_1_1">カラーバーを付ける</a></li>
+      <li><a href="#colorbar_1_2">カラーバーを横にする</a></li>
+      <li><a href="#colorbar_1_3">カラーバーにラベルを付ける</a></li>
+      <li><a href="#colorbar_1_4">カラーバーの目盛り線ラベルの書式を変える</a></li>
+      <li><a href="#colorbar_1_5">カラーバーの大きさを変える</a></li>
+      <li><a href="#colorbar_1_6">カラーバーと図枠との間隔を変える</a></li>
+      <li><a href="#colorbar_1_7">カラーバーの小目盛りを消す/付ける</a></li>
+      <li><a href="#colorbar_1_8">カラーバーの目盛り線を付ける間隔を変更する</a></li>
+      <li><a href="#colorbar_1_9">カラーバーの目盛り線ラベルに任意の文字列を付ける</a></li>
+    </ul>
+  </li></ul>
+  <!-- テキスト -->
+  <ul class="list1"><li><a href="#text_1">テキスト</a>
+    <ul class="list2">
+      <li><a href="#text_1_1">テキストをプロットする</a></li>
+      <li><a href="#text_1_2">テキストの文字サイズを変える</a></li>
+      <li><a href="#text_1_3">テキストの書体を変える</a></li>
+      <li><a href="#text_1_4">テキストの色を変更する</a></li>
+      <li><a href="#text_1_5">テキストの文字の太さを変える</a></li>
+      <li><a href="#text_1_6">テキストの文字列の水平位置と鉛直位置を指定する</a></li>
+      <li><a href="#text_1_7">テキストの文字列を回転させる</a></li>
+    </ul>
+  </li></ul>
+  <!-- 図の体裁 -->
+  <ul class="list1"><li><a href="#graph_e">図の体裁</a>
+    <ul class="list2">
+      <li><a href="#graph_e_1">タイトルの大きさや色を変更する</a></li>
+      <li><a href="#graph_e_2">x軸、y軸のラベルの大きさや色を変更する</a></li>
+      <li><a href="#graph_e_3">x軸、y軸の目盛り線の書式</a></li>
+      <li><a href="#graph_e_4">x軸、y軸の目盛り線の間隔を変更する</a></li>
+      <li><a href="#graph_e_5">x軸、y軸の目盛り線ラベルのサイズを変更する</a></li>
+      <li><a href="#graph_e_6">x軸、y軸の範囲を指定する</a></li>
+      <li><a href="#graph_e_7">x軸、y軸の範囲を取得する</a></li>
+      <li><a href="#graph_e_8">x軸、y軸の目盛り線を内側にする</a></li>
+      <li><a href="#graph_e_9">マーカーや線を重ねる順序を調整する</a></li>
+      <li><a href="#graph_e_10">図の時間軸の表示を調整する</a></li>
+      <li><a href="#graph_e_11">軸の上下、左右を逆転させる</a></li>
+      <li><a href="#graph_e_12">枠線や目盛りを消す</a></li>
+      <li><a href="#graph_e_13">y軸をログスケールにした時にラベルの数字を整数表示する</a></li>
+      <li><a href="#graph_e_14">y軸をパーセント表示にする</a></li>
+	</ul>
+  </li></ul>
+</div>
+
+<small><a href="#top">[top]</a></small> <br />
+<br />
+<hr width="105%" />
+<br />
+
+
+<!-- ここから本文 -->
+<!-- matplotlibの基本 -->
+<h3><div class="headline1" id="matplotlib_1">matplotlibの基本</div></h3>
+<h4><div class="headline2" id="matplotlib_1_1">IPython上での起動方法</div></h4>
+<div class="text1">
+IPython上で作図する場合
+<pre>% ipython3 --pylab</pre>
+でIPythonをpylabモードで起動する（%はコマンドプロンプト）
+</div>
+
+<h4><div class="headline2" id="matplotlib_1_2">IPythonの終了方法</div></h4>
+<div class="text1">
+<pre>quit()</pre>
+</div>
+
+<h4><div class="headline2" id="matplotlib_1_3">matplotlibのモジュール</div></h4>
+<div class="text1">
+matplotlib.pyplotモジュールをインポートする
+<pre>import matplotlib.pyplot as plt</pre>
+以降はpltとして参照できる
+</div>
+
+<h4><div class="headline2" id="matplotlib_1_4">画面上に表示する</div></h4>
+<div class="text1">
+<pre>plt.show()</pre>
+</div>
+
+<h4><div class="headline2" id="matplotlib_1_5">画像ファイルを保存する</div></h4>
+<div class="text1">
+ファイル名の拡張子を判断して自動で変換される
+<pre>plt.savefig("ファイル名")</pre>
+現在、eps、jpeg、jpg、pdf、pgf、png、ps、raw、rgba、svg、svgz、tif、tiffに対応
+<ul class="list1">
+<li>解像度を300 dpiに変えるには（デフォルト値：100）
+<pre>plt.savefig("ファイル名", dpi=300)</pre></li>
+<li>周囲の余白を少なくするには
+<pre>plt.savefig("ファイル名", bbox_inches='tight')</pre></li>
+<li>周囲の余白を完全に無くす場合
+<pre>plt.savefig("ファイル名", bbox_inches='tight', pad_inches=0.0)</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="matplotlib_1_6">matplotlibのデフォルト設定rcParamsを表示する</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>IPython上
+<pre>plt.rcParams</pre></li>
+<li>スクリプト内
+<pre>print(plt.rcParams)</pre></li>
+</ul>
+</div>
+
+
+
+<!-- スクリプトの基本 -->
+<h3><div class="headline1" id="matplotlib_2">matplotlib作図スクリプトの基本</div></h3>
+<h4><div class="headline2" id="matplotlib_2_1">python3スクリプト</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>スクリプトの最初の行
+<pre>#!/usr/bin/env python3</pre></li><br />
+<li>スクリプトの最初で、必要なモジュールをまとめてインポートする
+<pre>
+import matplotlib.pyplot as plt
+import pandas as pd # Pandas
+import numpy as np # Numpy
+</pre>
+matplotlib.pyplotについては、<a href="#matplotlib_1_3">matplotlibのモジュール</a>参照
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="matplotlib_2_2">python3スクリプトの実行方法</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>スクリプトをコマンドラインから直接実行する場合
+<pre>./スクリプト名.py</pre></li>
+<li>python3コマンドを使って実行する場合
+<pre>python3 スクリプト名.py</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="matplotlib_2_3">スクリプト実行時のWarning表示を消す</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>register matplotlib convertersの警告が出る場合
+<pre>
+from pandas.plotting import register_matplotlib_converters
+register_matplotlib_converters()
+</pre>
+</li><br />
+<!-- 2 -->
+<li>More than 20 figures have been openedの警告が出る場合
+<pre>
+matplotlib.rcParams['figure.max_open_warning'] = 0
+</pre>
+同じスクリプトで複数の図を連続作成している場合などに発生<br />
+不要なら作図後にplt.close()を行なった方が良い
+</li><br />
+<!-- 3 -->
+<li>.ix is deprecatedの警告が出る場合（.loc、.ilocに書き換える）
+<ul class="list2">
+<li>番号のみで記述していた場合
+<pre>
+df.ix[0, :]なら、df.iloc[0, :]
+</pre></li>
+<li>ラベルのみで記述していた場合
+<pre>
+df.ix[:,"A"]なら、df.loc[:,"A"]
+</pre></li>
+<li>番号とラベルが混在するものをラベルで
+<pre>
+df.ix[[0,2], "A"]なら、df.loc[df.index[[0,2]], "A"]
+</pre></li>
+<li>番号とラベルが混在するものを番号で
+<pre>
+df.ix[[0,2], "A"]なら、df.iloc[[0,2], df.columns.get_loc("A")]
+df.ix[[0,2], ["A", "B"]なら、df.iloc[[0,2], df.columns.get_indexer(["A", "B"])]
+</pre></li>
+</ul>
+<font color="red">＊pandasバージョン1.0.0以降では、.ixが廃止されエラーになります</font>
+</li><br />
+<!-- 4 -->
+<li> MatplotlibDeprecationWarning: You are modifying the state of a globally registered colormap.の警告が出る場合
+<pre>
+import matplotlib as mpl
+import copy
+cmap = copy.copy(mpl.cm.get_cmap("色テーブル"))
+</pre>
+</li><br />
+</ul>
+</div>
+
+
+<!-- グラフの基本 -->
+<h3><div class="headline1" id="graph_1">サブプロット</div></h3>
+<h4><div class="headline2" id="graph_1_1">プロットエリアの作成</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>サイズを指定しない場合
+<pre>fig = plt.figure()</pre></li>
+<li>サイズを指定する場合、例：縦横比６：３
+<pre>fig = plt.figure(figsize=(6,3))</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_1_2">サブプロットの作成</div></h4>
+<div class="text1">
+<pre>ax = fig.add_subplot(1,1,1)</pre>
+</div>
+
+<h4><div class="headline2" id="graph_1_3">複数のサブプロットを並べる</div></h4>
+<div class="text1">
+<pre>ax = fig.add_subplot(縦に並べる数,横に並べる数,番号)</pre>
+<ul class="list1">
+<li>縦に２つ並べる
+<pre>
+ax1 = fig.add_subplot(2,1,1)
+ax2 = fig.add_subplot(2,1,2)</pre></li>
+<li>縦に２つ、横に２つ並べる
+<pre>
+ax1 = fig.add_subplot(2,2,1)
+ax2 = fig.add_subplot(2,2,2)
+ax3 = fig.add_subplot(2,2,3)
+ax4 = fig.add_subplot(2,2,4)</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_1_4">サブプロットにタイトルを付ける</div></h4>
+<div class="text1">
+<pre>plt.title("タイトル")</pre>
+axを使う場合
+<pre>ax.set_title("タイトル")</pre>
+<a href="#graph_e_1">タイトルの大きさや色を変更する場合</a>
+</div>
+
+<h4><div class="headline2" id="graph_1_5">サブプロットにx軸、y軸のラベルを付ける</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>x軸のラベルをつける
+<pre>plt.xlabel("ラベル")</pre></li>
+<li>y軸のラベルをつける
+<pre>plt.ylabel("ラベル")</pre></li>
+<li>axを使う場合
+<pre>
+ax.set_xlabel("ラベル")
+ax.set_ylabel("ラベル")</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_1_6">複雑なサブプロットの配置</div></h4>
+<div class="text1">
+<a href="gridspec.html#gridspec">GridSpec</a>を使う
+</div>
+
+<h4><div class="headline2" id="graph_1_7">複数のサブプロットに１つのタイトルを付ける</div></h4>
+<div class="text1">
+枠線を消してからタイトルを付ける
+<pre>
+plt.axis('off')
+plt.title("タイトル")</pre>
+この後で複数のサブプロットを作成すれば、図枠の一番上のタイトルになる
+</div>
+
+<h4><div class="headline2" id="graph_1_8">サブプロットの中に別のサブプロットを配置</div></h4>
+<div class="text1">
+<pre>
+ax = fig.add_subplot(1,1,1) # 大枠の作成
+ax2 = plt.axes([0.20, 0.27, 0.3, 0.2]) # 小枠の作成</pre>
+与えるリストの要素は、x軸上の座標、y軸上の座標、横幅、縦幅の順
+</div>
+
+<h4><div class="headline2" id="graph_1_9">２軸グラフを作成する</div></h4>
+<div class="text1">
+<pre>
+ax1 = fig.add_subplot(2,1,1)
+ax2 = ax1.twinx() # 2つのプロットを関連付ける</pre>
+ax1では左側の軸、ax2では右側の軸が使われる
+</div>
+
+<h4><div class="headline2" id="graph_1_10">サブプロットのサイズを調整する</div></h4>
+<div class="text1">
+<pre>plt.subplots_adjust()</pre>
+オプションの一覧は、<a href="options.html#subplot_adjust">プロット範囲の調整</a>参照
+<ul class="list1">
+<li>例：水平を８割の大きさ、下に２割の空き
+<pre>plt.subplots_adjust(hspace=0.8,bottom=0.2)</pre></li>
+<li>例：左右のサブプロットのy軸同士、上下のサブプロットのx軸同士を結合して表示したい場合
+<pre>plt.subplots_adjust(wspace=0.0、hspace=0.0)</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_1_11">複数のサブプロットを配置した時のx軸、y軸ラベルの付け方</div></h4>
+<div class="text1">
+  サブプロットを縦に２、横に２配置し、左側の２つにはy軸ラベル、下側の２つにはx軸ラベルを付ける
+  <pre>
+  for n in np.arange(4):
+   ax = fig.add_subplot(2,2,n+1) # 2x2のサブプロット作成
+   if n &gt;= 2:
+      plt.xlabel(xlabel) # x軸のラベル（n=2,3で下側のサブプロット）
+   if not n % 2: # 0でFalse、1でTrue
+      plt.ylabel(ylabel) # y軸のラベル（n=0,2で左側のサブプロット）</pre>
+</div>
+
+<h4><div class="headline2" id="graph_1_12">直前に操作したサブプロットの情報を取得する</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>直前に操作した図（プロットエリア）の情報を取得する
+<pre>gcf = plt.gcf()</pre>
+gcf (get current figure)</li><br />
+<li>直前に操作した軸（サブプロット）の情報を取得する
+<pre>gca = plt.gca()</pre>
+gca (get current axes)</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_1_13">プロットエリアの作成とサブプロットの作成を同時に行う</div></h4>
+<div class="text1">
+<pre>fig, axs = plt.subplots(縦に並べる数, 横に並べる数, figsize=(縦幅,横幅))</pre>
+<ul class="list1">
+<li>サブプロットを１つだけ作成（サイズ指定なし）
+<pre>fig, ax = plt.subplots()</pre></li>
+<li>サブプロットを１つだけ作成（縦横比６：３）
+<pre>fig, ax = plt.subplots(figsize=(6,3))</pre></li>
+<li>縦に２つ、横に２つ並べる（縦横比６：６）
+<pre>fig, axs = plt.subplots(2, 2, figsize=(6,6))</pre>
+axs[0], axs[1], axs[2], axs[3]を軸（サブプロット）として参照できる</li>
+</ul>
+</div>
+
+<!-- 折れ線グラフ -->
+<h3><div class="headline1" id="graph_2">折れ線グラフ</div></h3>
+<h4><div class="headline2" id="graph_2_1">折れ線グラフを描く</div></h4>
+<div class="text1">
+Numpyを使って生成した配列を使いcos(x)を作図
+<pre>
+import numpy as np
+x = np.linspace(-np.pi,np.pi)
+plt.plot(x, np.cos(x), color='k')</pre>
+で黒色の折れ線グラフが描かれる
+</div>
+
+<h4><div class="headline2" id="graph_2_2">折れ線グラフの色を変える</div></h4>
+<div class="text1">
+<pre>plt.plot(x, np.cos(x), color='色の名前')</pre>
+または
+<pre>plt.plot(x, np.cos(x), c='色の名前')</pre>
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照
+<ul class="list1">
+<li>例：線を赤色に変える
+<pre>plt.plot(x, np.cos(x), color='r')</pre></li>
+<li>どうしても自分で色を作りたい場合
+<pre>plt.plot(x, np.cos(x), color='#d62728')</pre>
+'#rrggbb'の書式でRGBの0〜255の値を2桁の16進数で入力</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_2_3">折れ線グラフの線種を変える</div></h4>
+<div class="text1">
+<pre>plt.plot(x, np.sin(x), ls='線種')</pre>
+または
+<pre>plt.plot(x, np.sin(x), linestyle='線種')</pre>
+<a href="./options.html#linestyle">線種の一覧</a>、デフォルト値：'-'（実線）
+</div>
+  
+<h4><div class="headline2" id="graph_2_4">折れ線グラフの太さを変える</div></h4>
+<div class="text1">
+<pre>plt.plot(x, np.sin(x), lw=線の太さ)</pre>
+または
+<pre>plt.plot(x, np.sin(x), linewidth=線の太さ)</pre>
+デフォルト値：1、1〜10程度が許容範囲
+</div>
+
+<h4><div class="headline2" id="graph_2_5">折れ線グラフのマークを変える</div></h4>
+<div class="text1">
+<pre>plt.plot(x, np.cos(x), marker='マーカーの名前')</pre>
+マーカーの名前は<a href="./options.html#marker">指定可能なマーカーの一覧</a>参照
+</div>
+
+<h4><div class="headline2" id="graph_2_6">折れ線グラフのマークを塗り潰す</div></h4>
+<div class="text1">
+丸印の場合は、マーカーを塗り潰すパターンを変更可能
+<pre>plt.plot(x, np.cos(x), marker='o', fillstyle='塗り潰しパターン')</pre>
+塗り潰しパターンは<a href="./options.html#fillstyle">マーカーの塗り潰しパターン一覧</a>参照
+</div>
+
+<h4><div class="headline2" id="graph_2_7">階段状のグラフ</div></h4>
+<div class="text1">
+折れ線グラフの表示を階段状のグラフに変えることもできる
+<pre>plt.plot(x, np.cos(x), drawstyle=’スタイルの名前’)</pre>
+<ul class="list1">
+<li>折れ線グラフ（デフォルト）：
+<pre>plt.plot(x, np.cos(x), drawstyle=’default’)</pre></li>
+<li>階段状（前側）：
+<pre>plt.plot(x, np.cos(x), drawstyle=’steps-pre’)</pre></li>
+または
+<pre>plt.plot(x, np.cos(x), drawstyle=’steps’)</pre>
+<li>階段状（後側）：
+<pre>plt.plot(x, np.cos(x), drawstyle=’steps-post’)</pre></li>
+<li>階段状（中央）：
+<pre>plt.plot(x, np.cos(x), drawstyle=’steps-mid’)</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_2_8">折れ線グラフにx=0、y=0の線を付ける</div></h4>
+<div class="text1">
+plt.axhlineで水平方向、plt.axvlineで鉛直方向の線を引く
+<ul class="list1">
+<li>x=0の線を付ける
+<pre>plt.axvline(x=0, color='k', ls='--')</pre></li>
+<li>y=0の線を付ける
+<pre>plt.axhline(y=0, color='k', ls='--')</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_2_9">２つの折れ線グラフの間を塗り潰す</div></h4>
+<div class="text1">
+cos(x)とsin(x)の間を塗り潰す
+<pre>
+plt.plot(x, np.cos(x), color='k')
+plt.plot(x, np.sin(x), color='k')
+plt.fill_between(x, np.sin(x), np.cos(x), color='gray', alpha=0.4)</pre>
+で２つの折れ線グラフの間が灰色で塗り潰される
+</div>
+
+<h4><div class="headline2" id="graph_2_10">折れ線グラフに凡例を付ける</div></h4>
+<div class="text1">
+cos(x)とsin(x)を描き、凡例を付ける
+<pre>
+plt.plot(x, np.cos(x), color='k', ls='-', label='cos(x)')
+plt.plot(x, np.sin(x), color='k', ls='--', label='sin(x)')</pre>
+で凡例に表示するラベルを設定し、さらに凡例を描くために
+<pre>plt.legend()</pre>
+cos(x)が実線、sin(x)が破線であることが凡例として表示される<br />
+凡例を調整する方法は<a href="#legend_1">凡例</a>参照
+</div>
+
+<h4><div class="headline2" id="graph_2_11">折れ線グラフにグリッド線を引く</div></h4>
+<div class="text1">
+<pre>plt.grid()</pre>
+<ul class="list1">
+<li>例：グリッド線を灰色の点線にする
+<pre>plt.grid(color='gray', ls=':')</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_2_12">折れ線グラフをログスケールで表示する</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>図をプロットした後、軸のスケールを変更する場合
+<ul class="list2">
+<li>x軸を対数グラフ
+<pre>ax.set_xscale("log")</pre></li>
+<li>y軸を対数グラフ
+<pre>ax.set_yscale("log")</pre></li>
+</ul></li>
+<li>片対数グラフ、両対数グラフを描くメソッドもある
+<ul class="list2">
+<li>x軸を対数グラフ
+<pre>plt.semilogx(x, y)</pre></li>
+<li>y軸を対数グラフ
+<pre>plt.semilogy(x, y)</pre></li>
+<li>両対数グラフ
+<pre>plt.loglog(x, y)</pre></li>
+</ul></li>
+</ul>
+</div>
+
+
+<!-- 棒グラフ -->
+<h3><div class="headline1" id="graph_3">棒グラフ</div></h3>
+<h4><div class="headline2" id="graph_3_1">棒グラフを描く</div></h4>
+<div class="text1">
+<pre>plt.bar(x軸のデータ, y軸のデータ)</pre>
+</div>
+
+<h4><div class="headline2" id="graph_3_2">棒グラフを塗り潰す色を変える</div></h4>
+<div class="text1">
+<pre>plt.bar(x軸のデータ, y軸のデータ, color='色の名前')</pre>
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照
+</div>
+
+<h4><div class="headline2" id="graph_3_3">棒グラフの枠線の色を変える</div></h4>
+<div class="text1">
+<pre>plt.bar(x軸のデータ, y軸のデータ, edgecolor='色の名前')</pre>
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照
+</div>
+
+<h4><div class="headline2" id="graph_3_4">棒グラフを半透明にする</div></h4>
+<div class="text1">
+<pre>plt.bar(x軸のデータ, y軸のデータ, alpha=数字)</pre>
+0〜1の範囲で指定する（0で透明、1で不透明）、デフォルト値：1.0
+<ul class="list1">
+<li>例：枠線を黒、塗り潰す色を赤、半透明
+<pre>plt.bar(x, np.cos(x), alpha=0.4, color='r', edgecolor=0.4)</pre>
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_3_5">棒グラフの幅を変える</div></h4>
+<div class="text1">
+<pre>plt.bar(x軸のデータ, y軸のデータ, width=数字)</pre>
+widthはx軸上の幅で指定する
+</div>
+
+<h4><div class="headline2" id="graph_3_6">棒グラフの枠線を太くする</div></h4>
+<div class="text1">
+linewidthまたはlwを使う
+<pre>plt.bar(x軸のデータ, y軸のデータ, lw=数字)</pre>
+linewidthのデフォルト値：1
+</div>
+
+<h4><div class="headline2" id="graph_3_7">棒グラフを横に並べる</div></h4>
+<div class="text1">
+緑色、青、水色の順で横に３つの棒グラフを並べる
+<pre>
+plt.bar(x軸のデータ-0.2, y軸のデータ1, color='g', width=0.2)
+plt.bar(x軸のデータ, y軸のデータ2, color='b', width=0.2)
+plt.bar(x軸のデータ+0.2, y軸のデータ3, color='aqua', width=0.2)</pre>
+棒の横幅を0.2にして、棒グラフを描く際にx軸の座標を0.2毎ずらしている。棒グラフ同士の間隔を空ける場合には、x軸上でずらす値を大きくする
+</div>
+
+<h4><div class="headline2" id="graph_3_8">積み上げ棒グラフを描く</div></h4>
+<div class="text1">
+<pre>
+off_y = np.zeros(len(data_y[0])) # 棒グラフの初期開始位置（０）
+for n in np.arange(3):
+    index = data_y[n].index # x軸上の位置
+    plt.bar(index, data_y[n], bottom=off_y) # 棒グラフ積み上げ
+    off_y = off_y + data_y[n] # 棒グラフの開始位置再計算</pre>
+</div>
+
+<h4><div class="headline2" id="graph_3_9">横棒に変える</div></h4>
+<div class="text1">
+<pre>plt.barh(x軸のデータ, y軸のデータ)</pre>
+</div>
+
+<h4><div class="headline2" id="graph_3_10">棒グラフに凡例を付ける</div></h4>
+<div class="text1">
+<pre>plt.bar(x軸のデータ, y軸のデータ, label='ラベル')</pre>
+で凡例に表示するラベルを設定し、さらに凡例を描くために
+<pre>plt.legend()</pre>
+凡例を調整する方法は<a href="#legend_1">凡例</a>参照
+</div>
+
+<h4><div class="headline2" id="graph_3_11">棒グラフにエラーバーを付ける</div></h4>
+<div class="text1">
+エラーバーの書式をerror_kwで与え、エラーバーのデータをyerrで与える。透明度が0.3、ヒゲのキャップサイズが3の場合
+<pre>
+error_config = {'ecolor': '0.3', 'capsize': 3}
+plt.bar(x軸のデータ, y軸のデータ, yerr=y軸のエラーバーデータ, error_kw=error_config)</pre>
+設定可能なものは、ヒゲのキャップサイズ（capsize、整数値のみ、デフォルト値：0）とエラーバーの色や透明度（ecolor、文字列なので0.3ではなく'0.3'）、透明度の値は0.0で黒で1.0にかけて徐々に薄い灰色<br />
+書式は<a href="./options.html#error_kw">エラーバーの書式</a>参照
+<ul class="list1">
+<li>例：キャプサイズを長くする
+<pre>error_config = {'ecolor': '0.3', 'capsize': 6}</pre></li>
+<li>例：黒色で不透明
+<pre>error_config = {'ecolor': '0.0', 'capsize': 3}</pre></li>
+<li>例：水色に変える
+<pre>error_config = {'ecolor': 'c', 'capsize': 3}</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_3_12">棒グラフにハッチを付ける</div></h4>
+<div class="text1">
+<pre>plt.bar(x軸のデータ, y軸のデータ, alpha=1.0, hatch='ハッチのパターン', fill=None)</pre>
+パターンは<a href="./options.html#hatch">ハッチのパターン</a>参照
+</div>
+
+
+<!-- ヒストグラム -->
+<h3><div class="headline1" id="graph_4">ヒストグラム</div></h3>
+<h4><div class="headline2" id="graph_4_1">ヒストグラムを描く</div></h4>
+<div class="text1">
+<pre>plt.hist(データ)</pre>
+</div>
+
+<h4><div class="headline2" id="graph_4_2">ヒストグラムを塗り潰す色を変える</div></h4>
+<div class="text1">
+<pre>plt.hist(データ, color='色の名前')</pre>
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照
+</div>
+
+<h4><div class="headline2" id="graph_4_3">ヒストグラムの枠線の色を変える</div></h4>
+<div class="text1">
+<pre>plt.hist(データ, edgecolor='色の名前')</pre>
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照
+</div>
+
+<h4><div class="headline2" id="graph_4_4">ヒストグラムを半透明にする</div></h4>
+<div class="text1">
+<pre>plt.hist(データ, alpha=数字</pre>
+0〜1の範囲で指定する（0で透明、1で不透明）、デフォルト値：1.0
+</div>
+
+<h4><div class="headline2" id="graph_4_5">ヒストグラムにハッチを付ける</div></h4>
+<div class="text1">
+<pre>plt.hist(データ, hatch='ハッチのパターン', fill=False)</pre>
+パターンは<a href="./options.html#hatch">ハッチのパターン</a>参照
+<ul class="list1">
+<li>例：黒色の枠線にハッチ、半透明
+<pre>plt.hist(データ, alpha=0.4, fill=False, hatch='//')</pre></li>
+<li>例：黒色の枠線にハッチ、青色で塗り潰す、半透明
+<pre>plt.hist(データ, color='b', alpha=0.4, fill=True, hatch='++')</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_4_6">ヒストグラムのビンの間隔を設定する</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>自動設定（デフォルト値）
+<pre>plt.hist(データ, bins='auto')</pre></li>
+<li>ビンの数を指定する
+<pre>plt.hist(データ, bins='auto')</pre>
+データの最小値と最大値からビンの幅が自動設定される</li><br />
+<li>ビンの間隔を手動で設定する
+ビンの端点の値をedgesとして与える
+<pre>
+edges = np.arange(開始点, 終了点, 間隔) # ビンの端点の設定
+plt.hist(データ, bins=edges)</pre>  
+<a href="#graph_e_6">x軸の範囲</a>を同時に指定して開始点、終了点と合わせた方が良い</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_4_7">ヒストグラムに凡例を付ける</div></h4>
+<div class="text1">
+<pre>plt.hist(データ, label='ラベル')</pre>
+で凡例に表示するラベルを設定し、さらに凡例を描くために
+<pre>plt.legend()</pre>
+凡例を調整する方法は<a href="#legend_1">凡例</a>参照
+</div>
+
+<h4><div class="headline2" id="graph_4_8">ヒストグラムを描く際に合計を１にする</div></h4>
+<div class="text1">
+<pre>plt.hist(データ, density=True)</pre>
+</div>
+
+<h4><div class="headline2" id="graph_4_9">２つのヒストグラムを同時に描く</div></h4>
+<div class="text1">
+半透明にしたヒストグラムを使い、２つのヒストグラムが重なる部分も判別できるようにする
+<pre>
+plt.hist(データ1, color='b', alpha=0.4)
+plt.hist(データ2, color='r', alpha=0.4)</pre>
+</div>
+
+<h4><div class="headline2" id="graph_4_10">ヒストグラムを横に並べる</div></h4>
+<div class="text1">
+１つ目のデータを青色、２つ目のデータを赤色で塗り潰す
+<pre>plt.hist([データ1, データ2], color=['b', 'r'], label=["ラベル1", "ラベル2"])</pre>
+リストを渡すことができる
+</div>
+
+<h4><div class="headline2" id="graph_4_11">積み上げヒストグラムを描く</div></h4>
+<div class="text1">
+<pre>plt.hist([データ1, データ2], color=['b', 'r'], label=["ラベル1", "ラベル2"], stacked=True)</pre>
+stacked=Trueを使う。density=Trueと共に使うと、積み上げたものに対する総和が１となる
+</div>
+ 
+<h4><div class="headline2" id="graph_4_12">ヒストグラムと一緒にカーネル密度推定のグラフを描く</div></h4>
+<div class="text1">
+<pre>
+plt.hist(データ)
+データ.plot(kind='kde')</pre>
+データはPandasのSeriesかDataFrameにしておく必要あり
+</div>
+
+
+<!-- 散布図 -->
+<h3><div class="headline1" id="graph_5">散布図</div></h3>
+<h4><div class="headline2" id="graph_5_1">散布図を描く</div></h4>
+<div class="text1">
+<pre>plt.scatter(x軸データ, y軸データ)</pre>
+</div>
+
+<h4><div class="headline2" id="graph_5_2">散布図のマーカーの大きさと色を変える</div></h4>
+<div class="text1">
+<pre>plt.scatter(x軸データ, y軸データ, color='色の名前', s=大きさ)</pre>
+または
+<pre>plt.scatter(x軸データ, y軸データ, c='色の名前', s=大きさ)</pre>
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照<br />
+大きさのデフォルト値はs=36
+<ul class="list1">
+<li>色を赤、大きさを6（プロットする数が多い場合は、値を小さくする）
+<pre>plt.scatter(x軸データ, y軸データ, color='k', s=6)</pre></li>
+</ul>
+なお、sオプションのデフォルト値はrcParams['lines.markersize']の設定を参照しており、s=rcParams['lines.markersize']**2のように計算。rcParams['lines.markersize']=6なので、デフォルト値はs=36
+</div>
+
+<h4><div class="headline2" id="graph_5_3">散布図のマーカーの種類を変える</div></h4>
+<div class="text1">
+<pre>plt.scatter(x軸データ, y軸データ, marker='マーカーの名前')</pre>
+マーカーの名前は<a href="./options.html#marker">マーカーの一覧</a>参照
+</div>
+
+<h4><div class="headline2" id="graph_5_4">散布図のマーカーの色を値に応じて変える</div></h4>
+<div class="text1">
+z軸データをcオプションに与える
+<pre>plt.scatter(x軸データ, y軸データ, c=z軸データ)</pre>
+色の付け方はcmapで指定
+<pre>plt.scatter(x軸データ, y軸データ, c=z軸データ, cmap='色テーブル')</pre>
+色テーブルは<a href="./options.html#cmap">色テーブルの一覧</a>参照
+</div>
+
+<h4><div class="headline2" id="graph_5_5">散布図のマーカーの色をログスケールで変える</div></h4>
+<div class="text1">
+デフォルトでは値に応じて色が線形変化するので、matplotlib.colorsのLogNormを使いログスケールで色を変える
+<pre>
+from matplotlib.colors import LogNorm
+plt.scatter(x軸データ, y軸データ, c=z軸データ, cmap='色テーブル', norm=LogNorm())
+</pre>
+</div>
+
+<h4><div class="headline2" id="graph_5_6">散布図にカラーバーを付ける</div></h4>
+<div class="text1">
+<pre>fig.colorbar(plt.scatterの戻り値)</pre>
+<ul class="list1">
+<li>例：丸に青系の色を付けて、カラーバーを表示
+<pre>cs=plt.scatter(x軸データ, y軸データ, c=z軸データ, marker='o', s=24, cmap='Blues', edgecolor='k')
+fig.colorbar(cs)</pre></li>
+<li>例：カラーバーを横にする
+<pre>fig.colorbar(cs, orientation='horizontal')</pre></li>
+</ul>
+カラーバーの調整方法については、<a href="#colorbar_1">カラーバー</a>参照<br />
+（plt.colorbarと同じオプションを使用可能）
+</div>
+
+<h4><div class="headline2" id="graph_5_7">散布図を描く最小値、最大値の範囲を設定する</div></h4>
+<div class="text1">
+<pre>plt.scatter(x軸データ, y軸データ, vmin=最小値, vmax=最大値)</pre>
+</div>
+
+<h4><div class="headline2" id="graph_5_8">散布図に複数のデータを同時に描く</div></h4>
+<div class="text1">
+１番目のデータを青、２番目のデータを赤で描く
+<pre>
+plt.scatter(x軸のデータ1, y軸のデータ2, color='b')
+plt.scatter(x軸のデータ1, y軸のデータ2, color='r')</pre>
+</div>
+
+<h4><div class="headline2" id="graph_5_9">散布図に凡例を付ける</div></h4>
+<div class="text1">
+<pre>plt.scatter(x軸のデータ, y軸のデータ, label='ラベル')</pre>
+で凡例に表示するラベルを設定し、さらに凡例を描くために
+<pre>plt.legend()</pre>
+凡例を調整する方法は<a href="#legend_1">凡例</a>参照
+</div>
+
+<h4><div class="headline2" id="graph_5_10">散布図に相関係数を表示する</div></h4>
+<div class="text1">
+相関係数はNumpyのcorrcoefを使い計算する（corr[1,0]とcorr[0,1]は、x軸のデータ, y軸のデータの相関係数なのでどちらかを使う）
+<pre>
+import numpy as np
+corr = np.corrcoef(x軸のデータ, y軸のデータ) # ピアソンの積率相関係数の計算
+name = "{s:s}{f:4.3f}".format(s="r = ", f=corr[1,0]) # 表示するテキスト設定
+plt.text(テキストのx座標, テキストのy座標, name, fontsize=14, color='k') # 相関係数を表示</pre>
+<a href="#text_1">plt.text()</a>でnameに入れた文字列を表示する。
+</div>
+
+<h4><div class="headline2" id="graph_5_11">散布図に回帰式を追加する</div></h4>
+<div class="text1">
+回帰係数aと切片bを計算し、回帰直線をプロットする
+<pre>
+a = corr[1,0] * data_y.std() / data_x.std() # 回帰係数（a）
+b = data_y.mean() - a * data_x.mean() # 切片（b）
+x1 = np.linspace(np.floor(x軸最小値), np.ceil(x軸最大値), データ数) # x軸データ
+y1 = a * x1 + b # y軸データ
+plt.plot(x1, y1, color='k', lw=3, label='linear fit') # 回帰式のプロット</pre>
+np.linspace(最小値, 最大値, データ数)を使い、設定したデータ数分だけのx軸データを生成する<br />
+回帰式を表示するには、
+<pre>
+name = "{s1:s}{f1:4.3f}{s2:s}{f2:4.3f}".format(s1="y = ", f1=a, s2="x + ", f2=b)
+plt.text(テキストのx座標, テキストのy座標, name, fontsize=14, color='k') # 回帰式を表示</pre>
+</div>
+
+
+<!-- 矢羽 -->
+<h3><div class="headline1" id="graph_6">矢羽</div></h3>
+<h4><div class="headline2" id="graph_6_1">矢羽を描く</div></h4>
+<div class="text1">
+<pre>plt.barbs(x軸上の位置, y軸上の位置, 東西風データ, 南北風データ)</pre>
+</div>
+
+<h4><div class="headline2" id="graph_6_2">矢羽の色を変える</div></h4>
+<div class="text1">
+<pre>plt.barbs(x軸上の位置, y軸上の位置, 東西風データ, 南北風データ, color='色の名前')</pre>
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照
+<ul class="list1">
+<li>青色に変える
+<pre>plt.barbs(x, y, u, v, color='b')</pre></li>
+<li>色を青色、緑色と交互に変える
+<pre>plt.barbs(x, y, u, v, barbcolor=['b', 'g'])</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_6_3">矢羽の長さを変える</div></h4>
+<div class="text1">
+矢羽の長さを縦横同時に変える
+<pre>plt.barbs(x軸上の位置, y軸上の位置, 東西風データ, 南北風データ, length=長さ)</pre>
+長さのデフォルト値は8
+</div>
+
+<h4><div class="headline2" id="graph_6_4">矢羽のスタイルを調整する</div></h4>
+<div class="text1">
+設定可能なものは、矢羽を描けないほど風速が小さかった場合に描かれるシンボル（円）の大きさ（emptybarb）、矢羽同士の間隔（spacing）、矢羽の横方向の長さ（height）、旗矢羽の幅（width）<br />
+デフォルト値はemptybarb=0.15、spacing=0.12、height=0.4、width=0.25、<a href="options.html#sizes">矢羽の各部分の名称</a>参照
+<ul class="list1">
+<li>emptybarbをデフォルト値に対して小さくする
+<pre>plt.barbs(x軸上の位置, y軸上の位置, 東西風データ, 南北風データ, sizes=dict(emptybarb=0.05)</pre></li>
+<li>旗矢羽の幅を２倍にする
+<pre>plt.barbs(x軸上の位置, y軸上の位置, 東西風データ, 南北風データ, sizes=dict(width=0.50)</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_6_5">風速の小さい矢羽を描かない</div></h4>
+<div class="text1">
+<pre>
+plt.barbs(x軸上の位置, y軸上の位置, 東西風データ, 南北風データ, sizes=dict(emptybarb=0))
+</pre>
+</div>
+
+<h4><div class="headline2" id="graph_6_6">矢羽をノットで描く</div></h4>
+<div class="text1">
+barb_incrementsで短矢羽5 kt、長矢羽10 kt、旗矢羽50 ktに設定する。
+<pre>plt.barbs(x軸上の位置, y軸上の位置, 東西風データ, 南北風データ, barb_increments=dict(half=2.57222, full=5.14444, flag=25.7222)</pre>
+デフォルト値は短矢羽5 m/s、長矢羽10 m/s、旗矢羽50 m/s
+</div>
+
+
+<!-- 矢印 -->
+<h3><div class="headline1" id="graph_7">矢印</div></h3>
+<h4><div class="headline2" id="graph_7_1">矢印を描く</div></h4>
+<div class="text1">
+<pre>plt.quiver(x軸上の位置, y軸上の位置, 東西風データ, 南北風データ)</pre>
+</div>
+
+<h4><div class="headline2" id="graph_7_2">矢印の色を変える</div></h4>
+<div class="text1">
+<pre>plt.quiver(x軸上の位置, y軸上の位置, 東西風データ, 南北風データ, color='色の名前')</pre>
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照
+<ul class="list1">
+<li>赤色に変える
+<pre>plt.quiver(x, y, u, v, color='r')</pre></li>
+<li>色を青色、赤色、黒色と順番に変える
+<pre>plt.quiver(x, y, u, v, color=['b', 'r', 'k'])</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_7_3">矢印の幅を変える</div></h4>
+<div class="text1">
+<pre>plt.quiver(x軸上の位置, y軸上の位置, 東西風データ, 南北風データ, width=数字)</pre>
+幅のデフォルト値は0.005、0.004〜0.006程度が許容範囲
+<ul class="list1">
+<li>矢印の幅を太くする
+<pre>plt.quiver(x, y, u, v, width=0.006)</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_7_4">矢印の始点の配置方法</div></h4>
+<div class="text1">
+<pre>plt.quiver(x軸上の位置, y軸上の位置, 東西風データ, 南北風データ, pivot='位置')</pre>
+位置は<a href="options.html#pivot">矢印の始点の位置指定</a>参照
+</div>
+
+<h4><div class="headline2" id="graph_7_5">矢印の頭の部分の幅や長さを変える</div></h4>
+<div class="text1">
+矢印の頭の幅はheadwidth、頭の長さはheadlengthオプションで指定する<br />
+デフォルト値はheadwidth=3、headlength=5、<a href="options.html#quiver">矢印の各部分の名称</a>参照
+<ul class="list1">
+<li>矢印の頭の幅を大きくする
+<pre>plt.quiver(x, y, u, v, headwidth=3.5)</pre></li>
+<li>矢印の頭の長さを長くする
+<pre>plt.quiver(x, y, u, v, headlength=5.5)</pre></li>
+</ul>
+矢印の頭の幅や長さを変えた場合の見た目は<a href="options.html#headwidth">矢印の頭の幅</a>、<a href="options.html#headlength">矢印の頭の長さ</a>参照
+</div>
+
+<h4><div class="headline2" id="graph_7_6">矢印の頭の中心軸部分の長さを変える</div></h4>
+<div class="text1">
+矢印の頭の中心軸部分の長さはheadaxislengthで指定、<a href="options.html#quiver">矢印の各部分の名称</a>参照
+<pre>plt.quiver(x軸上の位置, y軸上の位置, 東西風データ, 南北風データ, headaxislength=数字)</pre>
+長さのデフォルト値は4.5、矢印の頭の部分の長さheadlengthよりも少し小さい値（headlength − １程度まで）が許容範囲
+</div>
+
+
+<!-- 等高線 -->
+<h3><div class="headline1" id="graph_8">等高線</div></h3>
+<h4><div class="headline2" id="graph_8_1">等高線を描く</div></h4>
+<div class="text1">
+<pre>plt.contour(x軸上の位置, y軸上の位置, z軸データ)</pre>
+x軸上の位置、y軸上の位置は２次元メッシュデータで与える<br />
+１次元データ(x, y)から２次元メッシュデータ(X, Y)を作成する場合には
+<pre>X, Y = np.meshgrid(x, y)</pre>
+</div>
+
+<h4><div class="headline2" id="graph_8_2">等高線のx、y軸の縦横比を１：１にする</div></h4>
+<div class="text1">
+<pre>plt.gca().set_aspect('equal')</pre>
+</div>
+
+<h4><div class="headline2" id="graph_8_3">等高線の色を変える</div></h4>
+<div class="text1">
+<pre>plt.contour(x軸上の位置, y軸上の位置, z軸データ, colors='色の名前')</pre>
+colorではなくcolorsなので注意<br />
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照
+<ul class="list1">
+<li>等高線を黒色に変える
+<pre>plt.contour(X, Y, Z, colors='k')</pre></li>
+<li>青、黒、赤の順で色を並べる
+<pre>plt.contour(X, Y, Z, colors=['b', 'r', 'k'])</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_8_4">等高線の幅や線種を変える</div></h4>
+<div class="text1">
+等高線の幅はlinewidths、線種はlinestylesで指定（linewidth、linestyleではないので注意）
+<pre>plt.contour(x軸上の位置, y軸上の位置, z軸データ, linestyles='スタイル', linewidths=数字)</pre>
+幅のデフォルト値は１、線種のデフォルト値は実線、<a href="./options.html#linestyle">線種の一覧</a>参照
+<ul class="list1">
+<li>例：幅を３にする
+<pre>plt.contour(X, Y, Z, linewidths=3)</pre></li>
+<li>例：点線にする
+<pre>plt.contour(X, Y, Z, linestyles=':')</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_8_5">等高線を描く値を指定する</div></h4>
+<div class="text1">
+levelsオプションに等高線を描きたい値のリストを渡す
+<pre>plt.contour(x軸上の位置, y軸上の位置, z軸データ, levels=等高線を描く値のリスト)</pre>
+<ul class="list1">
+<li>例：１、２、５、10、12の値を描く
+<pre>
+levels = [1, 2, 5, 10, 12] # 等高線の値のリスト
+plt.contour(X, Y, Z, levels=levels)
+</pre></li>
+<li>例：２から20まで２毎等間隔に描く
+<pre>
+levels = np.arange(2, 20, 2) # 値のリスト作成
+plt.contour(X, Y, Z, levels=levels)
+</pre></li>
+<li>例：データの最小値から最大値の範囲内で1.5毎等間隔に描く
+<pre>
+levels = np.arange(np.floor(Z.min()), np.ceil(Z.max()), 1.5) # 値のリスト作成
+plt.contour(X, Y, Z, colors='k', levels=levels) # 等高線を描く
+</pre>
+ZがNumpyのndarrayの場合。最小値よりも小さい最大の整数をnp.floor(Z.min())、最大値よりも大きい最小の整数をnp.ceil(Z.max())で取得、<a href="numpy.html#math">Numpyの数学関数</a>、<a href="numpy.html#stat">Numpyの統計処理</a>参照
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_8_6">等高線にラベルを付ける</div></h4>
+<div class="text1">
+plt.contourの戻り値を使いラベルを付ける
+<pre>
+cs = plt.contour(x軸上の位置, y軸上の位置, z軸データ) # 等高線を描く
+cs.clabel(fmt="%.1f") # ラベルを付ける
+</pre>
+小数点以下第1位まで表示
+<ul class="list1">
+<li>例：フォントサイズ12
+<pre>cs.clabel(fmt="%.1f", fontsize=12)</pre></li>
+<li>例：整数で表示
+<pre>cs.clabel(fmt="%d", fontsize=12)</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_8_7">等高線のラベルを１つ飛ばしに付ける</div></h4>
+<div class="text1">
+スライスの記法[::2]を使い、等高線のリストを１つ飛ばしでcs.clabelに渡す
+<pre>
+cs = plt.contour(X, Y, Z, colors='k', levels=levels) # 等高線を描く
+clevels = cs.levels # 等高線を描いたレベルを取得
+cs.clabel(clevels[::2], fmt="%d", fontsize=12) # ラベルを付ける
+</pre>
+</div>
+
+<h4><div class="headline2" id="graph_8_8">等高線の色を値に応じて変える</div></h4>
+<div class="text1">
+色の付け方はcmapで指定
+<pre>plt.contour(x軸上の位置, y軸上の位置, z軸データ, cmap='色テーブル')</pre>
+色テーブルは<a href="./options.html#cmap">色テーブルの一覧</a>参照
+<ul class="list1">
+<li>例：青〜赤〜緑と変化する色を付ける
+<pre>plt.contour(X, Y, Z, cmap='brg')</pre></li>
+</ul>
+</div>
+
+
+<!-- 陰影 -->
+<h3><div class="headline1" id="graph_9">陰影</div></h3>
+<h4><div class="headline2" id="graph_9_1">陰影を描く</div></h4>
+<div class="text1">
+<pre>plt.contourf(x軸上の位置, y軸上の位置, z軸データ)</pre>
+x軸上の位置、y軸上の位置は２次元メッシュデータで与える<br />
+１次元データ(x, y)から２次元メッシュデータ(X, Y)を作成する場合には
+<pre>X, Y = np.meshgrid(x, y)</pre>
+</div>
+
+<h4><div class="headline2" id="graph_9_2">陰影の色を値に応じて変える</div></h4>
+<div class="text1">
+色の付け方はcmapオプションで指定
+<pre>plt.contourf(x軸上の位置, y軸上の位置, z軸データ, cmap='色テーブル'')</pre>
+色テーブルは<a href="./options.html#cmap">色テーブルの一覧</a>参照
+<ul class="list1">
+<li>例：青〜白〜赤と変化と変化する色を付ける
+<pre>plt.contourf(X, Y, Z, cmap='bwr')</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_9_3">陰影を付ける間隔を変える</div></h4>
+<div class="text1">
+levelsオプションに陰影の色を変える値のリストを渡す
+<pre>plt.contourf(x軸上の位置, y軸上の位置, z軸データ, levels=陰影の色を変える値のリスト)</pre>
+<ul class="list1">
+<li>例：Zデータの最小値から最大値の範囲まで1.5間隔で陰影の値を変える
+<pre>
+levels = np.arange(np.floor(Z.min()), np.ceil(Z.max())+1, 1.5)
+plt.contourf(X, Y, Z, levels=levels, cmap='bwr')
+</pre>
+ZがNumpyのndarrayの場合。最小値よりも小さい最大の整数をnp.floor(Z.min())、最大値よりも大きい最小の整数をnp.ceil(Z.max())で取得、<a href="numpy.html#math">Numpyの数学関数</a>、<a href="numpy.html#stat">Numpyの統計処理</a>参照
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_9_4">陰影を付ける範囲を変更する</div></h4>
+<div class="text1">
+陰影を付ける最小値、最大値は、それぞれvmin、vmaxオプションで指定
+<pre>plt.contourf(x軸上の位置, y軸上の位置, z軸データ, vmin=数字, vmax=数字)</pre>
+<ul class="list1">
+<li>例：Zが３〜９の範囲で色を変化させる
+<pre>plt.contourf(X, Y, Z, cmap='bwr', vmin=3, vmax=9)</pre></li>
+<li>例：Zが３〜９の範囲で色を変化させ、範囲外の色を指定する
+<pre>
+cmap=plt.get_cmap('bwr') # 色テーブル取得
+cmap.set_under('gray') # 下限を下回った場合に灰色
+cmap.set_over('w') # 上限を超えた場合に白
+plt.contourf(X, Y, Z, cmap=cmap, vmin=3, vmax=9)
+</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_9_5">陰影にカラーバーを付ける</div></h4>
+<div class="text1">
+<pre>plt.colorbar()</pre>
+デフォルトでは縦方向のカラーバーが右側に付けられる
+<ul class="list1">
+<li>例：カラーバーを付け、ラベルも付ける
+<pre>cbar=plt.colorbar()
+cbar.set_label('文字列', fontsize=14) # カラーバーにラベルを付ける
+</pre>
+plt.colorbarの戻り値cbarを使いラベルを付ける</li><br />
+<li>例：カラーバーの長さを0.8倍にする
+<pre>plt.colorbar(shrink=0.8)</pre></li>
+<li>例：カラーバーを横方向にする
+<pre>plt.colorbar(orientation='horizontal')</pre></li>
+</ul>
+カラーバーの調整方法については、<a href="#colorbar_1">カラーバー</a>参照<br />
+</div>
+
+<h4><div class="headline2" id="graph_9_6">陰影にハッチを付ける</div></h4>
+<div class="text1">
+hatchesオプションを使う
+<pre>plt.contourf(x軸上の位置, y軸上の位置, z軸データ, hatches='ハッチパターンのリスト')</pre>
+パターンは<a href="./options.html#hatch">ハッチのパターン</a>参照
+<ul class="list1">
+<li>例：３種類のハッチパターンを繰り返す
+<pre>
+plt.contourf(X, Y, Z, levels=levels, cmap=cmap, vmin=3, vmax=9, hatches=['//', '..', 'xx'] ) 
+</pre>
+levelsは陰影を描く値、cmapは色テーブル（<a href="#graph_9_4">陰影を付ける範囲を変更する</a>参照）
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_9_7">陰影を描く値をログスケールにする</div></h4>
+<div class="text1">
+matplotlib.colorsのLogNormを使う
+<pre>
+from matplotlib.colors import LogNorm
+plt.contourf(x軸上の位置, y軸上の位置, z軸データ,  norm=LogNorm())
+</pre>
+</div>
+
+<h4><div class="headline2" id="graph_9_8">欠損値を灰色の陰影で塗り潰す</div></h4>
+<div class="text1">
+z軸データ（d）の０番目の軸のデータの一部（０からmaskoutの１つ前まで）を欠損にした場合
+<pre>
+d[0:maskout,:] = np.nan
+plt.contourf(x軸上の位置, y軸上の位置, d)
+
+# 作図範囲の取得
+xmin, xmax, ymin, ymax = plt.axis()
+xy = (xmin, ymin)
+width = xmax - xmin
+height = ymax - ymin
+# 矩形のパッチを使い、作図範囲の背景色を灰色にする
+import matplotlib.patches as patches
+p = patches.Rectangle(xy, width, height, fill=True, color='lightgray', zorder=-10)
+ax.add_patch(p)
+</pre>
+作図範囲の取得については、<a href="#graph_e_7">x軸、y軸の範囲を取得する</a>参照<br />
+patches.Rectangleの引数は、開始点の座標、横幅、高さの順<br />
+欠損値のデータは透明になるので、背景色を灰色にすると欠損値が灰色で塗り潰される（描く順を最背面にするためzorder=-10を指定）<br />
+</div>
+
+<h4><div class="headline2" id="graph_9_9">欠損値の周辺を滑らかにしない</div></h4>
+<div class="text1">
+デフォルトでは欠損値の周辺が滑らかに補完される。corner_mask=Falseとすることで角張った形に変わる。
+<pre>
+plt.contourf(x軸上の位置, y軸上の位置, z軸データ,  corner_mask=False)
+</pre>
+</div>
+
+<!-- 箱ひげ図 -->
+<h3><div class="headline1" id="graph_10">箱ひげ図</div></h3>
+<h4><div class="headline2" id="graph_10_1">箱ひげ図を描く</div></h4>
+<div class="text1">
+<pre>plt.boxplot(データ)</pre>
+デフォルトの箱ひげ図の見方は<a href="options.html#boxplot">箱ひげ図</a>参照
+</div>
+
+<h4><div class="headline2" id="graph_10_2">箱ひげ図で最小値から最大値までヒゲを描く</div></h4>
+<div class="text1">
+ヒゲをを描く範囲を決めるwhisオプションをwhis=100のように非常に大きな値にしておく
+<pre>plt.boxplot(データ, whis=100)</pre>
+whisオプションのデフォルト値は1.5（箱の1.5倍）
+<a href="options.html#boxplot">箱ひげ図</a>参照
+</div>
+
+<h4><div class="headline2" id="graph_10_3">箱ひげ図に平均値を描く</div></h4>
+<div class="text1">
+緑三角で平均値をプロットする
+<pre>plt.boxplot(データ, showmeans=True)</pre>
+デフォルト値はFalse（平均値を描かない）
+</div>
+
+<h4><div class="headline2" id="graph_10_4">箱ひげ図の平均値のマーカーを変更する</div></h4>
+<div class="text1">
+meanpropsオプションに平均値の部分のスタイルを辞書で与える
+<pre>plt.boxplot(データ, showmeans=True, meanprops=スタイルの辞書)</pre>
+<ul class="list1">
+<li>マーカーを丸にする
+<pre>plt.boxplot(データ, showmeans=True, meanprops=dict(marker='o'))</pre></li>
+<li>マーカーサイズを大きくする
+<pre>plt.boxplot(データ, showmeans=True, meanprops=dict(marker='o', markersize=10))</pre></li>
+<li>マーカーの枠を黒色に変える
+<pre>plt.boxplot(データ, showmeans=True, meanprops=dict(markeredgecolor='k'))</pre></li>
+<li>マーカーを赤色で塗り潰す
+<pre>plt.boxplot(データ, showmeans=True, meanprops=dict(markeredgecolor='k', markerfacecolor='r'))</pre></li>
+<li>マーカーを塗り潰さない
+<pre>plt.boxplot(データ, showmeans=True, meanprops=dict(markeredgecolor='k', markerfacecolor='none'))</pre>
+None（色を指定しないのでデフォルトのまま）ではなく'none'なので注意
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_10_5">箱ひげ図でpatch_artistを使う</div></h4>
+<div class="text1">
+<pre>plt.boxplot(データ, patch_artist=True)</pre>
+箱ひげ図の見た目が<a href="options.html#boxstyle">箱ひげ図の各部分と設定</a>の左側のように変わる
+</div>
+
+<h4><div class="headline2" id="graph_10_6">箱ひげ図のヒゲの色や太さを変える</div></h4>
+<div class="text1">
+cappropsオプションにヒゲの端のcap部分のスタイルを辞書で与える
+<pre>plt.boxplot(データ, capprops=スタイルの辞書)</pre>
+whiskerpropsオプションにヒゲの部分のスタイルを辞書で与える
+<pre>plt.boxplot(データ, whiskerprops=スタイルの辞書)</pre>
+<ul class="list1">
+<li>ヒゲを赤色にする
+<pre>plt.boxplot(データ, capprops=dict(color='r'), whiskerprops=dict(color='r'))</pre>
+</li>
+<li>ヒゲの太さを２にする
+<pre>plt.boxplot(データ, capprops=dict(linewidth=2), whiskerprops=dict(linewidth=2))</pre>
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_10_7">箱ひげ図の箱の色や太さを変える</div></h4>
+<div class="text1">
+boxpropsオプションに箱の部分のスタイルを辞書で与える
+<pre>plt.boxplot(データ, boxprops=スタイルの辞書)</pre>
+<ul class="list1">
+<li>箱の枠線の色を赤に変える
+<pre>plt.boxplot(データ, boxprops=dict(color='r'))</pre>
+</li>
+<li>箱を水色で塗り潰す
+<pre>plt.boxplot(データ, boxprops=dict(facecolor='aqua'))</pre>
+</li>
+<li>箱を塗り潰さない
+<pre>plt.boxplot(データ, boxprops=dict(facecolor='none'))</pre>
+Noneではなく'none'なので注意
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_10_8">箱ひげ図の外れ値のマーカーを変更する</div></h4>
+<div class="text1">
+flierpropsオプションに外れ値の部分のスタイルを辞書で与える
+<pre>plt.boxplot(データ, flierprops=スタイルの辞書)</pre>
+<ul class="list1">
+<li>外れ値のマーカーの色を青に変える
+<pre>plt.boxplot(データ, flierprops=dict(color='b'))</pre>
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_10_9">箱ひげ図の中央値のマーカーを変更する</div></h4>
+<div class="text1">
+medianpropsオプションに中央値の部分のスタイルを辞書で与える
+<pre>plt.boxplot(データ, medianprops=スタイルの辞書)</pre>
+<ul class="list1">
+<li>中央値の線の色を青に変える
+<pre>plt.boxplot(データ, medianprops=dict(color='b'))</pre>
+</li>
+</ul>
+</div>
+
+
+
+<!-- バイオリンプロット -->
+<h3><div class="headline1" id="graph_11">バイオリンプロット</div></h3>
+<h4><div class="headline2" id="graph_11_1">バイオリンプロットを描く</div></h4>
+<div class="text1">
+<pre>plt.violinplot(データ)</pre>
+</div>
+
+<h4><div class="headline2" id="graph_11_2">複数のバイオリンプロットを並べる</div></h4>
+<div class="text1">
+３つのデータをプロットする場合
+<pre>plt.violinplot((データ1, データ2, データ3))</pre>
+データ配列３つをタプルにして渡す
+</div>
+
+<h4><div class="headline2" id="graph_11_3">バイオリンプロットの横幅を変える</div></h4>
+widthsオプションを使う（widthではないので注意）
+<div class="text1">
+<pre>plt.violinplot(データ, widths=幅)</pre>
+デフォルト値：0.5
+</div>
+
+<h4><div class="headline2" id="graph_11_4">バイオリンプロットに中央値を描く</div></h4>
+<div class="text1">
+showmediansオプションで中央値を表す横線を描く（True）/描かない（False）を指定
+<pre>plt.violinplot(データ, showmedians=値)</pre>
+デフォルト値：False
+</div>
+
+<h4><div class="headline2" id="graph_11_5">バイオリンプロットに平均値を描く</div></h4>
+<div class="text1">
+showmeansオプションで平均値を表す横線を描く（True）/描かない（False）を指定
+<pre>plt.violinplot(データ, showmeans=値)</pre>
+デフォルト値：False
+</div>
+
+<h4><div class="headline2" id="graph_11_6">バイオリンプロットに最小値と最大値の範囲を表すヒゲを描く</div></h4>
+<div class="text1">
+showextremaオプションで最小値と最大値の範囲を表すヒゲを描く（True）/描かない（False）を指定
+<pre>plt.violinplot(データ, showextrema=値)</pre>
+デフォルト値：True
+</div>
+
+
+
+<!-- 流線関数 -->
+<h3><div class="headline1" id="graph_12">流線関数</div></h3>
+<h4><div class="headline2" id="graph_12_1">流線関数を描く</div></h4>
+<div class="text1">
+<pre>plt.streamplot(x軸上の位置, y軸上の位置, 東西風, 南北風)</pre>
+x軸上の位置、y軸上の位置は２次元メッシュデータで与える<br />
+東西風、南北風は２次元の配列<br />
+１次元データ(x, y)から２次元メッシュデータ(X, Y)を作成する場合には
+<pre>X, Y = np.meshgrid(x, y)</pre>
+</div>
+
+<h4><div class="headline2" id="graph_12_2">流線関数の色を変える</div></h4>
+<div class="text1">
+<pre>plt.streamplot(x軸上の位置, y軸上の位置, 東西風, 南北風, color='色の名前')</pre>
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照
+<ul class="list1">
+<li>流線関数を黒色に変える
+<pre>plt.streamplot(X, Y, Z, color='k')</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_12_3">流線関数の間隔や線の幅を変える</div></h4>
+<div class="text1">
+流線関数の間隔はdensity、線の幅はlinewidthで指定
+<pre>plt.streamplot(x軸上の位置, y軸上の位置, 東西風, 南北風, density=数字, linewidth=数字)</pre>
+densityのデフォルト値は１、linewidthのデフォルト値は１
+<ul class="list1">
+<li>例：流線関数の幅を２にする
+<pre>plt.streamplot(X, Y, U, V, linewidths=2)</pre></li>
+<li>例：流線関数の間隔を広くする
+<pre>plt.streamplot(X, Y, U, V, density=0.5)</pre></li>
+<li>例：流線関数の間隔をx軸方向のみ広くする
+<pre>plt.streamplot(X, Y, U, V, density=[0.5, 1])</pre>
+density=[x軸方向の密度, y軸方向の密度]のように与える</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_12_4">流線関数の色を値に応じて変える</div></h4>
+<div class="text1">
+色の付け方はcmapで指定、色を付ける基準は風速で与える
+<pre>
+spd = np.sqrt(東西風**2 + 南北風**2) # 風速
+plt.streamplot(x軸上の位置, y軸上の位置, 東西風, 南北風, cmap=plt.cm.'色テーブル')
+</pre>
+色テーブルは<a href="./options.html#cmap">色テーブルの一覧</a>参照
+<ul class="list1">
+<li>例：赤〜黄と変化する色を付ける
+<pre>
+spd = np.sqrt(U**2 + V**2) # 風速
+ax.streamplot(X, Y, U, V, color=spd, cmap=plt.cm.autumn)
+</pre></li>
+</ul>
+</div>
+
+
+
+<!-- 凡例 -->
+<h3><div class="headline1" id="legend_1">凡例</div></h3>
+<h4><div class="headline2" id="legend_1_1">凡例を付ける</div></h4>
+<div class="text1">
+<pre>plt.legend()</pre>
+</div>
+
+<h4><div class="headline2" id="legend_1_2">凡例の位置を変える</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>凡例の位置を自動設定する（デフォルト値）
+<pre>plt.legend(loc='best')</pre></li>
+<li>凡例の位置を左上に変える
+<pre>plt.legend(loc='upper left')</pre></li>
+</ul>
+凡例の位置は<a href="options.html#loc">凡例の位置</a>参照
+</div>
+
+<h4><div class="headline2" id="legend_1_3">凡例をグラフの外側に出す</div></h4>
+<div class="text1">
+<pre>plt.legend(loc='upper left', bbox_to_anchor=(1.05, 1.1), borderaxespad=0)</pre>
+図全体の右側、上側にアンカーを設定：bbox_to_anchor=(1.05, 1.1)<br />
+凡例の左上がちょうどアンカーに重なるようにする：loc='upper left'、borderaxespad=0
+</div>
+
+<h4><div class="headline2" id="legend_1_4">凡例の枠線を丸くしない</div></h4>
+<div class="text1">
+ 凡例の枠を角張った四角形に変える場合
+<pre>plt.rcParams["legend.fancybox"] = False</pre>
+</div>
+
+<h4><div class="headline2" id="legend_1_5">凡例の不透明度を変える</div></h4>
+<div class="text1">
+<pre>plt.rcParams["legend.framealpha"] = 数字</pre>
+0〜1の範囲で指定する（0で透明、1で不透明）、デフォルト値：0.8
+<ul class="list1">
+<li>例：凡例を不透明にする
+<pre>plt.rcParams["legend.framealpha"] = 1.0 </pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="legend_1_6">凡例の枠線の色を変える</div></h4>
+<div class="text1">
+<pre>plt.rcParams["legend.edgecolor"] = 数字または色の名前</pre>
+デフォルト値：0.8<br />
+数字の場合は、透明度を'0'〜'1'の範囲で指定する（'0'で不透明、'1'で透明、数字の場合も文字列として指定）<br />
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照
+<ul class="list1">
+<li>例：枠線の色を黒にする
+<pre>plt.rcParams["legend.edgecolor"] = 'k'</pre></li>
+<li>例：枠線の色を半透明にする
+<pre>plt.rcParams["legend.edgecolor"] = '0.6'</pre></li>
+<li>例：枠線を消す
+<pre>plt.rcParams["legend.edgecolor"] = '1'</pre></li>
+</ul>
+</div> 
+
+<h4><div class="headline2" id="legend_1_7">凡例の枠内を塗り潰す色を変える</div></h4>
+<div class="text1">
+<pre>plt.rcParams["legend.facecolor"] = 色の名前</pre>
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照<br />
+<ul class="list1">
+<li>例：枠線の枠内を灰色で塗り潰す
+<pre>plt.rcParams["legend.facecolor"] = 'gray'</pre></li>
+</ul>
+</div> 
+
+
+
+<!-- カラーバー -->
+<h3><div class="headline1" id="colorbar_1">カラーバー</div></h3>
+<h4><div class="headline2" id="colorbar_1_1">カラーバーを付ける</div></h4>
+<div class="text1">
+<pre>plt.colorbar()</pre>
+デフォルトでは縦方向のカラーバーが右側に付けられる（orientation='vertical'）
+<ul class="list1">
+<li>例：陰影を描いた戻り値を使う
+<pre>cs = ax.contourf(X, Y, Z)
+plt.colorbar(cs)
+</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="colorbar_1_2">カラーバーを横にする</div></h4>
+<div class="text1">
+<pre>plt.colorbar(orientation='horizontal')</pre>
+横方向のカラーバーが下側に付く
+</div>
+
+<h4><div class="headline2" id="colorbar_1_3">カラーバーにラベルを付ける</div></h4>
+<div class="text1">
+plt.colorbarの戻り値cbarを使いラベルを付ける
+<pre>
+cbar = plt.colorbar() # カラーバーを描く
+cbar.set_label('文字列') # カラーバーにラベルを付ける
+</pre>
+<ul class="list1">
+<li>例：カラーバーのラベルの文字サイズを指定する
+<pre>cs = ax.contourf(X, Y, Z) # 陰影を描く場合
+cbar = plt.colorbar(cs) # カラーバーを描く
+cbar.set_label('文字列', fontsize=14) # 文字サイズ14でラベルを付ける
+</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="colorbar_1_4">カラーバーの目盛り線ラベルの書式を変える</div></h4>
+<div class="text1">
+<pre>cbar = plt.colorbar(format="書式") # 目盛り線ラベルの書式設定してカラーバーを描く
+cbar.set_label('文字列') # カラーバーにラベルを付ける
+</pre>
+<ul class="list1">
+<li>例：カラーバーの目盛り線ラベルを整数にする
+<pre>plt.colorbar(format=“%.0f”)</pre></li>
+<li>例：カラーバーの目盛り線ラベルを小数点以下第一位まで表示
+<pre>plt.colorbar(format=“%.1f”)</pre></li>
+<li>例：小数点以下第一位まで表示し、全体で５文字以上
+<pre>plt.colorbar(format=“%5.1f”)</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="colorbar_1_5">カラーバーの大きさを変える</div></h4>
+<div class="text1">
+<pre>plt.colorbar(shrink=サイズ)</pre>
+デフォルト値：1.0
+<ul class="list1">
+<li>例：カラーバーのサイズを0.8倍にする
+<pre>plt.colorbar(shrink=0.8)</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="colorbar_1_6">カラーバーと図枠との間隔を変える</div></h4>
+<div class="text1">
+<pre>plt.colorbar(pad=間隔)</pre>
+<ul class="list1">
+<li>例：カラーバーとグラフとの間隔を広くする（縦方向の場合）
+<pre>plt.colorbar(pad=0.1)</pre>
+デフォルト値：pad=0.05</li><br />
+<li>例：カラーバーとグラフとの間隔を広くする（横方向の場合）
+<pre>plt.colorbar(pad=0.1, orientation='horizontal')</pre>
+デフォルト値：pad=0.15</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="colorbar_1_7">カラーバーの小目盛りを消す/付ける</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>カラーバー作成時の戻り値を使う
+<pre>cbar = plt.colorbar(オプション)
+cbar.minorticks_off/on()</pre>
+<ul class="list1">
+<li>例：カラーバーの小目盛りを消す
+<pre>cbar.minorticks_off()</pre>
+カラーバーに自動で小目盛りが付いてしまった場合などに使用</li><br />
+<li>例：カラーバーの小目盛りを付ける
+<pre>cbar.minorticks_on()</pre>
+</li>
+</ul>
+</li><br />
+<li>カラーバーの目盛り線の設定を変更する
+<ul class="list1">
+<li>例：縦方向カラーバーの小目盛りを消す
+<pre>import matplotlib.ticker as ticker
+cbar = plt.colorbar(オプション)
+cbar.ax.yaxis.set_minor_locator(ticker.NullLocator())</pre>
+</li>
+<li>例：横方向カラーバーの小目盛りを消す
+<pre>import matplotlib.ticker as ticker
+cbar = plt.colorbar(オプション)
+cbar.ax.xaxis.set_minor_locator(ticker.NullLocator())</pre>
+</li>
+</ul>
+この方法で小目盛りを付ける場合は、<a href="#colorbar_1_8">カラーバーの目盛り線を付ける間隔を変更する</a>参照
+</li></ul>
+</div>
+
+<h4><div class="headline2" id="colorbar_1_8">カラーバーの目盛り線を付ける間隔を変更する</div></h4>
+<div class="text1">
+カラーバーの目盛り線の設定を変更する
+<pre>import matplotlib.ticker as ticker
+cbar = plt.colorbar(オプション)
+cbar.ax.yaxis.set_major_locator(ticker.目盛り線の設定) # 縦方向カラーバーの大目盛り
+cbar.ax.yaxis.set_minor_locator(ticker.目盛り線の設定) # 縦方向カラーバーの小目盛り
+</pre>
+<ul class="list1">
+<li>例：縦方向カラーバーの大目盛り、小目盛りを自動設定
+<pre>
+cbar.ax.yaxis.set_major_locator(ticker.AutoLocator()) # 大目盛り
+cbar.ax.yaxis.set_minor_locator(ticker.AutoMinorLocator()) # 小目盛り
+</pre>
+</li>
+<li>例：横方向カラーバーの大目盛り、小目盛りを自動設定
+<pre>
+cbar.ax.xaxis.set_major_locator(ticker.AutoLocator()) # 大目盛り
+cbar.ax.xaxis.set_minor_locator(ticker.AutoMinorLocator()) # 小目盛り
+</pre>
+</li>
+
+<li>例：縦方向カラーバーの大目盛り、小目盛りの値を指定する
+<pre>
+cbar.ax.yaxis.set_major_locator(ticker.FixedLocator([1, 5, 10, 50, 100])) # 大目盛り
+cbar.ax.yaxis.set_minor_locator(ticker.FixedLocator(np.arange(1,100,1)))) # 小目盛り
+</pre>
+大目盛りは、1、5、10、50、100、小目盛りは1から99まで1毎</li><br />
+</ul>
+</div>
+
+<h4><div class="headline2" id="colorbar_1_9">カラーバーの目盛り線ラベルに任意の文字列を付ける</div></h4>
+<div class="text1">
+<pre>plt.colorbar(ticks=[目盛り線を描く値のリスト], orientation='カラーバーの向き')</pre>
+<ul class="list1">
+<li>カラーバーが縦の場合
+<pre>cbar.ax.set_yticklabels(cs, [目盛り線ラベルのリスト])</pre></li>
+<li>カラーバーが横の場合
+<pre>cbar.ax.set_xticklabels(cs, [目盛り線ラベルのリスト])</pre>
+</li>
+</ul>
+<ul class="list1">
+<li>例：カラーバーが横の場合
+<pre>cs = plt.contourf(X, Y, Z) # 陰影を描く場合
+cbar=plt.colorbar(cs, ticks=[1, 2, 3], オプション)
+cbar.ax.set_yticklabels(cs, ["lab1", "lab2", "lab3"])</pre>
+</li>
+<li>例：カラーバーが横の場合
+<pre>cs = plt.contourf(X, Y, Z) # 陰影を描く場合
+cbar=plt.colorbar(cs, ticks=[1, 2, 3], orientation='horizontal', オプション)
+cbar.ax.set_xticklabels(cs, ["lab1", "lab2", "lab3"])</pre>
+</li>
+<li>例：fig.colorbarを使う場合（縦方向）
+<pre>cs = plt.contourf(X, Y, Z) # 陰影を描く場合
+cbar=fig.colorbar(cs, ticks=[1, 2, 3], orientation='horizontal', オプション)
+cbar.ax.set_yticklabels(cs, ["lab1", "lab2", "lab3"])</pre>
+</li>
+<li>例：fig.colorbarを使う場合（横方向）
+<pre>cs = plt.contourf(X, Y, Z) # 陰影を描く場合
+cbar=fig.colorbar(cs, ticks=[1, 2, 3], orientation='horizontal', オプション)
+cbar.ax.set_xticklabels(cs, ["lab1", "lab2", "lab3"])</pre>
+</li>
+</ul>
+</div>
+
+
+
+<!-- テキスト -->
+<h3><div class="headline1" id="text_1">テキスト</div></h3>
+<h4><div class="headline2" id="text_1_1">テキストをプロットする</div></h4>
+<div class="text1">
+<pre>plt.text(x軸の座標, y軸の座標, テキスト)</pre>
+</div>
+
+<h4><div class="headline2" id="text_1_2">テキストの文字サイズを変える</div></h4>
+<div class="text1">
+  <pre>plt.text(x軸の座標, y軸の座標, テキスト, fontsize=文字の大きさ )</pre>
+  文字の大きさはポイントか文字列で与える。<a href="options.html#fontsize">文字のサイズと大きさ</a>参照
+</div>
+
+<h4><div class="headline2" id="text_1_3">テキストの書体を変える</div></h4>
+<div class="text1">
+<pre>plt.text(x軸の座標, y軸の座標, テキスト, fontstyle='字体')</pre>
+字体は'normal'、'italic'、oblique、デフォルト値：'normal'</div>
+
+<h4><div class="headline2" id="text_1_4">テキストの色を変更する</div></h4>
+<div class="text1">
+<pre>plt.text(x軸の座標, y軸の座標, fontweight='色の名前'')</pre>
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照
+</div>
+
+<h4><div class="headline2" id="text_1_5">テキストの文字の太さを変える</div></h4>
+<div class="text1">
+ <pre>plt.text(x軸の座標, y軸の座標, color='文字の太さ')</pre>
+文字の太さは<a href="options.html#fontsize">文字のサイズと大きさ</a>参照
+</div>
+
+<h4><div class="headline2" id="text_1_6">テキストの文字列の水平位置と鉛直位置を指定する</div></h4>
+<div class="text1">
+<pre>plt.text(x軸の座標, y軸の座標, ha='位置', va='位置')</pre>
+文字列の位置は<a href="options.html#hava">文字列の位置</a>参照
+</div>
+
+<h4><div class="headline2" id="text_1_7">テキストの文字列を回転させる</div></h4>
+<div class="text1">
+<pre>plt.text(x軸の座標, y軸の座標, rotation=角度)</pre>
+<ul class="list1">
+<li>文字列を90度回転させる（縦書きにする）
+<pre>plt.text(xloc, yloc, rotation=90)</pre></li>
+<li>文字列を斜めにする（70度回転の場合）
+<pre>plt.legend(xloc, yloc, rotation=70)</pre></li>
+</ul>
+</div>
+
+
+<!-- 図の体裁 -->
+<h3><div class="headline1" id="graph_e">図の体裁</div></h3>
+<h4><div class="headline2" id="graph_e_1">タイトルの大きさや色を変更する</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>文字サイズを指定する場合の例：24ポイント
+<pre>plt.title("タイトル", fontsize=24)</pre>
+文字サイズは<a href="options.html#fontsize">文字列</a>でも指定可能</li><br />
+<li>文字の色を赤色に指定する場合の例：
+<pre>plt.title("タイトル", color='r')</pre>
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_e_2">x軸、y軸のラベルの大きさや色を変更する</div></h4>
+<div class="text1">
+  plt.titleと同じオプションが使える
+  <ul class="list1">
+  <li>x軸の文字サイズを指定する場合の例：16ポイント
+  <pre>plt.xlabel("タイトル", fontsize=16)</pre>
+  文字サイズは<a href="options.html#fontsize">文字列</a>でも指定可能</li><br />
+  <li>y軸の文字の色を赤色に指定する場合の例：
+  <pre>plt.ylabel("タイトル", color='r')</pre>
+  色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li>
+  </ul>
+</div>
+
+<h4><div class="headline2" id="graph_e_3">x軸、y軸の目盛り線の書式</div></h4>
+<div class="text1">
+tickerを使い、大目盛りと小目盛りを自動設定
+<pre>import matplotlib.ticker as ticker
+ax.xaxis.set_major_locator(ticker.AutoLocator()) # x軸大目盛り
+ax.xaxis.set_minor_locator(ticker.AutoMinorLocator()) # x軸小目盛り
+ax.xaxis.set_major_locator(ticker.AutoLocator()) # y軸大目盛り
+ax.xaxis.set_minor_locator(ticker.AutoMinorLocator()) # y軸小目盛り</pre>
+</div>
+
+<h4><div class="headline2" id="graph_e_4">x軸、y軸の目盛り線の間隔を変更する</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>ticker.MultipleLocatorを使う例：y軸の大目盛りを10毎、小目盛りを2毎に付ける
+<pre>import matplotlib.ticker as ticker
+ax.yaxis.set_major_locator(ticker.MultipleLocator(10.00))
+ax.yaxis.set_minor_locator(ticker.MultipleLocator(2.00))</pre></li>
+<li>ax.set_xticklabels、ax.set_xticksを使う例：任意の場所に目盛り線とラベルを付ける
+<pre>ax.set_xticks([ラベルのリスト]) # 目盛り線
+ax.set_xticklabels([目盛り線の値のリスト]) # 目盛り線のラベル</pre></li>
+<li>FixedLocatorを使う例：任意の場所に目盛り線を付ける
+<pre>import matplotlib.ticker as ticker
+ax.yaxis.set_major_locator(ticker.FixedLocator(大目盛り線の値のリスト))
+ax.yaxis.set_minor_locator(ticker.FixedLocator(小目盛り線の値のリスト))
+</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_e_5">x軸、y軸の目盛り線ラベルのサイズを変更する</div></h4>
+<div class="text1">
+フォントサイズをデフォルトの10から12に変更する
+<pre>plt.rcParams["font.size"] = 12</pre>
+</div>
+
+<h4><div class="headline2" id="graph_e_6">x軸、y軸の範囲を指定する</div></h4>
+<div class="text1">
+<pre>
+plt.xlim([x軸最小値, x軸最大値])
+plt.ylim([y軸最小値, y軸最大値])</pre>
+</div>
+
+<h4><div class="headline2" id="graph_e_7">x軸、y軸の範囲を取得する</div></h4>
+<div class="text1">
+x軸の範囲をxmin、xmax、y軸の範囲をymin、ymaxに入力
+<pre>xmin, xmax, ymin, ymax = plt.axis()</pre>
+</div>
+
+<h4><div class="headline2" id="graph_e_8">x軸、y軸の目盛り線を内側にする</div></h4>
+<div class="text1">
+<pre>
+plt.rcParams['ytick.direction'] = 'in' # y軸目盛り線の向き
+plt.rcParams['ytick.major.width'] = 1.2 # y軸大目盛り線の太さ</pre>
+</div>
+
+<h4><div class="headline2" id="graph_e_9">マーカーや線を重ねる順序を調整する</div></h4>
+<div class="text1">
+zorder=整数、で数字が大きい方を後に描く
+<pre>
+plt.scatter(xデータ1, yデータ1, zorder=2) # 散布図を上に
+plt.plot(xデータ2, yデータ2, zorder=1) # 折れ線グラフを下に</pre>
+</div>
+
+<h4><div class="headline2" id="graph_e_10">図の時間軸の表示を調整する</div></h4>
+<div class="text1">
+matplotlib.datesを使い時刻表記を変える
+<pre>ax.xaxis.set_major_formatter(mdates.DateFormatter('時刻表記の書式'))</pre>
+<ul class="list1">
+<li>４桁の年/２桁の月表記にする
+<pre>ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y/%m'))</pre></li>
+<li>２桁の年/２桁の月表記にする
+<pre>ax.xaxis.set_major_formatter(mdates.DateFormatter('%y/%m'))</pre></li>
+</ul>
+時刻表記の書式については<a href="forms.html#time">時刻表記に用いられる書式指定子一覧</a>参照
+</div>
+
+<h4><div class="headline2" id="graph_e_11">軸の上下、左右を逆転させる</div></h4>
+<div class="text1">
+<ul class="list1">
+<!-- 1 -->
+<li>軸の設定を変更する方法
+<ul class="list2">
+<li>x軸を反転させる場合
+<pre>ax.invert_xaxis()</pre></li>
+<li>y軸を反転させる場合
+<pre>ax.invert_yaxis()</pre></li>
+<li>ログスケールのx軸を反転させる場合
+<pre>
+ax.set_xscale("log")
+ax.invert_xaxis()
+</pre></li>
+<li>ログスケールのy軸を反転させる場合
+<pre>
+ax.set_yscale("log")
+ax.invert_yaxis()
+</pre></li>
+</ul></li>
+<!-- 2 -->
+<li>直前に操作したサブプロットの設定を変更する場合
+<ul class="list2">
+<li>x軸を反転させる場合
+<pre>plt.gca().invert_xaxis()</pre></li>
+<li>y軸を反転させる場合
+<pre>plt.gca().invert_yaxis()</pre></li>
+</ul>
+plt.gca()については、<a href="#graph_1_12">直前に操作したサブプロットの情報を取得する</a>参照
+</li><br />
+<!-- 3 -->
+<li>set_ylimで大きな値を先、小さな値を後に書く
+<ul class="list2">
+<li>x軸を反転させる場合（-1から1の区間）
+<pre>ax.set_xlim([1, -1])</pre></li>
+<li>y軸を反転させる場合（-100から200の区間）
+<pre>ax.set_ylim([200, -100])</pre></li>
+<li>ログスケールのy軸を反転させる場合（10から1000 hPa）
+<pre>
+ax.set_yscale("log")
+ax.set_ylim([1000, 10])
+</pre></li>
+</ul></li>
+<!-- 4 -->
+<li>ax.set_ylimで上端と下端を逆転させた値を設定
+<ul class="list2">
+<li>x軸を反転させる場合
+<pre>ax.set_xlim(ax.get_xlim()[::-1])</pre>
+ax.get_xlim()でx軸の範囲を取得する</li><br />
+<li>y軸を反転させる場合
+<pre>ax.set_ylim(ax.get_ylim()[::-1])</pre>
+ax.get_ylim()でy軸の範囲を取得する</li><br />
+</ul></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_e_12">枠線や目盛りを消す</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>枠線と目盛りを全て消す
+<pre>
+plt.axis('off')
+</pre>
+</li>
+<li>直前に操作したplt.gca()を変更し、特定の枠線と目盛りを消す
+<ul class="list2">
+<li>右側の枠線と目盛りを消す場合
+<pre>
+plt.gca().spines['right'].set_visible(False)
+plt.gca().yaxis.set_ticks_position('left')
+</pre>
+１行目だけでは右側の目盛りと目盛り線が残ってしまうので、２行目で左側だけ残す指定を行なっている
+</li><br />
+<li>上側の枠線と目盛りを消す場合
+<pre>
+plt.gca().spines['top'].set_visible(False)
+plt.gca().xaxis.set_ticks_position('bottom')
+</pre>
+１行目だけでは上側の目盛りと目盛り線が残ってしまうので、２行目で下側だけ残す指定を行なっている
+</li><br />
+<li>左側の枠線と目盛りを消す場合
+<pre>
+plt.gca().spines['left'].set_visible(False)
+plt.gca().yaxis.set_ticks_position('right')
+</pre>
+２行目の指定で、右側に目盛りと目盛り線を付けている
+</li><br />
+<li>下側の枠線と目盛りを消す場合
+<pre>
+plt.gca().spines['bottom'].set_visible(False)
+plt.gca().xaxis.set_ticks_position('top')
+</pre>
+２行目の指定で、上側に目盛りと目盛り線を付けている
+</li><br />
+</ul>
+plt.gca()については、<a href="#graph_1_12">直前に操作したサブプロットの情報を取得する</a>参照
+</li></ul>
+</div>
+
+<h4><div class="headline2" id="graph_e_13">y軸をログスケールにした時にラベルの数字を整数表示する</div></h4>
+<div class="text1">
+matplotlib.tickerに含まれるLogLocatorとFuncFormatterを使う
+<ul class="list1">
+<li>y軸が気圧面高度の場合に大目盛りに1000、100、10、1の文字を表示
+<pre>
+import matplotlib.ticker as ticker
+def major_formatter(x, pos):
+&nbsp; &nbsp; return "%.0f" % x
+ax.yaxis.set_major_locator(ticker.LogLocator(base=10.0, numticks=15))
+ax.yaxis.set_major_formatter(ticker.FuncFormatter(major_formatter))
+</pre></li>
+<li>小目盛りにラベルを表示させない（NullFormatterを使う）
+<pre>
+ax.yaxis.set_minor_formatter(ticker.NullFormatter())
+</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_e_14">y軸をパーセント表示にする</div></h4>
+<div class="text1">
+matplotlib.tickerに含まれるPercentFormatterを使う
+<pre>ax.yaxis.set_major_formatter(ticker.PercentFormatter(1.0))</pre>
+0〜1が0％〜100%の表記に変わる
+</div>
+
+<small><a href="#top">[top]</a></small> <br />
+<hr width="105%" />
+</article>
+</body>
+<footer>
+<p>最終更新日：2021/01/02</p>
+<p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
+</footer>
+</html>

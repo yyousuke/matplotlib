@@ -1,0 +1,430 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="author" content="山下陽介 (Yousuke Yamashita)" />
+<link rel="icon" href="/~yyousuke/yousuke/favicon.ico" type="image/x-icon" />
+<!-- Mobile Internet Explorer allows us to activate ClearType technology for smoothing fonts for easy reading -->
+<meta http-equiv="cleartype" content="on" />
+<!-- Specify whether or not telephone numbers in the HTML content should appear as hypertext links -->
+<meta name="format-detection" content="telephone=no" />
+<!-- Changes the logical window size used when displaying a page mobile browsers -->
+<meta name = "viewport" content = "width = device-width, initial-scale=1, user-scalable=yes" />
+
+<meta name="robots" content="all" />
+<meta name="http-equiv" content="X-Robots-Tag : all" />
+<meta name="googlebot" content="all" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link href="design.css" rel="stylesheet" type="text/css" />
+<title>気象データ解析のためのmatplotlibの使い⽅</title>
+</head>
+
+<body link="#0000FF" vlink="#0000FF">
+
+<div id="nesting">
+<a href="/~yyousuke">ホーム</a> &gt; <a href="index.html">matplotlibの使い⽅</a> &gt; 気象データ処理のTIPS
+</div>
+<article>
+<center><h1 id="top">matplotlib：気象データ処理のTIPS</h1></center>
+<br />
+
+<!-- 目次 -->
+<h2 id="contents">目次</h2>
+<div class="contents">
+  <!--  CSVファイル -->
+  <ul class="list1"><li><a href="#csv_1">CSVファイル</a>
+    <ul class="list2">
+      <li><a href="#csv_1_1">CSVファイルの形式</a></li>
+      <li><a href="#csv_1_2">CSVファイルの読み込み</a></li>
+      <li><a href="#csv_1_3">CSVファイルの時刻処理</a></li>
+      <li><a href="#csv_1_4">CSVファイルの行処理</a></li>
+      <li><a href="#csv_1_5">CSVファイルの時刻がparse_dates未対応の場合</a></li>
+     </ul>
+  </li></ul>
+  <!--  バイナリファイル -->
+  <ul class="list1"><li><a href="#bin_1">バイナリファイル</a>
+    <ul class="list2">
+      <li><a href="#bin_1_1">バイナリファイルの形式</a></li>
+      <li><a href="#bin_1_2">バイナリファイルのエンディアン</a></li>
+      <li><a href="#bin_1_3">バイナリファイルの読み込み</a></li>
+    </ul>
+  </li></ul>
+  <!--  NetCDFファイル -->
+  <ul class="list1"><li><a href="#nc_1">NetCDFファイル</a>
+    <ul class="list2">
+      <li><a href="#nc_1_1">NetCDFファイルの形式</a></li>
+      <li><a href="#nc_1_2">NetCDFのモジュール</a></li>
+      <li><a href="#nc_1_3">NetCDFファイルの読み込み</a></li>
+      <li><a href="#nc_1_4">NetCDFファイル情報の取得</a></li>
+      <li><a href="#nc_1_5">データにスケールファクターとオフセットがある場合</a></li>
+    </ul>
+  </li></ul>
+  <!--  GRIB2ファイル -->
+  <ul class="list1"><li><a href="#grib2_1">GRIB2ファイル</a>
+    <ul class="list2">
+      <li><a href="#grib2_1_1">GRIB2ファイルの形式</a></li>
+      <li><a href="#grib2_1_2">GRIB2ファイルの読み込み</a></li>
+      <li><a href="#grib2_1_3">pygribを使ったGRIB2ファイルの読み込み</a></li>
+    </ul>
+  </li></ul>
+  <!--  GRIB1ファイル -->
+  <ul class="list1"><li><a href="#grib1_1">GRIB1ファイル</a>
+    <ul class="list2">
+      <li><a href="#grib1_1_1">GRIB1ファイルの形式</a></li>
+      <li><a href="#grib1_1_2">GRIB1ファイルの読み込み</a></li>
+    </ul>
+  </li></ul>
+  <!--  HDF5ファイル -->
+  <ul class="list1"><li><a href="#hdf5_1">HDF5ファイル</a>
+    <ul class="list2">
+      <li><a href="#hdf5_1_1">HDF5ファイルの形式</a></li>
+      <li><a href="#hdf5_1_2">HDF5ファイルの読み込み</a></li>
+    </ul>
+  </li></ul>
+</div>
+
+<small><a href="#top">[top]</a></small> <br />
+<br />
+<hr width="105%" />
+<br />
+
+<!-- ここから本文 -->
+<!-- CSVファイル -->
+<h3><div class="headline1" id="csv_1">CSVファイル</div></h3>
+<h4><div class="headline2" id="csv_1_1">CSVファイルの形式</div></h4>
+<div class="text1">
+カンマ区切りのテキストデータ
+<pre>
+時刻,項目1,項目2,項目3
+時刻1,データ1-1,データ1-2,データ1-3
+時刻2,データ2-1,データ2-2,データ2-3
+...
+</pre>
+＊<a href="#csv_1_4">ヘッダがない場合</a>を扱うことも可能
+</div>
+
+<h4><div class="headline2" id="csv_1_2">CSVファイルの読み込み</div></h4>
+<div class="text1">
+<pre>df = pd.read_csv("ファイル名")</pre>
+</div>
+
+<h4><div class="headline2" id="csv_1_3">CSVファイルの時刻処理</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>例：１列目が時刻データの場合
+<pre>df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0])</pre>
+parse_datesには時刻データとして処理する列、index_colにはindexとして扱う列を指定<br />
+時刻データはdf.indexになる
+</li><br />
+<li>例：１列目が年、２列目が月のように複数列に時刻データが入っている場合
+<pre>df = pd.read_csv("ファイル名", parse_dates=[[0,1]], index_col=[0])</pre>
+時刻データはdf.indexになり、年、月単独のデータは参照できない
+</li><br />
+<li>例：１列目が月、２列目が年のように並びが逆の場合
+<pre>df = pd.read_csv("ファイル名", parse_dates=[[1,0]], index_col=[0])</pre>
+</li>
+<li>例：読み込んだ年、月の時刻データも残したい場合
+<pre>df = pd.read_csv("ファイル名", parse_dates=[[0,1]], index_col=[0], keep_date_col=True)</pre>
+時刻データはdf.index、年、月のデータはdf.year、df.monthなどになる（yearやmonthなどは、ヘッダに記述された名前になる）
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="csv_1_4">CSVファイルの行処理</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>例：１行目にヘッダがなく、１行目からデータが入っている場合
+<pre>df = pd.read_csv("ファイル名", header=None)</pre>
+</li>
+<li>例：ヘッダがない場合に、読み込み時に任意のヘッダを付ける
+<pre>df = pd.read_csv("ファイル名", header=None, names=[名前１, 名前２, , ,名前n])</pre>
+namesに与えるリストの要素数は、データの列数に合わせる
+</li><br />
+<li>例：１〜３行目にデータ以外のもの（データの説明など）が入っており、４行目がヘッダの場合
+<pre>df = pd.read_csv("ファイル名", skiprows=[0, 1, 2])</pre>
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="csv_1_5">CSVファイルの時刻がparse_dates未対応の場合</div></h4>
+<div class="text1">
+日付データへの変換処理をdate_parserに関数で指定
+<pre>df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0], date_parser=parse_dates)</pre>
+parse_datesが関数名
+<ul class="list1">
+<li>例：時刻形式がGrADSで扱われる「00Z03FEB2020」のような形式の場合
+<pre>
+from datetime import datetime
+def parse_dates(x):
+    return datetime.strptime(x, "%HZ%d%b%Y")
+
+df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0], date_parser=parse_dates)
+</pre>
+時刻表記の書式については<a href="forms.html#time">時刻表記に用いられる書式指定子一覧</a>参照</li><br />
+<li>例：時刻形式が「2020/02/03 00:00」のような形式の場合
+<pre>
+from datetime import datetime
+def parse_dates(x):
+    return datetime.strptime(x, "%Y/%m/%d %H:%M")
+
+df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0], date_parser=parse_dates)
+</pre>
+</li>
+</ul>
+</div>
+
+
+
+<!--  バイナリファイル -->
+<h3><div class="headline1" id="bin_1">バイナリファイル</div></h3>
+<h4><div class="headline2" id="bin_1_1">バイナリファイルの形式</div></h4>
+<div class="text1">
+４バイト浮動小数点数（単精度）のデータや８バイト浮動小数点数（倍精度）のデータを改行コード無しで並べたもの<br />
+<ul class="list1">
+<li>例：経度、緯度方向とも10度の等間隔データの場合
+<pre>
+t=0： | 0E, 90N | 10E, 90N | ... | 350E, 90N |
+t=0： | 0E, 80N | 10E, 80N | ... | 350E, 80N |
+...
+t=1： | 0E, 90S | 10E, 80N | ... | 350E, 80N |
+t=1： | 0E, 90N | 10E, 90N | ... | 350E, 90N |
+t=1： | 0E, 80N | 10E, 80N | ... | 350E, 80N |
+...
+t=1： | 0E, 90S | 10E, 80N | ... | 350E, 80N |
+</pre>
+| |で囲まれた部分がデータを表していて、１つのサイズが４バイト
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="bin_1_2">バイナリファイルのエンディアン</div></h4>
+<div class="text1">
+エンディアン：２バイト以上のデータを保存する場合の保存順序の規則<br />
+ビックエンディアン（Big Endian）とリトルエンディアン（Little endian）の２種類
+<ul class="list1">
+<li>例：４バイトの場合
+<pre>
+データ：AABBCCDD
+
+ビックエンディアン：AABBCCDD（上位から保存）
+リトルエンディアン：DDCCBBAA（下位から保存）
+</pre>
+</li>
+</ul>
+</div>
+
+
+<h4><div class="headline2" id="bin_1_3">バイナリファイルの読み込み</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>Numpyを使った方法（先頭からdatasize分だけ読み込み）
+<pre>
+endian = 'big'
+idim = 288 # 経度方向のサイズ（整数）
+jdim = 145 # 緯度方向のサイズ（整数）
+num_rec = 3 # データの個数（整数）
+datasize = idim * jdim * num_rec # 読み込むデータサイズ（byte）
+f = open('読み込むファイル名', 'rb')
+if endian == 'big':
+    din = np.fromfile(f, dtype='&gt;f4', count=datasize)
+else:
+    din = np.fromfile(f, dtype='&lt;f4', count=datasize)
+f.close()
+d = din.reshape(num_rec, jdim, idim)
+</pre>
+ビックエンディアンの４バイト浮動小数点数の場合がdtype='&gt;f4'の書式に対応<br />
+リトルエンディアンの場合にはdtype='&lt;f4'となる
+</li><br />
+<li>arrayを使った方法（指定した時刻データを切り出す）
+<pre>
+idim = 288 # 経度方向のサイズ（整数）
+jdim = 145 # 緯度方向のサイズ（整数）
+tsta = 5 # 開始データ番号（整数、データの先頭番号は１）
+tend = 7 # 終了データ番号（整数、データの先頭番号は１）
+datasize = idim * jdim # 水平方向のデータサイズ（byte）
+import array
+import sys
+with open('読み込むファイル名', 'rb') as fin:
+    fin.seek(4*datasize*(tsta-1), 0) # 開始データの前まで読み飛ばす
+    buf = array.array('f') # ４バイト浮動小数点数
+    buf.fromfile(fin, datasize*(tend-tsta+1)) # データの読み込み
+    if sys.byteorder == 'little':
+        buf.byteswap()
+# bufからlistに変換し、x-, y-の配列に
+d = np.array(buf.tolist()).reshape(jdim,idim)
+</pre>
+４バイト浮動小数点数の場合の書式（'f'）<br />
+sys.byteorderを使い、ビックエンディアンとリトルエンディアンを判定（システムがリトルエンディアンの場合にビックエンディアンとして読み込むようにしている）<br />
+ここではデータの先頭番号が１としているが、先頭番号を０としたい場合には、tsta-1をtstaに変える
+</li>
+</ul>
+</div>
+
+
+<!--  NetCDFファイル -->
+<h3><div class="headline1" id="nc_1">NetCDFファイル</div></h3>
+<h4><div class="headline2" id="nc_1_1">NetCDFファイルの形式</div></h4>
+<div class="text1">
+データと一緒に格子点の情報やデータの説明も一緒に格納されている。データの説明も格納できるため、データを作成したモデルの名前や作成者、変数の導出方法、参照元の文献やURL などを記述しておけば、利用者がデータの中身を理解しやすい。また、格納されたデータを機種に依存することなく取り出せるため、データの配布に適している。
+</div>
+
+<h4><div class="headline2" id="nc_1_2">NetCDFのモジュール</div></h4>
+<div class="text1">
+モジュールをインポートする
+<pre>import netCDF4</pre><br />
+インポートでエラーが出る場合
+<ul class="list1">
+<li>MacPortsでpython3.7のnetcdfライブラリをインストール
+<pre>
+sudo port install py37-netcdf4
+</pre>
+＊HomebrewやAnacondaを使っている場合には、競合を避けるためMacPortsは使わない方が良い
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="nc_1_3">NetCDFファイルの読み込み</div></h4>
+<div class="text1">
+<pre>
+nc = netCDF4.Dataset('ファイル名', 'r')
+var = nc.variables['変数名'][:]
+</pre>
+<ul class="list1">
+<li>例：SLPデータの読み込み（変数名slpの場合）
+<pre>
+nc = netCDF4.Dataset('ファイル名', 'r')
+var = nc.variables['slp'][:]
+</pre></li>
+<li>例：軸情報の読み込み
+<pre>
+lon = nc.variables["lon"][:] # 経度
+lat = nc.variables["lat"][:] # 緯度
+time = nc.variables["time"][:] # 時刻
+</pre>
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="nc_1_4">NetCDFファイル情報の取得</div></h4>
+<div class="text1">
+<pre>
+nc = netCDF4.Dataset('ファイル名', 'r')
+idim = len(nc.dimensions['lon']) # 経度方向のデータ数
+jdim = len(nc.dimensions['lat']) # 緯度方向のデータ数
+ndim = len(nc.dimensions['time']) # 時間方向のデータ数
+add_offset = nc.variables['変数名'].add_offset # データのオフセット
+scale_factor = nc.variables['変数名'].scale_factor # データのスケールファクター
+</pre>
+</div>
+
+<h4><div class="headline2" id="nc_1_5">データにスケールファクターとオフセットがある場合</div></h4>
+<div class="text1">
+<pre>
+nc = netCDF4.Dataset('ファイル名', 'r')
+var_i = nc.variables['変数名'][:]
+add_offset = nc.variables['変数名'].add_offset
+scale_factor = nc.variables['変数名'].scale_factor
+var = var_i * scale_factor + add_offset
+</pre>
+</div>
+
+
+ <!--  GRIB2ファイル -->
+<h3><div class="headline1" id="grib2_1">GRIB2ファイル</div></h3>
+<h4><div class="headline2" id="grib2_1_1">GRIB2ファイルの形式</div></h4>
+<div class="text1">
+WMOが定めたバイナリデータの交換形式のうち、2001年に制定された第２版を指す。後述の<a href="#grib1_1">GRIB1形式</a>とは互換性がない。格納されたデータを機種に依存することなく取り出すことができ、データと一緒に格子点の情報や変数の簡単な説明等も格納できる。詳細については<a href="https://qiita.com/e_toyoda/items/ce7497e1a633b16f1ff1">Qiitaの記事</a>に詳しい。
+</div>
+
+<h4><div class="headline2" id="grib2_1_2">GRIB2ファイルの読み込み</div></h4>
+<div class="text1">
+GRIB2ファイルの読み込みを行うには、まずGRIB2からNetCDFへ変換し、NetCDFとして読み込む方法が良い。変換にはwgrib2を用いる。MacPortsであれば、
+<pre>
+% sudo port install wgrib2
+</pre>
+で導入できる。wgrib2を用いて次のように変換する。
+<pre>
+% wgrib2 入力ファイル名 -netcdf 出力ファイル名
+</pre>
+変換後のファイルは、<a href="#nc_1">NetCDF</a>に記述した方法で読み込み可能
+</div>
+
+<h4><div class="headline2" id="grib2_1_3">pygribを使ったGRIB2ファイルの読み込み</div></h4>
+<div class="text1">
+Python3.6以前ではpygribモジュールがあり、直接GRIB2ファイルを読み込むことができた。
+<pre>
+% sudo port install py36-pygrib
+</pre>
+で導入できる。pygribでは次のようにデータを取り出す。
+<pre>
+import pygrib
+grbs = pygrib.open("ファイル名") # GRIB2ファイルを開く
+grb1 = grbs.select(forecastTime=1)[0] # 1時間後の０番目の変数
+</pre>
+Python3.7以降では対応していないため、<a href="#grib2_1_2">GRIB2ファイルの読み込み</a>に記述した方法に切り替えた方が良い。
+</div>
+
+ <!--  GRIB1ファイル -->
+<h3><div class="headline1" id="grib1_1">GRIB1ファイル</div></h3>
+<h4><div class="headline2" id="grib1_1_1">GRIB1ファイルの形式</div></h4>
+<div class="text1">
+WMOが定めたバイナリデータの交換形式のうち、1989年に制定された第１版を指す。前述の<a href="#grib2_1">GRIB2形式</a>とは互換性がない。格納されたデータを機種に依存することなく取り出せ、データと一緒に格子点の情報や変数の簡単な説明等も格納できる。
+</div>
+
+<h4><div class="headline2" id="grib1_1_2">GRIB1ファイルの読み込み</div></h4>
+<div class="text1">
+GRIB1形式は、pythonで直接読むことはできないが、GrADSに付属しているwgribコマンドを使うことで、単純バイナリファイルに変換可能。JRA-55客観解析データの気圧面データを使い、下層が先に入ったビックエンディアンの単純バイナリファイルに変換する場合
+<pre>
+% wgrib -v 入力ファイル.grb | grep ":GRIBIDを記述," | sort -nr -k5 -t':' \
+  | wgrib -i -nh -ieee 入力ファイル.grb -o 出力ファイル.bin
+</pre>
+＊-nhはヘッダ無し、-ieeeはビックエンディアン<br />
+＊最初のwgribは、ファイルの中に含まれる変数をリスト化するためのもので、２回目のwgribは、リストを読み込んで入力ファイルからリストに対応するデータをファイルに書き出すためのもの。grepやsortでリストのうち必要な変数の取り出しや並べ替えを行う。
+</div>
+
+
+ <!--  HDF5ファイル -->
+<h3><div class="headline1" id="hdf5_1">HDF5ファイル</div></h3>
+<h4><div class="headline2" id="hdf5_1_1">HDF5ファイルの形式</div></h4>
+<div class="text1">
+HDF形式は、米国立スーパーコンピュータ応用研究所（National Center for Supercomputing Applications：NCSA）で開発され、大量のデータを格納し構造化するために設計されている。データと一緒に格子点の情報や変数の説明なども格納することができ、格納されたデータを機種に依存することなく取り出せる。HDF形式には、古いHDF4形式と新しいHDF5形式があり、両者に互換性はない。HDF5はファイル構造が単純化されており、ディレクトリに相当するグループとファイルに相当するデータセットの２種類で階層構造を持って保存することができる。
+</div>
+
+<h4><div class="headline2" id="hdf5_1_2">HDF5ファイルの読み込み</div></h4>
+<div class="text1">
+Pythonでは、Pandasやh5pyでHDF5ファイルを読むことができる。Pandasで読み込めない形式の場合にはh5pyを使う。
+<ul class="list1">
+<li>例：Pandasを使った方法
+<pre>
+import pandas as pd
+pd.read_hdf("ファイル名")
+</pre></li>
+<li>例：h5pyを使った方法
+Python3.8の場合、MacPortsを使い次のようにインストール
+<pre>
+% sudo port install py38-h5py
+</pre>
+２次元データをdに格納する場合
+<pre>
+import h5py
+hdf = h5py.File("ファイル名", "r") # HDF5ファイルを開く
+d = hdf['データセットの名前'][:, :] # データセットの名前に対応するデータを取得
+</pre>
+</li>
+＊以前はhdf['データセットの名前'].valueを使うことができたが、現在のバージョンではエラーが出る。
+＊データセットの名前を表示したい場合には、print(hdf.heys())
+</ul>
+</div>
+
+
+<small><a href="#top">[top]</a></small> <br />
+<hr width="105%" />
+</article>
+</body>
+<footer>
+<p>最終更新日：2021/01/02</p>
+<p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
+</footer>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="author" content="山下陽介 (Yousuke Yamashita)" />
+<link rel="icon" href="/~yyousuke/yousuke/favicon.ico" type="image/x-icon" />
+<!-- Mobile Internet Explorer allows us to activate ClearType technology for smoothing fonts for easy reading -->
+<meta http-equiv="cleartype" content="on" />
+<!-- Specify whether or not telephone numbers in the HTML content should appear as hypertext links -->
+<meta name="format-detection" content="telephone=no" />
+<!-- Changes the logical window size used when displaying a page mobile browsers -->
+<meta name = "viewport" content = "width = device-width, initial-scale=1, user-scalable=yes" />
+
+<meta name="robots" content="all" />
+<meta name="http-equiv" content="X-Robots-Tag : all" />
+<meta name="googlebot" content="all" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link href="design.css" rel="stylesheet" type="text/css" />
+<title>気象データ解析のためのmatplotlibの使い⽅</title>
+</head>
+
+<body link="#0000FF" vlink="#0000FF">
+<article>
+
+<h3 id="gridspec"><div class="headline1">GridSpec</div></h3>
+<h4><div class="headline2" id="gridspec_1">GridSpecのモジュール</div></h4>
+<div class="text1">
+gridspectモジュールをインポートする
+<pre>from matplotlib import gridspec</pre>
+以降はgridspectとして参照できる
+</div>
+
+<h4><div class="headline2" id="gridspec_2">GridSpecでサブプロットを生成</div></h4>
+<div class="text1">
+gridspec.GridSpecを用いる
+<pre>
+gs = gridspec.GridSpec(縦分割数, 横分割数, height_ratios=縦分割比率のタプル, width_ratios=横分割比率のタプル)
+ax = [plt.subplot(gs[縦軸方向の番号1, 横軸方向の番号1]), ..., plt.subplot(gs[縦軸方向の番号n, 横軸方向の番号n])]
+</pre>
+<ul class="list1">
+<li>縦方向に４：１、横方向に６：１で分割し３つのサブプロット生成
+<pre>
+gs = gridspec.GridSpec(2, 2, height_ratios=(4, 1), width_ratios=(6, 1))
+ax = [plt.subplot(gs[0, 0]), plt.subplot(gs[0, 1]), plt.subplot(gs[1, 0])]
+</pre>
+それぞれの図枠が、gs[0, 0]、gs[0, 1]、gs[1, 0]のように縦軸、横軸の番号をスライスで与えたものと対応</li>
+<br />
+<li>３つのサブプロット生成のイメージ</li>
+<img src="./figs/Fig4-6-1.png" width="600" alt="Fig" /><br /><br />
+</ul>
+</div>
+
+<h4><div class="headline2" id="gridspec_3">GridSpecで縦方向に３分割、横方向に３分割する</div></h4>
+<div class="text1">
+縦横の分割数を表す１番目と２番目の引数を３にする
+<pre>gs = gridspec.GridSpec(3, 3, height_ratios=縦分割比率のタプル, width_ratios=横分割比率のタプル)</pre>
+<ul class="list1">
+<li>縦縦軸を２：２：１、横軸を３：３：１に分割し、計７つのサブプロット生成
+<pre>
+gs = gridspec.GridSpec(3, 3, height_ratios=(2, 2, 1), width_ratios=(3, 3, 1))
+ax = [plt.subplot(gs[0, 0]), plt.subplot(gs[0, 1]), plt.subplot(gs[0, 2]), \
+   plt.subplot(gs[1, 0]), plt.subplot(gs[1, 1]), plt.subplot(gs[2, 0]), \
+   plt.subplot(gs[2, 2]) ]
+</pre></li>
+<br />
+<li>サブプロット生成のイメージ</li>
+<img src="./figs/Fig4-6-3.png" width="600" alt="Fig" /><br /><br />
+</ul>
+</div>
+
+<h4><div class="headline2" id="gridspec_4">GridSpecで複数の領域にまたがる図枠を作成</div></h4>
+<div class="text1">
+分割した領域にまたがる範囲をgs[0, :]のように指定する（コロンは横軸方向全てを使うことを表す）
+<ul class="list1">
+<li>縦横にそれぞれ３分割した後で、計５つのサブプロット生成
+<pre>
+gs = gridspec.GridSpec(3, 3, height_ratios=(2, 2, 1), width_ratios=(3, 3, 1))
+ax = [plt.subplot(gs[0, :]), \
+   plt.subplot(gs[1, 0]), plt.subplot(gs[1, 1]), plt.subplot(gs[2, 0]), \
+   plt.subplot(gs[1:, 2]) ]
+</pre></li>
+<br />
+<li>サブプロット生成のイメージ</li>
+<img src="./figs/Fig4-6-4.png" width="600" alt="Fig" /><br /><br />
+複雑な図枠配置を行う場合には、最初に完成後のイメージ図を作った方が良い
+</ul>
+</div>
+
+<small><a href="#top">[top]</a></small> <br />
+<hr width="105%" />
+</article>
+</body>
+<footer>
+<p>最終更新日：2021/01/02</p>
+<p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
+</footer>
+</html>

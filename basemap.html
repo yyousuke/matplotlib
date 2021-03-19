@@ -1,0 +1,633 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="author" content="山下陽介 (Yousuke Yamashita)" />
+<link rel="icon" href="/~yyousuke/yousuke/favicon.ico" type="image/x-icon" />
+<!-- Mobile Internet Explorer allows us to activate ClearType technology for smoothing fonts for easy reading -->
+<meta http-equiv="cleartype" content="on" />
+<!-- Specify whether or not telephone numbers in the HTML content should appear as hypertext links -->
+<meta name="format-detection" content="telephone=no" />
+<!-- Changes the logical window size used when displaying a page mobile browsers -->
+<meta name = "viewport" content = "width = device-width, initial-scale=1, user-scalable=yes" />
+
+<meta name="robots" content="all" />
+<meta name="http-equiv" content="X-Robots-Tag : all" />
+<meta name="googlebot" content="all" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link href="design.css" rel="stylesheet" type="text/css" />
+<title>気象データ解析のためのmatplotlibの使い⽅</title>
+</head>
+
+<body link="#0000FF" vlink="#0000FF">
+
+<div id="nesting">
+<a href="/~yyousuke">ホーム</a> &gt; <a href="index.html">matplotlibの使い⽅</a> &gt; BasemapのTIPS
+</div>
+<article>
+<center><h1 id="top">matplotlib：BasemapのTIPS</h1></center>
+<br />
+
+<!-- 目次 -->
+
+<h2 id="contents">目次</h2>
+<div class="contents">
+  <!-- Basemapの基本 -->
+  <ul class="list1"><li><a href="#basemap_1">Basemapの基本</a>
+    <ul class="list2">
+      <li><a href="#basemap_1_1">Basemapのモジュール</a></li>
+      <li><a href="#basemap_1_2">Basemapを呼び出す</a></li>
+      <li><a href="#basemap_1_3">Basemapで経度線・緯度線を描く</a></li>
+      <li><a href="#basemap_1_4">Basemapで海岸線を描く</a></li>
+      <li><a href="#basemap_1_5">Basemapで国境線を描く</a></li>
+      <li><a href="#basemap_1_6">Basemapで州の境界線を描く</a></li>
+      <li><a href="#basemap_1_7">Basemapで河川を描く</a></li>
+      <li><a href="#basemap_1_8">Basemapで大陸と海洋を塗り分ける</a></li>
+      <li><a href="#basemap_1_9">Basemapで地図の解像度を変更する</a></li>
+      <li><a href="#basemap_1_10">Basemapの地図を衛星画像風に変える</a></li>
+    </ul>
+  </li></ul>
+  <!-- Basemapの地図 -->
+  <ul class="list1"><li><a href="#basemap_2">Basemapの地図</a>
+    <ul class="list2">
+      <li><a href="#basemap_2_1">正距円筒図法</a></li>
+      <li><a href="#basemap_2_2">メルカトル図法</a></li>
+      <li><a href="#basemap_2_3">ポーラーステレオ図法（極投影図法）</a></li>
+      <li><a href="#basemap_2_4">ランベルト図法（ランベルト正角円錐図法）</a></li>
+      <li><a href="#basemap_2_5">正射投影図法（平射図法）</a></li>
+      <li><a href="#basemap_2_6">ロビンソン図法</a></li>
+      <li><a href="#basemap_2_7">モルワイデ図法</a></li>
+      <li><a href="#basemap_2_8">ランベルト正積円筒図法</a></li>
+	  <li><a href="#basemap_2_9">ミラー図法</a></li>
+      <li><a href="#basemap_2_10">正距方位図法</a></li>
+	</ul>
+  </li></ul>
+  <!-- Basemapのデータプロット -->
+  <ul class="list1"><li><a href="#basemap_3">Basemapのデータプロット</a>
+    <ul class="list2">
+      <li><a href="#basemap_3_1">経度・緯度データの作成</a></li>
+      <li><a href="#basemap_3_2">等高線を描く</a></li>
+      <li><a href="#basemap_3_3">陰影を描く</a></li>
+      <li><a href="#basemap_3_4">陰影にカラーバーを付ける</a></li>
+      <li><a href="#basemap_3_5">矢羽をプロットする</a></li>
+      <li><a href="#basemap_3_6">文字をプロットする</a></li>
+      <li><a href="#basemap_3_7">マーカーをプロットする</a></li>
+    </ul>
+  </li></ul>
+  <!-- 図の体裁 -->
+  <ul class="list1"><li><a href="#basemap_e">図の体裁</a>
+    <ul class="list2">
+      <li><a href="#basemap_e_1">タイトルを付ける</a></li>
+      <li><a href="#basemap_e_2">等高線を複数同時に描く場合に等高線上に文字を重ねない</a></li>
+      <li><a href="#basemap_e_3">極投影図法で0度と360度を滑らかにつなげる</a></li>
+    </ul>
+  </li></ul>
+</div>
+
+<small><a href="#top">[top]</a></small> <br />
+<br />
+<hr width="105%" />
+<br />
+
+<!-- ここから本文 -->
+<!-- Basemapの基本 -->
+<h3><div class="headline1" id="basemap_1">Basemapの基本</div></h3>
+<h4><div class="headline2" id="basemap_1_1">Basemapのモジュール</div></h4>
+<div class="text1">
+mpl_toolkits.basemapモジュールからBasemapをインポート
+<pre>
+from mpl_toolkits.basemap import Basemap
+import matplotlib.pyplot as plt
+</pre>
+以降はBasemapとして参照できる。同時に<a href="matplotlib.html#matplotlib_1_3">matplotlibもインポート</a>しておく
+</div>
+
+<h4><div class="headline2" id="basemap_1_2">Basemapを呼び出す</div></h4>
+<div class="text1">
+<pre>
+fig = plt.figure() # プロット領域の作成
+m = Basemap() # マップを作成
+</pre>
+以降はm.メソッドのようなインスタンスメソッドを使った作図が可能
+</div>
+
+<h4><div class="headline2" id="basemap_1_3">Basemapで経度線・緯度線を描く</div></h4>
+<div class="text1">
+<pre>
+m.drawmeridians(経度線を引く値のリスト) # 経度線を引く
+m.drawparallels(緯度線を引く値のリスト) # 緯度線を引く
+</pre>
+<ul class="list1">
+<li>例：60度毎に経度線を引く
+<pre>m.drawmeridians(np.arange(0,360,60))</pre></li>
+<li>例：30度毎に緯度線を引く
+<pre>m.drawparallels(np.arange(-90,90,30))</pre></li>
+<li>例：経度線にラベルを付ける（下側のみ）
+<pre>
+m.drawmeridians(np.arange(0,360,60), labels=[False, False, False, True])
+</pre>
+labels=[False, False, 上側ラベルの有無, 下側ラベルの有無]<br />
+前の２つの要素は反映されない
+</li><br />
+<li>経度線、緯度線と目盛り</li>
+<img src="./figs/Fig6-1-3.png" width="400" alt="Fig" />
+<br />
+<li>例：緯度線にラベルを付ける（左側のみ）
+<pre>
+m.drawparallels(np.arange(-90,90,30), labels=[True, False, False, False])
+</pre>
+labels=[左側のラベルの有無, 右側のラベルの有無, False, False]<br />
+後ろの２つの要素は反映されない
+</li><br />
+<li>例：線を灰色にしてラベルの文字サイズを小さくする
+<pre>
+m.drawmeridians(np.arange(0,360,60), color="gray", fontsize='small', ¥
+   labels=[False, False, False, True]) # 経度線を引く
+m.drawparallels(np.arange(-90,90,30), color="gray", fontsize='small', ¥
+   labels=[True, False, False, False]) # 緯度線を引く
+</pre>
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li>
+<br />
+<li>例：線の色を名前ではなく数字で指定する
+<pre>
+m.drawmeridians(np.arange(0,360,60), color="0.9")
+m.drawparallels(np.arange(-90,90,30), color="0.9")
+</pre>
+黒の"0.0"〜白の"1.0"まで徐々に色が変わる（0.0ではなく文字列"0.0"なので注意）
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="basemap_1_4">Basemapで海岸線を描く</div></h4>
+<div class="text1">
+<pre>m.drawcoastlines()</pre>
+<ul class="list1">
+<li>例：海岸線を緑の点線で描く
+<pre>m.drawcoastlines(color='g', linestyle='--')</pre>
+色の名前と線種は<a href="./options.html#color">色の名前一覧</a>、<a href="./options.html#linestyle">線種の一覧</a>参照</li><br />
+<li>例：海岸線の太さを1.5にする
+<pre>m.drawcoastlines(linewidth=1.5)</pre></li>
+デフォルト値：1
+</ul>
+</div>
+
+<h4><div class="headline2" id="basemap_1_5">Basemapで国境線を描く</div></h4>
+<div class="text1">
+<pre>m.drawcountries()</pre>
+<ul class="list1">
+<li>例：赤色で国境線を描く
+<pre>m.drawcountries(color='r')</pre>
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li><br />
+<li>例：国境線を太さ1.5の点線にする
+<pre>m.drawcountries(linestyle='--', linewidth=1.5)</pre>
+線種は<a href="./options.html#linestyle">線種の一覧</a>参照</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="basemap_1_6">Basemapで州の境界線を描く</div></h4>
+<div class="text1">
+<pre>m.drawstates()</pre>
+南北アメリカ、オーストラリアのみ
+<ul class="list1">
+<li>例：赤色で境界線を描く
+<pre>m.drawstates(color='r')</pre>
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li><br />
+<li>例：境界線を太さ1.5の点線にする
+<pre>m.drawstates(linestyle='--', linewidth=1.5)</pre>
+線種は<a href="./options.html#linestyle">線種の一覧</a>参照</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="basemap_1_7">Basemapで河川を描く</div></h4>
+<div class="text1">
+<pre>m.drawrivers()</pre>
+<ul class="list1">
+<li>例：河川を青色で描く
+<pre>m.drawrivers(color='b')</pre>
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li><br />
+<li>例：河川を太さ1.5で描く
+<pre>m.drawrivers(color='b', linewidth=1.5)</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="basemap_1_8">Basemapで大陸と海洋を塗り分ける</div></h4>
+<div class="text1">
+図の背景を塗り潰すm.drawmapboundary()と大陸を塗り潰すm.fillcontinents()を使う
+<ul class="list1">
+<li>例：大陸を緑色で塗り潰す
+<pre>m.fillcontinents(color='g')</pre>
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li><br />
+<li>例：大陸を緑色、湖を青色で塗り潰す
+<pre>m.fillcontinents(color='g', lake_color='b')</pre></li>
+<li>例：背景を水色、大陸を緑色で塗り潰す（海と湖が水色になる）
+<pre>
+m.drawmapboundary(fill_color='aqua') # 背景を塗り潰す
+m.fillcontinents(color='g') # 大陸部分を緑色で塗り潰す
+</pre></li>
+<li>例：背景を水色、大陸を白抜きにする
+<pre>
+m.drawmapboundary(fill_color='aqua') # 背景を塗り潰す
+m.fillcontinents(color='w') # 大陸部分を白色で塗り潰す
+</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="basemap_1_9">Basemapで地図の解像度を変更する</div></h4>
+<div class="text1">
+resolutionオプションを使う
+<pre>m = Basemap(resolution='解像度')</pre>
+resolution='c'（coarse、粗い解像度）、resolution='l'（low、低解像度）、resolution = 'i'（intermediate、中間解像度）、resolution='h'（high、高解像度）、resolution='f'（full、最高解像度）<br />
+デフォルト値：resolution='c'
+<ul class="list1">
+<li>例：低解像度
+<pre>m = Basemap(resolution='l')</pre></li>
+<li>解像度を変えた場合の見た目</li>
+<img src="./figs/Fig6-3-3.png" width="400" alt="Fig" />
+</ul>
+</div>
+
+<h4><div class="headline2" id="basemap_1_10">Basemapの地図を衛星画像風や高度分布図風に変える</div></h4>
+<div class="text1">
+図の背景を衛星画像風に変えるm.bluemarble()や高度分布図風に変えるm.etopo()を使う。m.drawmapboundary()を行うと背景が塗り潰されるので、同時には使わない。大陸のみ塗り潰したい場合には、m.fillcontinents()を行うことはできる。
+<ul class="list1">
+<li>例：bluemarbleを標準の解像度で使う
+<pre>map.bluemarble()</pre></li>
+<li>例：解像度を落として作図時間を短くする
+<pre>map.bluemarble(scale=0.1)</pre>
+デフォルト値：0.5</li><br />
+<li>例：etopoを標準の解像度で使う
+<pre>map.etopo()</pre></li>
+<li>例：解像度を落として作図時間を短くする
+<pre>map.etopo(scale=0.1)</pre>
+デフォルト値：0.5</li><br />
+</ul>
+</div>
+
+
+<!-- Basemapの地図 -->
+<h3><div class="headline1" id="basemap_2">Basemapの地図</div></h3>
+<h4><div class="headline2" id="basemap_2_1">正距円筒図法</div></h4>
+<div class="text1">
+<pre>m = Basemap(projection='cyl')</pre>
+デフォルトの図法<br />
+gradsのlatlonに相当する図法で、緯度線・経度線が直角かつ等間隔に交差
+<ul class="list1">
+<li>東経180度を中心にする場合
+<pre>m = Basemap(projection='cyl', lon_0=180)</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="basemap_2_2">メルカトル図法</div></h4>
+<div class="text1">
+<pre>m = Basemap(projection='merc', llcrnrlon=経度下限, urcrnrlon=経度上限, llcrnrlat=緯度下限, urcrnrlat=緯度上限)</pre>
+<ul class="list1">
+<li>例：南緯60度〜北緯60度まで、全ての緯度帯で描く場合
+<pre>m = Basemap(projection='merc', llcrnrlon=0, urcrnrlon=360, llcrnrlat=-60, urcrnrlat=60)</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="basemap_2_3">ポーラーステレオ図法（極投影図法）</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>北極を中心に描く場合
+<pre>m = Basemap(projection='npstere', lon_0=中心の緯度, boundinglat=端の緯度)</pre>
+gradsのnpsに相当する図法</li><br />
+<li>南極を中心に描く場合
+<pre>m = Basemap(projection='spstere', lon_0=中心の緯度, boundinglat=端の緯度)</pre>
+gradsのspsに相当する図法</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="basemap_2_4">ランベルト図法（ランベルト正角円錐図法）</div></h4>
+<div class="text1">
+<pre>m = Basemap(projection='lcc', lon_0=中心の経度,  lat_0=中心の緯度, width=幅, height=高さ)</pre>
+幅と高さの単位はm<br />
+または
+<pre>m = Basemap(projection='lcc', lon_0=中心の経度, lat_0=中心の緯度, llcrnrlon=経度下限, urcrnrlon=経度上限, llcrnrlat=緯度下限, urcrnrlat=緯度上限)</pre>
+</div>
+
+<h4><div class="headline2" id="basemap_2_5">正射投影図法（平射図法）</div></h4>
+<div class="text1">
+<pre>m = Basemap(projection='ortho', lon_0=中心の経度, lat_0=中心の緯度)</pre>
+<ul class="list1">
+<li>例：東経180度、北緯45度を中心に描く場合
+<pre>m = Basemap(projection='ortho', lon_0=180, lat_0=45)</pre>
+lat_0は-90から90まで許容されているが、45より大きい値を指定すると落ちるバグがある（2019/12/12）<br />
+該当する作図を行う際には、<a href="./info.html#20200201">解決法：正射投影図法で北緯45度より北側を中心にした場合の不具合（2020/02/01）</a>のコード修正を適用する
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="basemap_2_6">ロビンソン図法</div></h4>
+<div class="text1">
+<pre>m = Basemap(projection='robin', lon_0=中心の経度, lat_0=中心の緯度)</pre>
+<ul class="list1">
+<li>例：東経180度を中心に描く場合
+<pre>m = Basemap(projection='robin', lon_0=180)</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="basemap_2_7">モルワイデ図法</div></h4>
+<div class="text1">
+<pre>m = Basemap(projection='moll', lon_0=中心の経度, lat_0=中心の緯度)</pre>
+<ul class="list1">
+<li>例：東経180度を中心に描く場合
+<pre>m = Basemap(projection='moll', lon_0=180)</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="basemap_2_8">ランベルト正積円筒図法</div></h4>
+<div class="text1">
+<pre>m = Basemap(projection='cea')</pre>
+</div>
+
+<h4><div class="headline2" id="basemap_2_9">ミラー図法</div></h4>
+<div class="text1">
+<pre>m = Basemap(projection='mill', lon_0=中心の経度, lat_0=中心の緯度)</pre>
+<ul class="list1">
+<li>例：東経180度を中心に描く場合
+<pre>m = Basemap(projection='mill', lon_0=180)</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="basemap_2_10">正距方位図法</div></h4>
+<div class="text1">
+<pre>m = Basemap(projection='aeqd', lon_0=中心の経度, lat_0=中心の緯度)</pre>
+<ul class="list1">
+<li>例：東経140度、北緯35度を中心に描く場合
+<pre>m = Basemap(projection='aeqd', lon_0=140, lat_0=35)</pre></li>
+</ul>
+</div>
+
+
+
+
+<!-- Basemapのデータプロット -->
+<h3><div class="headline1" id="basemap_3">Basemapのデータプロット</div></h3>
+<h4><div class="headline2" id="basemap_3_1">経度・緯度データの作成</div></h4>
+<div class="text1">
+nlonsが経度方向のデータ数、nlatsが緯度方向のデータ数で、全球の格子点データの場合。緯度方向は北極が先、南極が後の場合。
+<pre>
+delta = 360. / (nlons - 1)
+lats = (90. - delta * np.indices((nlats, nlons))[0, :, :])
+m = Basemap(オプション)
+x, y = m(lons, lats)
+</pre>
+Numpyのnp.indicesを使い、経度(lons)、緯度(lats)データを作成し、図法に対応した(x, y)データに変換する
+</div>
+
+<h4><div class="headline2" id="basemap_3_2">等高線を描く</div></h4>
+<div class="text1">
+<pre>
+m = Basemap(オプション)
+m.contour(経度データ, 緯度データ, 等高線のデータ)
+</pre>
+<ul class="list1">
+<li>例：<a href="#basemap_3_1">作成した経度・緯度データ</a>と２次元データ(d)で作図
+<pre>
+m = Basemap()
+m.contour(x, y, d)
+</pre>
+</li>
+<li>例：等高線の幅を太くする
+<pre>
+m = Basemap()
+m.contour(x, y, d, linewidths=1.5)
+</pre>
+デフォルト値：1<br />
+linewidthではなくlinewidthsなので注意
+</li><br />
+<li>例：等高線を描く値を指定する
+<pre>
+m.contour(x, y, d, levels=[0, 1, 2, 3, 4, 5])
+</pre>
+等高線は0から5まで1毎に描く（levelsで指定）</li><br />
+<li>例：等高線にラベルを付ける
+<pre>
+cs = m.contour(x, y, d, levels=[0, 1, 2, 3, 4, 5])
+cs.clabel()
+</pre>
+m.contourの戻り値を使い、等高線のラベルを付ける</li><br />
+<li>例：等高線を２から20まで2毎等間隔に描く
+<pre>
+levels = np.arange(2, 20, 2) # 値のリスト作成
+m.contour(x, y, d, levels=levels)
+</pre>
+</li><br />
+<li>例：ラベルのフォーマット、文字サイズを指定する
+<pre>
+cs = m.contour(x, y, d, levels=levels)
+cs.clabel(fontsize=12, fmt="%d")
+</pre>
+文字の大きさはfontsize、ラベルの数値のフォーマットはfmtで指定する（ここでは整数値にするためfmt="%d"）。</li><br />
+<li>例：データの最小値から最大値の範囲内で2毎等間隔に描く
+<pre>
+levels = np.arange(np.floor(d.min()), np.ceil(d.max()), 2) # 値のリスト作成
+cs = m.contour(x, y, d, levels=levels) # 等高線を描く
+</pre>
+ZがNumpyのndarrayの場合。最小値よりも小さい最大の整数をnp.floor(Z.min())、最大値よりも大きい最小の整数をnp.ceil(Z.max())で取得、<a href="numpy.html#math">Numpyの数学関数</a>、<a href="numpy.html#stat">Numpyの統計処理</a>参照
+</li><br />
+<li>例：等高線のラベルを１つ飛ばしに付ける
+<pre>
+cs = m.contour(x, y, d, levels=levels)
+clevels = cs.levels
+cs.clabel(clevels[::2])
+</pre>
+cs.clabelにラベルを付ける値をclevels[::2]で与えることで、等高線のラベルを１つ飛ばしに付ける</li><br />
+<li>例：データの最小値から最大値の範囲内で1.5毎等間隔に描きラベルを付ける
+<pre>
+levels = np.arange(np.floor(d.min()), np.ceil(d.max()), 1.5) # 値のリスト作成
+cs = m.contour(x, y, d, levels=levels) # 等高線を描く
+clevels = cs.levels
+cs.clabel(clevels, fontsize=12, fmt="%.1f")
+</pre>
+ラベルは1.5毎に付け、小数点以下第一位まで表示（fmt="%.1f"）<br />
+ZがNumpyのndarrayの場合。最小値よりも小さい最大の整数をnp.floor(Z.min())、最大値よりも大きい最小の整数をnp.ceil(Z.max())で取得、<a href="numpy.html#math">Numpyの数学関数</a>、<a href="numpy.html#stat">Numpyの統計処理</a>参照</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="basemap_3_3">陰影を描く</div></h4>
+<div class="text1">
+<pre>
+m = Basemap(オプション)
+m.contourf(経度データ, 緯度データ, 陰影のデータ)
+</pre>
+</div>
+
+<h4><div class="headline2" id="basemap_3_4">陰影にカラーバーを付ける</div></h4>
+<div class="text1">
+<pre>
+cs = m.contourf(経度データ, 緯度データ, 陰影のデータ)
+cbar = m.colorbar(cs)
+cbar.set_label('カラーバーのラベルに表示する文字列')
+</pre>
+カラーバーの調整方法については、<a href="matplotlib.html#colorbar_1">カラーバー</a>参照<br />
+（plt.colorbarと同じオプションを使用可能）
+</div>
+
+<h4><div class="headline2" id="basemap_3_5">矢羽をプロットする</div></h4>
+<div class="text1">
+<pre>
+m = Basemap(オプション)
+m.barbs(経度データ, 緯度データ, 東西風データ, 南北風データ)
+</pre>
+<ul class="list1">
+<li>例：２次元データlons, lats, u, vから矢羽をプロット
+<pre>
+m = Basemap()
+m.barbs(x, y, u, v)
+</pre></li>
+<li>例：矢羽を6おきにプロット
+<pre>
+m.barbs(lons[::6,::6],lats[::6,::6],uwnd[::6,::6],vwnd[::6,::6])
+</pre></li>
+<li>例：矢羽の色を青色にする
+<pre>
+m.barbs(x, y, u, v, color='b')
+</pre>
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li><br />
+<li>例：矢羽の長さを4にする
+<pre>
+m.barbs(x, y, u, v, length=4)
+</pre>
+<li>例：風速の小さな矢羽を描かない
+<pre>
+m.barbs(x, y, u, v, sizes=dict(emptybarb=0.00))
+</pre>
+<li>例：矢羽の間を少し開けて重ならないようにする
+<pre>
+m.barbs(x, y, u, v, sizes=dict(spacing=0.16))
+</pre>
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="basemap_3_6">文字をプロットする</div></h4>
+<div class="text1">
+Basemapのインスタンスを使い、経度、緯度を図法に対応した(x, y)に変換
+<pre>
+m = Basemap(オプション)
+x, y = m(経度, 緯度)
+plt.text(x, y, "表示するテキスト")
+</pre>
+<ul class="list1">
+<li>例：フォントサイズを9に指定する場合
+<pre>
+plt.text(x, y, "表示するテキスト", fontsize=9)
+</pre></li>
+<li>例：テキストの色を赤にする場合
+<pre>
+plt.text(x, y, "表示するテキスト", color='r')
+</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="basemap_3_7">マーカーをプロットする</div></h4>
+<div class="text1">
+<pre>
+m = Basemap(オプション)
+x, y = m(経度, 緯度)
+m.plot(x, y, "マーカーの色と種類")
+</pre>
+<ul class="list1">
+<li>例：マーカーを白色の丸にする場合
+<pre>
+m.plot(x, y, "wo")
+</pre>
+色、マーカーをまとめて記述（それぞれ１文字のみ可能、順番はどちらでも良い）<br />
+マーカーの名前は<a href="./options.html#marker">指定可能なマーカーの一覧</a>参照<br />
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li><br />
+<li>例：マーカーを白色の丸にする場合（色の名前とマーカーの種類は別々に記述）
+<pre>
+m.plot(x, y, color="w", marker="o")
+</pre>
+まとめて"wo"と記述した場合と同じになる<br />
+色の名前やマーカーの種類が長い場合にも対応
+</li><br />
+<li>例：マーカーをマゼンタの三角にする場合
+<pre>
+m.plot(x, y, "m^")
+</pre></li>
+<li>例：マーカーを水色の丸にする場合
+<pre>
+m.plot(x, y, color="aqua", marker="o")
+</pre></li>
+<li>例：マーカーサイズを大きくする場合
+<pre>
+m.plot(x, y, color="aqua", marker="o", markersize=12)
+</pre>
+デフォルト値：6</li>
+</ul>
+</div>
+
+
+
+	
+<!-- 図の体裁 -->
+<h3><div class="headline1" id="basemap_e">図の体裁</div></h3>
+<h4><div class="headline2" id="basemap_e_1">タイトルを付ける</div></h4>
+<div class="text1">
+matplotlibのplt.titleを使う
+<pre>plt.title("タイトル")</pre>
+<a href="matplotlib.html#graph_1_4">サブプロットにタイトルを付ける</a>参照<br />
+<a href="matplotlib.html#graph_e_1">タイトルの大きさや色を変更する</a>参照
+</div>
+
+<h4><div class="headline2" id="basemap_e_2">等高線を複数同時に描く場合に等高線上に文字を重ねない</div></h4>
+<div class="text1">
+細実線で4 hPa毎の等高線を描き、太実線で20 hPaの等高線を描き、20 hPaの等高線ラベルに気圧の値を表示した場合、細実線の上に文字が重なる。<br />
+次のように、細実線、太実線ともに気圧の値を書くことで、文字の下に等高線は描かれなくなる。
+<pre>
+clevc = np.arange(960, 1080, 4) # 細実線を描く値
+cleva = np.arange(960, 1080, 20) # 太実線を描く値
+cr1 = m.contour(x, y, slp, clevc, linewidths=0.8, colors='k') # 細実線
+cr2 = m.contour(x, y, slp, cleva, linewidths=1.2, colors='k') # 太実線
+clevels = cr1.levels # 細実線を描いた気圧の値
+cr1.clabel(clevels[::5], fontsize=12, fmt="%d") # 細実線ラベルに20 hPa毎気圧の値を表示
+cr2.clabel(clevels[::5], fontsize=12, fmt="%d") # 太実線ラベルに20 hPa毎気圧の値を表示
+</pre>
+</div>
+
+<h4><div class="headline2" id="basemap_e_3">極投影図法で0度と360度を滑らかにつなげる</div></h4>
+<div class="text1">
+経度方向144（東経0度から2.5度刻み）、緯度方向73（北緯90度から2.5度刻み）の場合
+<pre>
+import numpy as np
+nlons = 144 # 経度方向のデータ数
+nlats = 73 # 緯度方向のデータ数
+datasize = nlons * nlats
+din = np.fromfile("入力ファイル名", dtype='&lt;f4', count=datasize) # バイナリファイルから入力
+data = np.zeros((nlats, nlons+1)) # 値が0の配列を作成
+data[:, 0:nlons] = din.reshape(nlats, nlons) # 0〜357.5度までコピー
+data[:, nlons] = data[:, 0] # 0度のデータを360度のデータにコピー
+nlons = nlons + 1 # 後の処理で使うため、経度方向のデータ数を1増やす
+
+import matplotlib.pyplot as plt
+from mpl_toolkits.basemap import Basemap
+fig = plt.figure() # プロット領域の作成
+m = Basemap(projection='npstere', lon_0=180, boundinglat=20) # 北極中心の極投影図法
+
+# 緯度・経度座標の準備（単位は度）
+delta = 360./(nlons-1)
+lons = (delta * np.indices((nlats, nlons))[1, :, :]) # 東経0度から2.5度刻み
+lats = (90. - delta * np.indices((nlats, nlons))[0, :, :]) # 北緯90度から2.5度刻み
+x, y = m(lons, lats) # 図法の経度、緯度に変換する
+
+clevs = [等高線を描く値のリスト]
+m.contour(x, y, data, clevs, linewidths=0.8, colors='k') # 等高線を描く
+</pre>
+</div>
+
+
+
+<small><a href="#top">[top]</a></small> <br />
+<hr width="105%" />
+</article>
+</body>
+<footer>
+<p>最終更新日：2021/01/03</p>
+<p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
+</footer>
+</html>

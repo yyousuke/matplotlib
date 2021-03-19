@@ -1,0 +1,604 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="author" content="山下陽介 (Yousuke Yamashita)" />
+<link rel="icon" href="/~yyousuke/yousuke/favicon.ico" type="image/x-icon" />
+<!-- Mobile Internet Explorer allows us to activate ClearType technology for smoothing fonts for easy reading -->
+<meta http-equiv="cleartype" content="on" />
+<!-- Specify whether or not telephone numbers in the HTML content should appear as hypertext links -->
+<meta name="format-detection" content="telephone=no" />
+<!-- Changes the logical window size used when displaying a page mobile browsers -->
+<meta name = "viewport" content = "width = device-width, initial-scale=1, user-scalable=yes" />
+
+<meta name="robots" content="all" />
+<meta name="http-equiv" content="X-Robots-Tag : all" />
+<meta name="googlebot" content="all" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link href="design.css" rel="stylesheet" type="text/css" />
+<title>気象データ解析のためのmatplotlibの使い⽅</title>
+</head>
+
+<body link="#0000FF" vlink="#0000FF">
+
+<div id="nesting">
+<a href="/~yyousuke">ホーム</a> &gt; <a href="index.html">matplotlibの使い⽅</a> &gt; cartopyのTIPS
+</div>
+<article>
+<center><h1 id="top">matplotlib：cartopyのTIPS</h1></center>
+<br />
+
+<!-- 目次 -->
+
+<h2 id="contents">目次</h2>
+<div class="contents">
+  <!-- cartopyの基本 -->
+  <ul class="list1"><li><a href="#cartopy_1">cartopyの基本</a>
+    <ul class="list2">
+      <li><a href="#cartopy_1_1">cartopyのモジュール</a></li>
+      <li><a href="#cartopy_1_2">cartopyを呼び出す</a></li>
+      <li><a href="#cartopy_1_3">cartopyで経度線・緯度線を描く</a></li>
+      <li><a href="#cartopy_1_4">cartopyで海岸線を描く</a></li>
+      <li><a href="#cartopy_1_5">cartopyで陸と海、湖を塗り分けて描く</a></li>
+      <li><a href="#cartopy_1_6">cartopyで国境線を描く</a></li>
+      <li><a href="#cartopy_1_7">cartopyで河川を描く</a></li>
+    </ul>
+  </li></ul>
+  <!-- cartopyの地図 -->
+  <ul class="list1"><li><a href="#cartopy_2">cartopyの地図</a>
+    <ul class="list2">
+      <li><a href="#cartopy_2_1">正距円筒図法</a></li>
+      <li><a href="#cartopy_2_2">メルカトル図法</a></li>
+      <li><a href="#cartopy_2_3">ポーラーステレオ図法（極投影図法）</a></li>
+      <li><a href="#cartopy_2_4">ランベルト図法（ランベルト正角円錐図法）</a></li>
+      <li><a href="#cartopy_2_5">正射投影図法（平射図法）</a></li>
+      <li><a href="#cartopy_2_6">ロビンソン図法</a></li>
+      <li><a href="#cartopy_2_7">モルワイデ図法</a></li>
+      <li><a href="#cartopy_2_8">ランベルト正積円筒図法</a></li>
+      <li><a href="#cartopy_2_9">ミラー図法</a></li>
+    </ul>
+  </li></ul>
+  <!-- cartopyのデータプロット -->
+  <ul class="list1"><li><a href="#cartopy_3">cartopyのデータプロット</a>
+    <ul class="list2">
+      <li><a href="#cartopy_3_1">経度・緯度データの作成</a></li>
+      <li><a href="#cartopy_3_2">等高線を描く</a></li>
+      <li><a href="#cartopy_3_3">等高線ラベルを付ける</a></li>
+      <li><a href="#cartopy_3_4">陰影を描く</a></li>
+      <li><a href="#cartopy_3_5">陰影にカラーバーを付ける</a></li>
+      <li><a href="#cartopy_3_6">矢羽をプロットする</a></li>
+      <li><a href="#cartopy_3_7">文字をプロットする</a></li>
+      <li><a href="#cartopy_3_8">マーカーをプロットする</a></li>
+    </ul>
+  </li></ul>
+  <!-- 図の体裁 -->
+  <ul class="list1"><li><a href="#basemap_e">図の体裁</a>
+    <ul class="list2">
+      <li><a href="#basemap_e_1">タイトルを付ける</a></li>
+      <li><a href="#basemap_e_2">極投影図法で図枠を円形にする</a></li>
+      <li><a href="#basemap_e_3">全球が表示されなくなった場合</a></li>
+      <li><a href="#basemap_e_4">0度と360度を滑らかにつなげる</a></li>
+    </ul>
+  </li></ul>
+</div>
+
+<small><a href="#top">[top]</a></small> <br />
+<br />
+<hr width="105%" />
+<br />
+
+<!-- ここから本文 -->
+<!-- cartopyの基本 -->
+<h3><div class="headline1" id="cartopy_1">cartopyの基本</div></h3>
+<h4><div class="headline2" id="cartopy_1_1">cartopyのモジュール</div></h4>
+<div class="text1">
+cartopy.crsをインポート
+<pre>
+import cartopy.crs as ccrs
+import matplotlib.pyplot as plt
+</pre>
+以降はccrsとして参照できる。同時に<a href="matplotlib.html#matplotlib_1_3">matplotlibもインポート</a>しておく
+</div>
+
+<h4><div class="headline2" id="cartopy_1_2">cartopyを呼び出す</div></h4>
+<div class="text1">
+<pre>
+fig = plt.figure() # プロット領域の作成（matplotlib）
+ax = fig.add_subplot(1,1,1, projection=ccrs.PlateCarree())  # サブプロット作成時にcartopy呼び出し
+</pre>
+以降は戻り値axを使い、ax.<b>メソッド</b>のように作図が可能
+</div>
+
+<h4><div class="headline2" id="cartopy_1_3">cartopyで経度線・緯度線を描く</div></h4>
+<div class="text1">
+<pre>
+import matplotlib.ticker as mticker
+gl = ax.gridlines(crs=ccrs.PlateCarree()) # 経度線・緯度線を描く
+gl.xlocator = mticker.FixedLocator(経度線を引く値のリスト)
+gl.ylocator = mticker.FixedLocator(緯度線を引く値のリスト)
+</pre>
+正距円筒図法、ランベルト正積円筒図法のみ対応
+<ul class="list1">
+<li>例：60度毎に経度線を引く
+<pre>gl.xlocator = mticker.FixedLocator(np.arange(0,360.1,60)) </pre>
+360では300°Eまでしか経度線が引かれないため、360.1としている</li><br />
+<li>例：30度毎に緯度線を引く
+<pre>gl.ylocator = mticker.FixedLocator(np.arange(-90,90.1,30))</pre>
+90では60°Nまでしか経度線が引かれないため、90.1としている</li><br />
+<li>例：経度線・緯度線を細い赤破線で描く
+<pre>
+gl = ax.gridlines(crs=ccrs.PlateCarree(), linewidth=0.5, linestyle='--', color='r')
+</pre>
+線の幅はlinewidth、線種はlinestyle、色はcolorで設定<br />
+船種は<a href="./options.html#linestyle">線種一覧</a>、色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li><br />
+<li>例：経度線・緯度線を不透明度0.8の黒点線で描く
+<pre>
+gl = ax.gridlines(crs=ccrs.PlateCarree(), linewidth=1, linestyle=':', color='k', alpha=0.8)
+</pre>
+不透明度は、透明0.0〜不透明1.0までの範囲で指定する
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="cartopy_1_4">cartopyで海岸線を描く</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>ax.coastlinesを使った方法
+<pre>ax.coastlines()</pre>
+<ul class="list2">
+<li>例：海岸線を緑の点線で描く
+<pre>ax.coastlines(color='g', linestyle='--')</pre>
+色の名前と線種は<a href="./options.html#color">色の名前一覧</a>、<a href="./options.html#linestyle">線種の一覧</a>参照</li><br />
+<li>例：海岸線の太さを1.5にする
+<pre>ax.coastlines(linewidth=1.5)</pre></li>
+デフォルト値：1
+</ul>
+</li><br />
+<li>cartopy.featureを使った方法
+<pre>
+import cartopy.feature as cfeature
+ax.add_feature(cfeature.COASTLINE)
+</pre>
+<ul class="list2">
+<li>例：海岸線を細くする
+<pre>ax.add_feature(cfeature.COASTLINE, linewidth=0.8)</pre></li>
+<li>例：海岸線を細い破線にする
+<pre>ax.add_feature(cfeature.COASTLINE, linewidth=0.8, linestyle='--')</pre></li>
+</ul>
+色を変更するオプションもあるが、意図しない場所が塗り潰されてしまうので、海岸線の色を変更したい場合には、ax.coastlinesを使う
+</li></ul>
+</div>
+
+<h4><div class="headline2" id="cartopy_1_5">cartopyで陸と海、湖を塗り分けて描く</div></h4>
+<div class="text1">
+cartopy.featureを使う
+<pre>
+import cartopy.feature as cfeature
+ax.add_feature(cfeature.LAND) # 陸に色を付ける
+ax.add_feature(cfeature.OCEAN) # 海に色を付ける
+ax.add_feature(cfeature.LAKES) # 湖を描く
+</pre>
+<ul class="list1">
+<li>例：陸を緑色、海と湖を水色にする
+<pre>
+ax.add_feature(cfeature.LAND, color='g') # 陸を緑色で塗り潰す
+ax.add_feature(cfeature.OCEAN, color='aqua') # 海を水色で塗り潰す
+ax.add_feature(cfeature.LAKES, color='aqua') # 湖を水色で塗り潰す
+</pre>
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li><br />
+<li>例：経度線・緯度線を海上だけに描く（zorderで描く順序を指定）
+<pre>
+gl = ax.gridlines(crs=ccrs.PlateCarree(), zorder=2) # 経度線・緯度線を描く
+gl.xlocator = mticker.FixedLocator(経度線を引く値のリスト)
+gl.ylocator = mticker.FixedLocator(緯度線を引く値のリスト)
+ax.add_feature(cfeature.LAND, zorder=3) # 陸に色を付ける
+ax.add_feature(cfeature.OCEAN, zorder=1) # 海に色を付ける
+</pre>
+経度線・緯度線については、<a href ="#cartopy_1_3">cartopyで経度線・緯度線を描く</a>参照
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="cartopy_1_6">cartopyで国境線を描く</div></h4>
+<div class="text1">
+cartopy.featureを使い、陸上に国境線を描く
+<pre>
+import cartopy.feature as cfeature
+ax.add_feature(cfeature.BORDERS) # 国境線を描く
+</pre>
+<ul class="list1">
+<li>例：国境線を細い破線にする
+<pre>ax.add_feature(cfeature.BORDERS, linestyle='--', linewidth=0.8)</pre>
+色を変更するオプションもあるが、意図しない場所が塗り潰されてしまうので使わない方が良い</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="cartopy_1_7">cartopyで河川を描く</div></h4>
+<div class="text1">
+cartopy.featureを使う
+<pre>
+import cartopy.feature as cfeature
+ax.add_feature(cfeature.RIVERS) # 川を描く
+</pre>
+<ul class="list1">
+<li>例：河川の幅を太くする
+<pre>ax.add_feature(cfeature.RIVERS, linewidth=1.2)</pre></li>
+</ul>
+</div>
+
+
+
+<!-- cartopyの地図 -->
+<h3><div class="headline1" id="cartopy_2">cartopyの地図</div></h3>
+サブプロットを生成するfig.add_subplotで図法を指定する
+<h4><div class="headline2" id="cartopy_2_1">正距円筒図法</div></h4>
+<div class="text1">
+<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.PlateCarree())</pre>
+gradsのlatlonやBasemapのprojection='cyl'に相当する図法で、緯度線・経度線が直角かつ等間隔に交差
+<ul class="list1">
+<li>東経180度を中心にする場合
+<pre> ax = fig.add_subplot(1,1,1, projection=ccrs.PlateCarree(central_longitude=180))</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="cartopy_2_2">メルカトル図法</div></h4>
+<div class="text1">
+<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.Mercator(central_longitude=中心の経度, min_latitude=緯度下限, max_latitude=緯度上限))</pre>
+<ul class="list1">
+<li>例：南緯60度〜北緯60度まで、全ての経度帯で描く場合
+<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.Mercator(min_latitude=-60.0, max_latitude=60.0))</pre></li>
+<li>例：南緯60度〜北緯60度まで、東経180度を中心として全ての緯度帯で描く場合
+<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.Mercator(central_longitude=180.0, min_latitude=-60.0, max_latitude=60.0))</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="cartopy_2_3">ポーラーステレオ図法（極投影図法）</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>北極を中心に描く場合
+<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.NorthPolarStereo())
+ax.set_extent([西端の経度, 東端の経度, 南端の緯度, 北端の緯度], ccrs.PlateCarree())
+</pre>
+gradsのnpsに相当する図法</li><br />
+<li>南極を中心に描く場合
+<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.SouthPolarStereo())
+ax.set_extent([西端の経度, 東端の経度, 南端の緯度, 北端の緯度], ccrs.PlateCarree())
+</pre>
+gradsのspsに相当する図法</li>
+</ul>
+<ul class="list1">
+<li>例：南緯90度〜20度まで、全ての経度帯で描く場合
+<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.SouthPolarStereo())
+ax.set_extent([-180, 180, -90, -20], ccrs.PlateCarree())</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="cartopy_2_4">ランベルト図法（ランベルト正角円錐図法）</div></h4>
+<div class="text1">
+<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.LambertConformal(central_longitude=中心の経度, central_latitude=中心の緯度))
+ax.set_extent([西端の経度, 東端の経度, 南端の緯度, 北端の緯度])
+</pre>
+<ul class="list1">
+<li>例：東経135度、北緯35度を中心に日本周辺だけを描く場合
+<pre>
+ax = fig.add_subplot(1,1,1, projection=ccrs.LambertConformal(central_longitude=135.0, central_latitude=35.0))
+ax.set_extent([100, 170, 10, 70]) # 領域の限定
+</pre>
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="cartopy_2_5">正射投影図法（平射図法）</div></h4>
+<div class="text1">
+<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.Orthographic(central_longitude=中心の経度, central_latitude=中心の緯度))
+</pre>
+<ul class="list1">
+<li>例：東経180度、北緯45度を中心に描く場合
+<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.Orthographic(central_longitude=180.0, central_latitude=45.0))</pre>
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="cartopy_2_6">ロビンソン図法</div></h4>
+<div class="text1">
+<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.Robinson(central_longitude=中心の経度))
+</pre>
+<ul class="list1">
+<li>例：東経180度を中心に描く場合
+<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.Robinson(central_longitude=180.0))</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="cartopy_2_7">モルワイデ図法</div></h4>
+<div class="text1">
+<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.Mollweide(central_longitude=中心の経度))
+</pre>
+<ul class="list1">
+<li>例：東経180度を中心に描く場合
+<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.Mollweide(central_longitude=180.0))</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="cartopy_2_8">ランベルト正積円筒図法</div></h4>
+<div class="text1">
+<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.LambertCylindrical(central_longitude=中心の経度))
+</pre>
+<ul class="list1">
+<li>例：東経180度を中心に描く場合
+<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.LambertCylindrical(central_longitude=180.0))</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="cartopy_2_9">ミラー図法</div></h4>
+<div class="text1">
+<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.Miller(central_longitude=中心の経度))
+</pre>
+<ul class="list1">
+<li>例：東経180度を中心に描く場合
+<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.Miller(central_longitude=180.0))</pre></li>
+</ul>
+</div>
+
+
+
+<!-- cartopyのデータプロット -->
+<h3><div class="headline1" id="cartopy_3">cartopyのデータプロット</div></h3>
+<h4><div class="headline2" id="cartopy_3_1">経度・緯度データの作成</div></h4>
+<div class="text1">
+nlonsが経度方向のデータ数、nlatsが緯度方向のデータ数で、全球の格子点データの場合。緯度方向は北極が先、南極が後の場合。
+<pre>
+delta = 360. / (nlons - 1)
+lats = (90. - delta * np.indices((nlats, nlons))[0, :, :])
+</pre>
+Numpyのnp.indicesを使い、経度(lons)、緯度(lats)データを作成し、図法に対応した(x, y)データに変換する（<a href="basemap.html#basemap_3_1">Basemapの経度・緯度データの作成</a>と同じ）<br />
+１次元目が緯度、２次元目が経度データになる
+</div>
+
+<h4><div class="headline2" id="cartopy_3_2">等高線を描く</div></h4>
+<div class="text1">
+<pre>
+ax.contour(経度データ, 緯度データ, 等高線のデータ)
+</pre>
+オプションや調整方法は、matplotlibの<a href="matplotlib.html#graph_8">等高線</a>参照
+<ul class="list1">
+<li>例：<a href="#cartopy_3_1">作成した経度・緯度データ</a>と２次元の等高線データ(d)で作図
+<pre>ax.contour(x, y, d)</pre></li>
+<li>例：等高線の幅を細くする
+<pre>ax.contour(x, y, d, linewidths=0.8)</pre>
+デフォルト値：1<br />
+linewidthではなくlinewidthsなので注意
+</li><br />
+<li>例：等高線を描く値を指定する
+<pre>
+ax.contour(x, y, slp_jul, clevs, levels=[0, 1, 2, 3, 4, 5])
+</pre>
+等高線は0から5まで1毎に描く（levelsで指定）</li><br />
+<li>例：等高線を２から20まで2毎等間隔に描く
+<pre>
+clevs = np.arange(2, 20, 2) # 値のリスト作成
+cs = ax.contour(x, y, d,  levels=clevs)
+</pre>
+または
+<pre>
+clevs = np.arange(2, 20, 2) # 値のリスト作成
+ax.contour(x, y, d,  clevs)
+</pre>
+</li><br />
+<li>例：データの最小値から最大値の範囲内で2毎等間隔に描く
+<pre>
+clevs = np.arange(np.floor(d.min()), np.ceil(d.max()), 2) # 値のリスト作成
+cs = ax.contour(x, y, d,  levels=clevs) # 等高線を描く
+</pre>
+dがNumpyのndarrayの場合。最小値よりも小さい最大の整数をnp.floor(d.min())、最大値よりも大きい最小の整数をnp.ceil(d.max())で取得、<a href="numpy.html#math">Numpyの数学関数</a>、<a href="numpy.html#stat">Numpyの統計処理</a>参照
+</li><br />
+</ul>
+</div>
+
+<h4><div class="headline2" id="cartopy_3_3">等高線ラベルを付ける</div></h4>
+<div class="text1">
+<pre>
+cs = ax.contour(経度データ, 緯度データ, 等高線のデータ)
+clevels = cs.levels # ラベルを付ける値
+cs.clabel(clevels) # 等高線ラベル
+</pre>
+<ul class="list1">
+<li>例：文字サイズを指定して等高線ラベルを付ける
+<pre>
+cs = ax.contour(x, y, d, levels=[0, 1, 2, 3, 4, 5])
+clevels = cs.levels # ラベルを付ける値
+cs.clabel(clevels, fontsize=12) # 等高線ラベル
+</pre>
+ax.contourの戻り値を使い、等高線のラベルを付ける</li><br />
+<li>例：ラベルのフォーマット、文字サイズを指定する
+<pre>
+cs = ax.contour(x, y, d, levels=[0, 1, 2, 3, 4, 5])
+clevels = cs.levels # ラベルを付ける値
+cs.clabel(clevels, fontsize=12,  fmt="%d") # 等高線ラベル
+</pre>
+文字の大きさはfontsize、ラベルの数値のフォーマットはfmtで指定する（ここでは整数値にするためfmt="%d"）。</li><br />
+<li>例：等高線のラベルを１つ飛ばしに付ける
+<pre>
+cs = ax.contour(x, y, d, levels=clevs)
+clevels = cs.levels # ラベルを付ける値
+cs.clabel(clevels[::2]) # 等高線ラベル
+</pre>
+cs.clabelにラベルを付ける値をclevels[::2]で与えることで、等高線のラベルを１つ飛ばしに付ける</li><br />
+<li>例：データの最小値から最大値の範囲内で1.5毎等間隔に描きラベルを付ける
+<pre>
+levels = np.arange(np.floor(d.min()), np.ceil(d.max()), 1.5) # 値のリスト作成
+cs = ax.contour(x, y, d, levels=clevs)
+clevels = cs.levels # ラベルを付ける値
+cs.clabel(clevels, fontsize=12, fmt="%.1f") #  等高線ラベル
+</pre>
+ラベルは1.5毎に付け、小数点以下第一位まで表示（fmt="%.1f"）<br />
+</li></ul>
+</div>
+
+<h4><div class="headline2" id="cartopy_3_4">陰影を描く</div></h4>
+<div class="text1">
+<pre>
+ax.contourf(経度データ, 緯度データ, 陰影のデータ)
+</pre>
+オプションや調整方法は、matplotlibの<a href="matplotlib.html#graph_9">陰影</a>参照
+<ul class="list1">
+<li>例：<a href="#cartopy_3_1">作成した経度・緯度データ</a>と２次元の等高線データ(d)で作図
+<pre>ax.contourf(x, y, d)</pre></li>
+<li>例：陰影を描く値を指定する
+<pre>ax.contour(x, y, slp_jul, clevs, levels=[0, 1, 2, 3, 4, 5, 6])</pre>
+等高線は0から5まで1毎に描く（levelsで指定、描く値より１大きく設定する）</li><br />
+<li>例：陰影の色テーブルを指定する（青〜白〜赤と変化）
+<pre>ax.contour(x, y, slp_jul, clevs, cmap='bwr')</pre>
+色テーブルは<a href="./options.html#cmap">色テーブルの一覧</a>参照
+</li><br />
+</ul>
+</div>
+
+<h4><div class="headline2" id="cartopy_3_5">陰影にカラーバーを付ける</div></h4>
+<div class="text1">
+<pre>
+cs = ax.contourf(経度データ, 緯度データ, 陰影のデータ)
+cbar = ax.colorbar(cs)
+cbar.set_label('カラーバーのラベルに表示する文字列')
+</pre>
+カラーバーの調整方法については、<a href="matplotlib.html#colorbar_1">カラーバー</a>参照<br />
+（plt.colorbarと同じオプションを使用可能）
+</div>
+
+<h4><div class="headline2" id="cartopy_3_6">矢羽をプロットする</div></h4>
+<div class="text1">
+<pre>
+ax.barbs(経度データ, 緯度データ, 東西風データ, 南北風データ)
+</pre>
+矢羽の調整方法については、matplotlibの<a href="matplotlib.html#graph_6">矢羽</a>参照<br />
+<ul class="list1">
+<li>例：２次元データlons, lats, u, vから矢羽をプロット
+<pre>
+ax.barbs(x, y, u, v)
+</pre></li>
+<li>例：矢羽を6おきにプロット
+<pre>
+ax.barbs(lons[::6,::6],lats[::6,::6],uwnd[::6,::6],vwnd[::6,::6])
+</pre></li>
+<li>例：矢羽の色を青色にする
+<pre>
+ax.barbs(x, y, u, v, color='b')
+</pre>
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li><br />
+<li>例：矢羽の長さを4にする
+<pre>
+ax.barbs(x, y, u, v, length=4)
+</pre>
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="cartopy_3_7">文字をプロットする</div></h4>
+<div class="text1">
+ax.textを使う
+テキストの調整方法については、matplotlibの<a href="matplotlib.html#text_1">テキスト</a>参照<br />
+<pre>
+ax.text(x座標, y座標, "表示するテキスト")
+</pre>
+<ul class="list1">
+<li>例：フォントサイズを9に指定する場合
+<pre>
+ax.text(x, y, "表示するテキスト", fontsize=9)
+</pre></li>
+<li>例：テキストの色を赤にする場合
+<pre>
+ax.text(x, y, "表示するテキスト", color='r')
+</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="cartopy_3_8">マーカーをプロットする</div></h4>
+<div class="text1">
+<pre>
+ax.plot(x座標, y座標, オプション)
+</pre>
+<ul class="list1">
+<li>例：マーカーを白色の丸にする場合
+<pre>
+ax.plot(x, y, marker="o", color="w")
+</pre>
+マーカーの名前は<a href="./options.html#marker">指定可能なマーカーの一覧</a>参照<br />
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li><br />
+<li>例：マーカーをマゼンタの三角にする場合
+<pre>
+ax.plot(x, y, marker="m", color="^")
+</pre></li>
+<li>例：マーカーを水色の丸にする場合
+<pre>
+ax.plot(x, y, color="aqua", marker="o")
+</pre></li>
+<li>例：マーカーサイズを大きくする場合
+<pre>
+ax.plot(x, y, color="aqua", marker="o", markersize=12)
+</pre>
+デフォルト値：6</li>
+</ul>
+</div>
+
+
+	
+<!-- 図の体裁 -->
+<h3><div class="headline1" id="basemap_e">図の体裁</div></h3>
+<h4><div class="headline2" id="basemap_e_1">タイトルを付ける</div></h4>
+<div class="text1">
+matplotlibのax.set_titleを使う
+<pre>ax_set.title("タイトル")</pre>
+<a href="matplotlib.html#graph_1_4">サブプロットにタイトルを付ける</a>参照<br />
+<a href="matplotlib.html#graph_e_1">タイトルの大きさや色を変更する</a>参照
+</div>
+
+<h4><div class="headline2" id="basemap_e_2">極投影図法で図枠を円形にする</div></h4>
+<div class="text1">
+図枠をmatplotlibのPathで設定する
+<pre>
+import matplotlib.path as mpath
+center, radius = [0.5, 0.5], 0.5 # 円の中心座標と半径
+theta = np.linspace(0, 2*np.pi, 100) # 0〜2πの位相
+verts = np.vstack([np.sin(theta), np.cos(theta)]).T # 円形の座標作成
+circle = mpath.Path(verts * radius + center) # 中心座標(0.5,0.5)、半径0.5の円形
+ax.set_boundary(circle, transform=ax.transAxes) # 円形の領域でマスク
+</pre>
+サブプロットaxが座標(0,0)、(0,1)、(1,1)、(1,0)を頂点とする四角形なので、それに内接する円形の領域でマスクする<br />
+<a href="https://scitools.org.uk/cartopy/docs/v0.15/examples/always_circular_stereo.html">cartopyのサンプル</a>参照
+</div>
+
+<h4><div class="headline2" id="basemap_e_3">全球が表示されなくなった場合</div></h4>
+<div class="text1">
+全球を表示させるために、次の記述を加える
+<pre>ax.set_global()</pre>
+</div>
+
+<h4><div class="headline2" id="basemap_e_4">0度と360度を滑らかにつなげる</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>経度、緯度が１次元データの場合<br />
+cartopy.utilのadd_cyclic_pointを使う
+<pre>
+from cartopy.util import add_cyclic_point
+d_cyclic, lons_cyclic = add_cyclic_point(d, coord=lons) # 0度の値を360度にコピー
+ax.contourf(lons_cyclic, lats, d_cyclic)
+</pre>
+＊２次元データd(緯度方向, 経度方向)、１次元の経度・緯度データlons、lats
+</li><br />
+<li>経度、緯度が２次元データの場合<br />
+Basemapの<a href="basemap.html#basemap_e_3">極投影図法で0度と360度を滑らかにつなげる</a>参照
+</li><br />
+</ul>
+</div>
+
+
+<small><a href="#top">[top]</a></small> <br />
+<hr width="105%" />
+</article>
+</body>
+<footer>
+<p>最終更新日：2021/01/03</p>
+<p>Copyright (C) 2019-2021, Yousuke Yamashita</p>
+</footer>
+</html>
