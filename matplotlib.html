@@ -263,6 +263,14 @@
       <li><a href="#text_1_7">テキストの文字列を回転させる</a></li>
     </ul>
   </li></ul>
+  <!-- アニメーション -->
+  <ul class="list1"><li><a href="#anim_1">アニメーション</a>
+    <ul class="list2">
+      <li><a href="#anim_1_1">アニメーションを作成</a></li>
+      <li><a href="#anim_1_2">複数のグラフを重ねる</a></li>
+      <li><a href="#anim_1_3">複数のサブプロットで同時に描く</a></li>
+    </ul>
+  </li></ul>
   <!-- 図の体裁 -->
   <ul class="list1"><li><a href="#graph_e">図の体裁</a>
     <ul class="list2">
@@ -280,7 +288,7 @@
       <li><a href="#graph_e_12">枠線や目盛りを消す</a></li>
       <li><a href="#graph_e_13">y軸をログスケールにした時にラベルの数字を整数表示する</a></li>
       <li><a href="#graph_e_14">y軸をパーセント表示にする</a></li>
-	</ul>
+    </ul>
   </li></ul>
 </div>
 
@@ -420,6 +428,22 @@ import copy
 cmap = copy.copy(mpl.cm.get_cmap("色テーブル"))
 </pre>
 </li><br />
+<!-- 5 -->
+<li> UserWarning: FixedFormatter should only be used together with FixedLocatorの警告が出る場合
+<ul class="list2">
+<li>変更前（xticklabelsを変更する場合）
+<pre>
+ax.set_xticklabels(ax.get_xticklabels(), rotation=70, size="small")
+</pre></li>
+<li>変更後（FixedLocatorを使う）
+<pre>
+import matplotlib.ticker as ticker
+ax.xaxis.set_major_locator(ticker.FixedLocator(ax.get_xticks().tolist()))
+ax.set_xticklabels(ax.get_xticklabels(), rotation=70, size="small")
+</pre></li>
+</ul>
+</li><br />
+
 </ul>
 </div>
 
@@ -1840,6 +1864,84 @@ cbar.ax.set_xticklabels(cs, ["lab1", "lab2", "lab3"])</pre>
 </div>
 
 
+
+<!-- アニメーション -->
+<h3><div class="headline1" id="anim_1">アニメーション</div></h3>
+<h4><div class="headline2" id="anim_1_1">アニメーションを作成</div></h4>
+<div class="text1">
+matplotlib.animationを使い、複数の作図時の戻り値をまとめる
+<pre>
+import matplotlib.animation as animation
+fig = plt.figure()
+ax = fig.add_subplot(1, 1, 1)
+imgs = [] # リストを作成
+for t in np.arange(開始, 終了, 間隔):
+&nbsp; &nbsp; 何らかの処理
+&nbsp; &nbsp; img = plt.plot(x, y, オプション) # 時刻tの(x, y)折れ線グラフ
+&nbsp; &nbsp; imgs.append(img) # 戻り値をリストに追加
+
+# アニメーション作成
+anim = animation.ArtistAnimation(fig, imgs)
+anim.save('ファイル名.gif', writer='pillow')  # gifで書き出す場合
+anim.save('ファイル名.mp4', writer='ffmpeg') # mp4で書き出す場合 
+</pre><br />
+<ul class="list1">
+<li>フレームの切り替え間隔を倍にする
+<pre>anim = animation.ArtistAnimation(fig, imgs, delay=100)</pre>
+デフォルト値：delay=200（単位はミリ秒）
+</li><br />
+<li>アニメーションを繰り返さない
+<pre>anim = animation.ArtistAnimation(fig, imgs, repeat=False)</pre>
+デフォルト値：repeat=True
+</li><br />
+<li>描画を高速化（blittingという手法を有効）
+<pre>anim = animation.ArtistAnimation(fig, imgs, blit=True)</pre>
+デフォルト値：blit=False
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="anim_1_2">複数のグラフを重ねる</div></h4>
+<div class="text1">
+同時刻の複数のグラフを同じサブプロットに描く場合
+<pre>
+import matplotlib.animation as animation
+fig = plt.figure()
+ax = fig.add_subplot(1, 1, 1)
+imgs = [] # リストを作成
+for t in np.arange(開始, 終了, 間隔):
+&nbsp; &nbsp; 何らかの処理
+&nbsp; &nbsp; img1 = plt.plot(x, y1, オプション) # 時刻tの(x, y1)折れ線グラフ
+&nbsp; &nbsp; img2 = plt.plot(x, y2, オプション) # 時刻tの(x, y2)折れ線グラフ
+&nbsp; &nbsp; imgs.append(img1 + img2) # 複数の戻り値をまとめてリストに追加
+
+# アニメーション作成
+anim = animation.ArtistAnimation(fig, imgs)
+</pre>
+</div>
+
+<h4><div class="headline2" id="anim_1_3">複数のサブプロットで同時に描く</div></h4>
+<div class="text1">
+複数のサブプロットで行った描画の戻り値をまとめる
+<pre>
+import matplotlib.animation as animation
+fig = plt.figure()
+ax1 = fig.add_subplot(1, 2, 1) # サブプロット1
+ax2 = fig.add_subplot(1, 2, 1) # サブプロット2
+imgs = [] # リストを作成
+for t in np.arange(開始, 終了, 間隔):
+&nbsp; &nbsp; 何らかの処理
+&nbsp; &nbsp; img1 = ax1.plot(x1, y1, オプション) # 時刻tの(x1, y1)折れ線グラフ
+&nbsp; &nbsp; img2 = ax2.plot(x2, y2, オプション) # 時刻tの(x2, y2)折れ線グラフ
+&nbsp; &nbsp; imgs.append(img1 + img2) # 複数の戻り値をまとめてリストに追加
+
+# アニメーション作成
+anim = animation.ArtistAnimation(fig, imgs)
+</pre>
+</div>
+
+
+
 <!-- 図の体裁 -->
 <h3><div class="headline1" id="graph_e">図の体裁</div></h3>
 <h4><div class="headline2" id="graph_e_1">タイトルの大きさや色を変更する</div></h4>
@@ -2073,7 +2175,7 @@ matplotlib.tickerに含まれるPercentFormatterを使う
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/01/02</p>
+<p>最終更新日：2021/06/14</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
