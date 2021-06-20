@@ -74,12 +74,13 @@
     </ul>
   </li></ul>
   <!-- 図の体裁 -->
-  <ul class="list1"><li><a href="#basemap_e">図の体裁</a>
+  <ul class="list1"><li><a href="#cartopy_e">図の体裁</a>
     <ul class="list2">
-      <li><a href="#basemap_e_1">タイトルを付ける</a></li>
-      <li><a href="#basemap_e_2">極投影図法で図枠を円形にする</a></li>
-      <li><a href="#basemap_e_3">全球が表示されなくなった場合</a></li>
-      <li><a href="#basemap_e_4">0度と360度を滑らかにつなげる</a></li>
+      <li><a href="#cartopy_e_1">タイトルを付ける</a></li>
+      <li><a href="#cartopy_e_2">極投影図法で図枠を円形にする</a></li>
+      <li><a href="#cartopy_e_3">全球が表示されなくなった場合</a></li>
+      <li><a href="#cartopy_e_4">0度と360度を滑らかにつなげる</a></li>
+      <li><a href="#cartopy_e_5">都道府県の境界線を描く</a></li>
     </ul>
   </li></ul>
 </div>
@@ -121,11 +122,17 @@ gl.ylocator = mticker.FixedLocator(緯度線を引く値のリスト)
 </pre>
 正距円筒図法、ランベルト正積円筒図法のみ対応
 <ul class="list1">
-<li>例：60度毎に経度線を引く
-<pre>gl.xlocator = mticker.FixedLocator(np.arange(0,360.1,60)) </pre>
+<li>例：60度毎に経度線を引く（バージョン0.18）
+<pre>gl.xlocator = mticker.FixedLocator(np.arange(-180, 180, 30)) </pre>
+バージョン0.17までは有効であった0〜360の範囲では、西半球で経度線が描かれない</li><br />
+<li>例：30度毎に緯度線を引く（バージョン0.18）
+<pre>gl.ylocator = mticker.FixedLocator(np.arange(-90, 90, 30))</pre>
+</li><br />
+<li>例：60度毎に経度線を引く（バージョン0.17）
+<pre>gl.xlocator = mticker.FixedLocator(np.arange(0, 360.1, 60)) </pre>
 360では300°Eまでしか経度線が引かれないため、360.1としている</li><br />
-<li>例：30度毎に緯度線を引く
-<pre>gl.ylocator = mticker.FixedLocator(np.arange(-90,90.1,30))</pre>
+<li>例：30度毎に緯度線を引く（バージョン0.17）
+<pre>gl.ylocator = mticker.FixedLocator(np.arange(-90, 90.1, 30))</pre>
 90では60°Nまでしか経度線が引かれないため、90.1としている</li><br />
 <li>例：経度線・緯度線を細い赤破線で描く
 <pre>
@@ -544,8 +551,8 @@ ax.plot(x, y, color="aqua", marker="o", markersize=12)
 
 	
 <!-- 図の体裁 -->
-<h3><div class="headline1" id="basemap_e">図の体裁</div></h3>
-<h4><div class="headline2" id="basemap_e_1">タイトルを付ける</div></h4>
+<h3><div class="headline1" id="cartopy_e">図の体裁</div></h3>
+<h4><div class="headline2" id="cartopy_e_1">タイトルを付ける</div></h4>
 <div class="text1">
 matplotlibのax.set_titleを使う
 <pre>ax_set.title("タイトル")</pre>
@@ -553,7 +560,7 @@ matplotlibのax.set_titleを使う
 <a href="matplotlib.html#graph_e_1">タイトルの大きさや色を変更する</a>参照
 </div>
 
-<h4><div class="headline2" id="basemap_e_2">極投影図法で図枠を円形にする</div></h4>
+<h4><div class="headline2" id="cartopy_e_2">極投影図法で図枠を円形にする</div></h4>
 <div class="text1">
 図枠をmatplotlibのPathで設定する
 <pre>
@@ -568,13 +575,13 @@ ax.set_boundary(circle, transform=ax.transAxes) # 円形の領域でマスク
 <a href="https://scitools.org.uk/cartopy/docs/v0.15/examples/always_circular_stereo.html">cartopyのサンプル</a>参照
 </div>
 
-<h4><div class="headline2" id="basemap_e_3">全球が表示されなくなった場合</div></h4>
+<h4><div class="headline2" id="cartopy_e_3">全球が表示されなくなった場合</div></h4>
 <div class="text1">
 全球を表示させるために、次の記述を加える
 <pre>ax.set_global()</pre>
 </div>
 
-<h4><div class="headline2" id="basemap_e_4">0度と360度を滑らかにつなげる</div></h4>
+<h4><div class="headline2" id="cartopy_e_4">0度と360度を滑らかにつなげる</div></h4>
 <div class="text1">
 <ul class="list1">
 <li>経度、緯度が１次元データの場合<br />
@@ -592,13 +599,43 @@ Basemapの<a href="basemap.html#basemap_e_3">極投影図法で0度と360度を�
 </ul>
 </div>
 
+<h4><div class="headline2" id="cartopy_e_5">都道府県の境界線を描く</div></h4>
+<div class="text1">
+cartopy.io.shapereaderを使う
+<pre>
+import matplotlib.pyplot as plt
+import cartopy.crs as ccrs
+import cartopy.io.shapereader as shapereader
+
+# 日本の都道府県のみ取得
+provinces = shapereader.Reader(shpfilename).records()
+prefs = filter(lambda province: province.attributes['admin'] == 'Japan', provinces)
+# プロット領域の作成
+fig = plt.figure(figsize=[6, 8])
+# cartopy呼び出し
+ax = plt.axes(projection=ccrs.PlateCarree())
+for pref in prefs:
+    geometry = pref.geometry
+    ax.add_geometries([geometry],
+                      ccrs.PlateCarree(),
+                      facecolor=col,
+                      linestyle=':')
+ax.coastlines(resolution='10m') # 海岸線を描く
+ax.set_extent([122, 147, 22, 52]) # 図の範囲
+# 図の表示
+plt.show()
+</pre>
+[geometry]のようにリストにする
+</div>
+
+
 
 <small><a href="#top">[top]</a></small> <br />
 <hr width="105%" />
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/01/03</p>
+<p>最終更新日：2021/06/20</p>
 <p>Copyright (C) 2019-2021, Yousuke Yamashita</p>
 </footer>
 </html>
