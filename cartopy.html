@@ -607,25 +607,25 @@ import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 import cartopy.io.shapereader as shapereader
 
+# 10mの解像度のデータ
+shpfilename = shapereader.natural_earth(resolution='10m', category='cultural', name='admin_1_states_provinces')
 # 日本の都道府県のみ取得
 provinces = shapereader.Reader(shpfilename).records()
 prefs = filter(lambda province: province.attributes['admin'] == 'Japan', provinces)
+
 # プロット領域の作成
 fig = plt.figure(figsize=[6, 8])
 # cartopy呼び出し
 ax = plt.axes(projection=ccrs.PlateCarree())
-for pref in prefs:
-    geometry = pref.geometry
-    ax.add_geometries([geometry],
-                      ccrs.PlateCarree(),
-                      facecolor=col,
-                      linestyle=':')
-ax.coastlines(resolution='10m') # 海岸線を描く
 ax.set_extent([122, 147, 22, 52]) # 図の範囲
-# 図の表示
-plt.show()
+ax.coastlines(resolution='10m') # 海岸線を描く（10mの解像度）
+
+# 都道府県毎に描く
+for pref in prefs:
+&nbsp; &nbsp; geometry = pref.geometry
+&nbsp; &nbsp; ax.add_geometries([geometry], ccrs.PlateCarree(), facecolor=col, linestyle=':')
 </pre>
-[geometry]のようにリストにする
+＊[geometry]のようにリストにする
 </div>
 
 
@@ -635,7 +635,7 @@ plt.show()
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/06/20</p>
+<p>最終更新日：2021/07/05</p>
 <p>Copyright (C) 2019-2021, Yousuke Yamashita</p>
 </footer>
 </html>
