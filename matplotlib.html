@@ -271,23 +271,36 @@
       <li><a href="#anim_1_3">複数のサブプロットで同時に描く</a></li>
     </ul>
   </li></ul>
+  <!-- 軸の体裁 -->
+  <ul class="list1"><li><a href="#axis_1">軸の体裁</a>
+    <ul class="list2">
+      <li><a href="#axis_1_1">x軸、y軸ラベルの大きさや色を変更する</a></li>
+      <li><a href="#axis_1_2">x軸、y軸の目盛り線の書式</a></li>
+      <li><a href="#axis_1_3">x軸、y軸の目盛り線の間隔を変更する</a></li>
+      <li><a href="#axis_1_4">x軸、y軸の目盛り線ラベルのサイズを変更する</a></li>
+      <li><a href="#axis_1_5">x軸、y軸の範囲を指定する</a></li>
+      <li><a href="#axis_1_6">x軸、y軸の範囲を取得する</a></li>
+      <li><a href="#axis_1_7">小目盛り線を付ける／消す</a></li>
+      <li><a href="#axis_1_8">x軸、y軸目盛り線を内側にする</a></li>
+      <li><a href="#axis_1_9">目盛り線の長さを変える</a></li>
+      <li><a href="#axis_1_10">目盛り線の幅を変える</a></li>
+      <li><a href="#axis_1_11">目盛り線の色を変える</a></li>      
+      <li><a href="#axis_1_12">図の時間軸の表示を調整する</a></li>
+      <li><a href="#axis_1_13">軸の上下、左右を逆転させる</a></li>
+      <li><a href="#axis_1_14">y軸をログスケールにした時にラベルの数字を整数表示する</a></li>
+      <li><a href="#axis_1_15">y軸をパーセント表示にする</a></li>
+    </ul>
+  </li></ul>
   <!-- 図の体裁 -->
   <ul class="list1"><li><a href="#graph_e">図の体裁</a>
     <ul class="list2">
-      <li><a href="#graph_e_1">タイトルの大きさや色を変更する</a></li>
-      <li><a href="#graph_e_2">x軸、y軸のラベルの大きさや色を変更する</a></li>
-      <li><a href="#graph_e_3">x軸、y軸の目盛り線の書式</a></li>
-      <li><a href="#graph_e_4">x軸、y軸の目盛り線の間隔を変更する</a></li>
-      <li><a href="#graph_e_5">x軸、y軸の目盛り線ラベルのサイズを変更する</a></li>
-      <li><a href="#graph_e_6">x軸、y軸の範囲を指定する</a></li>
-      <li><a href="#graph_e_7">x軸、y軸の範囲を取得する</a></li>
-      <li><a href="#graph_e_8">x軸、y軸の目盛り線を内側にする</a></li>
-      <li><a href="#graph_e_9">マーカーや線を重ねる順序を調整する</a></li>
-      <li><a href="#graph_e_10">図の時間軸の表示を調整する</a></li>
-      <li><a href="#graph_e_11">軸の上下、左右を逆転させる</a></li>
-      <li><a href="#graph_e_12">枠線や目盛りを消す</a></li>
-      <li><a href="#graph_e_13">y軸をログスケールにした時にラベルの数字を整数表示する</a></li>
-      <li><a href="#graph_e_14">y軸をパーセント表示にする</a></li>
+      <li><a href="#graph_e_1">全体のフォントをまとめて指定する</a></li>
+      <li><a href="#graph_e_2">全体の文字サイズをまとめて指定する</a></li>
+      <li><a href="#graph_e_3">タイトルの文字サイズや色を変更する</a></li>
+      <li><a href="#graph_e_4">タイトルや軸ラベル、テキストのフォントを指定する</a></li>
+      <li><a href="#graph_e_5">マーカーや線を重ねる順序を調整する</a></li>
+      <li><a href="#graph_e_6">図の枠線や目盛りを消す</a></li>
+      <li><a href="#graph_e_7">図の枠線の幅を変える</a></li>
     </ul>
   </li></ul>
 </div>
@@ -781,9 +794,10 @@ plt.bar(x軸のデータ+0.2, y軸のデータ3, color='aqua', width=0.2)</pre>
 <pre>
 off_y = np.zeros(len(data_y[0])) # 棒グラフの初期開始位置（０）
 for n in np.arange(3):
-    index = data_y[n].index # x軸上の位置
-    plt.bar(index, data_y[n], bottom=off_y) # 棒グラフ積み上げ
-    off_y = off_y + data_y[n] # 棒グラフの開始位置再計算</pre>
+&nbsp; &nbsp; index = data_y[n].index # x軸上の位置
+&nbsp; &nbsp; plt.bar(index, data_y[n], bottom=off_y) # 棒グラフ積み上げ
+&nbsp; &nbsp; off_y = off_y + data_y[n] # 棒グラフの開始位置再計算
+</pre>
 </div>
 
 <h4><div class="headline2" id="graph_3_9">横棒に変える</div></h4>
@@ -1977,34 +1991,29 @@ anim = animation.ArtistAnimation(fig, imgs)
 
 
 
-<!-- 図の体裁 -->
-<h3><div class="headline1" id="graph_e">図の体裁</div></h3>
-<h4><div class="headline2" id="graph_e_1">タイトルの大きさや色を変更する</div></h4>
+<!-- 軸の体裁 -->
+<h3><div class="headline1" id="axis_1">軸の体裁</div></h3>
+<h4><div class="headline2" id="axis_1_1">x軸、y軸ラベルの大きさや色を変更する</div></h4>
 <div class="text1">
+plt.titleと同じオプションが使える
 <ul class="list1">
-<li>文字サイズを指定する場合の例：24ポイント
-<pre>plt.title("タイトル", fontsize=24)</pre>
+<li>x軸の文字サイズを指定する場合の例：16ポイント
+<pre>plt.xlabel("x軸ラベル", fontsize=16)</pre>
 文字サイズは<a href="options.html#fontsize">文字列</a>でも指定可能</li><br />
-<li>文字の色を赤色に指定する場合の例：
-<pre>plt.title("タイトル", color='r')</pre>
-色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li>
+<li>y軸の文字の色を赤色に指定する場合の例：
+<pre>plt.ylabel("y軸ラベル", color='r')</pre>
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li><br />
+<li>axを使うこともできる
+<pre>
+ax.set_xlabel("x軸ラベル", fontsize=16)
+ax.set_ylabel("x軸ラベル", color='r') </pre></li>
+<li>全体の文字サイズをデフォルトの10から12に変更する
+<pre>plt.rcParams["font.size"] = 12</pre>
+x軸・y軸ラベルだけではなく、図の全体で変更される</li>
 </ul>
 </div>
 
-<h4><div class="headline2" id="graph_e_2">x軸、y軸のラベルの大きさや色を変更する</div></h4>
-<div class="text1">
-  plt.titleと同じオプションが使える
-  <ul class="list1">
-  <li>x軸の文字サイズを指定する場合の例：16ポイント
-  <pre>plt.xlabel("タイトル", fontsize=16)</pre>
-  文字サイズは<a href="options.html#fontsize">文字列</a>でも指定可能</li><br />
-  <li>y軸の文字の色を赤色に指定する場合の例：
-  <pre>plt.ylabel("タイトル", color='r')</pre>
-  色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li>
-  </ul>
-</div>
-
-<h4><div class="headline2" id="graph_e_3">x軸、y軸の目盛り線の書式</div></h4>
+<h4><div class="headline2" id="axis_1_2">x軸、y軸の目盛り線の書式</div></h4>
 <div class="text1">
 tickerを使い、大目盛りと小目盛りを自動設定
 <pre>import matplotlib.ticker as ticker
@@ -2014,7 +2023,7 @@ ax.xaxis.set_major_locator(ticker.AutoLocator()) # y軸大目盛り
 ax.xaxis.set_minor_locator(ticker.AutoMinorLocator()) # y軸小目盛り</pre>
 </div>
 
-<h4><div class="headline2" id="graph_e_4">x軸、y軸の目盛り線の間隔を変更する</div></h4>
+<h4><div class="headline2" id="axis_1_3">x軸、y軸の目盛り線の間隔を変更する</div></h4>
 <div class="text1">
 <ul class="list1">
 <li>ticker.MultipleLocatorを使う例：y軸の大目盛りを10毎、小目盛りを2毎に付ける
@@ -2032,41 +2041,78 @@ ax.yaxis.set_minor_locator(ticker.FixedLocator(小目盛り線の値のリスト
 </ul>
 </div>
 
-<h4><div class="headline2" id="graph_e_5">x軸、y軸の目盛り線ラベルのサイズを変更する</div></h4>
+<h4><div class="headline2" id="axis_1_4">x軸、y軸の目盛り線ラベルの文字サイズを変更する</div></h4>
 <div class="text1">
-フォントサイズをデフォルトの10から12に変更する
-<pre>plt.rcParams["font.size"] = 12</pre>
+<ul class="list1">
+<li>文字サイズをデフォルトの10から12に変更する
+<pre>plt.rcParams["font.size"] = 12</pre></li>
+</ul>
 </div>
 
-<h4><div class="headline2" id="graph_e_6">x軸、y軸の範囲を指定する</div></h4>
+<h4><div class="headline2" id="axis_1_5">x軸、y軸の範囲を指定する</div></h4>
 <div class="text1">
 <pre>
 plt.xlim([x軸最小値, x軸最大値])
 plt.ylim([y軸最小値, y軸最大値])</pre>
 </div>
 
-<h4><div class="headline2" id="graph_e_7">x軸、y軸の範囲を取得する</div></h4>
+<h4><div class="headline2" id="axis_1_6">x軸、y軸の範囲を取得する</div></h4>
 <div class="text1">
 x軸の範囲をxmin、xmax、y軸の範囲をymin、ymaxに入力
 <pre>xmin, xmax, ymin, ymax = plt.axis()</pre>
 </div>
 
-<h4><div class="headline2" id="graph_e_8">x軸、y軸の目盛り線を内側にする</div></h4>
+<h4><div class="headline2" id="axis_1_7">小目盛り線を付ける／消す</div></h4>
 <div class="text1">
+<ul class="list1">
+<li>小目盛り線を付ける
 <pre>
-plt.rcParams['ytick.direction'] = 'in' # y軸目盛り線の向き
-plt.rcParams['ytick.major.width'] = 1.2 # y軸大目盛り線の太さ</pre>
+plt.rcParams["xtick.minor.visible"] = True  # x軸
+plt.rcParams["ytick.minor.visible"] = True  # y軸
+</pre></li>
+<li>小目盛り線を消す
+<pre>
+plt.rcParams["xtick.minor.visible"] = False  # x軸
+plt.rcParams["ytick.minor.visible"] = False  # y軸
+</pre></li>
+</ul>
 </div>
 
-<h4><div class="headline2" id="graph_e_9">マーカーや線を重ねる順序を調整する</div></h4>
+<h4><div class="headline2" id="axis_1_8">x軸、y軸目盛り線を内側にする</div></h4>
 <div class="text1">
-zorder=整数、で数字が大きい方を後に描く
 <pre>
-plt.scatter(xデータ1, yデータ1, zorder=2) # 散布図を上に
-plt.plot(xデータ2, yデータ2, zorder=1) # 折れ線グラフを下に</pre>
+plt.rcParams['xtick.direction'] = 'in' # x軸目盛り線を内向き
+plt.rcParams['ytick.direction'] = 'in' # y軸目盛り線を内向き
+</pre>
+デフォルト：plt.rcParams['xtick.direction'] = 'out'（外向き）
 </div>
 
-<h4><div class="headline2" id="graph_e_10">図の時間軸の表示を調整する</div></h4>
+<h4><div class="headline2" id="axis_1_9">目盛り線の長さを変える</div></h4>
+<div class="text1">
+<pre>
+plt.rcParams['xtick.major.size'] = 8 # x軸大目盛り線の長さ
+plt.rcParams['ytick.major.size'] = 8 # y軸大目盛り線の長さ
+plt.rcParams['xtick.minor.size'] = 4 # x軸小目盛り線の長さ
+plt.rcParams['ytick.minor.size'] = 4 # y軸小目盛り線の長さ</pre>
+</div>
+
+<h4><div class="headline2" id="axis_1_10">目盛り線の幅を変える</div></h4>
+<div class="text1">
+<pre>
+plt.rcParams['xtick.major.width'] = 1.2 # x軸大目盛り線の幅
+plt.rcParams['ytick.major.width'] = 1.2 # y軸大目盛り線の幅
+plt.rcParams['xtick.minor.width'] = 0.8 # x軸小目盛り線の幅
+plt.rcParams['ytick.minor.width'] = 0.8 # y軸小目盛り線の幅</pre>
+</div>
+
+<h4><div class="headline2" id="axis_1_11">目盛り線の色を変える</div></h4>
+<div class="text1">
+<pre>
+plt.rcParams['ytick.color'] = 'b'  # x軸を青色
+plt.rcParams['ytick.color'] = 'r'  # y軸を赤色</pre>
+</div>
+
+<h4><div class="headline2" id="axis_1_12">図の時間軸の表示を調整する</div></h4>
 <div class="text1">
 matplotlib.datesを使い時刻表記を変える
 <pre>ax.xaxis.set_major_formatter(mdates.DateFormatter('時刻表記の書式'))</pre>
@@ -2079,7 +2125,7 @@ matplotlib.datesを使い時刻表記を変える
 時刻表記の書式については<a href="forms.html#time">時刻表記に用いられる書式指定子一覧</a>参照
 </div>
 
-<h4><div class="headline2" id="graph_e_11">軸の上下、左右を逆転させる</div></h4>
+<h4><div class="headline2" id="axis_1_13">軸の上下、左右を逆転させる</div></h4>
 <div class="text1">
 <ul class="list1">
 <!-- 1 -->
@@ -2136,7 +2182,81 @@ ax.get_ylim()でy軸の範囲を取得する</li><br />
 </ul>
 </div>
 
-<h4><div class="headline2" id="graph_e_12">枠線や目盛りを消す</div></h4>
+<h4><div class="headline2" id="axis_1_14">y軸をログスケールにした時にラベルの数字を整数表示する</div></h4>
+<div class="text1">
+matplotlib.tickerに含まれるLogLocatorとFuncFormatterを使う
+<ul class="list1">
+<li>y軸が気圧面高度の場合に大目盛りに1000、100、10、1の文字を表示
+<pre>
+import matplotlib.ticker as ticker
+def major_formatter(x, pos):
+&nbsp; &nbsp; return "%.0f" % x
+ax.yaxis.set_major_locator(ticker.LogLocator(base=10.0, numticks=15))
+ax.yaxis.set_major_formatter(ticker.FuncFormatter(major_formatter))
+</pre></li>
+<li>小目盛りにラベルを表示させない（NullFormatterを使う）
+<pre>
+ax.yaxis.set_minor_formatter(ticker.NullFormatter())
+</pre></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="axis_1_15">y軸をパーセント表示にする</div></h4>
+<div class="text1">
+matplotlib.tickerに含まれるPercentFormatterを使う
+<pre>ax.yaxis.set_major_formatter(ticker.PercentFormatter(1.0))</pre>
+0〜1が0％〜100%の表記に変わる
+</div>
+
+
+
+<!-- 図の体裁 -->
+<h3><div class="headline1" id="graph_e">図の体裁</div></h3>
+<h4><div class="headline2" id="graph_e_1">全体のフォントをまとめて指定する</div></h4>
+<div class="text1">
+<pre>plt.rcParams["font.family"] = "Times New Roman"</pre>
+Times New Romanに変更
+</div>
+
+<h4><div class="headline2" id="graph_e_2">全体の文字サイズをまとめて指定する</div></h4>
+<div class="text1">
+12ポイントに設定する（デフォルト値：10ポイント）
+<pre>plt.rcParams["font.size"] = 12</pre>
+</div>
+
+<h4><div class="headline2" id="graph_e_3">タイトルの文字サイズや色を変更する</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>文字サイズを指定する場合の例：24ポイント
+<pre>plt.title("タイトル", fontsize=24)</pre>
+文字サイズは<a href="options.html#fontsize">文字列</a>でも指定可能</li><br />
+<li>文字の色を赤色に指定する場合の例：
+<pre>plt.title("タイトル", color='r')</pre>
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_e_4">タイトルや軸ラベル、テキストのフォントを指定する</div></h4>
+<div class="text1">
+plt.title、plt.xlabel、plt.ylabel、plt.textなどでfontfamilyオプションを使う
+<pre>
+plt.title("タイトル", fontfamily="Times New Roman")
+plt.xlabel("x軸のラベル", fontfamily="Times New Roman")
+plt.ylabel("y軸のラベル", fontfamily="Times New Roman")
+plt.text(x位置, y位置, "テキスト", fontfamily="Times New Roman")
+</pre>
+Times New Romanに変更
+</div>
+
+<h4><div class="headline2" id="graph_e_5">マーカーや線を重ねる順序を調整する</div></h4>
+<div class="text1">
+zorder=整数、で数字が大きい方を後に描く
+<pre>
+plt.scatter(xデータ1, yデータ1, zorder=2) # 散布図を上に
+plt.plot(xデータ2, yデータ2, zorder=1) # 折れ線グラフを下に</pre>
+</div>
+
+<h4><div class="headline2" id="graph_e_6">図の枠線や目盛りを消す</div></h4>
 <div class="text1">
 <ul class="list1">
 <li>枠線と目盛りを全て消す
@@ -2179,38 +2299,21 @@ plt.gca()については、<a href="#graph_1_12">直前に操作したサブプ�
 </li></ul>
 </div>
 
-<h4><div class="headline2" id="graph_e_13">y軸をログスケールにした時にラベルの数字を整数表示する</div></h4>
+<h4><div class="headline2" id="graph_e_7">図の枠線の幅を変える</div></h4>
 <div class="text1">
-matplotlib.tickerに含まれるLogLocatorとFuncFormatterを使う
-<ul class="list1">
-<li>y軸が気圧面高度の場合に大目盛りに1000、100、10、1の文字を表示
+枠線の幅を太くする（デフォルト値：1.0）
 <pre>
-import matplotlib.ticker as ticker
-def major_formatter(x, pos):
-&nbsp; &nbsp; return "%.0f" % x
-ax.yaxis.set_major_locator(ticker.LogLocator(base=10.0, numticks=15))
-ax.yaxis.set_major_formatter(ticker.FuncFormatter(major_formatter))
-</pre></li>
-<li>小目盛りにラベルを表示させない（NullFormatterを使う）
-<pre>
-ax.yaxis.set_minor_formatter(ticker.NullFormatter())
-</pre></li>
-</ul>
+plt.rcParams["axes.linewidth"] = 1.5
+</pre>
 </div>
 
-<h4><div class="headline2" id="graph_e_14">y軸をパーセント表示にする</div></h4>
-<div class="text1">
-matplotlib.tickerに含まれるPercentFormatterを使う
-<pre>ax.yaxis.set_major_formatter(ticker.PercentFormatter(1.0))</pre>
-0〜1が0％〜100%の表記に変わる
-</div>
 
 <small><a href="#top">[top]</a></small> <br />
 <hr width="105%" />
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/06/29</p>
+<p>最終更新日：2021/07/08</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
