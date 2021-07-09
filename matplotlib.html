@@ -56,6 +56,7 @@
       <li><a href="#matplotlib_2_1">python3スクリプト</a></li>
       <li><a href="#matplotlib_2_2">python3スクリプトの実行方法</a></li>
       <li><a href="#matplotlib_2_3">スクリプト実行時のWarning表示を消す</a></li>
+      <li><a href="#matplotlib_2_4">pythonプログラムの文法チェックとインデント合わせ</a></li>
   </ul>
   </li></ul>
   <!-- グラフの基本 -->
@@ -459,6 +460,23 @@ ax.set_xticklabels(ax.get_xticklabels(), rotation=70, size="small")
 
 </ul>
 </div>
+
+<h4><div class="headline2" id="matplotlib_2_4">pythonプログラムの文法チェックとインデント合わせ</div></h4>
+<div class="text1">
+スクリプト実行前にyapfコマンドを実行すると、文法エラーがある場合には出力し、PEP8に準拠する４文字のインデント合わせと見た目の調整を自動で行ってくれる
+<ul class="list1">
+<li>yapfの取得
+<pre>sudo port install py38-yapf</pre>
+py38の部分はpythonのバージョンによって変わる</li><br />
+<li>yapfコマンドの実行（ファイルを変更する場合）
+<pre>yapf -i スクリプト名.py</pre>
+＊文法エラーがある場合には、実行を中断してエラーを表示する
+</li>
+<li>yapfコマンドの実行（変更点を表示しファイルは変更しない）
+<pre>yapf -d スクリプト名.py</pre></li>
+</ul>
+</div>
+
 
 
 <!-- グラフの基本 -->
@@ -2313,7 +2331,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/07/08</p>
+<p>最終更新日：2021/07/09</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
