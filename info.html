@@ -23,6 +23,15 @@
 
 <body link="#0000FF" vlink="#0000FF">
 <article>
+<h3><div class="headline1" id="20210731">Basemapで南極大陸を描く際の不具合について（2021/07/31）</div></h3>
+<div class="text1">
+Basemap1.2.2で行われた更新後に、一部の図法で南極大陸が描かれないか東半球側にしか描かれない不具合が発生しています。
+現在確認しているものは、正距円筒図法、モルワイデ図法、ロビンソン図法、ランベルト正積円筒図法、ミラー図法です。
+なお、正射投影図法、ランベルト正角円錐図法、極投影図法、正距方位図法については問題なく作図できています。
+</div>
+<br />
+<br />
+
 <h3><div class="headline1" id="20210224">気象庁HP更新に伴うサンプルプログラムの動作確認について（2021/02/24）</div></h3>
 <div class="text1">
 本日13時に気象庁ホームページが大幅に更新され、各種リンクが変更となりました。
@@ -273,7 +282,7 @@ epsgf = open(os.path.join(pyproj_datadir,'epsg'))
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/02/24</p>
+<p>最終更新日：2021/07/31</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
