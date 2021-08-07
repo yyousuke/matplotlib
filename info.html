@@ -275,6 +275,24 @@ epsgf = open(os.path.join(pyproj_datadir,'epsg'))
 <br />
 <br />
 
+<h3><div class="headline1" id="20181218">Basemapでimportエラー（2018/12/18）</div></h3>
+<div class="text1">
+MacPortを使い2018/10/18現在のmatplotlib最新版（3.0.0）に更新した場合、basemap-1.1.0でmatplotlib.cbook内のis_scalarをimportできない不具合が発生します。<br />
+この更新でmatplotlib.cbook内のis_scalarがis_scalar_or_stringに変更されました。一方で、basemap（ver. 1.1.0）の方ではimportする設定が変更されていない不一致があります。バグfixが出るまでは、以下のようにコードを修正することで対応可能です。<br />
+<p>ファイル：/opt/local/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mpl_toolkits/basemap/__init__.py</p><br />
+<pre>
+17行目<br />
+# from matplotlib.cbook <font color="red">import is_scalar</font>, dedent <br />
+from matplotlib.cbook <font color="red">import is_scalar_or_string</font>, dedent<br />
+4987行目<br />
+# elif masked and <font color="red">is_scalar(masked)</font>:<br />
+elif masked and <font color="red">is_scalar_or_string(masked)</font>:<br />
+</pre>
+＊<font color="red">basemap1.2.0で不具合が修正された（2019/11/08）</font>
+</div>
+<br />
+<br />
+
 <br />
 <br />
 <small><a href="#top">[top]</a></small> <br />
@@ -282,7 +300,7 @@ epsgf = open(os.path.join(pyproj_datadir,'epsg'))
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/07/31</p>
+<p>最終更新日：2021/08/07</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
