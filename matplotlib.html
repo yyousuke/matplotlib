@@ -1354,11 +1354,20 @@ ZがNumpyのndarrayの場合。最小値よりも小さい最大の整数をnp.f
 <pre>plt.contourf(X, Y, Z, cmap='bwr', vmin=3, vmax=9)</pre></li>
 <li>例：Zが３〜９の範囲で色を変化させ、範囲外の色を指定する
 <pre>
-cmap=plt.get_cmap('bwr') # 色テーブル取得
+cmap = plt.get_cmap('bwr') # 色テーブル取得
 cmap.set_under('gray') # 下限を下回った場合に灰色
 cmap.set_over('w') # 上限を超えた場合に白
 plt.contourf(X, Y, Z, cmap=cmap, vmin=3, vmax=9)
-</pre></li>
+</pre>
+＊matplotlib 3.3以降では、plt.get_cmapの返り値を変更すると警告が出るようになり、3.6以降ではエラーとなる予定。その場合には以下のように指定
+<pre>
+import matplotlib as mpl
+cmap = mpl.cm.get_cmap("bwr").copy() # 色テーブル取得
+cmap.set_under('gray') # 下限を下回った場合に灰色
+cmap.set_over('w') # 上限を超えた場合に白
+plt.contourf(X, Y, Z, cmap=cmap, vmin=3, vmax=9)
+</pre>
+</li>
 </ul>
 </div>
 
@@ -1860,22 +1869,22 @@ cbar.ax.yaxis.set_minor_locator(ticker.FixedLocator(np.arange(1,100,1)))) # 小�
 <ul class="list1">
 <li>例：カラーバーが横の場合
 <pre>cs = plt.contourf(X, Y, Z) # 陰影を描く場合
-cbar=plt.colorbar(cs, ticks=[1, 2, 3], オプション)
+cbar = plt.colorbar(cs, ticks=[1, 2, 3], オプション)
 cbar.ax.set_yticklabels(cs, ["lab1", "lab2", "lab3"])</pre>
 </li>
 <li>例：カラーバーが横の場合
 <pre>cs = plt.contourf(X, Y, Z) # 陰影を描く場合
-cbar=plt.colorbar(cs, ticks=[1, 2, 3], orientation='horizontal', オプション)
+cbar = plt.colorbar(cs, ticks=[1, 2, 3], orientation='horizontal', オプション)
 cbar.ax.set_xticklabels(cs, ["lab1", "lab2", "lab3"])</pre>
 </li>
 <li>例：fig.colorbarを使う場合（縦方向）
 <pre>cs = plt.contourf(X, Y, Z) # 陰影を描く場合
-cbar=fig.colorbar(cs, ticks=[1, 2, 3], orientation='horizontal', オプション)
+cbar = fig.colorbar(cs, ticks=[1, 2, 3], orientation='horizontal', オプション)
 cbar.ax.set_yticklabels(cs, ["lab1", "lab2", "lab3"])</pre>
 </li>
 <li>例：fig.colorbarを使う場合（横方向）
 <pre>cs = plt.contourf(X, Y, Z) # 陰影を描く場合
-cbar=fig.colorbar(cs, ticks=[1, 2, 3], orientation='horizontal', オプション)
+cbar = fig.colorbar(cs, ticks=[1, 2, 3], orientation='horizontal', オプション)
 cbar.ax.set_xticklabels(cs, ["lab1", "lab2", "lab3"])</pre>
 </li>
 </ul>
@@ -2331,7 +2340,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/07/09</p>
+<p>最終更新日：2021/08/11</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
