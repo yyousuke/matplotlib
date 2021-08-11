@@ -625,7 +625,8 @@ Numpyを使って生成した配列を使いcos(x)を作図
 import numpy as np
 x = np.linspace(-np.pi,np.pi)
 plt.plot(x, np.cos(x), color='k')</pre>
-で黒色の折れ線グラフが描かれる
+で黒色の折れ線グラフが描かれる<br />
+ax.plot()でも同じ（axはfig.add_subplotの戻り値）
 </div>
 
 <h4><div class="headline2" id="graph_2_2">折れ線グラフの色を変える</div></h4>
@@ -760,6 +761,7 @@ cos(x)が実線、sin(x)が破線であることが凡例として表示され�
 <h4><div class="headline2" id="graph_3_1">棒グラフを描く</div></h4>
 <div class="text1">
 <pre>plt.bar(x軸のデータ, y軸のデータ)</pre>
+ax.bar()でも同じ（axはfig.add_subplotの戻り値）
 </div>
 
 <h4><div class="headline2" id="graph_3_2">棒グラフを塗り潰す色を変える</div></h4>
@@ -862,6 +864,7 @@ plt.bar(x軸のデータ, y軸のデータ, yerr=y軸のエラーバーデータ
 <h4><div class="headline2" id="graph_4_1">ヒストグラムを描く</div></h4>
 <div class="text1">
 <pre>plt.hist(データ)</pre>
+ax.hist()でも同じ（axはfig.add_subplotの戻り値）
 </div>
 
 <h4><div class="headline2" id="graph_4_2">ヒストグラムを塗り潰す色を変える</div></h4>
@@ -959,6 +962,7 @@ plt.hist(データ)
 <h4><div class="headline2" id="graph_5_1">散布図を描く</div></h4>
 <div class="text1">
 <pre>plt.scatter(x軸データ, y軸データ)</pre>
+ax.scatter()でも同じ（axはfig.add_subplotの戻り値）
 </div>
 
 <h4><div class="headline2" id="graph_5_2">散布図のマーカーの大きさと色を変える</div></h4>
@@ -1067,6 +1071,7 @@ plt.text(テキストのx座標, テキストのy座標, name, fontsize=14, colo
 <h4><div class="headline2" id="graph_6_1">矢羽を描く</div></h4>
 <div class="text1">
 <pre>plt.barbs(x軸上の位置, y軸上の位置, 東西風データ, 南北風データ)</pre>
+ax.barbs()でも同じ（axはfig.add_subplotの戻り値）
 </div>
 
 <h4><div class="headline2" id="graph_6_2">矢羽の色を変える</div></h4>
@@ -1120,6 +1125,7 @@ barb_incrementsで短矢羽5 kt、長矢羽10 kt、旗矢羽50 ktに設定する
 <h4><div class="headline2" id="graph_7_1">矢印を描く</div></h4>
 <div class="text1">
 <pre>plt.quiver(x軸上の位置, y軸上の位置, 東西風データ, 南北風データ)</pre>
+ax.quiver()でも同じ（axはfig.add_subplotの戻り値）
 </div>
 
 <h4><div class="headline2" id="graph_7_2">矢印の色を変える</div></h4>
@@ -1176,6 +1182,7 @@ barb_incrementsで短矢羽5 kt、長矢羽10 kt、旗矢羽50 ktに設定する
 <h4><div class="headline2" id="graph_8_1">等高線を描く</div></h4>
 <div class="text1">
 <pre>plt.contour(x軸上の位置, y軸上の位置, z軸データ)</pre>
+ax.contour()でも同じ（axはfig.add_subplotの戻り値）<br />
 x軸上の位置、y軸上の位置は２次元メッシュデータで与える<br />
 １次元データ(x, y)から２次元メッシュデータ(X, Y)を作成する場合には
 <pre>X, Y = np.meshgrid(x, y)</pre>
@@ -1315,6 +1322,7 @@ cs.clabel(cs.levels[::5], fmt="%d", fontsize=12) # 5飛ばし（20 hPa毎）に�
 <h4><div class="headline2" id="graph_9_1">陰影を描く</div></h4>
 <div class="text1">
 <pre>plt.contourf(x軸上の位置, y軸上の位置, z軸データ)</pre>
+ax.contourf()でも同じ（axはfig.add_subplotの戻り値）<br />
 x軸上の位置、y軸上の位置は２次元メッシュデータで与える<br />
 １次元データ(x, y)から２次元メッシュデータ(X, Y)を作成する場合には
 <pre>X, Y = np.meshgrid(x, y)</pre>
@@ -1449,6 +1457,7 @@ plt.contourf(x軸上の位置, y軸上の位置, z軸データ,  corner_mask=Fal
 <h4><div class="headline2" id="graph_10_1">箱ひげ図を描く</div></h4>
 <div class="text1">
 <pre>plt.boxplot(データ)</pre>
+ax.boxplot()でも同じ（axはfig.add_subplotの戻り値）<br />
 デフォルトの箱ひげ図の見方は<a href="options.html#boxplot">箱ひげ図</a>参照
 </div>
 
@@ -1556,6 +1565,7 @@ medianpropsオプションに中央値の部分のスタイルを辞書で与え
 <h4><div class="headline2" id="graph_11_1">バイオリンプロットを描く</div></h4>
 <div class="text1">
 <pre>plt.violinplot(データ)</pre>
+ax.violinplot()でも同じ（axはfig.add_subplotの戻り値）
 </div>
 
 <h4><div class="headline2" id="graph_11_2">複数のバイオリンプロットを並べる</div></h4>
@@ -1600,6 +1610,7 @@ showextremaオプションで最小値と最大値の範囲を表すヒゲを描
 <h4><div class="headline2" id="graph_12_1">流線関数を描く</div></h4>
 <div class="text1">
 <pre>plt.streamplot(x軸上の位置, y軸上の位置, 東西風, 南北風)</pre>
+ax.streamplot()でも同じ（axはfig.add_subplotの戻り値）<br />
 x軸上の位置、y軸上の位置は２次元メッシュデータで与える<br />
 東西風、南北風は２次元の配列<br />
 １次元データ(x, y)から２次元メッシュデータ(X, Y)を作成する場合には
@@ -1656,6 +1667,7 @@ ax.streamplot(X, Y, U, V, color=spd, cmap=plt.cm.autumn)
 <h4><div class="headline2" id="legend_1_1">凡例を付ける</div></h4>
 <div class="text1">
 <pre>plt.legend()</pre>
+ax.legend()でも同じ（axはfig.add_subplotの戻り値）
 </div>
 
 <h4><div class="headline2" id="legend_1_2">凡例の位置を変える</div></h4>
@@ -1898,12 +1910,13 @@ cbar.ax.set_xticklabels(cs, ["lab1", "lab2", "lab3"])</pre>
 <h4><div class="headline2" id="text_1_1">テキストをプロットする</div></h4>
 <div class="text1">
 <pre>plt.text(x軸の座標, y軸の座標, テキスト)</pre>
+ax.text()でも同じ（axはfig.add_subplotの戻り値）
 </div>
 
 <h4><div class="headline2" id="text_1_2">テキストの文字サイズを変える</div></h4>
 <div class="text1">
-  <pre>plt.text(x軸の座標, y軸の座標, テキスト, fontsize=文字の大きさ )</pre>
-  文字の大きさはポイントか文字列で与える。<a href="options.html#fontsize">文字のサイズと大きさ</a>参照
+<pre>plt.text(x軸の座標, y軸の座標, テキスト, fontsize=文字の大きさ )</pre>
+文字の大きさはポイントか文字列で与える。<a href="options.html#fontsize">文字のサイズと大きさ</a>参照
 </div>
 
 <h4><div class="headline2" id="text_1_3">テキストの書体を変える</div></h4>
@@ -1919,7 +1932,7 @@ cbar.ax.set_xticklabels(cs, ["lab1", "lab2", "lab3"])</pre>
 
 <h4><div class="headline2" id="text_1_5">テキストの文字の太さを変える</div></h4>
 <div class="text1">
- <pre>plt.text(x軸の座標, y軸の座標, color='文字の太さ')</pre>
+<pre>plt.text(x軸の座標, y軸の座標, color='文字の太さ')</pre>
 文字の太さは<a href="options.html#fontsize">文字のサイズと大きさ</a>参照
 </div>
 
@@ -2341,7 +2354,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/08/11</p>
+<p>最終更新日：2021/08/12</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
