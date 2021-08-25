@@ -74,7 +74,6 @@
       <li><a href="#graph_1_10">サブプロットのサイズを調整する</a></li>
       <li><a href="#graph_1_11">複数のサブプロットを配置した時のx軸、y軸ラベルの付け方</a></li>
       <li><a href="#graph_1_12">直前に操作したサブプロットの情報を取得する</a></li>
-      <li><a href="#graph_1_13">プロットエリアの作成とサブプロットの作成を同時に行う</a></li>
     </ul>
   </li></ul>
   <!-- 折れ線グラフ -->
@@ -488,30 +487,53 @@ py38の部分はpythonのバージョンによって変わる</li><br />
 <ul class="list1">
 <li>サイズを指定しない場合
 <pre>fig = plt.figure()</pre></li>
-<li>サイズを指定する場合、例：縦横比６：３
-<pre>fig = plt.figure(figsize=(6,3))</pre></li>
+<li>サイズを指定する場合
+<pre>fig = plt.figure(figsize=(縦幅, 横幅))</pre></li>
+<li>例：縦横比６：３
+<pre>fig = plt.figure(figsize=(6, 3))</pre></li>
 </ul>
 </div>
 
 <h4><div class="headline2" id="graph_1_2">サブプロットの作成</div></h4>
 <div class="text1">
-<pre>ax = fig.add_subplot(1,1,1)</pre>
+<pre>ax = fig.add_subplot(1, 1, 1)</pre>
+戻り値の軸（サブプロット）axは、<a href="#matplotlib_1_3">matplotlib.pyplot</a>やインポートした際に設定する別名のpltに相当し、pltの代わりにaxでも作図メソッドを利用できる。
+<br /><br />
+プロットエリアの作成とサブプロットの作成を同時に行うこともできる
+<ul class="list1">
+<li>サイズを指定しない場合
+<pre>fig, ax = plt.subplots(111)</pre></li>
+<li>サイズを指定する場合（縦横比６：３）
+<pre>fig, ax = plt.subplots(111, figsize=(6, 3))</pre></li>
+</ul>
 </div>
 
 <h4><div class="headline2" id="graph_1_3">複数のサブプロットを並べる</div></h4>
 <div class="text1">
-<pre>ax = fig.add_subplot(縦に並べる数,横に並べる数,番号)</pre>
+<pre>ax = fig.add_subplot(縦に並べる数, 横に並べる数,番号)</pre>
 <ul class="list1">
 <li>縦に２つ並べる
 <pre>
-ax1 = fig.add_subplot(2,1,1)
-ax2 = fig.add_subplot(2,1,2)</pre></li>
+ax1 = fig.add_subplot(2, 1, 1)
+ax2 = fig.add_subplot(2, 1, 2)</pre></li>
 <li>縦に２つ、横に２つ並べる
 <pre>
-ax1 = fig.add_subplot(2,2,1)
-ax2 = fig.add_subplot(2,2,2)
-ax3 = fig.add_subplot(2,2,3)
-ax4 = fig.add_subplot(2,2,4)</pre></li>
+ax1 = fig.add_subplot(2, 2, 1)
+ax2 = fig.add_subplot(2, 2, 2)
+ax3 = fig.add_subplot(2, 2, 3)
+ax4 = fig.add_subplot(2, 2, 4)</pre></li>
+<br />
+<li>プロットエリアの作成とサブプロットの作成を同時
+<pre>fig, ax = plt.subplots(nrows=縦に並べる数, ncols=横に並べる数)</pre>
+<ul class="list2">
+<li>縦に３つ、横に２つ並べる
+<pre>fig, ax = plt.subplots(nrows=3, ncols=2)</pre>
+軸（サブプロット）axにはax[0][0]のようにアクセス<br />
+１番目が縦の番号（ここでは０〜２）、２番目が横の番号（ここでは０〜１）
+</li><br />
+<li>図のサイズを指定することも可能
+<pre>fig, ax = plt.subplots(nrows=3, ncols=2, figsize=(8, 8))</pre></li>
+</ul></li>
 </ul>
 </div>
 
@@ -544,17 +566,21 @@ ax.set_ylabel("ラベル")</pre></li>
 
 <h4><div class="headline2" id="graph_1_7">複数のサブプロットに１つのタイトルを付ける</div></h4>
 <div class="text1">
-枠線を消してからタイトルを付ける
+<ul class="list1">
+<li>枠線を消してからタイトルを付ける方法
 <pre>
 plt.axis('off')
 plt.title("タイトル")</pre>
-この後で複数のサブプロットを作成すれば、図枠の一番上のタイトルになる
+この後で複数のサブプロットを作成すれば、図枠の一番上のタイトルになる</li><br />
+<li>複数のサブプロット作成後にfig.suptitleを使う方法
+<pre>fig.suptitle("タイトル")</pre>
+</li></ul>
 </div>
 
 <h4><div class="headline2" id="graph_1_8">サブプロットの中に別のサブプロットを配置</div></h4>
 <div class="text1">
 <pre>
-ax = fig.add_subplot(1,1,1) # 大枠の作成
+ax = fig.add_subplot(1, 1, 1) # 大枠の作成
 ax2 = plt.axes([0.20, 0.27, 0.3, 0.2]) # 小枠の作成</pre>
 与えるリストの要素は、x軸上の座標、y軸上の座標、横幅、縦幅の順
 </div>
@@ -562,7 +588,7 @@ ax2 = plt.axes([0.20, 0.27, 0.3, 0.2]) # 小枠の作成</pre>
 <h4><div class="headline2" id="graph_1_9">２軸グラフを作成する</div></h4>
 <div class="text1">
 <pre>
-ax1 = fig.add_subplot(2,1,1)
+ax1 = fig.add_subplot(2, 1, 1)
 ax2 = ax1.twinx() # 2つのプロットを関連付ける</pre>
 ax1では左側の軸、ax2では右側の軸が使われる
 </div>
@@ -572,23 +598,29 @@ ax1では左側の軸、ax2では右側の軸が使われる
 <pre>plt.subplots_adjust()</pre>
 オプションの一覧は、<a href="options.html#subplot_adjust">プロット範囲の調整</a>参照
 <ul class="list1">
-<li>例：水平を８割の大きさ、下に２割の空き
-<pre>plt.subplots_adjust(hspace=0.8,bottom=0.2)</pre></li>
+<li>例：水平スペースを８割の大きさ、下に２割の空き
+<pre>plt.subplots_adjust(hspace=0.8, bottom=0.2)</pre></li>
+<li>例：水平スペースを狭くする場合（５割）
+<pre>plt.subplots_adjust(hspace=0.5, bottom=0.2)</pre></li>
+<li>例：図枠内を広く使用する場合（top、bottom、left、rightで指定）
+<pre>plt.subplots_adjust(top=0.85, bottom=0.15, left=0.1, right=0.9)</pre></li>
 <li>例：左右のサブプロットのy軸同士、上下のサブプロットのx軸同士を結合して表示したい場合
-<pre>plt.subplots_adjust(wspace=0.0、hspace=0.0)</pre></li>
+<pre>plt.subplots_adjust(wspace=0.0, hspace=0.0)</pre></li>
+<li>例：さらに図枠全体まで使う場合
+<pre>plt.subplots_adjust(top=1.0, bottom=0.0, left=0.0, right=1.0, wspace=0.0, hspace=0.0)</pre></li>
 </ul>
 </div>
 
 <h4><div class="headline2" id="graph_1_11">複数のサブプロットを配置した時のx軸、y軸ラベルの付け方</div></h4>
 <div class="text1">
-  サブプロットを縦に２、横に２配置し、左側の２つにはy軸ラベル、下側の２つにはx軸ラベルを付ける
-  <pre>
-  for n in np.arange(4):
-   ax = fig.add_subplot(2,2,n+1) # 2x2のサブプロット作成
-   if n &gt;= 2:
-      plt.xlabel(xlabel) # x軸のラベル（n=2,3で下側のサブプロット）
-   if not n % 2: # 0でFalse、1でTrue
-      plt.ylabel(ylabel) # y軸のラベル（n=0,2で左側のサブプロット）</pre>
+サブプロットを縦に２、横に２配置し、左側の２つにはy軸ラベル、下側の２つにはx軸ラベルを付ける
+<pre>
+for n in np.arange(4):
+&nbsp; &nbsp;  ax = fig.add_subplot(2, 2, n+1) # 2x2のサブプロット作成
+&nbsp; &nbsp;  if n &gt;= 2:
+&nbsp; &nbsp;  &nbsp; &nbsp;  plt.xlabel(xlabel) # x軸のラベル（n=2,3で下側のサブプロット）
+&nbsp; &nbsp;  if not n % 2: # 0でFalse、1でTrue
+&nbsp; &nbsp;  &nbsp; &nbsp;  plt.ylabel(ylabel) # y軸のラベル（n=0,2で左側のサブプロット）</pre>
 </div>
 
 <h4><div class="headline2" id="graph_1_12">直前に操作したサブプロットの情報を取得する</div></h4>
@@ -603,19 +635,6 @@ gca (get current axes)</li>
 </ul>
 </div>
 
-<h4><div class="headline2" id="graph_1_13">プロットエリアの作成とサブプロットの作成を同時に行う</div></h4>
-<div class="text1">
-<pre>fig, axs = plt.subplots(縦に並べる数, 横に並べる数, figsize=(縦幅,横幅))</pre>
-<ul class="list1">
-<li>サブプロットを１つだけ作成（サイズ指定なし）
-<pre>fig, ax = plt.subplots()</pre></li>
-<li>サブプロットを１つだけ作成（縦横比６：３）
-<pre>fig, ax = plt.subplots(figsize=(6,3))</pre></li>
-<li>縦に２つ、横に２つ並べる（縦横比６：６）
-<pre>fig, axs = plt.subplots(2, 2, figsize=(6,6))</pre>
-axs[0], axs[1], axs[2], axs[3]を軸（サブプロット）として参照できる</li>
-</ul>
-</div>
 
 <!-- 折れ線グラフ -->
 <h3><div class="headline1" id="graph_2">折れ線グラフ</div></h3>
@@ -624,7 +643,7 @@ axs[0], axs[1], axs[2], axs[3]を軸（サブプロット）として参照で�
 Numpyを使って生成した配列を使いcos(x)を作図
 <pre>
 import numpy as np
-x = np.linspace(-np.pi,np.pi)
+x = np.linspace(-np.pi, np.pi)
 plt.plot(x, np.cos(x), color='k')</pre>
 で黒色の折れ線グラフが描かれる<br />
 ax.plot()でも同じ（axはfig.add_subplotの戻り値）
