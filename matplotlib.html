@@ -108,7 +108,8 @@
       <li><a href="#graph_3_9">横棒に変える</a></li>
       <li><a href="#graph_3_10">棒グラフに凡例を付ける</a></li>
       <li><a href="#graph_3_11">棒グラフにエラーバーを付ける</a></li>
-      <li><a href="#graph_3_12">棒グラフにハッチを付ける</a></li>
+      <li><a href="#graph_3_12">棒グラフ非表示でエラーバーのみにする</a></li>
+      <li><a href="#graph_3_13">棒グラフにハッチを付ける</a></li>
     </ul>
   </li></ul>
   <!-- ヒストグラム -->
@@ -852,7 +853,14 @@ plt.bar(x軸のデータ, y軸のデータ, yerr=y軸のエラーバーデータ
 </ul>
 </div>
 
-<h4><div class="headline2" id="graph_3_12">棒グラフにハッチを付ける</div></h4>
+<h4><div class="headline2" id="graph_3_12">棒グラフ非表示でエラーバーのみにする</div></h4>
+<div class="text1">
+color="none"とすると棒グラフを非表示にできる
+<pre>error_config = {'ecolor': '0.3', 'capsize': 3}
+plt.bar(x軸のデータ, y軸のデータ, yerr=y軸のエラーバーデータ, color="none", error_kw=error_config)</pre>
+</div>
+
+<h4><div class="headline2" id="graph_3_13">棒グラフにハッチを付ける</div></h4>
 <div class="text1">
 <pre>plt.bar(x軸のデータ, y軸のデータ, alpha=1.0, hatch='ハッチのパターン', fill=None)</pre>
 パターンは<a href="./options.html#hatch">ハッチのパターン</a>参照
@@ -2354,7 +2362,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/08/12</p>
+<p>最終更新日：2021/08/25</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
