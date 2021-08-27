@@ -278,19 +278,21 @@
       <li><a href="#axis_1_1">x軸、y軸ラベルの大きさや色を変更する</a></li>
       <li><a href="#axis_1_2">x軸、y軸の目盛り線の書式</a></li>
       <li><a href="#axis_1_3">x軸、y軸の目盛り線の間隔を変更する</a></li>
-      <li><a href="#axis_1_4">x軸、y軸の目盛り線ラベルのサイズを変更する</a></li>
-      <li><a href="#axis_1_5">x軸の目盛り線ラベルの文字列を回転させる</a></li>
-      <li><a href="#axis_1_6">x軸、y軸の範囲を指定する</a></li>
-      <li><a href="#axis_1_7">x軸、y軸の範囲を取得する</a></li>
-      <li><a href="#axis_1_8">小目盛り線を付ける／消す</a></li>
-      <li><a href="#axis_1_9">x軸、y軸目盛り線を内側にする</a></li>
-      <li><a href="#axis_1_10">目盛り線の長さを変える</a></li>
-      <li><a href="#axis_1_11">目盛り線の幅を変える</a></li>
-      <li><a href="#axis_1_12">目盛り線の色を変える</a></li>      
-      <li><a href="#axis_1_13">図の時間軸の表示を調整する</a></li>
-      <li><a href="#axis_1_14">軸の上下、左右を逆転させる</a></li>
-      <li><a href="#axis_1_15">y軸をログスケールにした時にラベルの数字を整数表示する</a></li>
-      <li><a href="#axis_1_16">y軸をパーセント表示にする</a></li>
+      <li><a href="#axis_1_4">目盛り線とラベルを任意の場所に付ける</a></li>
+      <li><a href="#axis_1_5">x軸、y軸の目盛り線ラベルのサイズを変更する</a></li>
+      <li><a href="#axis_1_6">x軸の目盛り線ラベルの文字列を回転させる</a></li>
+      <li><a href="#axis_1_7">x軸、y軸の範囲を指定する</a></li>
+      <li><a href="#axis_1_8">x軸、y軸の範囲を取得する</a></li>
+      <li><a href="#axis_1_9">小目盛り線を付ける／消す</a></li>
+      <li><a href="#axis_1_10">x軸、y軸目盛り線を内側にする</a></li>
+      <li><a href="#axis_1_11">目盛り線の長さを変える</a></li>
+      <li><a href="#axis_1_12">目盛り線の幅を変える</a></li>
+      <li><a href="#axis_1_13">目盛り線の色を変える</a></li>      
+      <li><a href="#axis_1_14">図の時間軸の表示を調整する</a></li>
+      <li><a href="#axis_1_15">軸の上下、左右を逆転させる</a></li>
+      <li><a href="#axis_1_16">y軸をログスケールにした時にラベルの数字を整数表示する</a></li>
+      <li><a href="#axis_1_17">y軸をパーセント表示にする</a></li>
+      <li><a href="#axis_1_18">軸の体裁を一括設定する</a></li>
     </ul>
   </li></ul>
   <!-- 図の体裁 -->
@@ -2072,7 +2074,7 @@ plt.titleと同じオプションが使える
 <li>y軸の文字の色を赤色に指定する場合の例：
 <pre>plt.ylabel("y軸ラベル", color='r')</pre>
 色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li><br />
-<li>axを使うこともできる
+<li><a href="#graph_1_2">サブプロットを作成</a>した際の戻り値axを使うこともできる
 <pre>
 ax.set_xlabel("x軸ラベル", fontsize=16)
 ax.set_ylabel("x軸ラベル", color='r') </pre></li>
@@ -2090,19 +2092,23 @@ ax.xaxis.set_major_locator(ticker.AutoLocator()) # x軸大目盛り
 ax.xaxis.set_minor_locator(ticker.AutoMinorLocator()) # x軸小目盛り
 ax.xaxis.set_major_locator(ticker.AutoLocator()) # y軸大目盛り
 ax.xaxis.set_minor_locator(ticker.AutoMinorLocator()) # y軸小目盛り</pre>
+axは<a href="#graph_1_2">サブプロットを作成</a>した際の戻り値
 </div>
 
 <h4><div class="headline2" id="axis_1_3">x軸、y軸の目盛り線の間隔を変更する</div></h4>
 <div class="text1">
+x軸の目盛り線の設定（ax.xaxis）、y軸の目盛り線の設定（ax.yaxis）を変更<br />
+axは<a href="#graph_1_2">サブプロットを作成</a>した際の戻り値
 <ul class="list1">
 <li>ticker.MultipleLocatorを使う例：y軸の大目盛りを10毎、小目盛りを2毎に付ける
 <pre>import matplotlib.ticker as ticker
 ax.yaxis.set_major_locator(ticker.MultipleLocator(10.00))
 ax.yaxis.set_minor_locator(ticker.MultipleLocator(2.00))</pre></li>
-<li>ax.set_xticklabels、ax.set_xticksを使う例：任意の場所に目盛り線とラベルを付ける
-<pre>ax.set_xticks([ラベルのリスト]) # 目盛り線
-ax.set_xticklabels([目盛り線の値のリスト]) # 目盛り線のラベル</pre></li>
-<li>FixedLocatorを使う例：任意の場所に目盛り線を付ける
+<li>ticker.MultipleLocatorを使う例：x軸の大目盛りを3毎、小目盛りを1毎に付ける
+<pre>import matplotlib.ticker as ticker
+ax.xaxis.set_major_locator(ticker.MultipleLocator(3))
+ax.xaxis.set_minor_locator(ticker.MultipleLocator(1))</pre></li>
+<li>FixedLocatorを使う例：y軸の任意の場所に目盛り線を付ける
 <pre>import matplotlib.ticker as ticker
 ax.yaxis.set_major_locator(ticker.FixedLocator(大目盛り線の値のリスト))
 ax.yaxis.set_minor_locator(ticker.FixedLocator(小目盛り線の値のリスト))
@@ -2110,7 +2116,16 @@ ax.yaxis.set_minor_locator(ticker.FixedLocator(小目盛り線の値のリスト
 </ul>
 </div>
 
-<h4><div class="headline2" id="axis_1_4">x軸、y軸の目盛り線ラベルの文字サイズを変更する</div></h4>
+<h4><div class="headline2" id="axis_1_4">目盛り線とラベルを任意の場所に付ける</div></h4>
+<div class="text1">
+ax.set_xticks、ax.set_xticklabelsを使い、x軸の任意の場所に目盛り線とラベルを付ける
+<pre>ax.set_xticks([ラベルのリスト]) # 目盛り線
+ax.set_xticklabels([目盛り線の値のリスト]) # 目盛り線のラベル</pre>
+axは<a href="#graph_1_2">サブプロットを作成</a>した際の戻り値<br />
+ax.set_xticksを使う場合、ax.xaxis.set_major_locatorは設定しない
+</div>
+
+<h4><div class="headline2" id="axis_1_5">x軸、y軸の目盛り線ラベルの文字サイズを変更する</div></h4>
 <div class="text1">
 <ul class="list1">
 <li>文字サイズをデフォルトの10から12に変更する
@@ -2118,29 +2133,38 @@ ax.yaxis.set_minor_locator(ticker.FixedLocator(小目盛り線の値のリスト
 </ul>
 </div>
 
-<h4><div class="headline2" id="axis_1_5">x軸の目盛り線ラベルの文字列を回転させる</div></h4>
+<h4><div class="headline2" id="axis_1_6">x軸の目盛り線ラベルの文字列を回転させる</div></h4>
 <div class="text1">
 xticklabelsの書式を変更する
 <pre>
 import matplotlib.ticker as ticker
 ax.xaxis.set_major_locator(ticker.FixedLocator(ax.get_xticks().tolist()))
 ax.set_xticklabels(ax.get_xticklabels(), rotation=70, size="small")</pre>
+axは<a href="#graph_1_2">サブプロットを作成</a>した際の戻り値
 </div>
 
-<h4><div class="headline2" id="axis_1_6">x軸、y軸の範囲を指定する</div></h4>
+<h4><div class="headline2" id="axis_1_7">x軸、y軸の範囲を指定する</div></h4>
 <div class="text1">
+<ul class="list1">
+<li>plt.xlim、plt.ylimを使う方法
 <pre>
 plt.xlim([x軸最小値, x軸最大値])
-plt.ylim([y軸最小値, y軸最大値])</pre>
+plt.ylim([y軸最小値, y軸最大値])</pre></li>
+<li>plt.xlim、plt.ylimを使う方法
+<pre>
+ax.set_xlim([x軸最小値, x軸最大値])
+ax.set_ylim([y軸最小値, y軸最大値])</pre>
+axは<a href="#graph_1_2">サブプロットを作成</a>した際の戻り値</li>
+</ul>
 </div>
 
-<h4><div class="headline2" id="axis_1_7">x軸、y軸の範囲を取得する</div></h4>
+<h4><div class="headline2" id="axis_1_8">x軸、y軸の範囲を取得する</div></h4>
 <div class="text1">
 x軸の範囲をxmin、xmax、y軸の範囲をymin、ymaxに入力
 <pre>xmin, xmax, ymin, ymax = plt.axis()</pre>
 </div>
 
-<h4><div class="headline2" id="axis_1_8">小目盛り線を付ける／消す</div></h4>
+<h4><div class="headline2" id="axis_1_9">小目盛り線を付ける／消す</div></h4>
 <div class="text1">
 <ul class="list1">
 <li>小目盛り線を付ける
@@ -2156,7 +2180,7 @@ plt.rcParams["ytick.minor.visible"] = False  # y軸
 </ul>
 </div>
 
-<h4><div class="headline2" id="axis_1_9">x軸、y軸目盛り線を内側にする</div></h4>
+<h4><div class="headline2" id="axis_1_10">x軸、y軸目盛り線を内側にする</div></h4>
 <div class="text1">
 <pre>
 plt.rcParams['xtick.direction'] = 'in' # x軸目盛り線を内向き
@@ -2165,7 +2189,7 @@ plt.rcParams['ytick.direction'] = 'in' # y軸目盛り線を内向き
 デフォルト：plt.rcParams['xtick.direction'] = 'out'（外向き）
 </div>
 
-<h4><div class="headline2" id="axis_1_10">目盛り線の長さを変える</div></h4>
+<h4><div class="headline2" id="axis_1_11">目盛り線の長さを変える</div></h4>
 <div class="text1">
 <pre>
 plt.rcParams['xtick.major.size'] = 8 # x軸大目盛り線の長さ
@@ -2174,7 +2198,7 @@ plt.rcParams['xtick.minor.size'] = 4 # x軸小目盛り線の長さ
 plt.rcParams['ytick.minor.size'] = 4 # y軸小目盛り線の長さ</pre>
 </div>
 
-<h4><div class="headline2" id="axis_1_11">目盛り線の幅を変える</div></h4>
+<h4><div class="headline2" id="axis_1_12">目盛り線の幅を変える</div></h4>
 <div class="text1">
 <pre>
 plt.rcParams['xtick.major.width'] = 1.2 # x軸大目盛り線の幅
@@ -2183,14 +2207,14 @@ plt.rcParams['xtick.minor.width'] = 0.8 # x軸小目盛り線の幅
 plt.rcParams['ytick.minor.width'] = 0.8 # y軸小目盛り線の幅</pre>
 </div>
 
-<h4><div class="headline2" id="axis_1_12">目盛り線の色を変える</div></h4>
+<h4><div class="headline2" id="axis_1_13">目盛り線の色を変える</div></h4>
 <div class="text1">
 <pre>
 plt.rcParams['ytick.color'] = 'b'  # x軸を青色
 plt.rcParams['ytick.color'] = 'r'  # y軸を赤色</pre>
 </div>
 
-<h4><div class="headline2" id="axis_1_13">図の時間軸の表示を調整する</div></h4>
+<h4><div class="headline2" id="axis_1_14">図の時間軸の表示を調整する</div></h4>
 <div class="text1">
 matplotlib.datesを使い時刻表記を変える
 <pre>ax.xaxis.set_major_formatter(mdates.DateFormatter('時刻表記の書式'))</pre>
@@ -2203,7 +2227,7 @@ matplotlib.datesを使い時刻表記を変える
 時刻表記の書式については<a href="forms.html#time">時刻表記に用いられる書式指定子一覧</a>参照
 </div>
 
-<h4><div class="headline2" id="axis_1_14">軸の上下、左右を逆転させる</div></h4>
+<h4><div class="headline2" id="axis_1_15">軸の上下、左右を逆転させる</div></h4>
 <div class="text1">
 <ul class="list1">
 <!-- 1 -->
@@ -2260,7 +2284,7 @@ ax.get_ylim()でy軸の範囲を取得する</li><br />
 </ul>
 </div>
 
-<h4><div class="headline2" id="axis_1_15">y軸をログスケールにした時にラベルの数字を整数表示する</div></h4>
+<h4><div class="headline2" id="axis_1_16">y軸をログスケールにした時にラベルの数字を整数表示する</div></h4>
 <div class="text1">
 matplotlib.tickerに含まれるLogLocatorとFuncFormatterを使う
 <ul class="list1">
@@ -2279,13 +2303,27 @@ ax.yaxis.set_minor_formatter(ticker.NullFormatter())
 </ul>
 </div>
 
-<h4><div class="headline2" id="axis_1_16">y軸をパーセント表示にする</div></h4>
+<h4><div class="headline2" id="axis_1_17">y軸をパーセント表示にする</div></h4>
 <div class="text1">
 matplotlib.tickerに含まれるPercentFormatterを使う
 <pre>ax.yaxis.set_major_formatter(ticker.PercentFormatter(1.0))</pre>
 0〜1が0％〜100%の表記に変わる
 </div>
 
+<h4><div class="headline2" id="axis_1_18">軸の体裁を一括設定する</div></h4>
+<div class="text1">
+ax.setを使う（axは<a href="#graph_1_2">サブプロットを作成</a>した際の戻り値）
+<ul class="list1">
+<li>１行で一括設定する方法
+<pre>
+ax.set(xlim[x軸下限, x軸上限], ylim[y軸下限, y軸上限], xlabel="x軸ラベル", ylabel="y軸ラベル", 'xticks'=[x軸目盛り線を描く値], 'xticklabels'=[x軸目盛り線ラベル])</pre>
+ax.set_xlimがxlimに対応</li><br />
+<li>設定を辞書型に格納して与える方法
+<pre>
+STYLE = {'xticks': [x軸目盛り線を描く値], 'xticklabels': [x軸目盛り線ラベル], 'xlim': [x軸下限, x軸上限], 'ylim': [y軸下限, y軸上限], 'xlabel': "x軸ラベル", 'ylabel': "y軸ラベル"}
+ax.set(**STYLE)</pre></li>
+</ul>
+</div>
 
 
 <!-- 図の体裁 -->
