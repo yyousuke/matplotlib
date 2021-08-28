@@ -303,8 +303,9 @@
       <li><a href="#graph_e_3">タイトルの文字サイズや色を変更する</a></li>
       <li><a href="#graph_e_4">タイトルや軸ラベル、テキストのフォントを指定する</a></li>
       <li><a href="#graph_e_5">マーカーや線を重ねる順序を調整する</a></li>
-      <li><a href="#graph_e_6">図の枠線や目盛りを消す</a></li>
-      <li><a href="#graph_e_7">図の枠線の幅を変える</a></li>
+      <li><a href="#graph_e_6">グリッド線を背面に表示する</a></li>
+      <li><a href="#graph_e_7">図の枠線や目盛りを消す</a></li>
+      <li><a href="#graph_e_8">図の枠線の幅を変える</a></li>
     </ul>
   </li></ul>
 </div>
@@ -555,7 +556,7 @@ axを使う場合
 <pre>plt.xlabel("ラベル")</pre></li>
 <li>y軸のラベルをつける
 <pre>plt.ylabel("ラベル")</pre></li>
-<li>axを使う場合
+<li>axを使う場合（axは<a href="#graph_1_2">サブプロットを作成</a>した際の戻り値）
 <pre>
 ax.set_xlabel("ラベル")
 ax.set_ylabel("ラベル")</pre></li>
@@ -2119,8 +2120,8 @@ ax.yaxis.set_minor_locator(ticker.FixedLocator(小目盛り線の値のリスト
 <h4><div class="headline2" id="axis_1_4">目盛り線とラベルを任意の場所に付ける</div></h4>
 <div class="text1">
 ax.set_xticks、ax.set_xticklabelsを使い、x軸の任意の場所に目盛り線とラベルを付ける
-<pre>ax.set_xticks([ラベルのリスト]) # 目盛り線
-ax.set_xticklabels([目盛り線の値のリスト]) # 目盛り線のラベル</pre>
+<pre>ax.set_xticks([目盛り線の値のリスト]) # 目盛り線
+ax.set_xticklabels([ラベルのリスト]) # 目盛り線のラベル</pre>
 axは<a href="#graph_1_2">サブプロットを作成</a>した際の戻り値<br />
 ax.set_xticksを使う場合、ax.xaxis.set_major_locatorは設定しない
 </div>
@@ -2129,7 +2130,8 @@ ax.set_xticksを使う場合、ax.xaxis.set_major_locatorは設定しない
 <div class="text1">
 <ul class="list1">
 <li>文字サイズをデフォルトの10から12に変更する
-<pre>plt.rcParams["font.size"] = 12</pre></li>
+<pre>plt.rcParams["font.size"] = 12</pre>
+サイズは文字列では指定できない</li>
 </ul>
 </div>
 
@@ -2150,7 +2152,7 @@ axは<a href="#graph_1_2">サブプロットを作成</a>した際の戻り値
 <pre>
 plt.xlim([x軸最小値, x軸最大値])
 plt.ylim([y軸最小値, y軸最大値])</pre></li>
-<li>plt.xlim、plt.ylimを使う方法
+<li>ax.set_xlim、ax.set_ylimを使う方法
 <pre>
 ax.set_xlim([x軸最小値, x軸最大値])
 ax.set_ylim([y軸最小値, y軸最大値])</pre>
@@ -2316,11 +2318,20 @@ ax.setを使う（axは<a href="#graph_1_2">サブプロットを作成</a>し�
 <ul class="list1">
 <li>１行で一括設定する方法
 <pre>
-ax.set(xlim=[x軸下限, x軸上限], ylim=[y軸下限, y軸上限], xlabel="x軸ラベル", ylabel="y軸ラベル", 'xticks'=[x軸目盛り線を描く値], 'xticklabels'=[x軸目盛り線ラベル])</pre>
-ax.set_xlimがxlim、ax.set_ylimがylim、ax.set_xlabelがxlabel、ax.set_ylabelがylabel、ax.set_xticksがxticks、ax.set_xticklabelsがxticklabelsに対応</li><br />
+ax.set(xlim=[x軸下限, x軸上限], ylim=[y軸下限, y軸上限], xlabel="x軸ラベル", ylabel="y軸ラベル", title="図のタイトル", 'xticks'=[x軸目盛り線を描く値], 'xticklabels'=[x軸目盛り線ラベル], axisbelow=True)</pre>
+<a href="#axis_1_7">ax.set_xlim</a>がxlim、<a href="#axis_1_7">ax.set_ylim</a>がylim、<a href ="#graph_1_5">ax.set_xlabel</a>がxlabel、<a href ="#graph_1_5">ax.set_ylabel </a>がylabel、<a href ="#graph_1_4">ax.set_title</a>がtitle、<a href="#axis_1_4">ax.set_xticks</a>がxticks、<a href="#axis_1_4">ax.set_xticklabels</a>がxticklabels、<a href="#graph_e_6">ax.set_axisbelow</a>がaxisbelowに対応</li><br />
 <li>設定を辞書型に格納して与える方法
 <pre>
-STYLE = {'xticks': [x軸目盛り線を描く値], 'xticklabels': [x軸目盛り線ラベル], 'xlim': [x軸下限, x軸上限], 'ylim': [y軸下限, y軸上限], 'xlabel': "x軸ラベル", 'ylabel': "y軸ラベル"}
+STYLE = {
+&nbsp; &nbsp; 'xlim': [x軸下限, x軸上限], 
+&nbsp; &nbsp; 'ylim': [y軸下限, y軸上限], 
+&nbsp; &nbsp; 'xlabel': "x軸ラベル", 
+&nbsp; &nbsp; 'ylabel': "y軸ラベル",
+&nbsp; &nbsp; 'title': "図のタイトル", 
+&nbsp; &nbsp; 'xticks': [x軸目盛り線を描く値], 
+&nbsp; &nbsp; 'xticklabels': [x軸目盛り線ラベル], 
+&nbsp; &nbsp; 'axisbelow': True, 
+}
 ax.set(**STYLE)</pre></li>
 </ul>
 </div>
@@ -2354,14 +2365,25 @@ Times New Romanに変更
 
 <h4><div class="headline2" id="graph_e_4">タイトルや軸ラベル、テキストのフォントを指定する</div></h4>
 <div class="text1">
-plt.title、plt.xlabel、plt.ylabel、plt.textなどでfontfamilyオプションを使う
+fontfamilyオプションでTimes New Romanに変更する場合
+<ul class="list1">
+<li>plt.title、plt.xlabel、plt.ylabel、plt.textでの設定
 <pre>
 plt.title("タイトル", fontfamily="Times New Roman")
 plt.xlabel("x軸のラベル", fontfamily="Times New Roman")
 plt.ylabel("y軸のラベル", fontfamily="Times New Roman")
 plt.text(x位置, y位置, "テキスト", fontfamily="Times New Roman")
 </pre>
-Times New Romanに変更
+</li><br />
+<li>ax.set_title、ax.set_xlabel、ax.set_ylabel、ax.textでの設定
+<pre>
+ax.set_title("タイトル", fontfamily="Times New Roman")
+ax.set_xlabel("x軸のラベル", fontfamily="Times New Roman")
+ax.set_ylabel("y軸のラベル", fontfamily="Times New Roman")
+ax.text(x位置, y位置, "テキスト", fontfamily="Times New Roman")
+</pre>
+axは<a href="#graph_1_2">サブプロットを作成</a>した際の戻り値</li>
+</ul>
 </div>
 
 <h4><div class="headline2" id="graph_e_5">マーカーや線を重ねる順序を調整する</div></h4>
@@ -2372,7 +2394,15 @@ plt.scatter(xデータ1, yデータ1, zorder=2) # 散布図を上に
 plt.plot(xデータ2, yデータ2, zorder=1) # 折れ線グラフを下に</pre>
 </div>
 
-<h4><div class="headline2" id="graph_e_6">図の枠線や目盛りを消す</div></h4>
+<h4><div class="headline2" id="graph_e_6">グリッド線を背面に表示する</div></h4>
+<div class="text1">
+グリッド線がグラフの前面に来た場合は、ax.set_axisbelowで背面に移動する
+<pre>ax.set_axisbelow(True)</pre>
+Trueでzorder = 0.5になる、デフォルト値は"line"（zorder = 1.5）<br />
+グラフのzorderを0.5未満に設定した場合は、この設定を行ってもグリッド線がグラフの前面に表示される
+</div>
+
+<h4><div class="headline2" id="graph_e_7">図の枠線や目盛りを消す</div></h4>
 <div class="text1">
 <ul class="list1">
 <li>枠線と目盛りを全て消す
@@ -2415,7 +2445,7 @@ plt.gca()については、<a href="#graph_1_12">直前に操作したサブプ�
 </li></ul>
 </div>
 
-<h4><div class="headline2" id="graph_e_7">図の枠線の幅を変える</div></h4>
+<h4><div class="headline2" id="graph_e_8">図の枠線の幅を変える</div></h4>
 <div class="text1">
 枠線の幅を太くする（デフォルト値：1.0）
 <pre>
@@ -2429,7 +2459,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/08/27</p>
+<p>最終更新日：2021/08/28</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
