@@ -392,9 +392,10 @@ matplotlib.pyplotについては、<a href="#matplotlib_1_3">matplotlibのモジ
 <div class="text1">
 <ul class="list1">
 <li>スクリプトをコマンドラインから直接実行する場合
-<pre>./スクリプト名.py</pre></li>
+<pre>% ./スクリプト名.py</pre></li>
 <li>python3コマンドを使って実行する場合
-<pre>python3 スクリプト名.py</pre></li>
+<pre>% python3 スクリプト名.py</pre>
+（%はコマンドプロンプト）</li>
 </ul>
 </div>
 
@@ -474,11 +475,11 @@ ax.set_xticklabels(ax.get_xticklabels(), rotation=70, size="small")
 <pre>sudo port install py38-yapf</pre>
 py38の部分はpythonのバージョンによって変わる</li><br />
 <li>yapfコマンドの実行（ファイルを変更する場合）
-<pre>yapf -i スクリプト名.py</pre>
-＊文法エラーがある場合には、実行を中断してエラーを表示する
-</li>
+<pre>% yapf -i スクリプト名.py</pre>
+（%はコマンドプロンプト）<br />
+＊文法エラーがある場合には、実行を中断してエラーを表示する</li><br />
 <li>yapfコマンドの実行（変更点を表示しファイルは変更しない）
-<pre>yapf -d スクリプト名.py</pre></li>
+<pre>% yapf -d スクリプト名.py</pre></li>
 </ul>
 </div>
 
