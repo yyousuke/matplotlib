@@ -1,0 +1,246 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="author" content="山下陽介 (Yousuke Yamashita)" />
+<link rel="icon" href="/yousuke/favicon.ico" type="image/x-icon" />
+<!-- Mobile Internet Explorer allows us to activate ClearType technology for smoothing fonts for easy reading -->
+<meta http-equiv="cleartype" content="on" />
+<!-- Specify whether or not telephone numbers in the HTML content should appear as hypertext links -->
+<meta name="format-detection" content="telephone=no" />
+<!-- Changes the logical window size used when displaying a page mobile browsers -->
+<meta name = "viewport" content = "width = device-width, initial-scale=1, user-scalable=yes" />
+
+<meta name="robots" content="all" />
+<meta name="http-equiv" content="X-Robots-Tag : all" />
+<meta name="googlebot" content="all" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link href="design.css" rel="stylesheet" type="text/css" />
+<title>気象データ解析のためのmatplotlibの使い⽅</title>
+</head>
+
+<body link="#0000FF" vlink="#0000FF">
+<article>
+<h3><div class="headline1" id="time_1">時刻形式データの作成</div></h3>
+<div class="text1">
+datetimeで扱うことのできる時刻形式データを作成する
+<ul class="list1">
+<li>datetime.dateを使う（日付のみを扱う場合）
+<pre>
+from datetime import date
+time = date(年, 月, 日)
+</pre>
+年、月、日は整数で与える
+</li><br />
+<li>datetime.datetimeを使う（日付と時刻を扱う場合）
+<pre>
+from datetime import datetime
+time = datetime(年, 月, 日, 時, 分, 秒)
+</pre>
+年、月、日、時、分、秒は整数で与える
+</li><br />
+<li>現在時刻を与える場合（ローカルタイム）
+<pre>
+from datetime import datetime
+time = datetime.now()
+</pre>
+システム時刻をローカルタイムで取得
+</li><br />
+<li>現在時刻を与える場合（UTC）
+<pre>
+from datetime import datetime
+time = datetime.utcnow() 
+</pre>
+システム時刻をUTCで取得
+</li><br />
+<li>pandas.to_datetimeを使う（文字列から日付と時刻に変換）
+<pre>
+import pandas as pd
+time = pd.to_datetime("年-月-日 時:分:秒") # ISO形式の場合
+</pre>
+例えば、"2021-09-04 12:00:00"のような形式<br /><br />
+次のように数字の羅列でもよい
+<pre>
+time = pd.to_datetime("年月日時分秒")
+</pre>
+例えば、"20210904120000"のような形式
+</li>
+</ul>
+</div>
+<br />
+<br />
+
+<h3><div class="headline1" id="time_2">時刻形式データから年、月、日などを取り出す</div></h3>
+<div class="text1">
+時刻形式データ.取り出したい要素
+<ul class="list1">
+<li>datetime.dateの場合
+<pre>
+from datetime import date
+time = date(2021, 9, 4)
+print(time.year)
+print(time.moth)
+print(time.day)
+</pre>
+time.yearで2021、time.monthで9、time.dayで4が整数値で返される<br />
+時、分、秒を表示しようとするとエラーになる</li><br />
+<li>datetime.datetimeの場合
+<pre>
+from datetime import datetime
+time = datetime(2021, 9, 4, 12, 30, 0)
+print(time.year)
+print(time.moth)
+print(time.day)
+print(time.hour)
+print(time.minute)
+print(time.second)
+</pre>
+time.yearで2021、time.monthで9、time.dayで4、time.hourで12、time.minuteで30、time.secondで0が整数値で返される<br />
+pandas.to_datetimeの場合も挙動は同じ</li><br />
+</ul>
+</div>
+<br />
+<br />
+
+<h3><div class="headline1" id="time_3">時刻形式データから書式指定して取り出す</div></h3>
+<div class="text1">
+datetime.strftimeを使う
+<ul class="list1">
+<li>年/月/日
+<pre>
+from datetime import datetime
+time = datetime(2021, 9, 4, 12, 30, 0)
+print(time.strftime("%Y/%m/%d"))
+</pre>
+"2021/09/04"の文字列が表示される<br />
+時刻表記の書式については<a href="forms.html#time">時刻表記に用いられる書式指定子一覧</a>参照</li><br />
+<li>年/月/日 時:分:秒
+<pre>
+from datetime import datetime
+time = datetime(2021, 9, 4, 12, 30, 0)
+print(time.strftime("%Y/%m/%d %H:%M:%S"))
+</pre>
+"2021/09/04 12:30:00" の文字列が表示される</li><br />
+<li>ISOフォーマット
+<pre>
+from datetime import datetime
+time = datetime(2021, 9, 4, 12, 30, 0)
+print(time.isoformat())
+</pre>
+"2021-09-04T12:30:00" の文字列が表示される</li><br />
+</ul>
+</div>
+<br />
+<br />
+
+
+
+<h3><div class="headline1" id="time_4">時刻形式データの演算</div></h3>
+<div class="text1">
+datetime.timedeltaを使うことで時刻形式データの演算を行うことができる
+<ul class="list1">
+<li>datetime.datetimeで作成したものを利用
+<pre>
+from datetime import datetime, timedelta
+time = datetime(2021, 9, 4, 12, 0, 0)
+time_new = time + timedelta(hours=12)
+</pre>
+9/4 12時から12時間後の9/5 0時になる
+</li><br />
+<li>日単位での演算も可能
+<pre>
+from datetime import datetime, timedelta
+time = datetime(2021, 9, 4, 12, 0, 0)
+time_new = time + timedelta(days=2)
+</pre>
+9/4 12時から2日後の9/6 12時になる
+</li><br />
+<li>減算することもできる
+<pre>
+from datetime import datetime, timedelta
+time = datetime(2021, 9, 4, 12, 0, 0)
+time_new = time - timedelta(days=2)
+</pre>
+9/4 12時から2日前の9/2 12時になる
+</li><br />
+<li>pandas.to_datetimeで作成したものを利用
+<pre>
+import pandas as pd
+from datetime import timedelta
+time = pd.to_datetime("20210904120000")
+time_new = time + timedelta(hours=12)
+</pre>
+datetimeで作成した場合と同様に演算可能
+</li>
+</ul>
+</div>
+<br />
+<br />
+
+<h3><div class="headline1" id="time_5">1ヶ月後、1年後を計算する</div></h3>
+<div class="text1">
+datetime.timedeltaでは、1ヶ月後、1年後などを指定するとエラーになる<br />
+dateutil.relativedeltaを使うと加算・減算が可能
+<ul class="list1">
+<li>1ヶ月後の計算
+<pre>
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+time = datetime(2021, 9, 4, 12, 0, 0)
+time_new = time + relativedelta(months=1)
+</pre>
+9/4 12時から1ヶ月後の10/4 12時になる
+</li><br />
+<li>1年後の計算
+<pre>
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+time = datetime(2021, 9, 4, 12, 0, 0)
+time_new = time + relativedelta(years=2)
+</pre>
+2021/9/4 12時から1年後の2022/9/4 12時になる
+</li><br />
+<li>閏年をまたいだ場合
+<pre>
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+time = datetime(2021, 9, 4, 12, 0, 0)
+time_new = time + relativedelta(years=4)
+</pre>
+閏年をまたいでも、4年後の同じ日の2025/9/4 12時になる
+</li>
+</ul>
+</div>
+<br />
+<br />
+
+<h3><div class="headline1" id="time_6">月末の日を計算する</div></h3>
+<div class="text1">
+dateutil.relativedeltaの１ヶ月後の計算を応用して月末の日を計算する
+<pre>
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+time = datetime(2021, 8, 1, 0, 0, 0)
+time_new = time + relativedelta(months=1) - relativedelta(days=1)
+</pre>
+</div>
+<br />
+<br />
+
+
+<br />
+<br />
+<br />
+<br />
+
+<small><a href="#top">[top]</a></small> <br />
+<hr width="105%" />
+</article>
+</body>
+<footer>
+<p>最終更新日：2021/09/04</p>
+<p>Copyright (C) 2021, Yousuke Yamashita</p>
+</footer>
+</html>
