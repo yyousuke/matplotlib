@@ -59,6 +59,7 @@
       <li><a href="#nc_1_3">NetCDFファイルの読み込み</a></li>
       <li><a href="#nc_1_4">NetCDFファイル情報の取得</a></li>
       <li><a href="#nc_1_5">データにスケールファクターとオフセットがある場合</a></li>
+      <li><a href="#nc_1_6">変数がグループ化されている場合</a></li>
     </ul>
   </li></ul>
   <!--  GRIB2ファイル -->
@@ -330,6 +331,18 @@ var = var_i * scale_factor + add_offset
 </pre>
 </div>
 
+<h4><div class="headline2" id="nc_1_6">変数がグループ化されている場合</div></h4>
+<div class="text1">
+グループ化されている場合、
+<pre>% ncdump -h ファイル名</pre>
+でvariablesの上位にgroupが表示される。その場合、groupの下位に表示される変数名（ここdrは変数名1、変数名2があるものとする）を使い、以下のように取り出す
+<pre>
+nc = netCDF4.Dataset('ファイル名', 'r')
+grp = nc.groups['グループ名']
+var1 = grp.variables['変数名1'][:]
+var2 = grp.variables['変数名2'][:]
+</pre>
+</div>
 
  <!--  GRIB2ファイル -->
 <h3><div class="headline1" id="grib2_1">GRIB2ファイル</div></h3>
@@ -353,7 +366,7 @@ GRIB2ファイルの読み込みを行うには、まずGRIB2からNetCDFへ変�
 
 <h4><div class="headline2" id="grib2_1_3">pygribを使ったGRIB2ファイルの読み込み</div></h4>
 <div class="text1">
-Python3.6以前ではpygribモジュールがあり、直接GRIB2ファイルを読み込むことができた。
+pygribモジュールを用いると、直接GRIB2ファイルを読み込むことができた。
 <pre>
 % sudo port install py36-pygrib
 </pre>
@@ -363,7 +376,7 @@ import pygrib
 grbs = pygrib.open("ファイル名") # GRIB2ファイルを開く
 grb1 = grbs.select(forecastTime=1)[0] # 1時間後の０番目の変数
 </pre>
-Python3.7以降では対応していないため、<a href="#grib2_1_2">GRIB2ファイルの読み込み</a>に記述した方法に切り替えた方が良い。
+ファイルの読み込みに時間がかかるため、<a href="#grib2_1_2">GRIB2ファイルの読み込み</a>に記述した方法に切り替えた方が良い。
 </div>
 
  <!--  GRIB1ファイル -->
@@ -424,7 +437,7 @@ d = hdf['データセットの名前'][:, :] # データセットの名前に対
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/01/02</p>
+<p>最終更新日：2021/09/07</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
