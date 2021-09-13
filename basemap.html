@@ -74,6 +74,7 @@
       <li><a href="#basemap_3_5">矢羽をプロットする</a></li>
       <li><a href="#basemap_3_6">文字をプロットする</a></li>
       <li><a href="#basemap_3_7">マーカーをプロットする</a></li>
+      <li><a href="#basemap_3_8">マスクアウト処理</a></li>
     </ul>
   </li></ul>
   <!-- 図の体裁 -->
@@ -489,18 +490,11 @@ m.barbs(x, y, u, v, color='b')
 </pre>
 色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li><br />
 <li>例：矢羽の長さを4にする
-<pre>
-m.barbs(x, y, u, v, length=4)
-</pre>
+<pre>m.barbs(x, y, u, v, length=4)</pre></li>
 <li>例：風速の小さな矢羽を描かない
-<pre>
-m.barbs(x, y, u, v, sizes=dict(emptybarb=0.00))
-</pre>
+<pre>m.barbs(x, y, u, v, sizes=dict(emptybarb=0.00))</pre></li>
 <li>例：矢羽の間を少し開けて重ならないようにする
-<pre>
-m.barbs(x, y, u, v, sizes=dict(spacing=0.16))
-</pre>
-</li>
+<pre>m.barbs(x, y, u, v, sizes=dict(spacing=0.16))</pre></li>
 </ul>
 </div>
 
@@ -562,9 +556,29 @@ m.plot(x, y, color="aqua", marker="o", markersize=12)
 </ul>
 </div>
 
+<h4><div class="headline2" id="basemap_3_8">マスクアウト処理</div></h4>
+<div class="text1">
+Basemap.is_landを使って陸面マスクを作成し、陸面データをNaNにする
+<ul class="list1">
+<li>陸面マスク作成
+<pre>
+m = Basemap(オプション) # Basemap呼び出し
+x, y = np.meshgrid(経度データ, 緯度データ) # ２次元の経度・緯度データ作成
+y_size, x_size = x.shape # 経度・緯度データの個数
+x, y = m(x, y) # 図法の経度、緯度に変換する
 
+mask = list()
+for xpt, ypt in zip(x.flatten(), y.flatten()):
+    mask.append(m.is_land(xpt, ypt))
+mask = np.array(mask).reshape(y_size, x_size) # 2次元配列に戻す
+</pre>
+maskは真偽値（True/False）の入った２次元配列</li><br />
+<li>陸面データをNaNにする
+<pre>df[mask] = np.nan</pre>
+dfはmaskと同じサイズの2次元配列</li>
+</ul>
+</div>
 
-	
 <!-- 図の体裁 -->
 <h3><div class="headline1" id="basemap_e">図の体裁</div></h3>
 <h4><div class="headline2" id="basemap_e_1">タイトルを付ける</div></h4>
@@ -627,7 +641,7 @@ m.contour(x, y, data, clevs, linewidths=0.8, colors='k') # 等高線を描く
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/08/28</p>
+<p>最終更新日：2021/09/13</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>

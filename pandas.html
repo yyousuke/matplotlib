@@ -68,7 +68,7 @@ dfが２次元配列の場合。0番目の要素を選択
 dfが２次元配列の場合。labという名前のものを選択
 </li>
 <li>条件により選択（Aが正の場合）
-<pre>df_new = df[A >= 0]</pre>
+<pre>df_new = df[A &gt;= 0]</pre>
 Aはdfと同じサイズで条件を表す配列
 </li><br />
 </ul>
@@ -76,6 +76,24 @@ Aはdfと同じサイズで条件を表す配列
 <br />
 <br />
 
+<h3><div class="headline1" id="df_replace">データの置き換え</div></h3>
+<div class="text1">
+<ul class="list1">
+<li>別のデータから置き換え
+<pre>df.iloc[0, :] = np.array(data)</pre>
+dfが２次元配列の場合。0番目の要素を選択し、dataで置き換える
+</li>
+<li>条件により選択（負の場合にNaN）
+<pre>df[df &lt; 0] = np.nan</pre>
+</li><br />
+<li>条件により選択（qaが50%未満の場合にNaN）
+<pre>df[qa &lt; 50] = np.nan</pre>
+qaはdfと同じサイズの配列
+</li><br />
+</ul>
+</div>
+<br />
+<br />
 
 </body>
 </html>
