@@ -159,7 +159,7 @@ parse_datesが関数名
 <pre>
 from datetime import datetime
 def parse_dates(x):
-    return datetime.strptime(x, "%HZ%d%b%Y")
+&nbsp; &nbsp; return datetime.strptime(x, "%HZ%d%b%Y")
 
 df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0], date_parser=parse_dates)
 </pre>
@@ -168,7 +168,7 @@ df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0], date_parser=
 <pre>
 from datetime import datetime
 def parse_dates(x):
-    return datetime.strptime(x, "%Y/%m/%d %H:%M")
+&nbsp; &nbsp; return datetime.strptime(x, "%Y/%m/%d %H:%M")
 
 df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0], date_parser=parse_dates)
 </pre>
@@ -229,9 +229,9 @@ num_rec = 3 # データの個数（整数）
 datasize = idim * jdim * num_rec # 読み込むデータサイズ（byte）
 f = open('読み込むファイル名', 'rb')
 if endian == 'big':
-    din = np.fromfile(f, dtype='&gt;f4', count=datasize)
+&nbsp; &nbsp; din = np.fromfile(f, dtype='&gt;f4', count=datasize)
 else:
-    din = np.fromfile(f, dtype='&lt;f4', count=datasize)
+&nbsp; &nbsp; din = np.fromfile(f, dtype='&lt;f4', count=datasize)
 f.close()
 d = din.reshape(num_rec, jdim, idim)
 </pre>
@@ -248,11 +248,11 @@ datasize = idim * jdim # 水平方向のデータサイズ（byte）
 import array
 import sys
 with open('読み込むファイル名', 'rb') as fin:
-    fin.seek(4*datasize*(tsta-1), 0) # 開始データの前まで読み飛ばす
-    buf = array.array('f') # ４バイト浮動小数点数
-    buf.fromfile(fin, datasize*(tend-tsta+1)) # データの読み込み
-    if sys.byteorder == 'little':
-        buf.byteswap()
+&nbsp; &nbsp; fin.seek(4*datasize*(tsta-1), 0) # 開始データの前まで読み飛ばす
+&nbsp; &nbsp; buf = array.array('f') # ４バイト浮動小数点数
+&nbsp; &nbsp; buf.fromfile(fin, datasize*(tend-tsta+1)) # データの読み込み
+&nbsp; &nbsp; if sys.byteorder == 'little':
+&nbsp; &nbsp; &nbsp; &nbsp; buf.byteswap()
 # bufからlistに変換し、x-, y-の配列に
 d = np.array(buf.tolist()).reshape(jdim,idim)
 </pre>
@@ -277,10 +277,11 @@ sys.byteorderを使い、ビックエンディアンとリトルエンディア�
 <pre>import netCDF4</pre><br />
 インポートでエラーが出る場合
 <ul class="list1">
-<li>MacPortsでpython3.7のnetcdfライブラリをインストール
+<li>MacPortsでpython3.8のnetcdfライブラリをインストール
 <pre>
-sudo port install py37-netcdf4
+% sudo port install py38-netcdf4
 </pre>
+＊pythonのバージョンが異なる場合には、py38の部分を対応するものに変える<br />
 ＊HomebrewやAnacondaを使っている場合には、競合を避けるためMacPortsは使わない方が良い
 </li>
 </ul>
@@ -288,6 +289,9 @@ sudo port install py37-netcdf4
 
 <h4><div class="headline2" id="nc_1_3">NetCDFファイルの読み込み</div></h4>
 <div class="text1">
+NetCDFファイルに含まれている変数名などを確認する
+<pre>% ncdump -h ファイル名</pre>
+ファイルを開き、指定した変数名のデータを取り出す
 <pre>
 nc = netCDF4.Dataset('ファイル名', 'r')
 var = nc.variables['変数名'][:]
@@ -335,7 +339,7 @@ var = var_i * scale_factor + add_offset
 <div class="text1">
 グループ化されている場合、
 <pre>% ncdump -h ファイル名</pre>
-でvariablesの上位にgroupが表示される。その場合、groupの下位に表示される変数名（ここdrは変数名1、変数名2があるものとする）を使い、以下のように取り出す
+でvariablesの上位にgroupが表示される。その場合、groupの下位に表示される変数名（ここでは変数名1、変数名2があるものとする）を使い、以下のように取り出す
 <pre>
 nc = netCDF4.Dataset('ファイル名', 'r')
 grp = nc.groups['グループ名']
@@ -358,9 +362,7 @@ GRIB2ファイルの読み込みを行うには、まずGRIB2からNetCDFへ変�
 % sudo port install wgrib2
 </pre>
 で導入できる。wgrib2を用いて次のように変換する。
-<pre>
-% wgrib2 入力ファイル名 -netcdf 出力ファイル名
-</pre>
+<pre>% wgrib2 入力ファイル名 -netcdf 出力ファイル名</pre>
 変換後のファイルは、<a href="#nc_1">NetCDF</a>に記述した方法で読み込み可能
 </div>
 
@@ -368,9 +370,9 @@ GRIB2ファイルの読み込みを行うには、まずGRIB2からNetCDFへ変�
 <div class="text1">
 pygribモジュールを用いると、直接GRIB2ファイルを読み込むことができた。
 <pre>
-% sudo port install py36-pygrib
+% sudo port install py38-pygrib
 </pre>
-で導入できる。pygribでは次のようにデータを取り出す。
+で導入できる（python3.8の場合。異なるバージョンではpy38の部分を変える）。pygribでは次のようにデータを取り出す。
 <pre>
 import pygrib
 grbs = pygrib.open("ファイル名") # GRIB2ファイルを開く
@@ -412,22 +414,19 @@ Pythonでは、Pandasやh5pyでHDF5ファイルを読むことができる。Pan
 <li>例：Pandasを使った方法
 <pre>
 import pandas as pd
-pd.read_hdf("ファイル名")
+df = pd.read_hdf("ファイル名")
 </pre></li>
-<li>例：h5pyを使った方法
-Python3.8の場合、MacPortsを使い次のようにインストール
-<pre>
-% sudo port install py38-h5py
-</pre>
+<li>例：h5pyを使った方法<br />
+Python3.8の場合、MacPortsを使い次のようにインストール（バージョンが異なる場合はpy38の部分を変える）
+<pre>% sudo port install py38-h5py</pre>
 ２次元データをdに格納する場合
 <pre>
 import h5py
 hdf = h5py.File("ファイル名", "r") # HDF5ファイルを開く
 d = hdf['データセットの名前'][:, :] # データセットの名前に対応するデータを取得
 </pre>
-</li>
 ＊以前はhdf['データセットの名前'].valueを使うことができたが、現在のバージョンではエラーが出る。<br />
-＊データセットの名前を表示したい場合には、print(hdf.heys())
+＊データセットの名前を表示したい場合には、print(hdf.heys())</li>
 </ul>
 </div>
 
@@ -437,7 +436,7 @@ d = hdf['データセットの名前'][:, :] # データセットの名前に対
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/09/08</p>
+<p>最終更新日：2021/09/14</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
