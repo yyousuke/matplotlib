@@ -60,13 +60,13 @@
 <div class="text1">
 <ul class="list1">
 <li>配列の番号で選択する場合
-<pre>df_new = df.iloc[0, :]</pre>
-dfが２次元配列の場合。0番目の要素を選択
-</li>
+<pre>df_new = df.iloc[:, 0]</pre>
+dfが２次元配列の場合。axis=1の0番目の要素を選択
+</li><br />
 <li>配列のラベルで選択する場合
-<pre>df_new = df.loc["lab", :]</pre>
-dfが２次元配列の場合。labという名前のものを選択
-</li>
+<pre>df_new = df.loc[:, "lab"]</pre>
+dfが２次元配列の場合。labという名前の列を選択
+</li><br />
 <li>条件により選択（Aが正の場合）
 <pre>df_new = df[A &gt;= 0]</pre>
 Aはdfと同じサイズで条件を表す配列
@@ -80,9 +80,9 @@ Aはdfと同じサイズで条件を表す配列
 <div class="text1">
 <ul class="list1">
 <li>別のデータから置き換え
-<pre>df.iloc[0, :] = np.array(data)</pre>
-dfが２次元配列の場合。0番目の要素を選択し、dataで置き換える
-</li>
+<pre>df.iloc[:, 0] = np.array(data)</pre>
+dfが２次元配列の場合。axis=1の0番目の要素を選択し、dataで置き換える
+</li><br />
 <li>条件により選択（負の場合にNaN）
 <pre>df[df &lt; 0] = np.nan</pre>
 </li><br />
