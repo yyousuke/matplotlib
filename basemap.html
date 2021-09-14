@@ -569,7 +569,7 @@ x, y = m(x, y) # 図法の経度、緯度に変換する
 
 mask = list()
 for xpt, ypt in zip(x.flatten(), y.flatten()):
-    mask.append(m.is_land(xpt, ypt))
+&nbsp; &nbsp; mask.append(m.is_land(xpt, ypt))
 mask = np.array(mask).reshape(y_size, x_size) # 2次元配列に戻す
 </pre>
 maskは真偽値（True/False）の入った２次元配列</li><br />
@@ -641,7 +641,7 @@ m.contour(x, y, data, clevs, linewidths=0.8, colors='k') # 等高線を描く
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/09/13</p>
+<p>最終更新日：2021/09/14</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
