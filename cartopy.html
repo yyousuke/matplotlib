@@ -107,7 +107,7 @@ import matplotlib.pyplot as plt
 <div class="text1">
 <pre>
 fig = plt.figure() # プロット領域の作成（matplotlib）
-ax = fig.add_subplot(1,1,1, projection=ccrs.PlateCarree())  # サブプロット作成時にcartopy呼び出し
+ax = fig.add_subplot(1, 1, 1, projection=ccrs.PlateCarree())  # サブプロット作成時にcartopy呼び出し
 </pre>
 以降は戻り値axを使い、ax.<b>メソッド</b>のように作図が可能
 </div>
@@ -242,22 +242,22 @@ ax.add_feature(cfeature.RIVERS) # 川を描く
 サブプロットを生成するfig.add_subplotで図法を指定する
 <h4><div class="headline2" id="cartopy_2_1">正距円筒図法</div></h4>
 <div class="text1">
-<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.PlateCarree())</pre>
+<pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.PlateCarree())</pre>
 gradsのlatlonやBasemapのprojection='cyl'に相当する図法で、緯度線・経度線が直角かつ等間隔に交差
 <ul class="list1">
 <li>東経180度を中心にする場合
-<pre> ax = fig.add_subplot(1,1,1, projection=ccrs.PlateCarree(central_longitude=180))</pre></li>
+<pre> ax = fig.add_subplot(1, 1, 1, projection=ccrs.PlateCarree(central_longitude=180))</pre></li>
 </ul>
 </div>
 
 <h4><div class="headline2" id="cartopy_2_2">メルカトル図法</div></h4>
 <div class="text1">
-<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.Mercator(central_longitude=中心の経度, min_latitude=緯度下限, max_latitude=緯度上限))</pre>
+<pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.Mercator(central_longitude=中心の経度, min_latitude=緯度下限, max_latitude=緯度上限))</pre>
 <ul class="list1">
 <li>例：南緯60度〜北緯60度まで、全ての経度帯で描く場合
-<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.Mercator(min_latitude=-60.0, max_latitude=60.0))</pre></li>
+<pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.Mercator(min_latitude=-60.0, max_latitude=60.0))</pre></li>
 <li>例：南緯60度〜北緯60度まで、東経180度を中心として全ての緯度帯で描く場合
-<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.Mercator(central_longitude=180.0, min_latitude=-60.0, max_latitude=60.0))</pre></li>
+<pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.Mercator(central_longitude=180.0, min_latitude=-60.0, max_latitude=60.0))</pre></li>
 </ul>
 </div>
 
@@ -265,32 +265,32 @@ gradsのlatlonやBasemapのprojection='cyl'に相当する図法で、緯度線�
 <div class="text1">
 <ul class="list1">
 <li>北極を中心に描く場合
-<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.NorthPolarStereo())
+<pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.NorthPolarStereo())
 ax.set_extent([西端の経度, 東端の経度, 南端の緯度, 北端の緯度], ccrs.PlateCarree())
 </pre>
 gradsのnpsに相当する図法</li><br />
 <li>南極を中心に描く場合
-<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.SouthPolarStereo())
+<pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.SouthPolarStereo())
 ax.set_extent([西端の経度, 東端の経度, 南端の緯度, 北端の緯度], ccrs.PlateCarree())
 </pre>
 gradsのspsに相当する図法</li>
 </ul>
 <ul class="list1">
 <li>例：南緯90度〜20度まで、全ての経度帯で描く場合
-<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.SouthPolarStereo())
+<pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.SouthPolarStereo())
 ax.set_extent([-180, 180, -90, -20], ccrs.PlateCarree())</pre></li>
 </ul>
 </div>
 
 <h4><div class="headline2" id="cartopy_2_4">ランベルト図法（ランベルト正角円錐図法）</div></h4>
 <div class="text1">
-<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.LambertConformal(central_longitude=中心の経度, central_latitude=中心の緯度))
+<pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.LambertConformal(central_longitude=中心の経度, central_latitude=中心の緯度))
 ax.set_extent([西端の経度, 東端の経度, 南端の緯度, 北端の緯度])
 </pre>
 <ul class="list1">
 <li>例：東経135度、北緯35度を中心に日本周辺だけを描く場合
 <pre>
-ax = fig.add_subplot(1,1,1, projection=ccrs.LambertConformal(central_longitude=135.0, central_latitude=35.0))
+ax = fig.add_subplot(1, 1, 1, projection=ccrs.LambertConformal(central_longitude=135.0, central_latitude=35.0))
 ax.set_extent([100, 170, 10, 70]) # 領域の限定
 </pre>
 </li>
@@ -299,52 +299,52 @@ ax.set_extent([100, 170, 10, 70]) # 領域の限定
 
 <h4><div class="headline2" id="cartopy_2_5">正射投影図法（平射図法）</div></h4>
 <div class="text1">
-<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.Orthographic(central_longitude=中心の経度, central_latitude=中心の緯度))
+<pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.Orthographic(central_longitude=中心の経度, central_latitude=中心の緯度))
 </pre>
 <ul class="list1">
 <li>例：東経180度、北緯45度を中心に描く場合
-<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.Orthographic(central_longitude=180.0, central_latitude=45.0))</pre>
+<pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.Orthographic(central_longitude=180.0, central_latitude=45.0))</pre>
 </li>
 </ul>
 </div>
 
 <h4><div class="headline2" id="cartopy_2_6">ロビンソン図法</div></h4>
 <div class="text1">
-<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.Robinson(central_longitude=中心の経度))
+<pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.Robinson(central_longitude=中心の経度))
 </pre>
 <ul class="list1">
 <li>例：東経180度を中心に描く場合
-<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.Robinson(central_longitude=180.0))</pre></li>
+<pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.Robinson(central_longitude=180.0))</pre></li>
 </ul>
 </div>
 
 <h4><div class="headline2" id="cartopy_2_7">モルワイデ図法</div></h4>
 <div class="text1">
-<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.Mollweide(central_longitude=中心の経度))
+<pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.Mollweide(central_longitude=中心の経度))
 </pre>
 <ul class="list1">
 <li>例：東経180度を中心に描く場合
-<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.Mollweide(central_longitude=180.0))</pre></li>
+<pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.Mollweide(central_longitude=180.0))</pre></li>
 </ul>
 </div>
 
 <h4><div class="headline2" id="cartopy_2_8">ランベルト正積円筒図法</div></h4>
 <div class="text1">
-<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.LambertCylindrical(central_longitude=中心の経度))
+<pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.LambertCylindrical(central_longitude=中心の経度))
 </pre>
 <ul class="list1">
 <li>例：東経180度を中心に描く場合
-<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.LambertCylindrical(central_longitude=180.0))</pre></li>
+<pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.LambertCylindrical(central_longitude=180.0))</pre></li>
 </ul>
 </div>
 
 <h4><div class="headline2" id="cartopy_2_9">ミラー図法</div></h4>
 <div class="text1">
-<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.Miller(central_longitude=中心の経度))
+<pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.Miller(central_longitude=中心の経度))
 </pre>
 <ul class="list1">
 <li>例：東経180度を中心に描く場合
-<pre>ax = fig.add_subplot(1,1,1, projection=ccrs.Miller(central_longitude=180.0))</pre></li>
+<pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.Miller(central_longitude=180.0))</pre></li>
 </ul>
 </div>
 
@@ -486,7 +486,7 @@ ax.barbs(x, y, u, v)
 </pre></li>
 <li>例：矢羽を6おきにプロット
 <pre>
-ax.barbs(lons[::6,::6],lats[::6,::6],uwnd[::6,::6],vwnd[::6,::6])
+ax.barbs(lons[::6, ::6], lats[::6, ::6], uwnd[::6, ::6], vwnd[::6, ::6])
 </pre></li>
 <li>例：矢羽の色を青色にする
 <pre>
@@ -554,8 +554,8 @@ ax.plot(x, y, color="aqua", marker="o", markersize=12)
 <h3><div class="headline1" id="cartopy_e">図の体裁</div></h3>
 <h4><div class="headline2" id="cartopy_e_1">タイトルを付ける</div></h4>
 <div class="text1">
-matplotlibのax.set_titleを使う
-<pre>ax_set.title("タイトル")</pre>
+matplotlibのax.set_titleを使う（plt.titleでも同じ）
+<pre>ax.set_title("タイトル")</pre>
 <a href="matplotlib.html#graph_1_4">サブプロットにタイトルを付ける</a>参照<br />
 <a href="matplotlib.html#graph_e_3">タイトルの文字サイズや色を変更する</a>参照
 </div>
@@ -566,12 +566,12 @@ matplotlibのax.set_titleを使う
 <pre>
 import matplotlib.path as mpath
 center, radius = [0.5, 0.5], 0.5 # 円の中心座標と半径
-theta = np.linspace(0, 2*np.pi, 100) # 0〜2πの位相
+theta = np.linspace(0, 2 * np.pi, 100) # 0〜2πの位相
 verts = np.vstack([np.sin(theta), np.cos(theta)]).T # 円形の座標作成
-circle = mpath.Path(verts * radius + center) # 中心座標(0.5,0.5)、半径0.5の円形
+circle = mpath.Path(verts * radius + center) # 中心座標(0.5, 0.5)、半径0.5の円形
 ax.set_boundary(circle, transform=ax.transAxes) # 円形の領域でマスク
 </pre>
-サブプロットaxが座標(0,0)、(0,1)、(1,1)、(1,0)を頂点とする四角形なので、それに内接する円形の領域でマスクする<br />
+サブプロットaxが座標(0, 0)、(0, 1)、(1, 1)、(1, 0)を頂点とする四角形なので、それに内接する円形の領域でマスクする<br />
 <a href="https://scitools.org.uk/cartopy/docs/v0.15/examples/always_circular_stereo.html">cartopyのサンプル</a>参照
 </div>
 
@@ -635,7 +635,7 @@ for pref in prefs:
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/08/28</p>
+<p>最終更新日：2021/09/15</p>
 <p>Copyright (C) 2019-2021, Yousuke Yamashita</p>
 </footer>
 </html>
