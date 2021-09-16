@@ -108,7 +108,9 @@
 
 <h4><div class="headline2" id="csv_1_2">CSVファイルの読み込み</div></h4>
 <div class="text1">
-<pre>df = pd.read_csv("ファイル名")</pre>
+pandasのread_csvを用いる方法
+<pre>import pandas as pd
+df = pd.read_csv("ファイル名")</pre>
 </div>
 
 <h4><div class="headline2" id="csv_1_3">CSVファイルの時刻処理</div></h4>
@@ -222,6 +224,8 @@ t=1： | 0E, 90S | 10E, 80N | ... | 350E, 80N |
 <ul class="list1">
 <li>Numpyを使った方法（先頭からdatasize分だけ読み込み）
 <pre>
+import numpy as np
+
 endian = 'big'
 idim = 288 # 経度方向のサイズ（整数）
 jdim = 145 # 緯度方向のサイズ（整数）
@@ -240,13 +244,14 @@ d = din.reshape(num_rec, jdim, idim)
 </li><br />
 <li>arrayを使った方法（指定した時刻データを切り出す）
 <pre>
+import array
+import sys
+
 idim = 288 # 経度方向のサイズ（整数）
 jdim = 145 # 緯度方向のサイズ（整数）
 tsta = 5 # 開始データ番号（整数、データの先頭番号は１）
 tend = 7 # 終了データ番号（整数、データの先頭番号は１）
 datasize = idim * jdim # 水平方向のデータサイズ（byte）
-import array
-import sys
 with open('読み込むファイル名', 'rb') as fin:
 &nbsp; &nbsp; fin.seek(4*datasize*(tsta-1), 0) # 開始データの前まで読み飛ばす
 &nbsp; &nbsp; buf = array.array('f') # ４バイト浮動小数点数
@@ -436,7 +441,7 @@ d = hdf['データセットの名前'][:, :] # データセットの名前に対
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/09/14</p>
+<p>最終更新日：2021/09/16</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
