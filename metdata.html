@@ -49,6 +49,7 @@
       <li><a href="#bin_1_1">バイナリファイルの形式</a></li>
       <li><a href="#bin_1_2">バイナリファイルのエンディアン</a></li>
       <li><a href="#bin_1_3">バイナリファイルの読み込み</a></li>
+      <li><a href="#bin_1_4">バイナリファイルの書き出し</a></li>
     </ul>
   </li></ul>
   <!--  NetCDFファイル -->
@@ -122,14 +123,14 @@ parse_datesには時刻データとして処理する列、index_colにはindex�
 時刻データはdf.indexになる
 </li><br />
 <li>例：１列目が年、２列目が月のように複数列に時刻データが入っている場合
-<pre>df = pd.read_csv("ファイル名", parse_dates=[[0,1]], index_col=[0])</pre>
+<pre>df = pd.read_csv("ファイル名", parse_dates=[[0, 1]], index_col=[0])</pre>
 時刻データはdf.indexになり、年、月単独のデータは参照できない
 </li><br />
 <li>例：１列目が月、２列目が年のように並びが逆の場合
-<pre>df = pd.read_csv("ファイル名", parse_dates=[[1,0]], index_col=[0])</pre>
+<pre>df = pd.read_csv("ファイル名", parse_dates=[[1, 0]], index_col=[0])</pre>
 </li>
 <li>例：読み込んだ年、月の時刻データも残したい場合
-<pre>df = pd.read_csv("ファイル名", parse_dates=[[0,1]], index_col=[0], keep_date_col=True)</pre>
+<pre>df = pd.read_csv("ファイル名", parse_dates=[[0, 1]], index_col=[0], keep_date_col=True)</pre>
 時刻データはdf.index、年、月のデータはdf.year、df.monthなどになる（yearやmonthなどは、ヘッダに記述された名前になる）
 </li>
 </ul>
@@ -265,6 +266,23 @@ d = np.array(buf.tolist()).reshape(jdim,idim)
 sys.byteorderを使い、ビックエンディアンとリトルエンディアンを判定（システムがリトルエンディアンの場合にビックエンディアンとして読み込むようにしている）<br />
 ここではデータの先頭番号が１としているが、先頭番号を０としたい場合には、tsta-1をtstaに変える
 </li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="bin_1_4">バイナリファイルの書き出し</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>Numpyを使った方法（ndarrayのメソッドを使って書き出す）
+<pre>
+np.array(d).tofile("ファイル名")
+</pre>
+dはlistやnumpyのndarray、pandasのDataFrameなど<br />
+書き出されるデータのエンディアンはマシン依存</li><br />
+<li>データの型を指定する場合
+<pre>
+np.array(d).tofile("ファイル名", dtype=np.float32)
+</pre>
+単精度（4バイト）浮動小数点型で書き出す場合</li>
 </ul>
 </div>
 
@@ -441,7 +459,7 @@ d = hdf['データセットの名前'][:, :] # データセットの名前に対
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/09/16</p>
+<p>最終更新日：2021/10/04</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
