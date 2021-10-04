@@ -282,7 +282,15 @@ dはlistやnumpyのndarray、pandasのDataFrameなど<br />
 <pre>
 np.array(d).tofile("ファイル名", dtype=np.float32)
 </pre>
-単精度（4バイト）浮動小数点型で書き出す場合</li>
+単精度（4バイト）浮動小数点型で書き出す場合</li><br />
+<li>データをbig endianで書き出す場合
+<pre>
+np.array(d).astype('&gt;f').tofile("ファイル名")
+</pre></li>
+<li>データをlittle endianで書き出す場合
+<pre>
+np.array(d).astype('&lt;f').tofile("ファイル名")
+</pre></li>
 </ul>
 </div>
 
