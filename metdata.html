@@ -41,6 +41,7 @@
       <li><a href="#csv_1_3">CSVファイルの時刻処理</a></li>
       <li><a href="#csv_1_4">CSVファイルの行処理</a></li>
       <li><a href="#csv_1_5">CSVファイルの時刻がparse_dates未対応の場合</a></li>
+      <li><a href="#csv_1_6">CSVファイルとして書き出す</a></li>
      </ul>
   </li></ul>
   <!--  バイナリファイル -->
@@ -179,6 +180,24 @@ df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0], date_parser=
 </ul>
 </div>
 
+<h4><div class="headline2" id="csv_1_6">CSVファイルとして書き出す</div></h4>
+<div class="text1">
+pandasのDataFrameを使う場合
+<ul class="list1">
+<li>DataFrameを書き出す
+<pre>pd.DataFrame(d).to_csv("ファイル名")</pre>
+dはlistやnumpyのndarrayなど</li><br />
+<li>indexを無効にしてから書き出す
+<pre>pd.DataFrame(d).to_csv("ファイル名", index=False)</pre>
+1列目に番号などが入らないファイルができる</li><br />
+<li>ヘッダを付けない
+<pre>pd.DataFrame(d).to_csv("ファイル名", header=False)</pre>
+1行目にヘッダ行が入らないファイルができる</li><br />
+<li>カンマ区切りではなくタブ区切りで出力する（TSVファイルにする）
+<pre>pd.DataFrame(d).to_csv("ファイル名", sep='\t')</pre>
+sepで区切り文字をタブにする</li><br />
+</ul>
+</div>
 
 
 <!--  バイナリファイル -->
@@ -467,7 +486,7 @@ d = hdf['データセットの名前'][:, :] # データセットの名前に対
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/10/04</p>
+<p>最終更新日：2021/10/06</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
