@@ -273,17 +273,17 @@ tsta = 5 # 開始データ番号（整数、データの先頭番号は１）
 tend = 7 # 終了データ番号（整数、データの先頭番号は１）
 datasize = idim * jdim # 水平方向のデータサイズ（byte）
 with open('読み込むファイル名', 'rb') as fin:
-&nbsp; &nbsp; fin.seek(4*datasize*(tsta-1), 0) # 開始データの前まで読み飛ばす
+&nbsp; &nbsp; fin.seek(4 * datasize * (tsta - 1), 0) # 開始データの前まで読み飛ばす
 &nbsp; &nbsp; buf = array.array('f') # ４バイト浮動小数点数
-&nbsp; &nbsp; buf.fromfile(fin, datasize*(tend-tsta+1)) # データの読み込み
+&nbsp; &nbsp; buf.fromfile(fin, datasize * (tend - tsta + 1)) # データの読み込み
 &nbsp; &nbsp; if sys.byteorder == 'little':
 &nbsp; &nbsp; &nbsp; &nbsp; buf.byteswap()
 # bufからlistに変換し、x-, y-の配列に
-d = np.array(buf.tolist()).reshape(jdim,idim)
+d = np.array(buf.tolist()).reshape(jdim, idim)
 </pre>
 ４バイト浮動小数点数の場合の書式（'f'）<br />
 sys.byteorderを使い、ビックエンディアンとリトルエンディアンを判定（システムがリトルエンディアンの場合にビックエンディアンとして読み込むようにしている）<br />
-ここではデータの先頭番号が１としているが、先頭番号を０としたい場合には、tsta-1をtstaに変える
+ここではデータの先頭番号が１としているが、先頭番号を０としたい場合には、tsta - 1をtstaに、tend - tsta + 1をtend - tstaに変える
 </li>
 </ul>
 </div>
@@ -486,7 +486,7 @@ d = hdf['データセットの名前'][:, :] # データセットの名前に対
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/10/06</p>
+<p>最終更新日：2021/10/07</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
