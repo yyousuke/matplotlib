@@ -196,6 +196,17 @@ dはlistやnumpyのndarrayなど</li><br />
 <li>カンマ区切りではなくタブ区切りで出力する（TSVファイルにする）
 <pre>pd.DataFrame(d).to_csv("ファイル名", sep='\t')</pre>
 sepで区切り文字をタブにする</li><br />
+<li>複数のndarrayからDataFrameを作成して書き出す
+<pre>
+df = pd.DataFrame(
+    {
+        'index': np.array(index),
+        'mean': np.array(dmean),
+        'std': np.array(dstd)
+    },
+    dtype='float')
+df.to_csv("ファイル名")</pre>
+indexは時刻データ、meanは平均値、stdは標準偏差の場合で、ヘッダ行ありで書き出す</li><br />
 </ul>
 </div>
 
@@ -486,7 +497,7 @@ d = hdf['データセットの名前'][:, :] # データセットの名前に対
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/10/07</p>
+<p>最終更新日：2021/10/08</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
