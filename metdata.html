@@ -44,6 +44,13 @@
       <li><a href="#csv_1_6">CSVファイルとして書き出す</a></li>
      </ul>
   </li></ul>
+  <!--  JSONファイル -->
+  <ul class="list1"><li><a href="#json_1">JSONファイル</a>
+    <ul class="list2">
+      <li><a href="#json_1_1">JSONファイルの形式</a></li>
+      <li><a href="#json_1_2">JSONファイルの読み込み</a></li>
+     </ul>
+  </li></ul>
   <!--  バイナリファイル -->
   <ul class="list1"><li><a href="#bin_1">バイナリファイル</a>
     <ul class="list2">
@@ -209,6 +216,43 @@ df.to_csv("ファイル名")</pre>
 indexは時刻データ、meanは平均値、stdは標準偏差の場合で、ヘッダ行ありで書き出す</li><br />
 </ul>
 </div>
+
+
+<!-- JSONファイル -->
+<h3><div class="headline1" id="json_1">JSONファイル</div></h3>
+<h4><div class="headline2" id="json_1_1">JSONファイルの形式</div></h4>
+<div class="text1">
+データの名前（キー）とデータの組み合わせを決められたフォーマットで記述し、階層構造を持たせたテキストデータ
+<pre>
+{"時刻1":{
+&nbsp; &nbsp; {"キー1":"データ1"},
+&nbsp; &nbsp; {"キー2":"データ2"},
+&nbsp; &nbsp; {"キー3":["データ3-1","データ3-2","データ3-3"]},
+&nbsp; &nbsp; ...},
+"時刻2":{
+&nbsp; &nbsp; {"キー1":"データ1"},
+&nbsp; &nbsp; {"キー2":"データ2"},
+&nbsp; &nbsp; {"キー3":["データ3-1","データ3-2","データ3-3"]},
+&nbsp; &nbsp; ...},
+...
+}
+</pre>
+＊時刻毎に複数のデータが入っている場合
+</div>
+
+<h4><div class="headline2" id="json_1_2">JSONファイルの読み込み</div></h4>
+<div class="text1">
+jsonモジュールを使う
+<pre>import pandas as pd
+import json
+with open(‘’ファイル名, 'rt') as fin:
+&nbsp; &nbsp; data = fin.read()
+df = pd.DataFrame(json.loads(data))</pre>
+データの名前を指定する場合
+<pre>obj = json.loads(data)
+df = pd.DataFrame(obj[‘データ名’])</pre>
+</div>
+
 
 
 <!--  バイナリファイル -->
@@ -497,7 +541,7 @@ d = hdf['データセットの名前'][:, :] # データセットの名前に対
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/10/08</p>
+<p>最終更新日：2021/10/11</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
