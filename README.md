@@ -2,7 +2,7 @@
 
 http://ebcrpa.jamstec.go.jp/~yyousuke/matplotlib/ の2020年3月19日版に対して更新を行っています。
 
-Webページとして表示する場合には、暫定版ですが、https://yyousuke.github.io/matplotlib/ を開いてください。
+Webページとして表示する場合には、https://yyousuke.github.io/matplotlib/ を開いてください。
 
 （ダウンロードかクローンしてローカルで開くことも可能です）
 
