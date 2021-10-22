@@ -75,6 +75,7 @@
       <li><a href="#basemap_3_6">文字をプロットする</a></li>
       <li><a href="#basemap_3_7">マーカーをプロットする</a></li>
       <li><a href="#basemap_3_8">マスクアウト処理</a></li>
+      <li><a href="#basemap_3_9">疑似カラープロット</a></li>
     </ul>
   </li></ul>
   <!-- 図の体裁 -->
@@ -383,12 +384,14 @@ Numpyのnp.indicesを使い、経度(lons)、緯度(lats)データを作成し�
 <div class="text1">
 <pre>
 m = Basemap(オプション)
-m.contour(経度データ, 緯度データ, 等高線のデータ)
+x, y = m(経度データ, 緯度データ)
+m.contour(x, y, 等高線のデータ)
 </pre>
 <ul class="list1">
 <li>例：<a href="#basemap_3_1">作成した経度・緯度データ</a>と２次元データ(d)で作図
 <pre>
 m = Basemap()
+x, y = m(lons, lats)
 m.contour(x, y, d)
 </pre>
 </li>
@@ -453,14 +456,15 @@ ZがNumpyのndarrayの場合。最小値よりも小さい最大の整数をnp.f
 <div class="text1">
 <pre>
 m = Basemap(オプション)
-m.contourf(経度データ, 緯度データ, 陰影のデータ)
+x, y = m(経度データ, 緯度データ)
+m.contourf(x, y, 陰影のデータ)
 </pre>
 </div>
 
 <h4><div class="headline2" id="basemap_3_4">陰影にカラーバーを付ける</div></h4>
 <div class="text1">
 <pre>
-cs = m.contourf(経度データ, 緯度データ, 陰影のデータ)
+cs = m.contourf(x, y, 陰影のデータ)
 cbar = m.colorbar(cs)
 cbar.set_label('カラーバーのラベルに表示する文字列')
 </pre>
@@ -472,7 +476,8 @@ cbar.set_label('カラーバーのラベルに表示する文字列')
 <div class="text1">
 <pre>
 m = Basemap(オプション)
-m.barbs(経度データ, 緯度データ, 東西風データ, 南北風データ)
+x, y = m(経度データ, 緯度データ)
+m.barbs(x, y, 東西風データ, 南北風データ)
 </pre>
 <ul class="list1">
 <li>例：２次元データlons, lats, u, vから矢羽をプロット
@@ -579,6 +584,17 @@ dfはmaskと同じサイズの2次元配列</li>
 </ul>
 </div>
 
+<h4><div class="headline2" id="basemap_3_9">疑似カラープロット</div></h4>
+<div class="text1">
+<pre>
+m = Basemap(オプション)
+x, y = m(経度データ, 緯度データ)
+m.pcolor(x, y, 東西風データ, データ)
+</pre>
+pcolorの代わりにpcolormeshを使うこともできる
+</div>
+
+
 <!-- 図の体裁 -->
 <h3><div class="headline1" id="basemap_e">図の体裁</div></h3>
 <h4><div class="headline2" id="basemap_e_1">タイトルを付ける</div></h4>
@@ -641,7 +657,7 @@ m.contour(x, y, data, clevs, linewidths=0.8, colors='k') # 等高線を描く
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/09/14</p>
+<p>最終更新日：2021/10/22</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
