@@ -483,6 +483,7 @@ m.barbs(x, y, 東西風データ, 南北風データ)
 <li>例：２次元データlons, lats, u, vから矢羽をプロット
 <pre>
 m = Basemap()
+x, y = m(lons, lats)
 m.barbs(x, y, u, v)
 </pre></li>
 <li>例：矢羽を6おきにプロット
