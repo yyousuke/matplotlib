@@ -123,12 +123,12 @@ m.drawparallels(緯度線を引く値のリスト) # 緯度線を引く
 </pre>
 <ul class="list1">
 <li>例：60度毎に経度線を引く
-<pre>m.drawmeridians(np.arange(0,360,60))</pre></li>
+<pre>m.drawmeridians(np.arange(0, 360, 60))</pre></li>
 <li>例：30度毎に緯度線を引く
-<pre>m.drawparallels(np.arange(-90,90,30))</pre></li>
+<pre>m.drawparallels(np.arange(-90, 90, 30))</pre></li>
 <li>例：経度線にラベルを付ける（下側のみ）
 <pre>
-m.drawmeridians(np.arange(0,360,60), labels=[False, False, False, True])
+m.drawmeridians(np.arange(0, 360, 60), labels=[False, False, False, True])
 </pre>
 labels=[False, False, 上側ラベルの有無, 下側ラベルの有無]<br />
 前の２つの要素は反映されない
@@ -145,17 +145,17 @@ labels=[左側のラベルの有無, 右側のラベルの有無, False, False]<
 </li><br />
 <li>例：線を灰色にしてラベルの文字サイズを小さくする
 <pre>
-m.drawmeridians(np.arange(0,360,60), color="gray", fontsize='small', ¥
+m.drawmeridians(np.arange(0, 360, 60), color="gray", fontsize='small', ¥
    labels=[False, False, False, True]) # 経度線を引く
-m.drawparallels(np.arange(-90,90,30), color="gray", fontsize='small', ¥
+m.drawparallels(np.arange(-90, 90, 30), color="gray", fontsize='small', ¥
    labels=[True, False, False, False]) # 緯度線を引く
 </pre>
 色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li>
 <br />
 <li>例：線の色を名前ではなく数字で指定する
 <pre>
-m.drawmeridians(np.arange(0,360,60), color="0.9")
-m.drawparallels(np.arange(-90,90,30), color="0.9")
+m.drawmeridians(np.arange(0, 360, 60), color="0.9")
+m.drawparallels(np.arange(-90, 90, 30), color="0.9")
 </pre>
 黒の"0.0"〜白の"1.0"まで徐々に色が変わる（0.0ではなく文字列"0.0"なので注意）
 </li>
@@ -370,14 +370,26 @@ lat_0は-90から90まで許容されているが、45より大きい値を指�
 <h3><div class="headline1" id="basemap_3">Basemapのデータプロット</div></h3>
 <h4><div class="headline2" id="basemap_3_1">経度・緯度データの作成</div></h4>
 <div class="text1">
+<ul class="list1">
+<li>np.indicesを使い２次元配列を作成<br />
 nlonsが経度方向のデータ数、nlatsが緯度方向のデータ数で、全球の格子点データの場合。緯度方向は北極が先、南極が後の場合。
 <pre>
 delta = 360. / (nlons - 1)
 lats = (90. - delta * np.indices((nlats, nlons))[0, :, :])
+lons = (delta * np.indices((nlats, nlons))[1, :, :])
 m = Basemap(オプション)
 x, y = m(lons, lats)
 </pre>
-Numpyのnp.indicesを使い、経度(lons)、緯度(lats)データを作成し、図法に対応した(x, y)データに変換する
+Numpyのnp.indicesを使い、経度(lons)、緯度(lats)データを作成し、図法に対応した(x, y)データに変換する</li><br />
+<li>経度、緯度の１次元データから作成
+lonが経度の１次元データ、latが緯度の１次元データの場合。
+<pre>
+lons, lats = np.meshgrid(lon, lat)
+m = Basemap(オプション)
+x, y = m(lons, lats)
+</pre>
+</li>
+</ul>
 </div>
 
 <h4><div class="headline2" id="basemap_3_2">等高線を描く</div></h4>
@@ -658,7 +670,7 @@ m.contour(x, y, data, clevs, linewidths=0.8, colors='k') # 等高線を描く
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/10/22</p>
+<p>最終更新日：2021/10/23</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
