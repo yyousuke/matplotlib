@@ -425,16 +425,16 @@ df.ix[0, :]なら、df.iloc[0, :]
 </pre></li>
 <li>ラベルのみで記述していた場合
 <pre>
-df.ix[:,"A"]なら、df.loc[:,"A"]
+df.ix[:,"A"]なら、df.loc[:, "A"]
 </pre></li>
 <li>番号とラベルが混在するものをラベルで
 <pre>
-df.ix[[0,2], "A"]なら、df.loc[df.index[[0,2]], "A"]
+df.ix[[0,2], "A"]なら、df.loc[df.index[[0, 2]], "A"]
 </pre></li>
 <li>番号とラベルが混在するものを番号で
 <pre>
-df.ix[[0,2], "A"]なら、df.iloc[[0,2], df.columns.get_loc("A")]
-df.ix[[0,2], ["A", "B"]なら、df.iloc[[0,2], df.columns.get_indexer(["A", "B"])]
+df.ix[[0, 2], "A"]なら、df.iloc[[0, 2], df.columns.get_loc("A")]
+df.ix[[0, 2], ["A", "B"]なら、df.iloc[[0, 2], df.columns.get_indexer(["A", "B"])]
 </pre></li>
 </ul>
 <font color="red">＊pandasバージョン1.0.0以降では、.ixが廃止されエラーになります</font>
@@ -1076,7 +1076,7 @@ plt.scatter(x軸のデータ1, y軸のデータ2, color='r')</pre>
 <pre>
 import numpy as np
 corr = np.corrcoef(x軸のデータ, y軸のデータ) # ピアソンの積率相関係数の計算
-name = "{s:s}{f:4.3f}".format(s="r = ", f=corr[1,0]) # 表示するテキスト設定
+name = "{s:s}{f:4.3f}".format(s="r = ", f=corr[1, 0]) # 表示するテキスト設定
 plt.text(テキストのx座標, テキストのy座標, name, fontsize=14, color='k') # 相関係数を表示</pre>
 <a href="#text_1">plt.text()</a>でnameに入れた文字列を表示する。
 </div>
@@ -2460,7 +2460,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/08/28</p>
+<p>最終更新日：2021/10/24</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
