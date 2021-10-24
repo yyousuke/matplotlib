@@ -425,11 +425,11 @@ df.ix[0, :]なら、df.iloc[0, :]
 </pre></li>
 <li>ラベルのみで記述していた場合
 <pre>
-df.ix[:,"A"]なら、df.loc[:, "A"]
+df.ix[:, "A"]なら、df.loc[:, "A"]
 </pre></li>
 <li>番号とラベルが混在するものをラベルで
 <pre>
-df.ix[[0,2], "A"]なら、df.loc[df.index[[0, 2]], "A"]
+df.ix[[0, 2], "A"]なら、df.loc[df.index[[0, 2]], "A"]
 </pre></li>
 <li>番号とラベルが混在するものを番号で
 <pre>
@@ -2460,7 +2460,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/10/24</p>
+<p>最終更新日：2021/10/25</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
