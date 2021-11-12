@@ -44,6 +44,14 @@
       <li><a href="#csv_1_6">CSVファイルとして書き出す</a></li>
      </ul>
   </li></ul>
+  <!--  TSVファイル -->
+  <ul class="list1"><li><a href="#tsv_1">TSVファイル</a>
+    <ul class="list2">
+      <li><a href="#tsv_1_1">TSVファイルの形式</a></li>
+      <li><a href="#tsv_1_2">TSVファイルの読み込み</a></li>
+      <li><a href="#tsv_1_3">TSVファイルとして書き出す</a></li>
+     </ul>
+  </li></ul>
   <!--  JSONファイル -->
   <ul class="list1"><li><a href="#json_1">JSONファイル</a>
     <ul class="list2">
@@ -201,7 +209,7 @@ dはlistやnumpyのndarrayなど</li><br />
 <li>ヘッダを付けない
 <pre>pd.DataFrame(d).to_csv("ファイル名", header=False)</pre>
 1行目にヘッダ行が入らないファイルができる</li><br />
-<li>カンマ区切りではなくタブ区切りで出力する（TSVファイルにする）
+<li>カンマ区切りではなくタブ区切りで出力する（<a href="#tsv_1">TSVファイル</a>にする）
 <pre>pd.DataFrame(d).to_csv("ファイル名", sep='\t')</pre>
 sepで区切り文字をタブにする</li><br />
 <li>複数のndarrayからDataFrameを作成して書き出す
@@ -217,6 +225,52 @@ df.to_csv("ファイル名")</pre>
 indexは時刻データ、meanは平均値、stdは標準偏差の場合で、ヘッダ行ありで書き出す</li><br />
 </ul>
 </div>
+
+
+<!-- TSVファイル -->
+<h3><div class="headline1" id="tsv_1">TSVファイル</div></h3>
+<h4><div class="headline2" id="tsv_1_1">TSVファイルの形式</div></h4>
+<div class="text1">
+タブ区切りのテキストデータ
+<pre>
+時刻&lt;tab&gt;項目&lt;tab&gt;項目2&lt;tab&gt;項目3
+時刻1&lt;tab&gt;データ1-1&lt;tab&gt;データ1-2&lt;tab&gt;データ1-3
+時刻2&lt;tab&gt;データ2-1&lt;tab&gt;データ2-2&lt;tab&gt;データ2-3
+...
+</pre>
+＊&lt;tab&gt;は制御文字のHT（Horizontal Tabulation：水平タブ）を表す
+</div>
+
+<h4><div class="headline2" id="tsv_1_2">TSVファイルの読み込み</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>ヘッダ有りの場合
+<pre>df = pd.read_csv("ファイル名", sep='\t')</pre>
+ヘッダが列の名前になる</li><br />
+<li>ヘッダ無しの場合
+<pre>df = pd.read_csv("ファイル名", sep='\t', header=None)</pre>
+</li>
+<li>ヘッダ無しのファイルを読み込み列の名前を付ける場合
+<pre>df = pd.read_csv("ファイル名", sep='\t', header=None, names=('列1の名前', '列2の名前'))</pre>
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="tsv_1_3">TSVファイルとして書き出す</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>DataFrameを書き出す
+<pre>pd.DataFrame(d).to_csv("ファイル名", sep='\t')</pre>
+dはlistやnumpyのndarrayなど</li><br />
+<li>indexを無効にしてから書き出す
+<pre>pd.DataFrame(d).to_csv("ファイル名", sep='\t', index=False)</pre>
+1列目に番号などが入らないファイルができる</li><br />
+<li>ヘッダを付けない
+<pre>pd.DataFrame(d).to_csv("ファイル名", sep='\t', header=False)</pre>
+1行目にヘッダ行が入らないファイルができる</li>
+</ul>
+</div>
+
 
 
 <!-- JSONファイル -->
@@ -559,7 +613,7 @@ d = hdf['データセットの名前'][:, :] # データセットの名前に対
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/11/02</p>
+<p>最終更新日：2021/11/12</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
