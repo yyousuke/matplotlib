@@ -215,12 +215,12 @@ sepで区切り文字をタブにする</li><br />
 <li>複数のndarrayからDataFrameを作成して書き出す
 <pre>
 df = pd.DataFrame(
-    {
-        'index': np.array(index),
-        'mean': np.array(dmean),
-        'std': np.array(dstd)
-    },
-    dtype='float')
+&nbsp; &nbsp; {
+&nbsp; &nbsp; &nbsp; &nbsp; 'index': np.array(index),
+&nbsp; &nbsp; &nbsp; &nbsp; 'mean': np.array(dmean),
+&nbsp; &nbsp; &nbsp; &nbsp; 'std': np.array(dstd)
+&nbsp; &nbsp; },
+&nbsp; &nbsp; dtype='float')
 df.to_csv("ファイル名")</pre>
 indexは時刻データ、meanは平均値、stdは標準偏差の場合で、ヘッダ行ありで書き出す</li><br />
 </ul>
@@ -613,7 +613,7 @@ d = hdf['データセットの名前'][:, :] # データセットの名前に対
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/11/12</p>
+<p>最終更新日：2021/11/18</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>

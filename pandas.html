@@ -23,6 +23,22 @@
 
 <body link="#0000FF" vlink="#0000FF">
 
+<h3><div class="headline1" id="display">表示数を増やす</div></h3>
+<div class="text1">
+<ul class="list1">
+<li>現在の最大列数を表示
+<pre>print(pd.get_option("display.max_columns"))</pre></li>
+<li>最大列数を50列にする
+<pre>pd.set_option('display.max_columns', 50)</pre></li>
+<li>現在の最大行数を表示
+<pre>print(pd.get_option("display.max_rows"))</pre></li>
+<li>最大行数を50行にする
+<pre>pd.set_option('display.max_rows', 50)</pre></li>
+</ul>
+</div>
+<br />
+<br />
+
 <h3><div class="headline1" id="df_create">DataFrameの作成</div></h3>
 <div class="text1">
 <ul class="list1">
