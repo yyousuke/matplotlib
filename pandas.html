@@ -106,6 +106,16 @@ dfが２次元配列の場合。axis=1の0番目の要素を選択し、dataで�
 <pre>df[qa &lt; 50] = np.nan</pre>
 qaはdfと同じサイズの配列
 </li><br />
+<li>文字列の置き換え（正規表現を含む）
+<pre>df.iloc[:, 0].str.replace("文字列（正規表現を含む）", "置換する文字列", regex=True)</pre>
+dfのaxis=1の0番目の要素を全て置き換える
+</li><br />
+<li>文字列の置き換え（正規表現を含まない）
+<pre>df.iloc[:, 0].str.replace("文字列（正規表現を含まない）", "置換する文字列", regex=False)</pre>
+</li><br />
+<li>文字列の置き換え（大文字小文字を区別する）
+<pre>df.iloc[:, 0].str.replace("文字列", "置換する文字列", regex=False, case=True)</pre>
+</li><br />
 </ul>
 </div>
 <br />

@@ -478,12 +478,14 @@ dfはpandasのDataFrame
 <pre>
 df.iloc[:, i].str.replace("文字列（正規表現を含む）", "置換する文字列", regex=True)
 </pre>
+axis=1の0番目の要素を全て置き換える<br />
 文字列に正規表現を含む場合はregex=Trueが必須
 </li><br />
 <li>変更後（文字列のみならregex=Falseでもよい）
 <pre>
-df.iloc[:, i].str.replace("文字列（正規表現を含まない）", "置換する文字列", regex=False)
+df.iloc[:, 0].str.replace("文字列（正規表現を含まない）", "置換する文字列", regex=False)
 </pre>
+axis=1の0番目の要素を全て置き換える
 </li><br />
 </ul>
 </li><br />
