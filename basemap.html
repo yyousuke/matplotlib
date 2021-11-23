@@ -267,6 +267,16 @@ resolution='c'（coarse、粗い解像度）、resolution='l'（low、低解像�
 </ul>
 </div>
 
+<h4><div class="headline2" id="basemap_1_11">BasemapのWarningを消す</div></h4>
+<div class="text1">
+MatplotlibDeprecationWarningが出る場合
+<pre>
+import warnings
+warnings.filterwarnings('ignore', category=matplotlib.MatplotlibDeprecationWarning)
+</pre>
+</div>
+
+
 
 <!-- Basemapの地図 -->
 <h3><div class="headline1" id="basemap_2">Basemapの地図</div></h3>
@@ -670,7 +680,7 @@ m.contour(x, y, data, clevs, linewidths=0.8, colors='k') # 等高線を描く
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/10/25</p>
+<p>最終更新日：2021/11/22</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
