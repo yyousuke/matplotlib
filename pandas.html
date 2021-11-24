@@ -121,5 +121,34 @@ dfのaxis=1の0番目の要素を全て置き換える
 <br />
 <br />
 
+<h3><div class="headline1" id="df_sort">データの並べ替え</div></h3>
+<div class="text1">
+DataFrameのsort_values()を使う
+<ul class="list1">
+<li>基準となる列のラベルを指定して並べ替える
+<pre>df_2 = df.sort_values('列の名前')</pre>
+デフォルトは昇順
+</li><br />
+<li>降順で並べ替える
+<pre>df_2 = df.sort_values('列の名前', ascending=False)</pre>
+</li><br />
+<li>複数列を基準として並べ替える
+<pre>df_2 = df.sort_values(['列の名前1', 列の名前2'])</pre>
+列のリストの後ろから順にソートされる
+</li><br />
+<li>複数列で昇順・降順を指定する
+<pre>df_2 = df.sort_values(['列の名前1', 列の名前2'], ascending=[False, True])</pre>
+列の名前1は降順、列の名前2は昇順
+</li><br />
+<li>欠損値を最初に並べる
+<pre>df_2 = df.sort_values('列の名前', na_position='first')</pre>
+デフォルトでは最後に並ぶ
+</li><br />
+</ul>
+</div>
+<br />
+<br />
+
+
 </body>
 </html>
