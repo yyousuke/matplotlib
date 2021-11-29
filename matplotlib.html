@@ -438,7 +438,7 @@ df.ix[[0, 2], "A"]なら、df.iloc[[0, 2], df.columns.get_loc("A")]
 df.ix[[0, 2], ["A", "B"]なら、df.iloc[[0, 2], df.columns.get_indexer(["A", "B"])]
 </pre></li>
 </ul>
-<font color="red">＊pandasバージョン1.0.0以降では、.ixが廃止されエラーになります</font>
+<font color="red">＊pandasバージョン1.0.0以降では、.ixが廃止されエラーになる</font>
 </li><br />
 <!-- 4 -->
 <li> MatplotlibDeprecationWarning: You are modifying the state of a globally registered colormap.の警告が出る場合
@@ -489,6 +489,19 @@ axis=1の0番目の要素を全て置き換える
 </li><br />
 </ul>
 </li><br />
+	<!-- 7 -->
+<li> pcolorで警告が出る場合<br>
+matplotlib 3.3以降、pcolorでshadingオプションの警告が出るようになった（3.5以降ではエラーとなる予定）
+<ul class="list2">
+<li>変更前
+<pre>plt.pcolor(x, y, d, cmap='jet')</pre>
+x, y, dは２次元のndarray
+</li><br />
+<li>変更後（shading='auto'のオプションを付ける）
+<pre>plt.pcolor(x, y, d, cmap='jet', shading='auto')</pre>
+</li><br />
+</ul>
+</li>
 </ul>
 </div>
 
@@ -2502,7 +2515,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/11/21</p>
+<p>最終更新日：2021/11/29</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
