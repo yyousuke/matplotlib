@@ -470,7 +470,15 @@ clevels = cs.levels
 cs.clabel(clevels, fontsize=12, fmt="%.1f")
 </pre>
 ラベルは1.5毎に付け、小数点以下第一位まで表示（fmt="%.1f"）<br />
-ZがNumpyのndarrayの場合。最小値よりも小さい最大の整数をnp.floor(Z.min())、最大値よりも大きい最小の整数をnp.ceil(Z.max())で取得、<a href="numpy.html#math">Numpyの数学関数</a>、<a href="numpy.html#stat">Numpyの統計処理</a>参照</li>
+ZがNumpyのndarrayの場合。最小値よりも小さい最大の整数をnp.floor(Z.min())、最大値よりも大きい最小の整数をnp.ceil(Z.max())で取得、<a href="numpy.html#math">Numpyの数学関数</a>、<a href="numpy.html#stat">Numpyの統計処理</a>参照</li><br />
+<li>例：等高線を4hPa毎の細線、等高線ラベルを20hPa毎の太線に付ける
+<pre>
+levels = np.arange(960, 1061, 4) # 値のリスト作成
+cs = m.contour(x, y, d, levels=levels, colors='k', linewidths=[1.2, 0.8, 0.8, 0.8, 0.8]) # 4hPaの等高線を描く
+cs.clabel(cs.levels[::5], fmt="%d", fontsize=12) # 5飛ばし（20 hPa毎）にラベルを付ける
+</pre>
+dはSLPデータ、linewidths=[1.2, 0.8, 0.8, 0.8, 0.8]とすることで、4hPa毎の細線、20hPa毎の太線を描く
+</li><br />
 </ul>
 </div>
 
@@ -482,7 +490,37 @@ x, y = m(経度データ, 緯度データ)
 m.contourf(x, y, 陰影のデータ)
 </pre>
 経度データ、緯度データ、陰影のデータは２次元
+<ul class="list1">
+<li>例：<a href="#basemap_3_1">作成した経度・緯度データ</a>と陰影のデータ（d）で作図
+<pre>
+m = Basemap()
+x, y = m(lons, lats)
+m.contourf(x, y, d)
+</pre>
+</li>
+<li>例：陰影を付ける値を指定する
+<pre>
+m.contourf(x, y, d, levels=[値1, 値2, 値3, ...])
+</pre>
+</li>
+<li>例：陰影を4の倍数で付ける
+<pre>
+import math
+levels = range(math.floor(d.min() - d.fmod(d.min(), 4)), math.ceil(d.max()) + 1, 4)
+m.contourf(x, y, d, levels=levels)
+</pre>
+dがNumpyのndarrayの場合<br />
+最小値よりも小さい最大の整数をmath.floor(d.min())、最大値よりも大きい最小の整数をmath.ceil(d.max())で取得</li><br />
+<li>例：色テーブル（'jet'）を使って陰影を付ける
+<pre>
+cmap = plt.get_cmap('jet')  # 色テーブル取得
+m.contourf(x, y, d, levels=levels, cmap=cmap)
+</pre>
+色テーブルは<a href="./options.html#cmap">色テーブルの一覧</a>参照
+</li><br />
+</ul>
 </div>
+
 
 <h4><div class="headline2" id="basemap_3_4">陰影にカラーバーを付ける</div></h4>
 <div class="text1">
@@ -493,6 +531,38 @@ cbar.set_label('カラーバーのラベルに表示する文字列')
 </pre>
 カラーバーの調整方法については、<a href="matplotlib.html#colorbar_1">カラーバー</a>参照<br />
 （plt.colorbarと同じオプションを使用可能）
+<ul class="list1">
+<li>例：カラーバーの下限以下と上限以上の色を指定する
+<pre>
+cmap = plt.get_cmap('jet')  # 色テーブル取得
+cmap.set_under('gray') # 下限を下回った場合の色を指定
+cmap.set_over('brown')  # 上限を超えた場合の色を指定
+cs = m.contourf(x, y, d, cmap=cmap, extend='both')
+cbar = m.colorbar(cs) # カラーバーを描く
+cbar.set_label('カラーバーのラベルに表示する文字列')
+</pre>
+陰影のデータd<br />
+指定可能な色の名前は<a href="./options.html#color">色の名前一覧</a>参照<br />
+</li><br />
+<li>例：カラーバーの下限以下の色のみを指定する
+<pre>
+cmap = plt.get_cmap('drywet')  # 色テーブル取得
+cmap.set_under('w') # 下限を下回った場合の色を指定
+cs = m.contourf(x, y, d, cmap=cmap, extend='min')
+cbar = m.colorbar(cs) # カラーバーを描く
+cbar.set_label('カラーバーのラベルに表示する文字列')
+</pre>
+</li><br />
+<li>例：カラーバーの上限以上の色のみを指定する
+<pre>
+cmap = plt.get_cmap('bwr')  # 色テーブル取得
+cmap.set_over('brown')  # 上限を超えた場合の色を指定
+cs = m.contourf(x, y, d, cmap=cmap, extend='max')
+cbar = m.colorbar(cs) # カラーバーを描く
+cbar.set_label('カラーバーのラベルに表示する文字列')
+</pre>
+</li><br />
+</ul>
 </div>
 
 <h4><div class="headline2" id="basemap_3_5">矢羽をプロットする</div></h4>
@@ -702,7 +772,7 @@ m.contour(x, y, data, clevs, linewidths=0.8, colors='k') # 等高線を描く
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/11/29</p>
+<p>最終更新日：2021/12/01</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>

@@ -489,7 +489,7 @@ axis=1の0番目の要素を全て置き換える
 </li><br />
 </ul>
 </li><br />
-	<!-- 7 -->
+<!-- 7 -->
 <li> pcolorで警告が出る場合<br>
 matplotlib 3.3以降、pcolorでshadingオプションの警告が出るようになった（3.5以降ではエラーとなる予定）
 <ul class="list2">
@@ -1386,7 +1386,7 @@ cs.clabel(cs.levels[::2], fmt="%d", fontsize=12) # ４の倍数の値にラベ�
 <pre>
 # levelsに4の倍数をリストとして入れる
 levels = range(math.floor(Z.min() - math.fmod(Z.min(), 4)), math.ceil(Z.max()) + 1, 4)
-cs = plt.contour(X, Y, Z, colors='k', levels=levels, linewidths=[1.2, 0.8, 0.8, 0.8, 0.8]) # 等高線を描く
+cs = plt.contour(X, Y, Z, colors='k', levels=levels, linewidths=[1.2, 0.8, 0.8, 0.8, 0.8]) # 4hPaの等高線を描く
 cs.clabel(cs.levels[::5], fmt="%d", fontsize=12) # 5飛ばし（20 hPa毎）にラベルを付ける
 </pre></li>
 </ul>
@@ -2515,7 +2515,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/11/29</p>
+<p>最終更新日：2021/12/01</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
