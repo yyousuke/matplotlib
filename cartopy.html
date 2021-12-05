@@ -364,29 +364,28 @@ ax.set_extent([100, 170, 10, 70]) # 領域の限定
 <h3><div class="headline1" id="cartopy_3">cartopyのデータプロット</div></h3>
 <h4><div class="headline2" id="cartopy_3_1">経度・緯度データの作成</div></h4>
 <div class="text1">
-<a href="basemap.html#basemap_3_1">Basemapの経度・緯度データの作成</a>と同じ
 <ul class="list1">
-<li>np.indicesを使い２次元配列を作成<br />
+<li>np.meshgridを使い２次元配列を作成<br />
 nlonsが経度方向のデータ数、nlatsが緯度方向のデータ数で、全球の格子点データの場合。緯度方向は北極が先、南極が後の場合。
 <pre>
 delta = 360. / (nlons - 1)
-lats = (90. - delta * np.indices((nlats, nlons))[0, :, :])
-lons = (delta * np.indices((nlats, nlons))[1, :, :])
-m = Basemap(オプション)
-x, y = m(lons, lats)
+lon = delta * np.arange(nlons) # １次元の経度データ
+lat = 90. - delta * np.arange(nlons) # １次元の緯度データ
+x, y = np.meshgrid(lon - 180.0, lat) # ２次元の経度・緯度座標の準備
 </pre>
-Numpyのnp.indicesを使い、経度(lons)、緯度(lats)データを作成し、図法に対応した(x, y)データに変換する。</li><br />
-<li>経度、緯度の１次元データから作成
+Numpyのnp.meshgridを使い、経度(lons)、緯度(lats)データを作成する。<br />
+１次元目が緯度、２次元目が−180度を開始点とする経度の２次元データになる。</li><br />
+<li>NetCDFファイルから読み込んだ経度、緯度の１次元データから作成
 lonが経度の１次元データ、latが緯度の１次元データの場合。
 <pre>
-lons, lats = np.meshgrid(lon, lat)
-m = Basemap(オプション)
-x, y = m(lons, lats)
+nc = netCDF4.Dataset('ファイル名', 'r') # NetCDFファイルを開く
+lon = nc.variables["lon"][:] # 経度データ読み込み
+lat = nc.variables["lat"][:] # 緯度データ読み込み
+x, y = np.meshgrid(lon - 180.0, lat) # ２次元の経度・緯度座標の準備
 </pre>
 １次元目が緯度、２次元目が経度の２次元データになる。</li>
 </ul>
 <br />
-
 </div>
 
 <h4><div class="headline2" id="cartopy_3_2">等高線を描く</div></h4>
@@ -661,7 +660,7 @@ for pref in prefs:
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/11/22</p>
+<p>最終更新日：2021/12/05</p>
 <p>Copyright (C) 2019-2021, Yousuke Yamashita</p>
 </footer>
 </html>
