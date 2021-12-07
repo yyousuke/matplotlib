@@ -51,7 +51,18 @@
 &nbsp; &nbsp; },
 &nbsp; &nbsp; dtype='float')
 </pre>
-インデックスをindex、平均値をdmean、標準偏差をdstdに格納した場合
+インデックスをindex、平均値をdmean、標準偏差をdstdに格納した場合<br />
+dtype=np.float32等も可能
+</li><br />
+<li>indexがDatetimeIndexの場合
+<pre>df = pd.DataFrame(
+&nbsp; &nbsp; {
+&nbsp; &nbsp; &nbsp; &nbsp; 'index': list(index),
+&nbsp; &nbsp; &nbsp; &nbsp; 'mean': np.array(dmean),
+&nbsp; &nbsp; &nbsp; &nbsp; 'std': np.array(dstd)
+&nbsp; &nbsp; })
+</pre>
+dtypeの指定を行うと警告が出る
 </li><br />
 <li>csvファイルから作成する方法
 <pre>df = pd.read_csv(file_name)</pre></li>
@@ -82,6 +93,10 @@
 <pre>df_new = df.resample('D').mean()</pre></li>
 <li>時間軸のデータを日毎に合計する方法
 <pre>df_new = df.resample('D').sum()</pre></li>
+<li>時間軸のデータを月平均する方法
+<pre>df_new = df.resample('M').mean()</pre></li>
+<li>時間軸のデータを月毎に合計する方法
+<pre>df_new = df.resample('M').sum()</pre></li>
 </ul>
 </div>
 <br />

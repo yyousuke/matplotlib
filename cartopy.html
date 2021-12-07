@@ -425,13 +425,6 @@ cs = ax.contour(x, y, d,  levels=clevs) # 等高線を描く
 </pre>
 dがNumpyのndarrayの場合。最小値よりも小さい最大の整数をnp.floor(d.min())、最大値よりも大きい最小の整数をnp.ceil(d.max())で取得、<a href="numpy.html#math">Numpyの数学関数</a>、<a href="numpy.html#stat">Numpyの統計処理</a>参照
 </li><br />
-<li>例：等高線を4hPa毎の細線、等高線ラベルを20hPa毎の太線に付ける
-<pre>
-levels = np.arange(960, 1061, 4) # 値のリスト作成
-cs = ax.contour(x, y, d, levels=levels, colors='k', linewidths=[1.2, 0.8, 0.8, 0.8, 0.8]) # 4hPaの等高線を描く
-cs.clabel(cs.levels[::5], fmt="%d", fontsize=12) # 5飛ばし（20 hPa毎）にラベルを付ける
-</pre>
-</li><br />
 </ul>
 </div>
 
@@ -472,7 +465,15 @@ clevels = cs.levels # ラベルを付ける値
 cs.clabel(clevels, fontsize=12, fmt="%.1f") #  等高線ラベル
 </pre>
 ラベルは1.5毎に付け、小数点以下第一位まで表示（fmt="%.1f"）<br />
-</li></ul>
+</li><br />
+<li>例：等高線を4hPa毎の細線、等高線ラベルを20hPa毎の太線に付ける
+<pre>
+levels = np.arange(960, 1061, 4) # 値のリスト作成
+cs = ax.contour(x, y, d, levels=levels, colors='k', linewidths=[1.2, 0.8, 0.8, 0.8, 0.8]) # 4hPaの等高線を描く
+cs.clabel(cs.levels[::5], fmt="%d", fontsize=12) # 5飛ばし（20 hPa毎）にラベルを付ける
+</pre>
+</li><br />
+</ul>
 </div>
 
 <h4><div class="headline2" id="cartopy_3_4">陰影を描く</div></h4>
@@ -667,7 +668,7 @@ for pref in prefs:
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/12/06</p>
+<p>最終更新日：2021/12/07</p>
 <p>Copyright (C) 2019-2021, Yousuke Yamashita</p>
 </footer>
 </html>
