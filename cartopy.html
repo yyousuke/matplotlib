@@ -486,10 +486,10 @@ ax.contourf(経度データ, 緯度データ, 陰影のデータ)
 <li>例：<a href="#cartopy_3_1">作成した経度・緯度データ</a>と２次元の等高線データ(d)で作図
 <pre>ax.contourf(x, y, d)</pre></li>
 <li>例：陰影を描く値を指定する
-<pre>ax.contour(x, y, slp_jul, clevs, levels=[0, 1, 2, 3, 4, 5, 6])</pre>
+<pre>ax.contourf(x, y, d, clevs, levels=[0, 1, 2, 3, 4, 5, 6])</pre>
 等高線は0から5まで1毎に描く（levelsで指定、描く値より１大きく設定する）</li><br />
 <li>例：陰影の色テーブルを指定する（青〜白〜赤と変化）
-<pre>ax.contour(x, y, slp_jul, clevs, cmap='bwr')</pre>
+<pre>ax.contourf(x, y, d, clevs, cmap='bwr')</pre>
 色テーブルは<a href="./options.html#cmap">色テーブルの一覧</a>参照
 </li><br />
 </ul>
@@ -668,7 +668,7 @@ for pref in prefs:
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/12/07</p>
+<p>最終更新日：2021/12/08</p>
 <p>Copyright (C) 2019-2021, Yousuke Yamashita</p>
 </footer>
 </html>
