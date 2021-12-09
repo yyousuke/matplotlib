@@ -40,11 +40,13 @@
       <li><a href="#cartopy_1_1">cartopyのモジュール</a></li>
       <li><a href="#cartopy_1_2">cartopyを呼び出す</a></li>
       <li><a href="#cartopy_1_3">cartopyで経度線・緯度線を描く</a></li>
-      <li><a href="#cartopy_1_4">cartopyで海岸線を描く</a></li>
-      <li><a href="#cartopy_1_5">cartopyで陸と海、湖を塗り分けて描く</a></li>
-      <li><a href="#cartopy_1_6">cartopyで国境線を描く</a></li>
-      <li><a href="#cartopy_1_7">cartopyで河川を描く</a></li>
-      <li><a href="#cartopy_1_8">cartopyで海岸線を描く際のWarningを消す</a></li>
+      <li><a href="#cartopy_1_4">cartopyの経度線・緯度線に目盛り線ラベルを付ける</a></li>
+      <li><a href="#cartopy_1_5">経度線・緯度線と目盛り線ラベルを別々の間隔で設定する</a></li>
+      <li><a href="#cartopy_1_6">cartopyで海岸線を描く</a></li>
+      <li><a href="#cartopy_1_7">cartopyで陸と海、湖を塗り分けて描く</a></li>
+      <li><a href="#cartopy_1_8">cartopyで国境線を描く</a></li>
+      <li><a href="#cartopy_1_9">cartopyで河川を描く</a></li>
+      <li><a href="#cartopy_1_10">cartopyで海岸線を描く際のWarningを消す</a></li>
     </ul>
   </li></ul>
   <!-- cartopyの地図 -->
@@ -118,10 +120,10 @@ ax = fig.add_subplot(1, 1, 1, projection=ccrs.PlateCarree())  # サブプロッ�
 <pre>
 import matplotlib.ticker as mticker
 gl = ax.gridlines(crs=ccrs.PlateCarree()) # 経度線・緯度線を描く
-gl.xlocator = mticker.FixedLocator(経度線を引く値のリスト)
-gl.ylocator = mticker.FixedLocator(緯度線を引く値のリスト)
+gl.xlocator = mticker.FixedLocator(経度線を引く値のリスト) # 経度線の設定
+gl.ylocator = mticker.FixedLocator(緯度線を引く値のリスト) # 緯度線の設定
 </pre>
-正距円筒図法、ランベルト正積円筒図法のみ対応
+バージョン0.17以前では、正距円筒図法、ランベルト正積円筒図法のみ対応
 <ul class="list1">
 <li>例：60度毎に経度線を引く（バージョン0.18）
 <pre>gl.xlocator = mticker.FixedLocator(np.arange(-180, 180, 30)) </pre>
@@ -141,7 +143,7 @@ gl = ax.gridlines(crs=ccrs.PlateCarree(), linewidth=0.5, linestyle='--', color='
 </pre>
 線の幅はlinewidth、線種はlinestyle、色はcolorで設定<br />
 船種は<a href="./options.html#linestyle">線種一覧</a>、色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li><br />
-<li>例：経度線・緯度線を不透明度0.8の黒点線で描く
+<li>例：経度線・緯度線を不透明度0.8幅1の黒点線で描く
 <pre>
 gl = ax.gridlines(crs=ccrs.PlateCarree(), linewidth=1, linestyle=':', color='k', alpha=0.8)
 </pre>
@@ -150,7 +152,96 @@ gl = ax.gridlines(crs=ccrs.PlateCarree(), linewidth=1, linestyle=':', color='k',
 </ul>
 </div>
 
-<h4><div class="headline2" id="cartopy_1_4">cartopyで海岸線を描く</div></h4>
+<h4><div class="headline2" id="cartopy_1_4">cartopyの経度線・緯度線に目盛り線ラベルを付ける</div></h4>
+<div class="text1">
+<pre>
+import matplotlib.ticker as mticker
+gl = ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=True) # 経度線・緯度線ラベルを有効に
+gl.xlocator = mticker.FixedLocator(経度線を引く値のリスト) # 経度線の設定
+gl.ylocator = mticker.FixedLocator(緯度線を引く値のリスト) # 緯度線の設定
+</pre>
+バージョン0.18以降では、経度線・緯度線ラベルに対応する図法が増えた
+<ul class="list1">
+<li>例：30度毎に経度線・緯度線を不透明度0.8幅1の黒点線で描き、ラベルを付ける
+<pre>
+gl = ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=True, linewidth=1, linestyle=':', color='k', alpha=0.8)
+gl.xlocator = mticker.FixedLocator(np.arange(-180, 180, 30))  # 経度線の設定
+gl.ylocator = mticker.FixedLocator(np.arange(-90, 90, 30))  # 緯度線の設定
+</pre>
+</li>
+<li>図の横軸ラベルが省略されてしまう場合
+<pre>
+fig = plt.figure(figsize=(8, 6)) # 図の横幅を大きくする
+</pre>
+</li>
+<li>例：上と右のラベルを消す
+<pre>
+gl.top_labels = False
+gl.right_labels = False
+</pre>
+</li>
+<li>例：下と左のラベルを消す
+<pre>
+gl.bottom_labels = False
+gl.left_labels = False
+gl.top_labels = True
+gl.right_labels = True
+</pre>
+</li>
+<li>例：0°を中心にすると180°にE/Wが付かないので、150°W〜150°Eにする
+<pre>
+ax = fig.add_subplot(1, 1, 1, projection=ccrs.PlateCarree()) # 0°を中心
+gl = ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=True) # ラベルを付ける
+gl.xlocator = mticker.FixedLocator(np.arange(-150, 180, 30))  # 経度線（150°W〜150°E）
+gl.ylocator = mticker.FixedLocator(np.arange(-90, 90, 30))  # 緯度線
+</pre>
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="cartopy_1_5">経度線・緯度線と目盛り線ラベルを別々の間隔で設定する</div></h4>
+<div class="text1">
+ax.set_xticks、ax.set_yticksを使う
+<pre>
+import matplotlib.ticker as mticker
+gl = ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=False) # 経度線・緯度線ラベルを無効
+gl.xlocator = mticker.FixedLocator(経度線を引く値のリスト) # 経度線
+gl.ylocator = mticker.FixedLocator(緯度線を引く値のリスト) # 緯度線
+ax.set_xticks(経度線ラベルのリスト, crs=ccrs.PlateCarree())  # 経度線ラベル
+ax.set_yticks(緯度線ラベルのリスト, crs=ccrs.PlateCarree())  # 緯度線ラベル
+</pre>
+<ul class="list1">
+<li>例：30度毎に経度線・緯度線を、60度毎に経度線、30度毎に経度線ラベルを付ける
+<pre>
+gl = ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=False) # 経度線・緯度線ラベルを無効
+gl.xlocator = mticker.FixedLocator(np.arange(-180, 180, 30)) # 経度線
+gl.ylocator = mticker.FixedLocator(np.arange(-90, 90.1, 30)) # 緯度線
+ax.set_xticks(np.arange(0, 360.1, 60), crs=ccrs.PlateCarree())  # 経度線ラベル
+ax.set_yticks(np.arange(-90, 90.1, 30), crs=ccrs.PlateCarree())  # 緯度線ラベル
+</pre>
+</li>
+<li>例：目盛り線ラベルの表示形式を度数表記にする
+<pre>
+ax.xaxis.set_major_formatter(LongitudeFormatter(zero_direction_label=True))
+ax.yaxis.set_major_formatter(LatitudeFormatter())
+</pre>
+</li>
+<li>例：目盛り線ラベルのサイズを12ポイントに指定
+<pre>
+ax.axes.tick_params(labelsize=12)
+</pre>
+</li>
+<li>例：目盛り線とラベルを上と右に付ける
+<pre>
+ax.axes.tick_params(top=True, right=True, labeltop=True, labelright=True)
+</pre>
+デフォルトでは下と左に付くので上下左右に目盛り線とラベルが付く<br />
+<a href="options.html#cartopy_tick_params">ax.axes.tick_paramsで変更される箇所</a>参照
+</li><br />
+</ul>
+</div>
+
+<h4><div class="headline2" id="cartopy_1_6">cartopyで海岸線を描く</div></h4>
 <div class="text1">
 <ul class="list1">
 <li>ax.coastlinesを使った方法
@@ -179,7 +270,7 @@ ax.add_feature(cfeature.COASTLINE)
 </li></ul>
 </div>
 
-<h4><div class="headline2" id="cartopy_1_5">cartopyで陸と海、湖を塗り分けて描く</div></h4>
+<h4><div class="headline2" id="cartopy_1_7">cartopyで陸と海、湖を塗り分けて描く</div></h4>
 <div class="text1">
 cartopy.featureを使う
 <pre>
@@ -209,7 +300,7 @@ ax.add_feature(cfeature.OCEAN, zorder=1) # 海に色を付ける
 </ul>
 </div>
 
-<h4><div class="headline2" id="cartopy_1_6">cartopyで国境線を描く</div></h4>
+<h4><div class="headline2" id="cartopy_1_8">cartopyで国境線を描く</div></h4>
 <div class="text1">
 cartopy.featureを使い、陸上に国境線を描く
 <pre>
@@ -223,7 +314,7 @@ ax.add_feature(cfeature.BORDERS) # 国境線を描く
 </ul>
 </div>
 
-<h4><div class="headline2" id="cartopy_1_7">cartopyで河川を描く</div></h4>
+<h4><div class="headline2" id="cartopy_1_9">cartopyで河川を描く</div></h4>
 <div class="text1">
 cartopy.featureを使う
 <pre>
@@ -236,7 +327,7 @@ ax.add_feature(cfeature.RIVERS) # 川を描く
 </ul>
 </div>
 
-<h4><div class="headline2" id="cartopy_1_8">cartopyで海岸線を描く際のWarningを消す</div></h4>
+<h4><div class="headline2" id="cartopy_1_10">cartopyで海岸線を描く際のWarningを消す</div></h4>
 <div class="text1">
 ShapelyDeprecationWarningが出る場合
 <pre>
@@ -668,7 +759,7 @@ for pref in prefs:
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/12/08</p>
+<p>最終更新日：2021/12/09</p>
 <p>Copyright (C) 2019-2021, Yousuke Yamashita</p>
 </footer>
 </html>
