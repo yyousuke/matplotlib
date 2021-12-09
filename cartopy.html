@@ -222,6 +222,7 @@ ax.set_yticks(np.arange(-90, 90.1, 30), crs=ccrs.PlateCarree())  # 緯度線ラ�
 </li>
 <li>例：目盛り線ラベルの表示形式を度数表記にする
 <pre>
+from cartopy.mpl.ticker import LongitudeFormatter, LatitudeFormatter
 ax.xaxis.set_major_formatter(LongitudeFormatter(zero_direction_label=True))
 ax.yaxis.set_major_formatter(LatitudeFormatter())
 </pre>
