@@ -456,8 +456,7 @@ cartopyバージョン0.18以降で対応
 <pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.LambertCylindrical(central_longitude=180.0))</pre></li>
 <li>例：経度線・緯度線ラベルを付ける
 <pre>gl = ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=True)</pre>
-cartopyバージョン0.18以降で対応
-</li><br />
+</li>
 </ul>
 </div>
 
@@ -468,6 +467,9 @@ cartopyバージョン0.18以降で対応
 <ul class="list1">
 <li>例：東経180度を中心に描く場合
 <pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.Miller(central_longitude=180.0))</pre></li>
+<li>例：経度線・緯度線ラベルを付ける
+<pre>gl = ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=True)</pre>
+</li>
 </ul>
 </div>
 
@@ -781,7 +783,7 @@ for pref in prefs:
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/12/11</p>
+<p>最終更新日：2021/12/12</p>
 <p>Copyright (C) 2019-2021, Yousuke Yamashita</p>
 </footer>
 </html>
