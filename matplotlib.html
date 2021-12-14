@@ -726,6 +726,14 @@ ax.plot()でも同じ（axは<a href="#graph_1_2">fig.add_subplot</a>の戻り�
 または
 <pre>plt.plot(x, np.sin(x), linestyle='線種')</pre>
 <a href="./options.html#linestyle">線種の一覧</a>、デフォルト値：'-'（実線）
+<ul class="list1">
+<li>例：破線を描く：
+<pre>plt.plot(x, np.sin(x), linestyle='--')</pre></li>
+<li>例：線の代わりに丸印のマーカーを付ける：
+<pre>plt.plot(x, np.sin(x), linestyle='', marker='o')</pre>
+マーカーについては、<a href="#graph_2_5">折れ線グラフのマークを変える</a>参照
+</li>
+</ul>
 </div>
   
 <h4><div class="headline2" id="graph_2_4">折れ線グラフの太さを変える</div></h4>
@@ -2515,7 +2523,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/12/01</p>
+<p>最終更新日：2021/12/14</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
