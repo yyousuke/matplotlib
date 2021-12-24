@@ -384,8 +384,9 @@ else:
 f.close()
 d = din.reshape(num_rec, jdim, idim)
 </pre>
-ビックエンディアンの４バイト浮動小数点数の場合がdtype='&gt;f4'の書式に対応<br />
-リトルエンディアンの場合にはdtype='&lt;f4'となる
+ビックエンディアンの単精度（４バイト）浮動小数点数の場合がdtype='&gt;f4'の書式に対応<br />
+リトルエンディアンの場合にはdtype='&lt;f4'となる<br />
+コードの一覧は<a href="numpy.html#dtype">Numpyのデータ形式</a>参照
 </li><br />
 <li>arrayを使った方法（指定した時刻データを切り出す）
 <pre>
@@ -429,12 +430,13 @@ np.array(d).tofile("ファイル名", dtype=np.float32)
 単精度（4バイト）浮動小数点型で書き出す場合</li><br />
 <li>データをbig endianで書き出す場合
 <pre>
-np.array(d).astype('&gt;f').tofile("ファイル名")
+np.array(d).astype('&gt;f4').tofile("ファイル名")
 </pre></li>
 <li>データをlittle endianで書き出す場合
 <pre>
-np.array(d).astype('&lt;f').tofile("ファイル名")
-</pre></li>
+np.array(d).astype('&lt;f4').tofile("ファイル名")
+</pre>
+コードの一覧は<a href="numpy.html#dtype">Numpyのデータ形式</a>参照</li>
 </ul>
 </div>
 
@@ -628,7 +630,7 @@ d = hdf['データセットの名前'][:, :] # データセットの名前に対
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/11/24</p>
+<p>最終更新日：2021/12/24</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>

@@ -92,7 +92,19 @@
 <br />
 <br />
 
-
+<!-- Numpyのデータ形式 -->
+<h3><div class="headline1" id="dtype">Numpyのデータ形式</div></h3>
+<div class="text1">
+<ul class="list1">
+<li>Numpyのデータ形式</li>
+<img src="./tables/Table6-4-4.png" width="600" alt="Table" /><br /><br />
+</ul>
+<p>読み込む場合：d = np.fromfile("ファイル名", dtype='コード', count=データサイズ)</p>
+<p>書き出す場合：np.array(d).astype('コード').tofile("ファイル名")</p>
+<p>単精度浮動小数点型のコードはf4をfと省略可能</p>
+</div>
+<br />
+<br />
 
 <!-- Numpyの配列 -->
 <h3><div class="headline1" id="array_1">Numpyの配列</div></h3>
@@ -178,7 +190,7 @@ for ij in itertools.product(i_list, j_list):
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/11/26</p>
+<p>最終更新日：2021/12/24</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
