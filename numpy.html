@@ -39,6 +39,13 @@
   <!--  Numpyの統計処理 -->
   <ul class="list1"><li><a href="#stat">Numpyの統計処理</a>
   </li></ul>
+  <!-- Numpyのデータ形式 -->
+  <ul class="list1"><li><a href="#dtype">Numpyのデータ形式</a>
+    <ul class="list2">
+      <li><a href="#dtype_1">Numpyのデータ型一覧</a></li>
+      <li><a href="#dtype_2">Numpyバイナリデータ読み書きの書式一覧</a></li>
+     </ul>
+  </li></ul>
   <!--  Numpyの配列 -->
   <ul class="list1"><li><a href="#array_1">Numpyの配列</a>
     <ul class="list2">
@@ -94,10 +101,21 @@
 
 <!-- Numpyのデータ形式 -->
 <h3><div class="headline1" id="dtype">Numpyのデータ形式</div></h3>
+<h4><div class="headline2" id="dtype_1">Numpyのデータ型一覧</div></h4>
 <div class="text1">
 <ul class="list1">
-<li>Numpyのデータ形式</li>
+<li>Numpyのデータ型一覧</li>
 <img src="./tables/Table6-4-4.png" width="600" alt="Table" /><br /><br />
+</ul>
+<p>dtype=np.'型コード'</p>
+</div>
+<br />
+
+<h4><div class="headline2" id="dtype_2">Numpyバイナリデータ読み書きの書式一覧</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>Numpyバイナリデータ読み書きの書式一覧</li>
+<img src="./tables/Table6-4-5.png" width="600" alt="Table" /><br /><br />
 </ul>
 <p>読み込む場合：d = np.fromfile("ファイル名", dtype='コード')</p>
 <p>書き出す場合：np.array(d).astype('コード').tofile("ファイル名")</p>
@@ -120,10 +138,13 @@ np.array(var)
 <li>配列ndarrayの作成（定数）<br />
 配列全部を同じ値に初期化する
 <pre>
-np.zeros((ndim, kdim, jdim, idim)) # 全ての要素が0
-np.ones((ndim, kdim, jdim, idim)) # 全ての要素が1
+a = np.zeros((ndim, kdim, jdim, idim)) # 全ての要素が0
+b = np.ones((ndim, kdim, jdim, idim)) # 全ての要素が1
+c = np.ones((ndim, kdim, jdim, idim)) * 10.0 # 全ての要素が10
+d = np.zeros((ndim, kdim, jdim, idim), dtype=np.int32) # 全ての要素が0、整数型を指定
 </pre>
 <p>idim：経度方向のグリッド数、jdim：緯度方向のグリッド数、kdim：高度方向のグリッド数、ndim：時間方向のグリッド数</p>
+<p>Numpyで利用可能な型は<a href="#dtype_1">Numpyのデータ型一覧</a>参照</p>
 </li>
 </ul>
 </div>
@@ -190,7 +211,7 @@ for ij in itertools.product(i_list, j_list):
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/12/24</p>
+<p>最終更新日：2021/12/27</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>

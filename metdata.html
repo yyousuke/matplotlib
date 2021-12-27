@@ -386,7 +386,7 @@ d = din.reshape(num_rec, jdim, idim)
 </pre>
 ビックエンディアンの単精度（４バイト）浮動小数点数の場合がdtype='&gt;f4'の書式に対応<br />
 リトルエンディアンの場合にはdtype='&lt;f4'となる<br />
-コードの一覧は<a href="numpy.html#dtype">Numpyのデータ形式</a>参照
+書式の一覧は<a href="numpy.html#dtype_2">Numpyバイナリデータ読み書きの書式一覧</a>参照</li>
 </li><br />
 <li>arrayを使った方法（指定した時刻データを切り出す）
 <pre>
@@ -436,7 +436,7 @@ np.array(d).astype('&gt;f4').tofile("ファイル名")
 <pre>
 np.array(d).astype('&lt;f4').tofile("ファイル名")
 </pre>
-コードの一覧は<a href="numpy.html#dtype">Numpyのデータ形式</a>参照</li>
+書式の一覧は<a href="numpy.html#dtype_2">Numpyバイナリデータ読み書きの書式一覧</a>参照</li>
 </ul>
 </div>
 
@@ -630,7 +630,7 @@ d = hdf['データセットの名前'][:, :] # データセットの名前に対
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/12/24</p>
+<p>最終更新日：2021/12/27</p>
 <p>Copyright (C) 2018-2021, Yousuke Yamashita</p>
 </footer>
 </html>
