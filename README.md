@@ -7,13 +7,13 @@ Webページとして表示する場合には、https://yyousuke.github.io/matpl
 （ダウンロードかクローンしてローカルで開くことも可能です）
 
 
-## 2021年12月15日版のファイルは以下
+## 2021年12月28日版のファイルは以下
 
     １章　はじめに（matplotlib-1.pdf）
 
     ２章　matplotlibの導入（matplotlib-2.pdf）
 
-    ３章　matplotlibの基本（matplotlib-3.pdf ）
+    ３章　matplotlibの基本（matplotlib-3.pdf）
 
     ４章　折れ線グラフ、棒グラフ、ヒストグラム、散布図（matplotlib-4.pdf）
 
