@@ -64,6 +64,11 @@ dtype=np.float32等も可能
 </pre>
 dtypeの指定を行うと警告が出る
 </li><br />
+<li>別の2次元配列dから作成する場合
+<pre>df = pd.DataFrame(d, index=index_list, columns=columns_list)
+</pre>
+index_listのサイズは行数、columns_listのサイズは列数と一致させる
+</li><br />
 <li>csvファイルから作成する方法
 <pre>df = pd.read_csv(file_name)</pre></li>
 </ul>
