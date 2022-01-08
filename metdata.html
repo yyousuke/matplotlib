@@ -563,13 +563,13 @@ grb1 = grbs.select(forecastTime=1)[0] # 1時間後の０番目の変数
 <a href="https://www.cpc.ncep.noaa.gov/products/wesley/wgrib2/">wgrib2コマンド</a>を使うと、単純バイナリファイルに変換可能。北極が先、下層が先に入ったビックエンディアンの単純バイナリファイルに変換する場合
 <pre>
 % wgrib2 -v 入力ファイル.grb | grep "変数名" | grep "時刻" | sort -nr -k5 -t':' \
-  | wgrib 入力ファイル.grb -i -no_header -order we:ns -ieee -o 出力ファイル.bin
+  | wgrib2 入力ファイル.grb -i -no_header -order we:ns -ieee -o 出力ファイル.bin
 </pre>
 ＊-no_headerはヘッダ無し、-ieeeはビックエンディアン<br />
 ＊-order we:nsで、西から東、北から南の順に並べ替えて出力<br />
 ＊下層が先になるように、sort -nr -k5 -t':'で並べ替えを行っている<br />
 ＊最初のwgrib2は、ファイルの中に含まれる変数をリスト化するためのもので、２回目のwgrib2は、リストを読み込んで入力ファイルからリストに対応するデータをファイルに書き出すためのもの。grepやsortでリストのうち必要な変数の取り出しや並べ替えを行う。<br />
-＊追加書き込みを行う際には、-appendを付ける<br />
+＊追加書き込みを行う際には、wgrib2 入力ファイル.grb -i -no_header -append -order we:ns -ieee -o 出力ファイル.bin<br />
 </div>
 
 
@@ -590,7 +590,7 @@ GRIB1形式は、pythonで直接読むことはできないが、GrADSに付属�
 ＊-nhはヘッダ無し、-ieeeはビックエンディアン<br />
 ＊下層が先になるように、sort -nr -k5 -t':'で並べ替えを行っている<br />
 ＊最初のwgribは、ファイルの中に含まれる変数をリスト化するためのもので、２回目のwgribは、リストを読み込んで入力ファイルからリストに対応するデータをファイルに書き出すためのもの。grepやsortでリストのうち必要な変数の取り出しや並べ替えを行う。<br />
-＊追加書き込みを行う際には、-appendを付ける<br />
+＊追加書き込みを行う際には、wgrib -i -nh -ieee -append 入力ファイル.grb 出力ファイル.bin<br />
 </div>
 
 
@@ -630,7 +630,7 @@ d = hdf['データセットの名前'][:, :] # データセットの名前に対
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/01/02</p>
+<p>最終更新日：2022/01/08</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
