@@ -195,11 +195,11 @@ footer{
 
 @media screen and (max-width: 480px) {
 body{
-	width:450px;
+	width:95%;
 }
 
 .contents{
-	width:450px;
+	width:95%;
 	}
 
 h1{
@@ -220,9 +220,13 @@ h4{
 
 .headline1 {
 	height:21px;
-	width:450px;
+	width:95%;
+	padding-top:0.0em;
+	padding-bottom:0.0em;
 	padding-left:0.5em;
 	margin-left:0.0em;
+	margin-top:0.5em;
+	margin-bottom:0.5em;
 	word-break: break-all;
 	word-wrap: break-word;
 	white-space: pre;
@@ -237,7 +241,7 @@ h4{
 
 .headline2 {
 	height:21px;
-	width:450px;
+	width:95%;
 	padding-left:0.5em;
 	margin-left:0.0em;
 	word-break: break-all;
@@ -263,14 +267,14 @@ h4{
 
 .text1 {
 	font-size:12px;
-	width:450px;
+	width:95%;
 	word-break: break-all;
 	word-wrap: break-word;
 }
 
 .text2 {
 	font-size:12px;
-	width:450px;
+	width:95%;
 	word-break: break-all;
 	word-wrap: break-word;
 }
