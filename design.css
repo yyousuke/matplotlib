@@ -122,6 +122,23 @@ h4{
 	margin-bottom:0.8em;
 }
 
+.headline-scroll {
+	float:left;
+	height:21px;
+	width:800px;
+	border-left:solid 0.4em #0000ff;
+	padding-top:0.2em;
+	padding-bottom:0.5em;
+	padding-left:0.5em;
+	margin-left:0.5em;
+	margin-top:1em;
+	margin-bottom:1em;
+	border-bottom-style:solid;
+	border-bottom-color:#cccccc;
+	border-bottom-width:1px;
+}
+
+
 .text1 {
 	font-family:Verdana, Arial, Helvetica, sans-serif;
 	font-size:14px;
@@ -253,6 +270,23 @@ h4{
 	white-space: -o-pre-wrap;
 	white-space: -moz-pre-wrap;
 	white-space: -hp-pre-wrap; 
+}
+
+.headline-scroll {
+        height:21px;
+        width:95%;
+        padding-top:0.0em;
+        padding-bottom:0.0em;
+        padding-left:0.5em;
+        margin-left:0.0em;
+        margin-top:0.5em;
+        margin-bottom:0.5em;
+        box-sizing: border-box
+        white-space: pre;
+        white-space: pre-line;
+        white-space: nowrap; /* 折り返されないように */
+        overflow-x: auto; /* 横スクロール */
+        -webkit-overflow-scrolling: touch; /* スムーズにスクロール */
 }
 
 .list1 {
