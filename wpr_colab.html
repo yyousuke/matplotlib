@@ -70,7 +70,7 @@ from google.colab import drive
 drive.mount('/content/drive')
 </pre>
 <br />
-<img src="./images/wpr-fig1.png" width="600" alt="Fig" /><br /><br />
+<img src="./images/wpr-fig1.png" class="size2" alt="Fig" /><br /><br />
 &nbsp; アカウントを選択し、Google Drive File StreamからGoogleアカウントへのアクセスを許可します。ログインに必要なコードが表示されるので、コピペします。成功すると、以下のように、マウント成功の表示が出てきます。<br />
 <img src="./images/wpr-fig2.png" width="400" alt="Fig" />
 </div>
@@ -83,7 +83,7 @@ drive.mount('/content/drive')
 
 [ファイル] - [ドライブにコピーを保存]を選び、自分のGoogleドライブにコピーします。<br /><br />
 &nbsp; ここでは、input_dir_googleを”.”（同じ場所）にしたので、Google Driveのトップにウィンドプロファイラのデータを置くことになります。output_dir_googleは”wpr”としたので、Google Driveのトップの下に./wpr/というディレクトリが作成され、出力データが格納されます。<br /><br />
-<img src="./images/wpr-fig3.png" width="600" alt="Fig" /><br />
+<img src="./images/wpr-fig3.png" class="size2" alt="Fig" /><br />
 <ul class="list1">
 <li>Google Driveのトップが/content/drive/に対応します。</li>
 <li>入力データを置くinput_dir_google、出力データが格納されるoutput_dir_googleは、Google Driveのトップからの相対パスで指定します。</li>
@@ -96,14 +96,14 @@ drive.mount('/content/drive')
 wpr（日付）.（地点番号）
 のようなファイル名になっているウィンドプロファイラのデータを置きます。<br /><br />
 日付、地点を対応するものに書き換え、実行ボタンを押します。<br /><br />
-<img src="./images/wpr-fig4.png" width="200" alt="Fig" />
+<img src="./images/wpr-fig4.png" class="size0" alt="Fig" />
 </div>
 
 <h4><div class="headline2" id="wpr_2_3">作図</div></h4>
 <div class="text1">
 &nbsp; 公開されている<a href="https://colab.research.google.com/drive/1xWt5n9lpDcOKpvaVt2vyOhyNQ6bA5xU-">map_wpr.ipynb</a>にアクセスします。<br /><br />
 日付、地点を作成したデータと同じものに書き換えます。wpr_sta_nameは表示される地点名、wpr_date_nameは表示される日付です。実行ボタンを押したら作図できます。<br /><br />
-<img src="./images/wpr-fig5.png" width="300" alt="Fig" />
+<img src="./images/wpr-fig5.png" class="size0" alt="Fig" />
 </div>
 
 <h3><div class="headline1" id="wpr_3">プログラム解説</div></h3>
@@ -241,7 +241,7 @@ plt.savefig(output_filename, dpi=300, bbox_inches='tight')
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/01/02</p>
+<p>最終更新日：2022/01/15</p>
 <p>Copyright (C) 2020-2022, Yousuke Yamashita</p>
 </footer>
 </html>

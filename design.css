@@ -210,6 +210,22 @@ footer{
 	padding-right:15px;
 	}
 
+.size0{
+	width:250px;
+}
+
+.size1{
+	width:400px;
+}
+
+.size2{
+	width:600px;
+}
+
+.size3{
+	width:800px;
+}
+
 @media screen and (max-width: 480px) {
 body{
 	width:95%;
@@ -316,4 +332,21 @@ h4{
 footer{
 	font-size:10px;
 	}
+
+.size0{
+	width:250px;
+}
+
+.size1{
+	width:95%;
+}
+
+.size2{
+	width:95%;
+}
+
+.size3{
+	width:95%;
+}
+
 }
