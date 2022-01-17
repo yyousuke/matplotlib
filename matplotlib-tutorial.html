@@ -64,7 +64,7 @@ import matplotlib.pyplot as plt
 fig = plt.figure()
 ax = fig.add_subplot(1, 1, 1) 
 </pre>
-<a href="./figs/tutorial-fig1.png"><img src="./figs/tutorial-fig1.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig1.png"><img src="./figs/tutorial-fig1.png" class="size2" alt="Fig" /></a><br /><br />
 </div>
 
 <h4><div class="headline2" id="tutorial_2_2">関数グラフの作成</div></h4>
@@ -74,33 +74,33 @@ ax = fig.add_subplot(1, 1, 1)
 x = np.linspace(-np.pi, np.pi)
 plt.plot(x, np.cos(x), color='k', ls='-', label='cos(x)')
 </pre>
-<a href="./figs/tutorial-fig2.png"><img src="./figs/tutorial-fig2.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig2.png"><img src="./figs/tutorial-fig2.png" class="size2" alt="Fig" /></a><br /><br />
 引数として渡したcolor='k', ls='-'がオプションで、それぞれ色（黒）、線種（実線）を意味しています。colorには図３−２−２のような色指定が可能で、color='k'とc='k'、color='red'、c='red'のいずれも同じです。<br /><br />
-<a href="./figs/Fig3-2-2.png" ><img src="./figs/Fig3-2-2.png" width="400"  alt="Fig" /></a><br />
+<a href="./figs/Fig3-2-2.png" ><img src="./figs/Fig3-2-2.png" class="size2" alt="Fig" /></a><br />
 図３−２−２　matplotlibの色指定。赤ならcolor="r"、またはc="r"のように指定する<br /><br />
 
-<a href="./figs/Fig3-2-3.png"><img src="./figs/Fig3-2-3.png" width="400"  alt="Fig" /></a><br />
+<a href="./figs/Fig3-2-3.png"><img src="./figs/Fig3-2-3.png" class="size3" alt="Fig" /></a><br />
 図３−２−３　matplotlibで指定可能な色の一覧（<a href="https://pythondatascience.plavox.info/wp-content/uploads/2016/06/colorpalette.png">https://pythondatascience.plavox.info/wp-content/uploads/2016/06/colorpalette.png</a>）<br /><br />
 どうしても自分で色を作りたい場合は、color='#d62728'のように、'#rrggbb'の書式でRGBの０〜255の値を２桁の16進数で入力します。<br /><br />
 sin(x)も重ねてみます。<br />
 <pre>
 plt.plot(x, np.sin(x), color='r', ls='--', label='sin(x)')
 </pre>
-<a href="./figs/tutorial-fig3.png" ><img src="./figs/tutorial-fig3.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig3.png" ><img src="./figs/tutorial-fig3.png" class="size2" alt="Fig" /></a><br /><br />
 sin(x)を描く際に、ls='--'で線種を破線に変えています。線種として使用可能なものを表３−２−１にまとめました。<br /><br />
 表３−２−１　matplotlibのlinestyleで指定可能な線種一覧<br />
-<a href="./tables/Table3-2-1.png"><img src="./tables/Table3-2-1.png" width="400"  alt="Table" /></a><br /><br />
+<a href="./tables/Table3-2-1.png"><img src="./tables/Table3-2-1.png" class="size2" alt="Table" /></a><br /><br />
 
 線を区別するためにplt.legend で凡例も追加します。
 <pre>
 plt.legend(loc='best')
 </pre>
-<a href="./figs/tutorial-fig4.png"><img src="./figs/tutorial-fig4.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig4.png"><img src="./figs/tutorial-fig4.png" class="size2" alt="Fig" /></a><br /><br />
 
 凡例の場所はloc=’best’では自動指定ですが、loc=’upper left’のように強制的に位置を指定することも可能です（図３−２−５）。
 <br /><br />
 
-<a href="./figs/Fig3-2-5.png" ><img src="./figs/Fig3-2-5.png" width="400"  alt="Fig" /></a><br />
+<a href="./figs/Fig3-2-5.png" ><img src="./figs/Fig3-2-5.png" class="size2" alt="Fig" /></a><br />
 図３−２−５　plt.legendで指定可能な位置。他にbestで自動指定も可能<br /><br />
 </div>
 
@@ -111,33 +111,33 @@ plt.legend(loc='best')
  plt.plot(x, np.tanh(x), color='k', ls='-', label='tanh(x)', marker='x')
 </pre>
 これまでの作図が残っているので、pltの部分を次のように書き換えます。
-<a href="./figs/tutorial-fig5.png"><img src="./figs/tutorial-fig5.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig5.png"><img src="./figs/tutorial-fig5.png" class="size2" alt="Fig" /></a><br /><br />
 さらにtan-1(x) を青色で重ねてみます。marker='o', fillstyle='none'でopen circle になります。
 <pre>
 plt.plot(x, np.arctan(x), color='b', ls='-', label='arctan(x)', marker='o', fillstyle='none')
 </pre>
-<a href="./figs/tutorial-fig6.png" ><img src="./figs/tutorial-fig6.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig6.png" ><img src="./figs/tutorial-fig6.png" class="size2" alt="Fig" /></a><br /><br />
 matplotlib では数多くのマーカーが用意されています（表３−３−１）。
 <br /><br />
 表３−３−１　matplotlibで指定可能なマーカーの一覧<br />
-<a href="./tables/Table3-3-1.png"><img src="./tables/Table3-3-1.png" width="400"  alt="Table" /></a><br /><br />
+<a href="./tables/Table3-3-1.png"><img src="./tables/Table3-3-1.png" class="size3" alt="Table" /></a><br /><br />
 marker='o'では塗りつぶしを変えることもできるので試してみましょう。まずmarker='o’, fillstyle='full'でclosed circle にしてみます。
 <pre>
 plt.plot(x, np.arccosh(x), color='r', ls='-', label='arccosh(x)', marker='o', fillstyle='full')
 </pre>
 RuntimeWarmingが出ますが、作図はうまく行っているのでここでは無視します。<br />
-<a href="./figs/tutorial-fig7.png"><img src="./figs/tutorial-fig7.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig7.png"><img src="./figs/tutorial-fig7.png" class="size2" alt="Fig" /></a><br /><br />
 ちょっと変わったマーカーを付けることもでき、marker='o', fillstyle='left'と
 すれば、左側だけ塗り潰せます。凡例もつけておきます。
 <pre>
 plt.plot(x, np.arcsinh(x), color='c', ls='-', label='arcsinh(x)', marker='o', fillstyle='left')
 plt.legend(loc='best')
 </pre>
-<a href="./figs/tutorial-fig8.png"><img src="./figs/tutorial-fig8.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig8.png"><img src="./figs/tutorial-fig8.png" class="size2" alt="Fig" /></a><br /><br />
 他にも様々な塗りつぶしオプションがあるので一覧にしました（表３−３−２）。
 <br /><br />
 表３−３−２　matplotlibのfillstyleで指定可能な塗り潰しオプション一覧<br />
-<a href="./tables/Table3-3-2.png"><img src="./tables/Table3-3-2.png" width="400"  alt="Table" /></a><br /><br />
+<a href="./tables/Table3-3-2.png"><img src="./tables/Table3-3-2.png" class="size1" alt="Table" /></a><br /><br />
 </div>
 
 <h4><div class="headline2" id="tutorial_2_4">グラフを上下に並べる</div></h4>
@@ -152,7 +152,7 @@ fig = plt.figure()
 ax1 = fig.add_subplot(2, 1, 1) 
 ax2 = fig.add_subplot(2, 1, 2) 
 </pre>
-<a href="./figs/tutorial-fig9.png"><img src="./figs/tutorial-fig9.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig9.png"><img src="./figs/tutorial-fig9.png" class="size2" alt="Fig" /></a><br /><br />
 fig.add_subplotの最初の引数が縦に並べる数、２つ目が横に並べる数、３つ目がサブプロットのうちの何番目に当たるかを表します。ax1が上のサブプロット、ax2が下のサブプロットに対応します。それぞれのサブプロットに図を描くには、ここで定義したax1、ax2を使います。<br /><br />
 これまでのように[−π, π]の範囲を作成し、上のサブプロットax1にsinh(x)を描き凡例を追加してみます。サブプロットを指定して描く場合は、先ほどのplt.plotの代わりにax1.plotのように指定します。凡例についても同様で、plt.legendの代わりにax1.legendを使います。
 <pre>
@@ -160,13 +160,13 @@ x = np.linspace(-np.pi, np.pi)
 ax1.plot(x, np.sinh(x), color='b' , ls='-', lw=6, label='sinh(x)')
 ax1.legend(loc='best')
 </pre>
-<a href="./figs/tutorial-fig10.png"><img src="./figs/tutorial-fig10.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig10.png"><img src="./figs/tutorial-fig10.png" class="size2" alt="Fig" /></a><br /><br />
 線がこれまでより太いのが分かると思います。lw=6と指定したためです（デフォルトはlw=1）。lw=6の代わりにlinewidth=6としても同じです。下のサブプロットax2にcosh(x)を描き凡例を追加してみます。ls=''とすれば、線が消えてマーカーのみになります。marker='x', ms='3'で×印で大きさ3のマーカーを追加します（デフォルトはms=6）。markersize=3としても同じです。
 <pre>
 ax2.plot(x, np.cosh(x), color='r', ls='', marker='x', ms='3', label='cosh(x)')
 ax2.legend(loc='best')
 </pre>
-<a href="./figs/tutorial-fig11.png"><img src="./figs/tutorial-fig11.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig11.png"><img src="./figs/tutorial-fig11.png" class="size2" alt="Fig" /></a><br /><br />
 </div>
 
 <h4><div class="headline2" id="tutorial_2_5">４つのグラフを並べる</div></h4>
@@ -185,24 +185,24 @@ ax1 = fig.add_subplot(2, 2, 1)
 <pre>
 plt.text(0.4, 0.4, "(2,2,1)", fontsize=20, color='k')
 </pre>
-<a href="./figs/tutorial-fig12.png"><img src="./figs/tutorial-fig12.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig12.png"><img src="./figs/tutorial-fig12.png" class="size2" alt="Fig" /></a><br /><br />
 <pre>
 ax2 = fig.add_subplot(2, 2, 2)
 plt.text(0.4, 0.4, "(2,2,2)", rotation=30, fontsize=20, color='k'
 </pre>
-<a href="./figs/tutorial-fig13.png"><img src="./figs/tutorial-fig13.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig13.png"><img src="./figs/tutorial-fig13.png" class="size2" alt="Fig" /></a><br /><br />
 左下にサブプロットを追加し、横にちょっとずらして（0.2、0.4）に配置します。新たに出てきたalpha=0.7は不透明度を指定する引数で、0が透明、1が不透明です（デフォルトは1）。
 <pre>
 ax3 = fig.add_subplot(2, 2, 3)
 plt.text(0.2, 0.4, "(2,2,3)", fontsize=20, color='k', alpha=0.7)
 </pre>
-<a href="./figs/tutorial-fig14.png"><img src="./figs/tutorial-fig14.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig14.png"><img src="./figs/tutorial-fig14.png" class="size2" alt="Fig" /></a><br /><br />
 右下にもサブプロットを追加します。
 <pre>
 ax4 = fig.add_subplot(2, 2, 4)
 plt.text(0.2, 0.4, "(2,2,4)", fontsize=20, color='k')
 </pre>
-<a href="./figs/tutorial-fig15.png"><img src="./figs/tutorial-fig15.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig15.png"><img src="./figs/tutorial-fig15.png" class="size2" alt="Fig" /></a><br /><br />
 
 図にx * sin(x)のグラフを追加してみます。オプションとして追加したdrawstyle='default'は、これまでも使用してきたデフォルト設定の折れ線グラフです。
 <pre>
@@ -220,11 +220,11 @@ ax3.plot(x, x * np.sin(x), color='r', ls='-', drawstyle='steps-pre')
 ax4.plot(x, x * np.sin(x), color='r', ls='-', drawstyle='steps-mid')
 </pre>
 ３種類の階段状のグラフは、よく見ないと違いが分かりませんが、グラフの両端をみると、前側、後側、両方、のいずれに飛び出しているかが違っています。<br />
-<a href="./figs/tutorial-fig16.png"><img src="./figs/tutorial-fig16.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig16.png"><img src="./figs/tutorial-fig16.png" class="size2" alt="Fig" /></a><br /><br />
 最後に折れ線グラフで使用できるオプション一覧を表３−４−１にまとめておきます。
 <br /><br />
 表３−４−１　matplotlibのpyplot.plotのオプション一覧<br />
-<a href="./tables/Table3-4-1.png"><img src="./tables/Table3-4-1.png" width="400"  alt="Table" /></a><br /><br />
+<a href="./tables/Table3-4-1.png"><img src="./tables/Table3-4-1.png" class="size2" alt="Table" /></a><br /><br />
 </div>
 
 
@@ -241,18 +241,18 @@ ax = fig.add_subplot(1, 1, 1)
 x = np.linspace(-np.pi, np.pi)
 ax.plot(x, np.sinh(x), color='k')
 </pre>
-<a href="./figs/tutorial-fig17.png"><img src="./figs/tutorial-fig17.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig17.png"><img src="./figs/tutorial-fig17.png" class="size2" alt="Fig" /></a><br /><br />
 
 図にplt.titleでタイトルを付けてみます。fontsize=24で文字の大きさを24ポイントに変えました。
 <pre>
 plt.title("sinh(x)", fontsize=24)
 </pre>
-<a href="./figs/tutorial-fig18.png"><img src="./figs/tutorial-fig18.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig18.png"><img src="./figs/tutorial-fig18.png" class="size2" alt="Fig" /></a><br /><br />
 
 ちなみに、fontsizeは整数の他に文字列で指定することもでき、"xx-small"、"x-small"、"small"、"medium"、"large"、"x-large"、"xx-large"を指定可能です。fontweightというオプションで文字の太さを変えることもでき、０〜1000の整数か、"ultralight"、"light"、"normal"、"regular"、"book"、"medium"、"roman"、"semibold"、"demibold"、"demi"、"bold"、"heavy"、"extra bold"、"black"の文字列を指定可能です。例えば太字にするには、fontweight="bold"です。fontsizeオプションは見た目に反映されますが、fontweightオプションは細かく設定しても変わらないようです（表３−５−１）。
 <br /><br />
 表３−５−１　文字列の大きさと太さを指定するオプション一覧<br />
-<a href="./tables/Table3-5-1.png"><img src="./tables/Table3-5-1.png" width="400"  alt="Table" /></a><br /><br />
+<a href="./tables/Table3-5-1.png"><img src="./tables/Table3-5-1.png" class="size2" alt="Table" /></a><br /><br />
 
 軸の大目盛りの間隔を変更し、ラベルの付いていない小目盛りも追加します。目盛り線の設定にはmatplotlib.tickerを使います。ticker.AutoLocator()が大目盛り、ticker.AutoMinorLocator()が小目盛りの自動設定を返し、xaxis.set_major_locatorや、xaxis.set_minor_locatorの値を置き換えます。x軸に小目盛りが追加されたでしょうか。大目盛りの方はticker.AutoLocator()の値が1毎だったので、変更はありません。
 <pre>
@@ -260,74 +260,74 @@ import matplotlib.ticker as ticker
 ax.xaxis.set_major_locator(ticker.AutoLocator())
 ax.xaxis.set_minor_locator(ticker.AutoMinorLocator())
 </pre>
-<a href="./figs/tutorial-fig19.png"><img src="./figs/tutorial-fig19.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig19.png"><img src="./figs/tutorial-fig19.png" class="size2" alt="Fig" /></a><br /><br />
 
 y軸についても変更します。今度はticker.MultipleLocator(値)を使い、大目盛りを10毎、小目盛りを2毎に手動設定してみます。MultipleLocatorは指定した値の間隔で目盛りの設定を返すものです。
 <pre>
 ax.yaxis.set_major_locator(ticker.MultipleLocator(10.00))
 ax.yaxis.set_minor_locator(ticker.MultipleLocator(2.00))
 </pre>
-<a href="./figs/tutorial-fig20.png"><img src="./figs/tutorial-fig20.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig20.png"><img src="./figs/tutorial-fig20.png" class="size2" alt="Fig" /></a><br /><br />
 
 x軸とy軸にラベルを付けてみます。ax.set_xlabel、ax.set_ylabelを使います。文字サイズや色を同時に指定可能です。黒色でx-axis、赤色でy-axisが表示されたでしょうか。サブプロットを複数設定した場合は、axの番号を変えて、それぞれのサブプロットに別のラベルを設定可能です。
 <pre>
 ax.set_xlabel("x-axis", fontsize=20)
 ax.set_ylabel("y-axis", fontsize=20, color='r')
 </pre>
-<a href="./figs/tutorial-fig21.png"><img src="./figs/tutorial-fig21.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig21.png"><img src="./figs/tutorial-fig21.png" class="size2" alt="Fig" /></a><br /><br />
 
 plt.subplots_adjustでずの大きさを調整してみます。hspace=0.8で水平を８割の大きさに、bottom=0.2で下に２割の空きを付けます。ラベルが図からはみ出した場合などの調整に使います。
 <pre>
 plt.subplots_adjust(hspace=0.8, bottom=0.2)
 </pre>
-<a href="./figs/tutorial-fig22.png"><img src="./figs/tutorial-fig22.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig22.png"><img src="./figs/tutorial-fig22.png" class="size2" alt="Fig" /></a><br /><br />
 
 さらに、plt.gridを使い大目盛りの位置にグリッド線を引きます。折れ線グラフ同様、色や線種、線の太さなども指定できます。灰色の点線に設定してみます。
 <pre>
 plt.grid(color='gray', ls=':')
 </pre>
-<a href="./figs/tutorial-fig23.png"><img src="./figs/tutorial-fig23.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig23.png"><img src="./figs/tutorial-fig23.png" class="size2" alt="Fig" /></a><br /><br />
 
 x=0、y=0などの線を追加することもできます。plt.axhlineで水平方向、plt.axvlineで鉛直方向の線を引きます。色や線種が指定できるので、黒の破線に設定してみます。
 <pre>
 plt.axhline(y=0, color='k', ls='--')
 plt.axvline(x=0, color='k', ls='--')
 </pre>
-<a href="./figs/tutorial-fig24.png"><img src="./figs/tutorial-fig24.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig24.png"><img src="./figs/tutorial-fig24.png" class="size2" alt="Fig" /></a><br /><br />
 
 折れ線グラフと一緒に使える機能をもう１つ紹介しておきます。まずは点線でcosh(x)を重ねます。sinh(x)よりcosh(x)の値が大きいので、plt.fill_between（ax.fill_betweenも同じ）を使い、その間を灰色で塗り潰してみます。１番目の引数がx軸、２番目の引数がy軸を塗り潰す下限値、３番目の引数がy軸を塗り潰す上限値を表しています。color='gray', alpha=0.4で灰色の半透明な色で塗り潰します。
 <pre>
 ax.plot(x, np.cosh(x), color='k', ls='--')
 ax.fill_between(x, np.sinh(x), np.cosh(x), color='gray', alpha=0.4)
 </pre>
-<a href="./figs/tutorial-fig25.png"><img src="./figs/tutorial-fig25.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig25.png"><img src="./figs/tutorial-fig25.png" class="size2" alt="Fig" /></a><br /><br />
 
 plt.titleでタイトルも変えておきます。先ほどのplt.titleをもう一度呼び出すと、これまでのタイトルが置き換えられます。
 <pre>
 plt.title("sinh(x) &amp; cosh(x)", fontsize=24)
 </pre>
-<a href="./figs/tutorial-fig26.png"><img src="./figs/tutorial-fig26.png" width="400"  alt="Fig" /></a><br /><br />
+<a href="./figs/tutorial-fig26.png"><img src="./figs/tutorial-fig26.png" class="size2" alt="Fig" /></a><br /><br />
 
 最後に、グラフの体裁を整える際に用いることがある主なメソッドを表３−５−２にまとめておきます。
 <br /><br />
 表３−５−２　図の体裁を整える時に用いるメソッド一覧<br />
-<a href="./tables/Table3-5-2.png"><img src="./tables/Table3-5-2.png" width="400"  alt="Table" /></a><br /><br />
+<a href="./tables/Table3-5-2.png"><img src="./tables/Table3-5-2.png" class="size2" alt="Table" /></a><br /><br />
 
 これらのメソッドのうちplt.textでは、書式の設定で様々なオプションが出てきたので、ここで表３−５−３にまとめておきます。なお、最初の行のx、yを除けば、plt.textと同じオプションをplt.title、plt.xlabel、plt.ylabelでも使うことができます。
 <br /><br />
 表３−５−３　matplotlibのpyplot.textの主要オプション一覧<br />
-<a href="./tables/Table3-5-3.png"><img src="./tables/Table3-5-3.png" width="400"  alt="Table" /></a><br />
+<a href="./tables/Table3-5-3.png"><img src="./tables/Table3-5-3.png" class="size2" alt="Table" /></a><br />
 使用方法：plt.text(x, y, s)、plt.text(x, y, s, オプション)<br /><br />
 
 表３−５−３には、これまでに出てこなかったオプションとして、水平方向の位置を指定するhorizontalalignment（省略形：ha）、鉛直方向の位置を指定するverticalalignment（省略形：va）があります。haには'center'、'right'、'left'を指定可能で、vaには'top'、'bottom'、'center'、'baseline'、'center_baseline'を指定可能です（表３−５−４）。x、yで指定する中央の位置を点線で示しています。
 <br /><br />
 表３−５−４　文字列の水平位置と鉛直位置を指定するオプション、点線は中央の位置<br />
-<a href="./tables/Table3-5-4.png"><img src="./tables/Table3-5-4.png" width="400"  alt="Table" /></a><br /><br />
+<a href="./tables/Table3-5-4.png"><img src="./tables/Table3-5-4.png" class="size2" alt="Table" /></a><br /><br />
 
 これまでに、Numpyを使った関数の作成が度々出てきました。Numpyには便利な機能が多数含まれていますが、ここでは関数の作成や簡単な計算に用いることができる主要な数学関数を紹介しておきます（表３−５−５）。
 <br /><br />
 表３−５−５　Numpyの主要な数学関数一覧<br />
-<a href="./tables/Table3-5-5.png"><img src="./tables/Table3-5-5.png" width="400"  alt="Table" /></a><br /><br />
+<a href="./tables/Table3-5-5.png"><img src="./tables/Table3-5-5.png" class="size2" alt="Table" /></a><br /><br />
 </div>
 
 <br />
@@ -336,7 +336,7 @@ plt.title("sinh(x) &amp; cosh(x)", fontsize=24)
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/01/02</p>
+<p>最終更新日：2022/01/17</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
