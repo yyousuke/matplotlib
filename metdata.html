@@ -53,6 +53,14 @@
       <li><a href="#tsv_1_3">TSVファイルとして書き出す</a></li>
      </ul>
   </li></ul>
+  <!--  SSVファイル -->
+  <ul class="list1"><li><a href="#ssv_1">SSVファイル</a>
+    <ul class="list2">
+      <li><a href="#ssv_1_1">SSVファイルの形式</a></li>
+      <li><a href="#ssv_1_2">SSVファイルの読み込み</a></li>
+      <li><a href="#ssv_1_3">SSVファイルとして書き出す</a></li>
+     </ul>
+  </li></ul>
   <!--  JSONファイル -->
   <ul class="list1"><li><a href="#json_1">JSONファイル</a>
     <ul class="list2">
@@ -115,7 +123,7 @@
 <h3><div class="headline1" id="csv_1">CSVファイル</div></h3>
 <h4><div class="headline2" id="csv_1_1">CSVファイルの形式</div></h4>
 <div class="text1">
-CSV（Comma-Separated values）は、カンマ区切りのテキストデータ
+CSV（Comma-Separated Values）は、カンマ区切りのテキストデータ
 <pre>
 時刻,項目1,項目2,項目3
 時刻1,データ1-1,データ1-2,データ1-3
@@ -249,7 +257,7 @@ indexは時刻データ、meanは平均値、stdは標準偏差の場合で、�
 <h3><div class="headline1" id="tsv_1">TSVファイル</div></h3>
 <h4><div class="headline2" id="tsv_1_1">TSVファイルの形式</div></h4>
 <div class="text1">
-TSV（Tab-Separated values）は、タブ区切りのテキストデータ
+TSV（Tab-Separated Values）は、タブ区切りのテキストデータ
 <pre>
 時刻&lt;tab&gt;項目&lt;tab&gt;項目2&lt;tab&gt;項目3
 時刻1&lt;tab&gt;データ1-1&lt;tab&gt;データ1-2&lt;tab&gt;データ1-3
@@ -264,6 +272,7 @@ TSV（Tab-Separated values）は、タブ区切りのテキストデータ
 <ul class="list1">
 <li>ヘッダ有りの場合
 <pre>df = pd.read_csv("ファイル名", sep='\t')</pre>
+CSVファイルのセパレータがタブであることを指定<br />
 ヘッダが列の名前になる</li><br />
 <li>ヘッダ無しの場合
 <pre>df = pd.read_csv("ファイル名", sep='\t', header=None)</pre>
@@ -285,6 +294,58 @@ dはlistやnumpyのndarrayなど</li><br />
 1列目に番号などが入らないファイルができる</li><br />
 <li>ヘッダを付けない
 <pre>pd.DataFrame(d).to_csv("ファイル名", sep='\t', header=False)</pre>
+1行目にヘッダ行が入らないファイルができる</li>
+</ul>
+</div>
+
+
+<!-- SSVファイル -->
+<h3><div class="headline1" id="ssv_1">SSVファイル</div></h3>
+<h4><div class="headline2" id="ssv_1_1">SSVファイルの形式</div></h4>
+<div class="text1">
+SSV（Space-Separated Values）は、スペース区切りのテキストデータ
+<pre>
+時刻 &nbsp;項目 &nbsp;項目2 &nbsp;項目3
+時刻1 &nbsp;データ1-1 &nbsp;データ1-2 &nbsp;データ1-3
+時刻2 &nbsp;データ2-1 &nbsp;データ2-2 &nbsp;データ2-3
+...
+</pre>
+</div>
+
+<h4><div class="headline2" id="ssv_1_2">SSVファイルの読み込み</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>ヘッダ有りの場合
+<pre>df = pd.read_csv("ファイル名", sep='\s+')</pre>
+CSVファイルのセパレータがスペースであることを指定する<br />
+ヘッダが列の名前になる</li><br />
+<li>ヘッダ無しの場合
+<pre>df = pd.read_csv("ファイル名", sep='\s+', header=None)</pre>
+</li>
+<li>ヘッダ無しのファイルを読み込み列の名前を付ける場合
+<pre>df = pd.read_csv("ファイル名", sep='\s+', header=None, names=('列1の名前', '列2の名前'))</pre>
+</li><br />
+<li>固定長のSSVファイルの場合
+<pre>df = pd.read_fwf("ファイル名")</pre>
+個々のレコードが記述されている列が、ファイル全体で不変の場合
+</li><br />
+<li>ヘッダ無しの場合
+<pre>df = pd.read_fwf("ファイル名", header=None)</pre>
+</li><br />
+</ul>
+</div>
+
+<h4><div class="headline2" id="ssv_1_3">SSVファイルとして書き出す</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>DataFrameを書き出す
+<pre>pd.DataFrame(d).to_csv("ファイル名", sep=' ')</pre>
+dはlistやnumpyのndarrayなど</li><br />
+<li>indexを無効にしてから書き出す
+<pre>pd.DataFrame(d).to_csv("ファイル名", sep=' ', index=False)</pre>
+1列目に番号などが入らないファイルができる</li><br />
+<li>ヘッダを付けない
+<pre>pd.DataFrame(d).to_csv("ファイル名", sep=' ', header=False)</pre>
 1行目にヘッダ行が入らないファイルができる</li>
 </ul>
 </div>
@@ -637,7 +698,7 @@ d = hdf['データセットの名前'][:, :] # データセットの名前に対
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/01/18</p>
+<p>最終更新日：2022/01/21</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
