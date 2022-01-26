@@ -398,7 +398,12 @@ lons, lats = np.meshgrid(lon, lat)
 m = Basemap(オプション)
 x, y = m(lons, lats)
 </pre>
-１次元目が緯度、２次元目が経度の２次元データになる。</li>
+１次元目が緯度、２次元目が経度の２次元データになる。</li><br />
+<li>緯度データの範囲が−180〜180度の場合に、0〜360度の範囲に変換する
+<pre>
+lon = np.array([l + 360. if l < 0 else l for l in lon])
+</pre>
+lonが経度の１次元データの場合</li><br />
 </ul>
 </div>
 
@@ -772,7 +777,7 @@ m.contour(x, y, data, clevs, linewidths=0.8, colors='k') # 等高線を描く
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/01/02</p>
+<p>最終更新日：2022/01/25</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
