@@ -25,5 +25,5 @@ Webページとして表示する場合には、https://yyousuke.github.io/matpl
 
     サンプルプログラム（met_sample.zip）
 
-MIT Licenseで公開していますので、著作権表示および本許諾表示（https://yyousuke.github.io/matplotlib/LICENSE）を、ソフトウェアのすべての複製または重要な部分に記載することで、自由に使用、改変、配布等することができます。授業等で使用する場合にも、MIT Licenseに従えば、改変したものなどを自由に配布して問題ありません。
+MIT Licenseで公開していますので、著作権表示および本許諾表示（https://yyousuke.github.io/matplotlib/LICENSE ）を、ソフトウェアのすべての複製または重要な部分に記載することで、自由に使用、改変、配布等することができます。授業等で使用する場合にも、MIT Licenseに従えば、改変したものなどを自由に配布して問題ありません。
 
