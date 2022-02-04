@@ -230,6 +230,21 @@ time_new = time + relativedelta(months=1) - relativedelta(days=1)
 <br />
 
 
+<h3><div class="headline1" id="dir_1">ディレクトリの一覧を取得する</div></h3>
+<div class="text1">
+os.listdirを使う
+<pre>
+import os
+input_dir = "ディレクトリのパス"
+files = os.listdir(input_dir)
+for f in files:
+&nbsp; &nbsp; print(os.path.join(input_dir, f))
+</pre>
+ファイル一覧をリストとして取得し、パスを表示
+</div>
+<br />
+<br />
+
 <br />
 <br />
 <br />
@@ -240,7 +255,7 @@ time_new = time + relativedelta(months=1) - relativedelta(days=1)
 </article>
 </body>
 <footer>
-<p>最終更新日：2021/09/04</p>
+<p>最終更新日：2022/02/02</p>
 <p>Copyright (C) 2021, Yousuke Yamashita</p>
 </footer>
 </html>
