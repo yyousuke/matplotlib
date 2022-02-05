@@ -43,7 +43,7 @@
       <li><a href="#time_6">月末の日を計算する</a></li>
      </ul>
   </li></ul>
-  <!-- 時刻形式 -->
+  <!-- ディレクトリ -->
   <ul class="list1"><li><a href="#dir">ディレクトリ</a>
     <ul class="list2">
       <li><a href="#dir_1">ディレクトリの一覧を取得する</a></li>
@@ -54,7 +54,7 @@
 <!-- ここから本文 -->
 <!-- 時刻形式 -->
 <h3><div class="headline1" id="time">時刻形式</div></h3>
-<h3><div class="headline1" id="time_1">時刻形式データの作成</div></h3>
+<h4><div class="headline2" id="time_1">時刻形式データの作成</div></h4>
 <div class="text1">
 datetimeで扱うことのできる時刻形式データを作成する
 <ul class="list1">
@@ -103,7 +103,7 @@ time = pd.to_datetime("年月日時分秒")
 <br />
 <br />
 
-<h3><div class="headline1" id="time_2">時刻形式データから年、月、日などを取り出す</div></h3>
+<h4><div class="headline2" id="time_2">時刻形式データから年、月、日などを取り出す</div></h4>
 <div class="text1">
 時刻形式データ.取り出したい要素
 <ul class="list1">
@@ -135,7 +135,7 @@ pandas.to_datetimeの場合も挙動は同じ</li><br />
 <br />
 <br />
 
-<h3><div class="headline1" id="time_3">時刻形式データから書式指定して取り出す</div></h3>
+<h4><div class="headline2" id="time_3">時刻形式データから書式指定して取り出す</div></h4>
 <div class="text1">
 datetime.strftimeを使う
 <ul class="list1">
@@ -166,9 +166,7 @@ print(time.isoformat())
 <br />
 <br />
 
-
-
-<h3><div class="headline1" id="time_4">時刻形式データの演算</div></h3>
+<h4><div class="headline2" id="time_4">時刻形式データの演算</div></h4>
 <div class="text1">
 datetime.timedeltaを使うことで時刻形式データの演算を行うことができる
 <ul class="list1">
@@ -210,7 +208,7 @@ datetimeで作成した場合と同様に演算可能
 <br />
 <br />
 
-<h3><div class="headline1" id="time_5">1ヶ月後、1年後を計算する</div></h3>
+<h4><div class="headline2" id="time_5">1ヶ月後、1年後を計算する</div></h4>
 <div class="text1">
 datetime.timedeltaでは、1ヶ月後、1年後などを指定するとエラーになる<br />
 dateutil.relativedeltaを使うと加算・減算が可能
@@ -247,7 +245,7 @@ time_new = time + relativedelta(years=4)
 <br />
 <br />
 
-<h3><div class="headline1" id="time_6">月末の日を計算する</div></h3>
+<h4><div class="headline2" id="time_6">月末の日を計算する</div></h4>
 <div class="text1">
 dateutil.relativedeltaの１ヶ月後の計算を応用して月末の日を計算する
 <pre>
@@ -260,8 +258,9 @@ time_new = time + relativedelta(months=1) - relativedelta(days=1)
 <br />
 <br />
 
-
-<h3><div class="headline1" id="dir_1">ディレクトリの一覧を取得する</div></h3>
+<!-- ディレクトリ -->
+<h3><div class="headline1" id="dir">ディレクトリ</div></h3>
+<h4><div class="headline2" id="dir_1">ディレクトリの一覧を取得する</div></h4>
 <div class="text1">
 os.listdirを使う
 <pre>
@@ -286,7 +285,7 @@ for f in files:
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/02/05</p>
+<p>最終更新日：2022/02/06</p>
 <p>Copyright (C) 2021, Yousuke Yamashita</p>
 </footer>
 </html>
