@@ -113,6 +113,13 @@
       <li><a href="#hdf5_1_2">HDF5ファイルの読み込み</a></li>
     </ul>
   </li></ul>
+  <!--  GTOOL3フファイル -->
+  <ul class="list1"><li><a href="#gtool3_1">GTOOL3ファイル</a>
+    <ul class="list2">
+      <li><a href="#gtool3_1_1">GTOOL3ファイルの形式</a></li>
+      <li><a href="#gtool3_1_2">GTOOL3ファイルの読み込み</a></li>
+    </ul>
+  </li></ul>
 </div>
 
 <small><a href="#top">[top]</a></small> <br />
@@ -695,12 +702,25 @@ d = hdf['データセットの名前'][:, :] # データセットの名前に対
 </div>
 
 
+ <!--  GTOOL3ファイル -->
+<h3><div class="headline1" id="gtool3_1">GTOOL3ファイル</div></h3>
+<h4><div class="headline2" id="gtool3_1_1">GTOOL3ファイルの形式</div></h4>
+<div class="text1">
+GTOOL3形式は、気候モデルMIROCの出力に用いられている形式で、ヘッダ部とデータ部のセットで構成されている。ヘッダ部にはデータ部のサイズなどが格納されている。
+</div>
+
+<h4><div class="headline2" id="gtool3_1_2">GTOOL3ファイルの読み込み</div></h4>
+<div class="text1">
+GTOOL3の読み込みには、<a href="https://github.com/hyungjun/gtool3/" target="_blank">gtool3更新版</a>を用いることができる。
+</div>
+
+
 <small><a href="#top">[top]</a></small> <br />
 <hr width="105%" />
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/02/11</p>
+<p>最終更新日：2022/02/16</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
