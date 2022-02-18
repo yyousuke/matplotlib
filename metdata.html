@@ -461,7 +461,8 @@ d = din.reshape(num_rec, jdim, idim)
 リトルエンディアンの場合にはdtype='&lt;f4'となる<br />
 書式の一覧は<a href="numpy.html#dtype_2">Numpyバイナリデータ読み書きの書式一覧</a>参照
 </li><br />
-<li>arrayを使った方法（指定した時刻データを切り出す）
+<li>arrayを使った方法（指定した時刻データを切り出す）<br />
+np.fromfileではメモリサイズ不足の場合など
 <pre>
 import array
 import sys
@@ -732,7 +733,7 @@ GTOOL3の読み込みには、<a href="https://github.com/hyungjun/gtool3/" targ
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/02/17</p>
+<p>最終更新日：2022/02/18</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
