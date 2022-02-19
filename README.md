@@ -1,10 +1,10 @@
 # 気象データ解析のためのmatplotlibの使い⽅
 
-海洋研究開発機構（JAMSTEC）のページ（http://ebcrpa.jamstec.go.jp/~yyousuke/matplotlib/ ）で2020年3月19日まで公開していたものを維持更新しています。
+作成者：山下陽介（国立環境研究所）
+
+2020年4月に海洋研究開発機構（JAMSTEC）から国立環境研究所（NIES）に移りました。ここでは、海洋研究開発機構（JAMSTEC）のページで2020年3月19日まで公開していたものを維持更新して公開しています。
 
 Webページとして表示する場合には、https://yyousuke.github.io/matplotlib/ を開いてください。
-
-（ダウンロードかクローンしてローカルで開くことも可能です）
 
 
 ## 2021年12月28日版のファイルは以下
@@ -25,5 +25,5 @@ Webページとして表示する場合には、https://yyousuke.github.io/matpl
 
     サンプルプログラム（met_sample.zip）
 
-MIT Licenseで公開していますので、著作権表示および本許諾表示（https://yyousuke.github.io/matplotlib/LICENSE ）を、ソフトウェアのすべての複製または重要な部分に記載することで、自由に使用、改変、配布等することができます。上記の解説はソフトウェアに付随するものです。授業等で使用する場合にも、MIT Licenseに従えば、改変したものなどを自由に配布して問題ありません。
+MIT Licenseで公開していますので、著作権表示および本許諾表示（https://github.com/yyousuke/matplotlib/blob/main/LICENSE ）を、ソフトウェアのすべての複製または重要な部分に記載することで、自由に使用、改変、配布等することができます。上記の解説はソフトウェアに付随するものです。授業等で使用する場合にも、MIT Licenseに従えば、改変したものなどを自由に配布して問題ありません。
 
