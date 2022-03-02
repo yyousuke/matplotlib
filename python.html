@@ -48,7 +48,14 @@
   <!-- ディレクトリ -->
   <ul class="list1"><li><a href="#dir">ディレクトリ</a>
     <ul class="list2">
-      <li><a href="#dir_1">ディレクトリの一覧を取得する</a></li>
+      <li><a href="#dir_1">ディレクトリのパスを結合する</a></li>
+      <li><a href="#dir_2">ディレクトリの一覧を取得する</a></li>
+     </ul>
+  </li></ul>
+  <!-- 環境変数 -->
+  <ul class="list1"><li><a href="#env">環境変数</a>
+    <ul class="list2">
+      <li><a href="#env_1">環境変数を取得する</a></li>
      </ul>
   </li></ul>
 </div>
@@ -260,9 +267,25 @@ time_new = time + relativedelta(months=1) - relativedelta(days=1)
 <br />
 <br />
 
+
 <!-- ディレクトリ -->
 <h3><div class="headline1" id="dir">ディレクトリ</div></h3>
-<h4><div class="headline2" id="dir_1">ディレクトリの一覧を取得する</div></h4>
+<h4><div class="headline2" id="dir_1">ディレクトリのパスを結合する</div></h4>
+<div class="text1">
+os.path.joinを使う
+<pre>
+import os
+dir1 = "dir_name1"
+dir2 = "dir_name2"
+dir_path = os.path.join(dir1, dir2)
+</pre>
+dir_pathには、dir_name1/dir_name2が入る<br />
+UNIX環境では/、Windows環境では¥が設定されるので、OSに依存しないコードが書ける
+</div>
+<br />
+<br />
+
+<h4><div class="headline2" id="dir_2">ディレクトリの一覧を取得する</div></h4>
 <div class="text1">
 os.listdirを使う
 <pre>
@@ -277,6 +300,21 @@ for f in files:
 <br />
 <br />
 
+
+<!-- 環境変数 -->
+<h3><div class="headline1" id="env">環境変数</div></h3>
+<h4><div class="headline2" id="env_1">環境変数を取得する</div></h4>
+<div class="text1">
+os.environ.getを使う
+<pre>
+import os
+cur = os.environ.get('PWD')
+</pre>
+カレントディレクトリを取得する
+</div>
+<br />
+<br />
+
 <br />
 <br />
 <br />
@@ -287,7 +325,7 @@ for f in files:
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/02/11</p>
+<p>最終更新日：2022/03/03</p>
 <p>Copyright (C) 2021, Yousuke Yamashita</p>
 </footer>
 </html>
