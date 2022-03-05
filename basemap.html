@@ -84,7 +84,7 @@
   <ul class="list1"><li><a href="#basemap_e">図の体裁</a>
     <ul class="list2">
       <li><a href="#basemap_e_1">タイトルを付ける</a></li>
-      <li><a href="#basemap_e_2">等高線を複数同時に描く場合に等高線上に文字を重ねない</a></li>
+      <li><a href="#basemap_e_2">複数の等高線を同時に描く</a></li>
       <li><a href="#basemap_e_3">極投影図法で0度と360度を滑らかにつなげる</a></li>
     </ul>
   </li></ul>
@@ -403,7 +403,7 @@ x, y = m(lons, lats)
 １次元目が緯度、２次元目が経度の２次元データになる。</li><br />
 <li>緯度データの範囲が−180〜180度の場合に、0〜360度の範囲に変換する
 <pre>
-lon = np.array([l + 360. if l < 0 else l for l in lon])
+lon = np.array([l + 360. if l &lt; 0 else l for l in lon])
 </pre>
 lonが経度の１次元データの場合</li><br />
 </ul>
@@ -478,14 +478,6 @@ cs.clabel(clevels, fontsize=12, fmt="%.1f")
 </pre>
 ラベルは1.5毎に付け、小数点以下第一位まで表示（fmt="%.1f"）<br />
 ZがNumpyのndarrayの場合。最小値よりも小さい最大の整数をnp.floor(Z.min())、最大値よりも大きい最小の整数をnp.ceil(Z.max())で取得、<a href="numpy.html#math">Numpyの数学関数</a>、<a href="numpy.html#stat">Numpyの統計処理</a>参照</li><br />
-<li>例：等高線を4hPa毎の細線、等高線ラベルを20hPa毎の太線に付ける
-<pre>
-levels = np.arange(960, 1061, 4) # 値のリスト作成
-cs = m.contour(x, y, d, levels=levels, colors='k', linewidths=[1.2, 0.8, 0.8, 0.8, 0.8]) # 4hPaの等高線を描く
-cs.clabel(cs.levels[::5], fmt="%d", fontsize=12) # 5飛ばし（20 hPa毎）にラベルを付ける
-</pre>
-dはSLPデータ、linewidths=[1.2, 0.8, 0.8, 0.8, 0.8]とすることで、4hPa毎の細線、20hPa毎の太線を描く
-</li><br />
 </ul>
 </div>
 
@@ -727,19 +719,20 @@ matplotlibのplt.titleを使う
 <a href="matplotlib.html#graph_e_3">タイトルの文字サイズや色を変更する</a>参照
 </div>
 
-<h4><div class="headline2" id="basemap_e_2">等高線を複数同時に描く場合に等高線上に文字を重ねない</div></h4>
+<h4><div class="headline2" id="basemap_e_2">複数の等高線を同時に描く</div></h4>
 <div class="text1">
-細実線で4 hPa毎の等高線を描き、太実線で20 hPaの等高線を描き、20 hPaの等高線ラベルに気圧の値を表示した場合、細実線の上に文字が重なる。<br />
-次のように、細実線、太実線ともに気圧の値を書くことで、文字の下に等高線は描かれなくなる。
+細実線と太実線を別々に描き太実線にラベルを付けると、ラベルの下に細実線が描かれてしまう。<br />
+次のように、細実線、太実線を同時に描くことで、文字の下に等高線は描かれなくなる。
+<ul class="list1">
+<li>例：等高線を4hPa毎の細線、等高線ラベルを20hPa毎の太線に付ける
 <pre>
-clevc = np.arange(960, 1080, 4) # 細実線を描く値
-cleva = np.arange(960, 1080, 20) # 太実線を描く値
-cr1 = m.contour(x, y, slp, clevc, linewidths=0.8, colors='k') # 細実線
-cr2 = m.contour(x, y, slp, cleva, linewidths=1.2, colors='k') # 太実線
-clevels = cr1.levels # 細実線を描いた気圧の値
-cr1.clabel(clevels[::5], fontsize=12, fmt="%d") # 細実線ラベルに20 hPa毎気圧の値を表示
-cr2.clabel(clevels[::5], fontsize=12, fmt="%d") # 太実線ラベルに20 hPa毎気圧の値を表示
+levels = np.arange(960, 1061, 4) # 細実線を描く値
+cs = m.contour(x, y, d, levels=levels, colors='k', linewidths=[1.2, 0.8, 0.8, 0.8, 0.8]) # 4hPaで細実線、20hPaで太実線
+cs.clabel(cs.levels[::5], fmt="%d", fontsize=12) # 5飛ばし（20 hPa毎）にラベルを付ける
 </pre>
+dはSLPデータ、linewidths=[1.2, 0.8, 0.8, 0.8, 0.8]とすることで、4hPa毎の細線、20hPa毎の太線を描く
+</li><br />
+</ul>
 </div>
 
 <h4><div class="headline2" id="basemap_e_3">極投影図法で0度と360度を滑らかにつなげる</div></h4>
@@ -779,7 +772,7 @@ m.contour(x, y, data, clevs, linewidths=0.8, colors='k') # 等高線を描く
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/02/11</p>
+<p>最終更新日：2022/03/05</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
