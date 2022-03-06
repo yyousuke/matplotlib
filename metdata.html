@@ -54,6 +54,7 @@
       <li><a href="#tsv_1_1">TSVファイルの形式</a></li>
       <li><a href="#tsv_1_2">TSVファイルの読み込み</a></li>
       <li><a href="#tsv_1_3">TSVファイルとして書き出す</a></li>
+      <li><a href="#tsv_1_4">LTSVファイル</a></li>
      </ul>
   </li></ul>
   <!--  SSVファイル -->
@@ -281,6 +282,7 @@ df = pd.read_csv(StringIO(csv))
 </pre>
 行の読み飛ばしオプションにも対応（<a href="#csv_1_4">CSVファイルの行処理</a>参照）
 </li><br />
+</ul>
 </div>
 
 <!-- TSVファイル -->
@@ -325,6 +327,25 @@ dはlistやnumpyのndarrayなど</li><br />
 <li>ヘッダを付けない
 <pre>pd.DataFrame(d).to_csv("ファイル名", sep='\t', header=False)</pre>
 1行目にヘッダ行が入らないファイルができる</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="tsv_1_4">LTSVファイル</div></h4>
+<div class="text1">
+TSVファイルの中には、Labeled Tab-separated Values（LTSV）形式のものがある
+。各列にラベルを付けることで、データが欠損になった場合やデータが追加になった場合にも柔軟に対応できる。
+<ul class="list1">
+<li>LTSV形式のファイルを読み込む
+<pre>
+from collections import OrderedDict
+ with open(path_to_file) as f:
+&nbsp; &nbsp; df = pd.DataFrame([
+&nbsp; &nbsp; &nbsp; &nbsp; OrderedDict(
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cell.split(':', 1) for cell in line.rstrip('\r\n').split('\t'))
+&nbsp; &nbsp; &nbsp; &nbsp; for line in f
+&nbsp; &nbsp; ])
+</pre>
+</li><br />
 </ul>
 </div>
 
@@ -728,7 +749,7 @@ d = hdf['データセットの名前'][:, :] # データセットの名前に対
 <h3><div class="headline1" id="gtool3_1">GTOOL3ファイル</div></h3>
 <h4><div class="headline2" id="gtool3_1_1">GTOOL3ファイルの形式</div></h4>
 <div class="text1">
-GTOOL3形式は、気候モデルMIROCの出力に用いられているバイナリ形式で、ヘッダ部とデータ部のセットで構成されている。ヘッダ部にはデータ部の格納形式やサイズ、欠損値、日時などが16 文字&#215;64欄の文字データとして格納されている。また、データの経度、緯度、高度方向の格子点数や、格子点値が記述された格子情報ファイル名なども格納され、データの名前、作成 、作成日時なども記述することができる。
+GTOOL3形式は、気候モデルMIROCの出力に用いられているバイナリ形式で、ヘッダ部とデータ部のセットで構成されている。ヘッダ部にはデータ部の格納形式やサイズ、欠損値、日時などが16 文字&#215;64欄の文字データとして格納されている。また、データの経度、緯度、高度方向の格子点数や、格子点値が記述された格子情報ファイル名なども格納され、データの名前、作成 、作成日時なども記述することができる。
 <ul class="list1">
 <li>GTOOL3ファイルの形式
 <pre>
@@ -761,7 +782,7 @@ d = gt['変数名'][:, :, :] # 変数名に対応するデータ取得（次元�
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/02/8</p>
+<p>最終更新日：2022/03/06</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
