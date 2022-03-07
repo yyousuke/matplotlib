@@ -335,6 +335,13 @@ dはlistやnumpyのndarrayなど</li><br />
 TSVファイルの中には、Labeled Tab-separated Values（LTSV）形式のものがある
 。各列にラベルを付けることで、データが欠損になった場合やデータが追加になった場合にも柔軟に対応できる。
 <ul class="list1">
+<li>LTSV形式のファイルの形式
+<pre>
+time:時刻1&lt;tab&gt; lat:緯度1&lt;tab&gt; lon:経度1&lt;tab&gt; t:気温1&lt;tab&gt; p:気圧1
+time:時刻2&lt;tab&gt; lat:緯度2&lt;tab&gt; lon:経度2&lt;tab&gt; t:気温2&lt;tab&gt; p:気圧2
+...
+</pre>
+</li><br />
 <li>LTSV形式のファイルを読み込む
 <pre>
 from collections import OrderedDict
