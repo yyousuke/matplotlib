@@ -43,6 +43,7 @@
       <li><a href="#time_4">時刻形式データの演算</a></li>
       <li><a href="#time_5">1ヶ月後、1年後を計算する</a></li>
       <li><a href="#time_6">月末の日を計算する</a></li>
+      <li><a href="#time_7">ISOフォーマットで表示する</a></li>
      </ul>
   </li></ul>
   <!-- ディレクトリ -->
@@ -177,7 +178,8 @@ from datetime import datetime
 time = datetime(2021, 9, 4, 12, 30, 0)
 print(time.isoformat())
 </pre>
-"2021-09-04T12:30:00" の文字列が表示される</li><br />
+"2021-09-04T12:30:00" の文字列が表示される<br />
+詳細は<a href="#time_7">ISOフォーマットで表示する</a>参照</li><br />
 </ul>
 </div>
 <br />
@@ -271,6 +273,67 @@ from dateutil.relativedelta import relativedelta
 time = datetime(2021, 8, 1, 0, 0, 0)
 time_new = time + relativedelta(months=1) - relativedelta(days=1)
 </pre>
+</div>
+<br />
+<br />
+
+<h4><div class="headline2" id="time_7">ISOフォーマットで表示する</div></h4>
+<div class="text1">
+datetime.datetimeのisoformatメソッドを利用する
+<ul class="list1">
+<li>デフォルトのISO date表示
+<pre>
+from datetime import datetime
+time = datetime(2022, 3, 8, 12, 31, 12)
+print(dt.isoformat())
+print(type(dt.isoformat()))
+</pre>
+2022-03-08T12:31:12（デフォルトでは日付と時刻の間にTが入り、秒まで）<br />
+&lt;class 'str'&gt;（文字型に変換されている）
+</li><br />
+<li>日付と時刻の間を空白にする
+<pre>
+from datetime import datetime
+time = datetime(2022, 3, 8, 12, 31, 12)
+print(dt.isoformat(' '))
+</pre>
+2022-03-08 12:31:12
+</li><br />
+<li>ミリ秒まで表示する
+<pre>
+from datetime import datetime
+time = datetime(2022, 3, 8, 12, 31, 12)
+print(dt.isoformat(timespec='milliseconds'))
+</pre>
+2022-03-08T12:31:12.000
+</li><br />
+<li>日付と時刻の間を空白、ミリ秒まで表示
+<pre>
+from datetime import datetime
+time = datetime(2022, 3, 8, 12, 31, 12)
+print(dt.isoformat(sep=' ', timespec='milliseconds'))
+</pre>
+2022-03-08 12:31:12.000<br />
+sep=は省略可能
+</li><br />
+<li>マイクロ秒まで表示する
+<pre>
+from datetime import datetime
+time = datetime(2022, 3, 8, 12, 31, 12, 30)
+print(dt.isoformat(timespec='microseconds'))
+</pre>
+2022-03-08T12:31:12.000030<br />
+datetimeの7番目の引数にマイクロ秒を与えることができる
+</li><br />
+<li>分まで表示する
+<pre>
+from datetime import datetime
+time = datetime(2022, 3, 8, 12, 31, 12)
+print(dt.isoformat(timespec='minutes'))
+</pre>
+2022-03-08T12:31
+</li><br />
+</ul>
 </div>
 <br />
 <br />
@@ -395,6 +458,6 @@ bにはTrueかFalseが入っている
 </body>
 <footer>
 <p>最終更新日：2022/03/08</p>
-<p>Copyright (C) 2021, Yousuke Yamashita</p>
+<p>Copyright (C) 2021-2022, Yousuke Yamashita</p>
 </footer>
 </html>
