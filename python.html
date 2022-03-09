@@ -57,6 +57,8 @@
   <ul class="list1"><li><a href="#env">環境変数</a>
     <ul class="list2">
       <li><a href="#env_1">環境変数を取得する</a></li>
+      <li><a href="#env_2">環境変数を追加・上書きする</a></li>
+      <li><a href="#env_3">pythonパッケージへのパスを追加する</a></li>
      </ul>
   </li></ul>
   <!-- 文字列 -->
@@ -373,18 +375,81 @@ for f in files:
 
 
 <!-- 環境変数 -->
-<h3><div class="headline1" id="env">環境変数</div></h3>
+<h3><div class="headline1" id="env">環境変数、パス</div></h3>
 <h4><div class="headline2" id="env_1">環境変数を取得する</div></h4>
 <div class="text1">
 os.environ.getを使う
+<ul class="list1">
+<li>例：カレントディレクトリを取得する
 <pre>
 import os
 cur = os.environ.get('PWD')
 </pre>
-カレントディレクトリを取得する
+</li>
+<li>例：LANGの取得
+<pre>
+import os
+lang = os.environ.get('LANG', "C")
+</pre>
+取得できなかった場合は英語表記（C）に設定
+</li><br />
+</ul>
 </div>
 <br />
 <br />
+
+<h4><div class="headline2" id="env_2">環境変数を追加・上書きする</div></h4>
+<div class="text1">
+os.environを使う
+<ul class="list1">
+<li>例：rsyncに用いるコマンド設定（RSYNC_RSH）
+<pre>
+import os
+os.environ['RSYNC_RSH'] = 'rsh'
+</pre>
+rshに設定される
+</li><br />
+<li>例：セキュリティ上好ましくないのでsshに変更する
+<pre>
+import os
+os.environ['RSYNC_RSH'] = 'ssh'
+</pre>
+sshに上書きされる
+</li><br />
+</ul>
+</div>
+
+<h4><div class="headline2" id="env_3">pythonパッケージへのパスを追加する</div></h4>
+<div class="text1">
+sys.path.appendを使う
+<ul class="list1">
+<li>例：親ディレクトリをパスに追加する
+<pre>
+import sys
+sys.path.append('../')
+</pre>
+</li>
+<li>例：os.pardirを使う方法
+<pre>
+import sys
+import os
+sys.path.append(os.pardir)
+</pre>
+</li>
+<li>例：環境変数に追加する（bash）
+<pre>% export PYTHONPATH=設定したいパス:${PYTHONPATH}</pre>
+</li>
+<li>例：環境変数に追加する（python）
+<pre>
+import os
+os.environ['PYTHONPATH'] = '設定したいパス'
+</pre>
+</li>
+</ul>
+</div>
+<br />
+<br />
+
 
 
 <!-- 文字列 -->
@@ -457,7 +522,7 @@ bにはTrueかFalseが入っている
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/03/08</p>
+<p>最終更新日：2022/03/10</p>
 <p>Copyright (C) 2021-2022, Yousuke Yamashita</p>
 </footer>
 </html>
