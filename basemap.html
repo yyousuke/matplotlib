@@ -329,7 +329,8 @@ gradsのspsに相当する図法</li>
 <li>例：東経180度、北緯45度を中心に描く場合
 <pre>m = Basemap(projection='ortho', lon_0=180, lat_0=45)</pre>
 lat_0は-90から90まで許容されているが、45より大きい値を指定すると落ちるバグがある（2019/12/12）<br />
-該当する作図を行う際には、<a href="./info.html#20200201">解決法：正射投影図法で北緯45度より北側を中心にした場合の不具合（2020/02/01）</a>のコード修正を適用する
+該当する作図を行う際には、<a href="./info.html#20200201">解決法：正射投影図法で北緯45度より北側を中心にした場合の不具合（2020/02/01）</a>のコード修正を適用する<br />
+<font color="red">＊Basemapバージョン1.2.2で修正されました</font>
 </li>
 </ul>
 </div>
@@ -776,7 +777,7 @@ m.contour(x, y, data, clevs, linewidths=0.8, colors='k') # 等高線を描く
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/03/07</p>
+<p>最終更新日：2022/03/15</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
