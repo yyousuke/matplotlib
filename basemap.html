@@ -319,7 +319,8 @@ gradsのspsに相当する図法</li>
 <pre>m = Basemap(projection='lcc', lon_0=中心の経度,  lat_0=中心の緯度, width=幅, height=高さ)</pre>
 幅と高さの単位はm<br />
 または
-<pre>m = Basemap(projection='lcc', lon_0=中心の経度, lat_0=中心の緯度, llcrnrlon=経度下限, urcrnrlon=経度上限, llcrnrlat=緯度下限, urcrnrlat=緯度上限)</pre>
+<pre>m = Basemap(projection='lcc', lon_0=中心の経度, lat_0=中心の緯度, llcrnrlon=経度下限, urcrnrlon=経度上限, ¥
+&nbsp; &nbsp; llcrnrlat=緯度下限, urcrnrlat=緯度上限)</pre>
 </div>
 
 <h4><div class="headline2" id="basemap_2_5">正射投影図法（平射図法）</div></h4>
@@ -463,7 +464,7 @@ cs.clabel(fontsize=12, fmt="%d")
 <li>例：データの最小値から最大値の範囲内で2毎等間隔に描く
 <pre>
 levels = np.arange(np.floor(d.min()), np.ceil(d.max()), 2) # 値のリスト作成
-cs = m.contour(x, y, d, levels=levels) # 等高線を描く
+m.contour(x, y, d, levels=levels) # 等高線を描く
 </pre>
 ZがNumpyのndarrayの場合。最小値よりも小さい最大の整数をnp.floor(Z.min())、最大値よりも大きい最小の整数をnp.ceil(Z.max())で取得、<a href="numpy.html#math">Numpyの数学関数</a>、<a href="numpy.html#stat">Numpyの統計処理</a>参照
 </li><br />
@@ -675,7 +676,8 @@ for xpt, ypt in zip(x.flatten(), y.flatten()):
 &nbsp; &nbsp; mask.append(m.is_land(xpt, ypt))
 mask = np.array(mask).reshape(y_size, x_size) # 2次元配列に戻す
 </pre>
-maskは真偽値（True/False）の入った２次元配列</li><br />
+maskは真偽値（True/False）の入った２次元配列<br />
+is_land関数はスカラー値しか扱えないので、一度スカラー値にしてから配列に戻している</li><br />
 <li>陸面データをNaNにする
 <pre>df[mask] = np.nan</pre>
 dfはmaskと同じサイズの2次元配列</li>
@@ -777,7 +779,7 @@ m.contour(x, y, data, clevs, linewidths=0.8, colors='k') # 等高線を描く
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/03/15</p>
+<p>最終更新日：2022/03/17</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
