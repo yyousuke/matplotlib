@@ -241,8 +241,9 @@
       <li><a href="#legend_1_7">凡例の枠内を塗り潰す色を変える</a></li>
       <li><a href="#legend_1_8">凡例の枠を描かない</a></li>
       <li><a href="#legend_1_9">凡例内の線を長くする</a></li>
-	  <li><a href="#legend_1_10">凡例内の文字の色を変える</a></li>
+      <li><a href="#legend_1_10">凡例内の文字の色を変える</a></li>
       <li><a href="#legend_1_11">凡例内の線を任意に設定する</a></li>
+      <li><a href="#legend_1_12">凡例にマーカーやパッチを設定する</a></li>
     </ul>
   </li></ul>
   <!-- カラーバー -->
@@ -1861,13 +1862,29 @@ ax.legend()でも同じ（axは<a href="#graph_1_2">fig.add_subplot</a>の戻り
 
 <h4><div class="headline2" id="legend_1_11">凡例内の線を任意に設定する</div></h4>
 <div class="text1">
-plt.Line2Dでカスタムラインを設定する
+Line2Dでカスタムラインを設定する
 <pre>
 from matplotlib.lines import Line2D
 custom_lines = [
 &nbsp; &nbsp; Line2D([0], [0], color='tab:blue', lw=4), # 青線
 &nbsp; &nbsp; Line2D([0], [0], color='tab:orange', lw=4), # オレンジ線
 &nbsp; &nbsp; Line2D([0], [0], color='tab:red', lw=4) # 赤線
+]
+fig, ax = plt.subplots()
+# 凡例を描く
+ax.legend(custom_lines, ['Low', 'Medium', 'High']) # 青、オレンジ、赤の順に並ぶ
+</pre>
+</div> 
+
+<h4><div class="headline2" id="legend_1_12">凡例にマーカーやパッチを設定する</div></h4>
+<div class="text1">
+Line2D、Patchでマーカーやパッチを設定する
+<pre>
+from matplotlib.lines import Line2D
+custom_lines = [
+&nbsp; &nbsp; Line2D([0], [0], color='tab:blue', lw=4), # 青線
+&nbsp; &nbsp; Line2D([0], [0], marker='o', markersize=8, color='tab:orange', lw=0), # オレンジ丸マーカー
+&nbsp; &nbsp; Patch(facecolor='red', edgecolor='k', hatch='//',  lw=1) # 赤塗りの黒枠に射線のハッチ
 ]
 fig, ax = plt.subplots()
 # 凡例を描く
@@ -2572,7 +2589,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/04/18</p>
+<p>最終更新日：2022/04/21</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
