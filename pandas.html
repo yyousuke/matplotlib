@@ -164,7 +164,7 @@ dfのaxis=1の0番目の要素を全て置き換える
 
 <h3><div class="headline1" id="df_sort">データの並べ替え</div></h3>
 <div class="text1">
-DataFrameのsort_values()を使う
+DataFrameのsort_values()メソッドを使う
 <ul class="list1">
 <li>基準となる列のラベルを指定して並べ替える
 <pre>df_2 = df.sort_values('列の名前')</pre>
@@ -184,6 +184,40 @@ DataFrameのsort_values()を使う
 <li>欠損値を最初に並べる
 <pre>df_2 = df.sort_values('列の名前', na_position='first')</pre>
 デフォルトでは最後に並ぶ
+</li><br />
+</ul>
+</div>
+<br />
+<br />
+
+
+<h3><div class="headline1" id="df_info">データの情報を表示</div></h3>
+<div class="text1">
+<ul class="list1">
+<li>行数・列数、データ列の名前などを表示
+<pre>df.info()</pre>
+DataFrame（df）のdf.info()メソッドを使う<br />
+行数・列数、データ列の名前、データ型、メモリサイズなどが表示できる
+</li><br />
+<li>データ行の名前を取得する
+<pre>print(df.index)</pre>
+</li><br />
+<li>データ列の名前を取得する
+<pre>print(df.columns)</pre>
+</li><br />
+<li>行数を取得する
+<pre>print(len(df))</pre>
+</li><br />
+<li>列数を取得する
+<pre>print(len(df.columns))</pre>
+</li><br />
+<li>サイズを取得する
+<pre>print(df.size)</pre>
+行数&times;列数と一致
+</li><br />
+<li>形状を取得する
+<pre>print(df.shape)</pre>
+軸の番号順に要素となったタプルとして表示
 </li><br />
 </ul>
 </div>

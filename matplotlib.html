@@ -510,6 +510,26 @@ x, y, dは２次元のndarray
 </ul>
 </li>
 </ul>
+<!-- 8 -->
+<li> pandasでSettingWithCopyWarningの警告が出る場合<br>
+元のDataFrameから切り出したスライスを変更する場合に警告が出る。コピーを用いる。
+<ul class="list2">
+<li>変更前
+<pre>
+doy = df.loc[:, "doy"]
+doy[doy > 300] = np.nan
+</pre>
+dfはDataFrame
+</li><br />
+<li>変更後（copy()を使う）
+<pre>
+doy = df.loc[:, "doy"].copy()
+doy[doy > 300] = np.nan
+</pre>
+</li><br />
+</ul>
+</li>
+</ul>
 </div>
 
 <h4><div class="headline2" id="matplotlib_2_4">pythonプログラムの文法チェックとインデント合わせ</div></h4>
@@ -2589,7 +2609,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/04/21</p>
+<p>最終更新日：2022/05/05</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
