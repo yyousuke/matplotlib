@@ -20,13 +20,13 @@
 <meta name="description" content="" />
 <meta name="keywords" content="matplotlib" />
 <link href="design.css" rel="stylesheet" type="text/css" />
-<title>気象データ解析のためのmatplotlibの使い⽅</title>
+<title>気象データ解析のためのmatplotlibの使い方</title>
 </head>
 
 <body link="#0000FF" vlink="#0000FF">
 
 <div id="nesting">
-<a href="/">ホーム</a> &gt; <a href="index.html">matplotlibの使い⽅</a> &gt; グラフ作図のTIPS
+<a href="/">ホーム</a> &gt; <a href="index.html">matplotlibの使い方</a> &gt; グラフ作図のTIPS
 </div>
 <article>
 <center><h1 id="top">matplotlib：グラフ作図のTIPS</h1></center>
@@ -509,7 +509,6 @@ x, y, dは２次元のndarray
 </li><br />
 </ul>
 </li>
-</ul>
 <!-- 8 -->
 <li> pandasでSettingWithCopyWarningの警告が出る場合<br>
 元のDataFrameから切り出したスライスを変更する場合に警告が出る。コピーを用いる。
@@ -517,18 +516,19 @@ x, y, dは２次元のndarray
 <li>変更前
 <pre>
 doy = df.loc[:, "doy"]
-doy[doy > 300] = np.nan
+doy[doy &gt; 300] = np.nan
 </pre>
 dfはDataFrame
 </li><br />
 <li>変更後（copy()を使う）
 <pre>
 doy = df.loc[:, "doy"].copy()
-doy[doy > 300] = np.nan
+doy[doy &gt; 300] = np.nan
 </pre>
 </li><br />
 </ul>
 </li>
+
 </ul>
 </div>
 
@@ -2609,7 +2609,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/05/05</p>
+<p>最終更新日：2022/05/17</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
