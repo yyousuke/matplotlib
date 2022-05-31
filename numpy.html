@@ -45,6 +45,12 @@
       <li><a href="#stat_2">Numpyの統計処理一覧（欠損あり）</a></li>
      </ul>
   </li></ul>
+  <!--  Numpyの判定関数 -->
+  <ul class="list1"><li><a href="#is">Numpyの判定関数</a>
+    <ul class="list2">
+      <li><a href="#is_1">Numpyのスカラー判定</a></li>
+     </ul>
+  </li></ul>
   <!-- Numpyのデータ形式 -->
   <ul class="list1"><li><a href="#dtype">Numpyのデータ形式</a>
     <ul class="list2">
@@ -105,6 +111,24 @@
 <br />
 <br />
 
+<!-- Numpyの判定関数 -->
+<h3><div class="headline1" id="is">Numpyの判定関数</div></h3>
+<h4><div class="headline2" id="is_1">Numpyのスカラー判定</div></h4>
+<div class="text1">
+オブジェクトがスカラーか判定する
+<pre>np.isscalar(var)</pre>
+数値、文字列、bool値はTrue、リスト、タプル、ndarrayなどはFalse<br />
+＊<p href="https://numpy.org/doc/stable/reference/generated/numpy.isscalar.html">numpy.isscalar</p>参照<br />
+＊数であることを判定したい場合には、以下のようにisinstanceを使う
+<pre>
+import numbers
+isinstance(x, numbers.Number)
+</pre>
+</div>
+
+
+<br />
+  
 <!-- Numpyのデータ形式 -->
 <h3><div class="headline1" id="dtype">Numpyのデータ形式</div></h3>
 <h4><div class="headline2" id="dtype_1">Numpyのデータ型一覧</div></h4>
@@ -217,7 +241,7 @@ for ij in itertools.product(i_list, j_list):
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/05/17</p>
+<p>最終更新日：2022/05/30</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
