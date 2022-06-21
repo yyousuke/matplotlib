@@ -50,7 +50,8 @@
       <li><a href="#matplotlib_1_4">画面上に表示する</a></li>
       <li><a href="#matplotlib_1_5">画像ファイルを保存する</a></li>
       <li><a href="#matplotlib_1_6">matplotlibのデフォルト設定rcParamsを表示する</a></li>
-  </ul>
+      <li><a href="#matplotlib_1_7">モジュールのimportでエラーが出る場合</a></li>
+    </ul>
   </li></ul>
   <!-- matplotlib作図スクリプトの基本 -->
   <ul class="list1"><li><a href="#matplotlib_2">matplotlib作図スクリプトの基本</a>
@@ -60,7 +61,7 @@
       <li><a href="#matplotlib_2_3">スクリプト実行時のWarning表示を消す</a></li>
       <li><a href="#matplotlib_2_4">pythonプログラムの文法チェックとインデント合わせ</a></li>
       <li><a href="#matplotlib_2_5">pythonプログラムをhtmlで表示</a></li>
-  </ul>
+    </ul>
   </li></ul>
   <!-- グラフの基本 -->
   <ul class="list1"><li><a href="#graph_1">サブプロット</a>
@@ -376,12 +377,45 @@ matplotlib.pyplotモジュールをインポートする
 </ul>
 </div>
 
+<h4><div class="headline2" id="matplotlib_1_7">モジュールのimportでエラーが出る場合</div></h4>
+<div class="text1">
+MacPortsでpythonをインストールした場合
+<ul class="list1">
+<li>pythonをバージョン指定して起動（3.9の場合）
+<pre>% python3.9
+import モジュール名
+</pre>
+＊モジュールを導入したバージョンで起動し、import可能か確認する
+</li><br />
+<li>デフォルトのpythonバージョンを確認
+<pre>% python3</pre>
+＊最初の行にバージョンが表示される
+</li><br />
+<li>デフォルトバージョンを変更（3.9に変える場合）
+<pre>% sudo port select --set python3 python39</pre>
+</li><br />
+</ul>
+標準とは違う場所にあるモジュールをimportする場合
+<ul class="list1">
+<li>スクリプト中にpythonのパスを追加
+<pre>import sys
+sys.path.append(os.pardir)
+</pre>
+＊上位ディレクトリのパスを追加
+</li><br />
+<li>環境変数で追加する場合
+<pre>export PYTHONPATH=モジュールを置いた場所へのパス</pre>
+</li><br />
+</ul>
+</div>
+
 
 
 <!-- スクリプトの基本 -->
 <h3><div class="headline1" id="matplotlib_2">matplotlib作図スクリプトの基本</div></h3>
 <h4><div class="headline2" id="matplotlib_2_1">python3スクリプト</div></h4>
 <div class="text1">
+sample.pyのようなファイル名で作成する
 <ul class="list1">
 <li>スクリプトの最初の行
 <pre>#!/usr/bin/env python3</pre></li><br />
@@ -2623,7 +2657,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/05/27</p>
+<p>最終更新日：2022/06/21</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
