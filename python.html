@@ -69,6 +69,15 @@
       <li><a href="#char_3">文字列からboolへの変換</a></li>
      </ul>
   </li></ul>
+  <!-- 条件式-->
+  <ul class="list1"><li><a href="#if">条件式</a>
+    <ul class="list2">
+      <li><a href="#if_1">pythonにおける真偽値の判定</a></li>
+      <li><a href="#if_2">全ての要素がTrueか判定する</a></li>
+      <li><a href="#if_3">いずれかの要素がTrueか判定する</a></li>
+      <li><a href="#if_4">全ての要素がFalseか判定する</a></li>
+     </ul>
+  </li></ul>
   <!-- Web -->
   <ul class="list1"><li><a href="#web">Web</a>
     <ul class="list2">
@@ -524,6 +533,60 @@ bにはTrueかFalseが入っている
 
 
 
+ <!-- 条件式-->
+<h3><div class="headline1" id="if">条件式</div></h3>
+<h4><div class="headline2" id="if_1">pythonにおける真偽値の判定</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>真偽値</li>
+<img src="./tables/Table4-4-2.png" class="size2" alt="Table" />
+</ul>
+</div>
+
+<h4><div class="headline2" id="if_2">全ての要素がTrueか判定する</div></h4>
+<div class="text1">
+allを用いる
+<pre>
+print(all([True, True, True]))
+出力：True
+print(all([True, True, False]))
+出力：False
+</pre>
+＊全てTrueの時のみTrueが表示される<br />
+＊allの引数には、リスト、タプル、集合が使用可能<br />
+参考：<a href="https://note.nkmk.me/python-all-any-usage/">Pythonの組み込み関数all(), any()の使い方</a>
+</div>
+
+<h4><div class="headline2" id="if_3">いずれかの要素がTrueか判定する</div></h4>
+<div class="text1">
+allを用いる
+<pre>
+print(any([True, False, False]))
+出力：True
+print(any([False, False, False]))
+出力：False
+</pre>
+＊１つでもTrueが含まれていればTrueが表示される<br />
+＊allの引数には、リスト、タプル、集合が使用可能
+</div>
+
+<h4><div class="headline2" id="if_4">全ての要素がFalseか判定する</div></h4>
+<div class="text1">
+not anyを用いる
+<pre>
+print(not any([False, False, False]))
+出力：True
+print(not any([False, False, True]))
+出力：False
+</pre>
+＊anyの否定を取ることで、全ての要素がFalseの場合を判定できる<br />
+＊allの引数には、リスト、タプル、集合が使用可能
+</div>
+<br />
+<br />
+
+
+
 <!-- Web -->
 <h3><div class="headline1" id="web">Web</div></h3>
 <h4><div class="headline2" id="web_1">pythonでwebサーバを起動</div></h4>
@@ -548,7 +611,7 @@ Webページのコンテンツのある場所で以下のコマンドを実行�
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/05/17</p>
+<p>最終更新日：2022/07/14</p>
 <p>Copyright (C) 2021-2022, Yousuke Yamashita</p>
 </footer>
 </html>
