@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="author" content="山下陽介 (Yousuke Yamashita)  国立環境研究所 (National Institute for Environmental Studies, NIES)" />
+<link rel="icon" type="image/vnd.microsoft.icon" href="/matplotlib/favicon.ico" />
+<link rel="apple-touch-icon" type="image/png" href="/matplotlib/apple-touch-icon-180x180.png" />
+<link rel="icon" type="image/png" href="/matplotlib/icon-192x192.png" />
+<!-- Mobile Internet Explorer allows us to activate ClearType technology for smoothing fonts for easy reading -->
+<meta http-equiv="cleartype" content="on" />
+<!-- Specify whether or not telephone numbers in the HTML content should appear as hypertext links -->
+<meta name="format-detection" content="telephone=no" />
+<!-- Changes the logical window size used when displaying a page mobile browsers -->
+<meta name = "viewport" content = "width = device-width, initial-scale=1, user-scalable=yes" />
+
+<meta name="robots" content="all" />
+<meta name="http-equiv" content="X-Robots-Tag : all" />
+<meta name="googlebot" content="all" />
+<meta name="description" content="" />
+<meta name="keywords" content="matplotlib" />
+<link href="design.css" rel="stylesheet" type="text/css" />
+<title>気象データ解析のためのmatplotlibの使い方</title>
+</head>
+
+<body link="#0000FF" vlink="#0000FF">
+
+<div id="nesting">
+<a href="/">ホーム</a> &gt; <a href="index.html">matplotlibの使い方</a> &gt; インストール</div>
+<article>
+<center><h1 id="top">matplotlib：インストール</h1></center>
+<br />
+<div id="text2">
+<p>&nbsp; ここでは、macOS向けに作成した「気象データ解析のためのmatplotlibの使い方」の<a href="./met_sample.zip" target="_blank">サンプルプログラム</a>をLinux環境で実行するための手順を紹介しています。導入にはパッケージ管理ツール Condaを用います。macOSの場合には<a href="matplotlib-2.pdf">「２章　matplotlibの導入」</a>をご参照ください。</p>
+<p>作成者：山下陽介（国立環境研究所）</p>
+</div>
+<br />
+<hr />
+<br />
+
+
+<!-- ここから本文 -->
+<h3><div class="headline1" id="install_1">準備</div></h3>
+<h4><div class="headline2" id="install_1_1">パッケージ管理ツールConda</div></h4>
+<div class="text1">
+Python環境を構築するため、まずはパッケージ管理ツールCondaを導入します。Anacondaを導入する、軽量版のMinicondaを導入する、Intel oneAPIのcondaコマンドを利用する、など複数の方法がありますので、好みのものをご利用ください。なお下記のツールには、Linux版の他、Windows版、macOS版もあります。
+<ul class="list1">
+<li><a href="https://www.python.jp/install/anaconda/unix/install.html" target="_blank">Linux版Anacondaのインストール</a></li>
+<li><a href="https://www.anaconda.com/" target="_blank">Anaconda</a>（ダウンロードサイト）</li>
+<li><a href="https://docs.conda.io/en/latest/miniconda.html" target="_blank">Miniconda</a>（Python環境に特化した軽量版）</li>
+<li><a href="https://qiita.com/implicit_none/items/35bc4be8f2022903747a" target="_blank">Intel oneAPI Base Toolkit + HPC Toolkit (Intel Fortran)のインストール（Linux版）</a>（Intel Fortranと共存させたい場合など）</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="install_1_2">Conda環境の作成</div></h4>
+<div class="text1">
+ここでは、conda実行環境を複数用意して、使いたい環境に切り替える方法を紹介します。Python3.9環境をpy39という名前で作成するには、次のようにします。
+<pre>% conda create -n py39 python=3.9<br />
+＊~/.conda/envs/py39 ができる<br />
+作成した実行環境を次のように有効化します。
+<pre>% conda activate py39<br />
+</div>
+
+
+<h3><div class="headline1" id="install_2">パッケージのインストール</div></h3>
+<h4><div class="headline2" id="install_2_1">サンプルプログラムで利用するパッケージ</div></h4>
+<div class="text1">
+サンプルプログラムでは、次のパッケージを利用しています。インストールを行う際には、
+<pre>% conda install パッケージ名</pre>
+を用います。
+<pre>
+% conda install pandas
+% conda install netcdf4
+% conda install basemap
+% conda install cartopy
+</pre>
+</div>
+
+<br />
+<small><a href="#top">[top]</a></small> <br />
+<hr width="105%" />
+</article>
+</body>
+<footer>
+<p>最終更新日：2022/07/24</p>
+<p>Copyright (C) 2022, Yousuke Yamashita</p>
+</footer>
+</html>
