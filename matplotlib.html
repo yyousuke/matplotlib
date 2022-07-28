@@ -209,7 +209,8 @@
       <li><a href="#graph_10_7">箱ひげ図の箱の色や太さを変える</a></li>
       <li><a href="#graph_10_8">箱ひげ図の外れ値のマーカーを変更する</a></li>
       <li><a href="#graph_10_9">箱ひげ図の中央値のマーカーを変更する</a></li>
-      <li><a href="#graph_10_10">箱ひげ図を横に複数並べる</a></li>
+      <li><a href="#graph_10_10">箱ひげ図のひげの範囲を%で指定する</a></li>
+      <li><a href="#graph_10_11">箱ひげ図を横に複数並べる</a></li>
     </ul>
   </li></ul>
 <!-- バイオリンプロット -->
@@ -1638,7 +1639,7 @@ ax.boxplot()でも同じ（axは<a href="#graph_1_2">fig.add_subplot</a>の戻�
 
 <h4><div class="headline2" id="graph_10_2">箱ひげ図で最小値から最大値までヒゲを描く</div></h4>
 <div class="text1">
-ヒゲをを描く範囲を決めるwhisオプションをwhis=100のように非常に大きな値にしておく
+ヒゲを描く範囲を決めるwhisオプションをwhis=100のように非常に大きな値にしておく
 <pre>plt.boxplot(データ, whis=100)</pre>
 whisオプションのデフォルト値は1.5（箱の1.5倍）
 <a href="options.html#boxplot">箱ひげ図</a>参照
@@ -1719,6 +1720,10 @@ flierpropsオプションに外れ値の部分のスタイルを辞書で与え�
 <li>外れ値のマーカーの色を青に変える
 <pre>plt.boxplot(データ, flierprops=dict(color='b'))</pre>
 </li>
+<li>外れ値のマーカーを小さくする
+<pre>plt.boxplot(データ, flierprops=dict(markersize=4)</pre>
+</li>
+デフォルト値：markersize=6
 </ul>
 </div>
 
@@ -1733,7 +1738,21 @@ medianpropsオプションに中央値の部分のスタイルを辞書で与え
 </ul>
 </div>
 
-<h4><div class="headline2" id="graph_10_10">箱ひげ図を横に複数並べる</div></h4>
+<h4><div class="headline2" id="graph_10_10">箱ひげ図のひげの範囲を%で指定する</div></h4>
+<div class="text1">
+ヒゲを描く範囲を決めるwhisオプションで最小値、最大値のパーセント点を与える
+<pre>plt.boxplot(データ, whis=[最小値, 最大値])</pre>
+<ul class="list1">
+<li>5〜95%にひげを描く
+<pre>plt.boxplot(データ, whis=[5, 95])</pre>
+</li>
+<li>外れ値を描かない
+<pre>plt.boxplot(データ, whis=[5, 95], showfliers=False)</pre>
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_10_11">箱ひげ図を横に複数並べる</div></h4>
 <div class="text1">
 </div>
 
@@ -2666,7 +2685,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/07/27</p>
+<p>最終更新日：2022/07/28</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
