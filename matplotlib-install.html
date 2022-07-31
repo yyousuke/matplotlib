@@ -31,7 +31,7 @@
 <center><h1 id="top">matplotlib：インストール</h1></center>
 <br />
 <div id="text2">
-<p>&nbsp; ここでは、macOS向けに作成した「気象データ解析のためのmatplotlibの使い方」の<a href="./met_sample.zip" target="_blank">サンプルプログラム</a>をLinux環境で実行するための手順を紹介しています。導入にはパッケージ管理ツール Condaを用います。macOSの場合には<a href="matplotlib-2.pdf">「２章　matplotlibの導入」</a>をご参照ください。</p>
+<p>&nbsp; ここでは、macOS向けに作成した「気象データ解析のためのmatplotlibの使い方」の<a href="./met_sample.zip" target="_blank">サンプルプログラム</a>をLinux環境で実行するための手順を紹介しています。導入にはパッケージ管理ツール Condaを用います。macOSでMacPortsを利用する場合には<a href="matplotlib-2.pdf">「２章　matplotlibの導入」</a>をご参照ください。</p>
 <p>作成者：山下陽介（国立環境研究所）</p>
 </div>
 <br />
@@ -48,13 +48,13 @@ Python環境を構築するため、まずはパッケージ管理ツールConda
 <li><a href="https://www.python.jp/install/anaconda/unix/install.html" target="_blank">Linux版Anacondaのインストール</a></li>
 <li><a href="https://www.anaconda.com/" target="_blank">Anaconda</a>（ダウンロードサイト）</li>
 <li><a href="https://docs.conda.io/en/latest/miniconda.html" target="_blank">Miniconda</a>（Python環境に特化した軽量版）</li>
-<li><a href="https://qiita.com/implicit_none/items/35bc4be8f2022903747a" target="_blank">Intel oneAPI Base Toolkit + HPC Toolkit (Intel Fortran)のインストール（Linux版）</a>（Intel Fortranと共存させたい場合など）</li>
+<li><a href="https://qiita.com/implicit_none/items/35bc4be8f2022903747a" target="_blank">Intel oneAPI Base Toolkit + HPC Toolkit (Intel Fortran)のインストール（Linux版）</a>（Intel Fortran/Pythonと共存させたい場合など）</li>
 </ul>
 </div>
 
 <h4><div class="headline2" id="install_1_2">Conda環境の作成</div></h4>
 <div class="text1">
-ここでは、conda実行環境を複数用意して、使いたい環境に切り替える方法を紹介します。Python3.9環境をpy39という名前で作成するには、次のようにします。
+ここでは、conda実行環境を複数用意して、使いたい環境に切り替える方法を紹介します。Python3.9環境をpy39という名前で作成するには、次のようにします。Pythonのバージョンを変えたい場合には、python=3.9の部分を変更します。
 <pre>% conda create -n py39 python=3.9</pre>
 ＊~/.conda/envs/py39 ができる<br />
 作成した実行環境を次のように有効化します。
@@ -82,7 +82,7 @@ Python環境を構築するため、まずはパッケージ管理ツールConda
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/07/26</p>
+<p>最終更新日：2022/07/29</p>
 <p>Copyright (C) 2022, Yousuke Yamashita</p>
 </footer>
 </html>
