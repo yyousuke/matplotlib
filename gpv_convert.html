@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="author" content="山下陽介 (Yousuke Yamashita)  国立環境研究所 (National Institute for Environmental Studies, NIES)" />
+<link rel="icon" type="image/vnd.microsoft.icon" href="/matplotlib/favicon.ico" />
+<link rel="apple-touch-icon" type="image/png" href="/matplotlib/apple-touch-icon-180x180.png" />
+<link rel="icon" type="image/png" href="/matplotlib/icon-192x192.png" />
+<!-- Mobile Internet Explorer allows us to activate ClearType technology for smoothing fonts for easy reading -->
+<meta http-equiv="cleartype" content="on" />
+<!-- Specify whether or not telephone numbers in the HTML content should appear as hypertext links -->
+<meta name="format-detection" content="telephone=no" />
+<!-- Changes the logical window size used when displaying a page mobile browsers -->
+<meta name = "viewport" content = "width = device-width, initial-scale=1, user-scalable=yes" />
+
+<meta name="robots" content="all" />
+<meta name="http-equiv" content="X-Robots-Tag : all" />
+<meta name="googlebot" content="all" />
+<meta name="description" content="" />
+<meta name="keywords" content="matplotlib 気象庁GPV GSM MSM" />
+<link href="design.css" rel="stylesheet" type="text/css" />
+<title>気象データ解析のためのmatplotlibの使い方</title>
+</head>
+
+<body link="#0000FF" vlink="#0000FF">
+
+<div id="nesting">
+<a href="/">ホーム</a> &gt; <a href="index.html">matplotlibの使い方</a> &gt; 番外編GPV</div>
+<article>
+<center><h1 id="top">matplotlib：番外編　気象庁GPVデータの変換</h1></center>
+<br />
+<center><h3>Google colaboratoryを用いた気象庁GPV GSM/MSMデータのオンライン変換</h3></center>
+<br />
+<div id="text2">
+<p>&nbsp; ここでは、Google Colaboratoryを利用して、気象庁が提供しているGPV GSM/MSMデータ（grib2形式）をオンラインで取得しNetCDF形式の3次元データに変換するためのWebツールの使い方を紹介しています。このツールで出力されるNetCDFファイルは、 COARDSに準拠しているため、GrADSのsdfopenで直接開くことができます。データの提供元は京都大学生存圏研究所（RISH）のサーバです。データ利用時の注意事項等については<a href="http://database3.rish.kyoto-u.ac.jp/arch/jmadata/" target="_blank">RISHのwebページ</a>を参照してください。<br />
+&nbsp; このツールはwebブラウザ上で動作し、Google Colaboratory上の環境を利用するため、ローカルにpython/gcc/gfortran環境を構築できない場合にも、変換されたNetCDFファイルを取得することが可能です。Google Colaboratoryの利用にはGoogleアカウントが必要です。<br />
+&nbsp; なお、ローカルのLinux、macOSなどのpython環境で動作するものは、<a href="https://github.com/yyousuke/gpv_basemap" target="_blank">GitHub</a>で公開しています。
+</p><br />
+<p>作成者：山下陽介（国立環境研究所）</p>
+</div>
+<br />
+<hr />
+<br />
+
+
+<!-- ここから本文 -->
+<h3><div class="headline1" id="conv_1">準備</div></h3>
+<h4><div class="headline2" id="conv_1_1">プログラムの置き場所</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>gsm_convert.ipynb
+<p><a href="https://colab.research.google.com/drive/1emhkraJ6hvr6PppuCo8dd1Y9I9TZ4Kcm" target="_blank">https://colab.research.google.com/drive/1emhkraJ6hvr6PppuCo8dd1Y9I9TZ4Kcm</a></p></li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="conv_1_2">Google Colaboratoryの利用</div></h4>
+<div class="text1">
+&nbsp; Google Colaboratoryは、ブラウザ上からpythonプログラムを記述し実行できるようにしたものです。Googleアカウントを持っていれば、無料で利用できます。以下の手順を行うにはGoogleアカウントが必要ですので、アカウントを持っていない場合にはアカウントの作成、持っている場合にはログインが必要となります。<br />
+</div>
+
+<h4><div class="headline2" id="conv_1_3">ドライブにコピーを保存</div></h4>
+<div class="text1">
+&nbsp; <a href="#conv_1_1">上記</a>のipynbをブラウザで開きます。しばらくgoogleアカウントにログインしていない場合には、再度ログインするよう求められることがあります。<br />
+&nbsp; [ファイル] ー [ドライブにコピーを保存]を選択し自分のGoogleドライブにノートブックをコピーします。この状態で、ログインしたアカウントで書き込み可能な領域（マイドライブ/Colab Notebooks）にコピーされています。コピーされたノートブックは自由に編集可能です。
+</div>
+
+
+<h3><div class="headline1" id="conv_2">データの変換</div></h3>
+<h4><div class="headline2" id="conv_2_1">予報時刻などの設定</div></h4>
+<div class="text1">
+&nbsp; 予報時刻の設定、GSM/MSMの選択、予報時刻からの経過時間の設定を行います。設定する箇所はコードの最後の<pre>if __name__ == '__main__':</pre>以降にあります。<br /><br />
+<ul class="list1">
+<li>予報時刻の設定<br />
+次のように、YYYYMMDDHHMMSS形式で指定する。
+<pre>fcst_date = "20220523000000"</pre>
+</li>
+<li>GSM/MSMの選択
+<pre>dset = "GSM"</pre>または
+<pre>dset = "MSM"</pre>
+</li>
+<li>予報時刻からの経過時間の設定<br />
+3時間毎に指定可能、整数値
+<pre>fcst_end = 36</pre>
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="conv_2_2">NetCDFファイルの作成</div></h4>
+<div class="text1">
+&nbsp; 左側の実行ボタン<img src="./images/wpr-but1.png" width="15" alt="Fig" />を押します。<br /><br />
+&nbsp; 初回実行時には、wgrib2のダウンロードとビルドが始まります。結構時間がかかります。ビルド時に大量のメッセージが出てきますが、ここでは無視して構いません。ビルドが終了すると、一時領域にwgrib2が配置されます。<br /><br />
+&nbsp; 次に、RISHのサーバからデータダウンロード、wgrib2を使ったNetCDFファイルへの変換が始まります。その間、次のような表示が出ています（しばらく時間がかかります）。
+<pre>data lev = plev , fcst_time = 20220523000000</pre>
+<br />
+&nbsp; NetCDFファイルを読み込み、3次元データに変換してNetCDF形式で出力します。初回実行時には、出力データについて記載されたoutput.jsonを読みます。次のように、出力されたファイルの情報を表示した後、ダウンロードが始まります。
+<pre>
+output file name =  Z__C_RJTD_20220523000000_GSM_GPV_Rjp_L-pall.nc
+-rw-r--r-- 1 root root 91215712 May 25 09:55 Z__C_RJTD_20220523000000_GSM_GPV_Rjp_L-pall.nc
+</pre>
+<img src="./images/conv-fig1.png" class="size3" border="1" alt="Fig" /><br /><br />
+&nbsp; ダウンロードが終了すると、ファイルを保存するダイアログが現れるので、ローカルPCに保存します。<br /><br />
+&nbsp; 2回目以降にはwgrib2のビルドは行われず、既にビルドされたものが用いられます。1日程度アクセスしない場合には一時領域のファイルが消えるため、再度wgrib2のビルドが行われます。
+</div>
+
+
+<br />
+<small><a href="#top">[top]</a></small> <br />
+<hr width="105%" />
+</article>
+</body>
+<footer>
+<p>最終更新日：2022/08/10</p>
+<p>Copyright (C) 2022, Yousuke Yamashita</p>
+</footer>
+</html>
