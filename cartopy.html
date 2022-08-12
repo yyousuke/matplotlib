@@ -115,7 +115,8 @@ import matplotlib.pyplot as plt
 fig = plt.figure() # プロット領域の作成（matplotlib）
 ax = fig.add_subplot(1, 1, 1, projection=ccrs.PlateCarree())  # サブプロット作成時にcartopy呼び出し
 </pre>
-以降は戻り値axを使い、ax.<b>メソッド</b>のように作図が可能
+以降は戻り値axを使い、ax.<b>メソッド</b>のように作図が可能<br />
+特に説明がない限り、本ページのaxはこのように作成されたものを表す。
 </div>
 
 <h4><div class="headline2" id="cartopy_1_3">cartopyで経度線・緯度線を描く</div></h4>
@@ -795,7 +796,7 @@ for pref in prefs:
 
 <h4><div class="headline2" id="cartopy_e_6">地図の等高線が消える場合</div></h4>
 <div class="text1">
-海岸線と陰影を同時に描く場合、先に等高線を描くと陰影に隠されてしまう（cartopy-0.19）
+海岸線と陰影を同時に描く場合、先に等高線を描くと陰影に隠されてしまう（cartopyバージョン0.19以降）
 <pre>ax.coastlines(オプション, zorder=10)</pre>
 ＊zorderを大きくして、上に描かれるようにする
 </div>
@@ -805,7 +806,7 @@ for pref in prefs:
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/07/02</p>
+<p>最終更新日：2022/08/12</p>
 <p>Copyright (C) 2019-2022, Yousuke Yamashita</p>
 </footer>
 </html>
