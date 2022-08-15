@@ -89,6 +89,7 @@
     <ul class="list2">
       <li><a href="#config_1">設定ファイルの形式</a></li>
       <li><a href="#config_2">設定ファイルの読み込み</a></li>
+      <li><a href="#config_3">設定ファイルの書き出し</a></li>
      </ul>
   </li></ul>
 </div>
@@ -615,7 +616,7 @@ Webページのコンテンツのある場所で以下のコマンドを実行�
 <div class="text1">
 次のように[セクション]で区切られ、各セクションに複数のキーと値のペアが配置されている。
 <pre>
-[default]
+[Default]
 SHELL = /bin/bash
 TERM = xterm-256color
 LANG = ja_JP.UTF-8
@@ -630,7 +631,7 @@ OutputFileName = output.txt
 
 <h4><div class="headline2" id="config_2">設定ファイルの読み込み</div></h4>
 <div class="text1">
-<a href="config_1">設定ファイル</a>をconfig.iniとして保存したものを読み込む例
+<a href="#config_1">設定ファイル</a>をconfig.iniとして保存したものを読み込む例。
 <pre>
 import configparser
 config = configparser.ConfigParser()
@@ -639,22 +640,30 @@ config.read("config.ini")
 <ul class="list1">
 <li>セクションを表示する場合
 <pre>print(config.sections())</pre>
-出力：['default', 'filenames']</li><br />
+出力：['Default', 'filenames']<br />
+＊キーは大文字、小文字を区別する
+</li><br />
 <li>キーに対応する値を表示する場合
-<pre>print(config["default"]["SHELL"])</pre>
+<pre>print(config["Default"]["SHELL"])</pre>
 出力：/bin/bash</li><br />
+<li>小文字にした場合
+<pre>print(config["Default"]["shell"])</pre>
+出力：/bin/bash<br />
+＊キーは大文字、小文字を区別しない</li><br />
 <li>セクション内のキーを全て表示する
 <pre>
-for key in config["default"]:
+for key in config["Default"]:
 &nbsp; &nbsp; print(key)
 </pre>
 出力：
 <pre>
-shell term lang
+shell
+term
+lang
 </pre></li><br />
 <li>セクション内のキー、値のペアを全て表示する
 <pre>
-for key in config["default"]:
+for key in config["Default"]:
 &nbsp; &nbsp; print(key)
 </pre>
 出力：
@@ -664,6 +673,44 @@ term xterm-256color
 lang ja_JP.UTF-8
 </pre></li><br />
 </ul>
+</div>
+<br />
+<br />
+
+<h4><div class="headline2" id="config_3">設定ファイルの書き出し</div></h4>
+<div class="text1">
+<a href="#config_1">設定ファイル</a>をconfig.iniとして出力するmkconfig.pyを作成する。
+<pre>
+#!/usr/bin/env python3
+import configparser
+config = configparser.ConfigParser()
+
+config['Default'] = {
+&nbsp; &nbsp; 'SHELL': '/bin/bash',
+&nbsp; &nbsp; 'TERM': 'xterm-256color',
+&nbsp; &nbsp; 'LANG': 'ja_JP.UTF-8'
+}
+
+config['filenames'] = {
+&nbsp; &nbsp; 'InputFileName': 'input.txt',
+&nbsp; &nbsp; 'OutputFileName': 'output.txt'
+}
+
+# 書き出し
+with open('config.ini', 'w') as f:
+&nbsp; &nbsp; config.write(f)
+</pre>
+＊出力されたファイルでは、次のようにキーが全て小文字となる。
+<pre>
+[Default]
+shell = /bin/bash
+term = xterm-256color
+lang = ja_JP.UTF-8
+
+[filenames]
+inputfilename = input.txt
+outputfilename = output.txt
+</pre>
 </div>
 <br />
 <br />
