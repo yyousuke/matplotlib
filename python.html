@@ -84,6 +84,13 @@
       <li><a href="#web_1">pythonでwebサーバを起動</a></li>
      </ul>
   </li></ul>
+  <!-- 設定ファイル -->
+  <ul class="list1"><li><a href="#config">設定ファイル</a>
+    <ul class="list2">
+      <li><a href="#config_1">設定ファイルの形式</a></li>
+      <li><a href="#config_2">設定ファイルの読み込み</a></li>
+     </ul>
+  </li></ul>
 </div>
 
 <small><a href="#top">[top]</a></small> <br />
@@ -601,6 +608,67 @@ Webページのコンテンツのある場所で以下のコマンドを実行�
 <br />
 
 
+
+<!-- 設定ファイル-->
+<h3><div class="headline1" id="config">設定ファイル</div></h3>
+<h4><div class="headline2" id="config_1">設定ファイルの形式</div></h4>
+<div class="text1">
+次のように[セクション]で区切られ、各セクションに複数のキーと値のペアが配置されている。
+<pre>
+[default]
+SHELL = /bin/bash
+TERM = xterm-256color
+LANG = ja_JP.UTF-8
+
+[filenames]
+InputFileName = input.txt
+OutputFileName = output.txt
+</pre>
+</div>
+<br />
+<br />
+
+<h4><div class="headline2" id="config_2">設定ファイルの読み込み</div></h4>
+<div class="text1">
+<a href="config_1">設定ファイル</a>をconfig.iniとして保存したものを読み込む例
+<pre>
+import configparser
+config = configparser.ConfigParser()
+config.read("config.ini")
+</pre>
+<ul class="list1">
+<li>セクションを表示する場合
+<pre>print(config.sections())</pre>
+出力：['default', 'filenames']</li><br />
+<li>キーに対応する値を表示する場合
+<pre>print(config["default"]["SHELL"])</pre>
+出力：/bin/bash</li><br />
+<li>セクション内のキーを全て表示する
+<pre>
+for key in config["default"]:
+&nbsp; &nbsp; print(key)
+</pre>
+出力：
+<pre>
+shell term lang
+</pre></li><br />
+<li>セクション内のキー、値のペアを全て表示する
+<pre>
+for key in config["default"]:
+&nbsp; &nbsp; print(key)
+</pre>
+出力：
+<pre>
+shell /bin/bash
+term xterm-256color
+lang ja_JP.UTF-8
+</pre></li><br />
+</ul>
+</div>
+<br />
+<br />
+
+
 <br />
 <br />
 <br />
@@ -611,7 +679,7 @@ Webページのコンテンツのある場所で以下のコマンドを実行�
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/07/14</p>
+<p>最終更新日：2022/08/15</p>
 <p>Copyright (C) 2021-2022, Yousuke Yamashita</p>
 </footer>
 </html>
