@@ -510,11 +510,10 @@ idim = 288 # 経度方向のサイズ（整数）
 jdim = 145 # 緯度方向のサイズ（整数）
 num_rec = 3 # データの個数（整数）
 datasize = idim * jdim * num_rec # 読み込むデータサイズ（byte）
-f = open('読み込むファイル名', 'rb')
 if endian == 'big':
-&nbsp; &nbsp; din = np.fromfile(f, dtype='&gt;f4', count=datasize)
+&nbsp; &nbsp; din = np.fromfile('読み込むファイル名', dtype='&gt;f4', count=datasize)
 else:
-&nbsp; &nbsp; din = np.fromfile(f, dtype='&lt;f4', count=datasize)
+&nbsp; &nbsp; din = np.fromfile('読み込むファイル名', dtype='&lt;f4', count=datasize)
 f.close()
 d = din.reshape(num_rec, jdim, idim)
 </pre>
@@ -801,7 +800,7 @@ d = gt['変数名'][:, :, :] # 変数名に対応するデータ取得（次元�
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/08/03</p>
+<p>最終更新日：2022/08/20</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
