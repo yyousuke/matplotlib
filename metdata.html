@@ -514,7 +514,6 @@ if endian == 'big':
 &nbsp; &nbsp; din = np.fromfile('読み込むファイル名', dtype='&gt;f4', count=datasize)
 else:
 &nbsp; &nbsp; din = np.fromfile('読み込むファイル名', dtype='&lt;f4', count=datasize)
-f.close()
 d = din.reshape(num_rec, jdim, idim)
 </pre>
 ビックエンディアンの単精度（４バイト）浮動小数点数の場合がdtype='&gt;f4'の書式に対応<br />
