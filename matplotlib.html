@@ -2469,6 +2469,10 @@ matplotlib.datesを使い時刻表記を変える
 <pre>ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y/%m'))</pre></li>
 <li>２桁の年/２桁の月表記にする
 <pre>ax.xaxis.set_major_formatter(mdates.DateFormatter('%y/%m'))</pre></li>
+<li>２桁の月/２桁の日表記にする
+<pre>ax.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))</pre></li>
+<li>３文字の月 ２桁の日表記にする
+<pre>ax.xaxis.set_major_formatter(mdates.DateFormatter('%b %d'))</pre></li>
 </ul>
 時刻表記の書式については<a href="forms.html#time">時刻表記に用いられる書式指定子一覧</a>参照
 </div>
@@ -2703,7 +2707,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/08/08</p>
+<p>最終更新日：2022/08/21</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
