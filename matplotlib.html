@@ -223,6 +223,8 @@
       <li><a href="#graph_11_4">バイオリンプロットに中央値を描く</a></li>
       <li><a href="#graph_11_5">バイオリンプロットに平均値を描く</a></li>
       <li><a href="#graph_11_6">バイオリンプロットに最小値と最大値の範囲を表すヒゲを描く</a></li>
+      <li><a href="#graph_11_7">バイオリンプロットのボディを変更する</a></li>
+      <li><a href="#graph_11_8">バイオリンプロットのパーツを変更する</a></li>
     </ul>
   </li></ul>
   <!-- 流線関数 -->
@@ -1819,6 +1821,42 @@ showextremaオプションで最小値と最大値の範囲を表すヒゲを描
 デフォルト値：True
 </div>
 
+<h4><div class="headline2" id="graph_11_7">バイオリンプロットのボディを変更する</div></h4>
+<div class="text1">
+violin_parts['bodies']の設定を変更する
+<pre>
+violin_parts = plt.violinplot(データ, オプション)
+for vp in violin_parts['bodies']:
+&nbsp; &nbsp; vp.set_facecolor('b')
+&nbsp; &nbsp; vp.set_edgecolor('k')
+&nbsp; &nbsp; vp.set_linewidth(1)
+&nbsp; &nbsp; vp.set_alpha(0.5)
+</pre>
+縁の色を幅1の黒線、ボディの色を半透明（0.5）の青にする<br />
+＊violin_parts['bodies']はリストになっているので、matplotlib.collections.LineCollectionを取り出したvpに対して設定
+</div>
+
+<h4><div class="headline2" id="graph_11_8">バイオリンプロットのパーツを変更する</div></h4>
+<div class="text1">
+violin_parts['パーツ名']の設定を変更する
+<pre>
+violin_parts = plt.violinplot(データ, オプション)
+partnames = ('cbars', 'cmins', 'cmaxes', 'cmedians', 'cmeans')
+edgecolors = ('k', 'k', 'k', 'k', 'b')
+linestyles = ('-', '-', '-', '-', '--')
+linewidths = (1, 1, 1, 1, 1)
+for partname, edgecolor, linestyle, linewidth in zip(partnames, edgecolors, linestyles, linewidths):
+&nbsp; &nbsp; vp = violin_parts[partname]
+&nbsp; &nbsp; vp.set_edgecolor(edgecolor)
+&nbsp; &nbsp; vp.set_linestyle(linestyle)
+&nbsp; &nbsp; vp.set_linewidth(linewidth)
+</pre>
+ヒゲの縦線（cbars）、最小（cmins）、最大（cmaxes）の横線を幅1の黒実線<br />
+中央値の横線（cmedians）を幅1の黒実線、平均値の横線（cmeans）を幅1の青破線<br />
+＊showextrema=Falseの場合は、cbars、cmins、cmaxesの変更はエラーになる<br />
+＊showmedians=Falseの場合は、cmediansの変更はエラーになる<br />
+＊showmeans=Falseの場合は、cmeansの変更はエラーになる<br />
+</div>
 
 
 <!-- 流線関数 -->
@@ -2709,7 +2747,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/08/24</p>
+<p>最終更新日：2022/08/26</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
