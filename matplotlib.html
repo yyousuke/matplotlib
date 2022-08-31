@@ -93,8 +93,7 @@
       <li><a href="#graph_2_8">折れ線グラフにx=0、y=0の線を付ける</a></li>
       <li><a href="#graph_2_9">２つの折れ線グラフの間を塗り潰す</a></li>
       <li><a href="#graph_2_10">折れ線グラフに凡例を付ける</a></li>
-      <li><a href="#graph_2_11">折れ線グラフにグリッド線を引く</a></li>
-      <li><a href="#graph_2_12">折れ線グラフをログスケールで表示する</a></li>
+      <li><a href="#graph_2_11">折れ線グラフをログスケールで表示する</a></li>
     </ul>
   </li></ul>
   <!-- 棒グラフ -->
@@ -318,9 +317,10 @@
       <li><a href="#graph_e_3">タイトルの文字サイズや色を変更する</a></li>
       <li><a href="#graph_e_4">タイトルや軸ラベル、テキストのフォントを指定する</a></li>
       <li><a href="#graph_e_5">マーカーや線を重ねる順序を調整する</a></li>
-      <li><a href="#graph_e_6">グリッド線を背面に表示する</a></li>
-      <li><a href="#graph_e_7">図の枠線や目盛りを消す</a></li>
-      <li><a href="#graph_e_8">図の枠線の幅を変える</a></li>
+      <li><a href="#graph_e_6">グリッド線を引く</a></li>
+      <li><a href="#graph_e_7">グリッド線を背面に表示する</a></li>
+      <li><a href="#graph_e_8">図の枠線や目盛りを消す</a></li>
+      <li><a href="#graph_e_9">図の枠線の幅を変える</a></li>
     </ul>
   </li></ul>
 </div>
@@ -912,22 +912,7 @@ cos(x)が実線、sin(x)が破線であることが凡例として表示され�
 凡例を調整する方法は<a href="#legend_1">凡例</a>参照
 </div>
 
-<h4><div class="headline2" id="graph_2_11">折れ線グラフにグリッド線を引く</div></h4>
-<div class="text1">
-<pre>plt.grid()</pre>
-<ul class="list1">
-<li>例：グリッド線を灰色の点線にする
-<pre>plt.grid(color='gray', ls=':')</pre></li>
-<li>例：x軸のみにグリッド線を引く
-<pre>plt.grid(axis="x", color='gray', ls=':')</pre></li>
-<li>例：y軸のみにグリッド線を引く
-<pre>plt.grid(axis="y", color='gray', ls=':')</pre></li>
-<li>例：グリッド線を細くする
-<pre>plt.grid(color='gray', ls=':', lw=0.5)</pre></li>
-</ul>
-</div>
-
-<h4><div class="headline2" id="graph_2_12">折れ線グラフをログスケールで表示する</div></h4>
+<h4><div class="headline2" id="graph_2_11">折れ線グラフをログスケールで表示する</div></h4>
 <div class="text1">
 <ul class="list1">
 <li>図をプロットした後、軸のスケールを変更する場合
@@ -2708,7 +2693,24 @@ plt.scatter(xデータ1, yデータ1, zorder=2) # 散布図を上に
 plt.plot(xデータ2, yデータ2, zorder=1) # 折れ線グラフを下に</pre>
 </div>
 
-<h4><div class="headline2" id="graph_e_6">グリッド線を背面に表示する</div></h4>
+<h4><div class="headline2" id="graph_e_6">グリッド線を引く</div></h4>
+<div class="text1">
+<pre>plt.grid()</pre>
+<ul class="list1">
+<li>例：グリッド線を灰色の点線にする
+<pre>plt.grid(color='gray', ls=':')</pre></li>
+<li>例：x軸のみにグリッド線を引く
+<pre>plt.grid(axis="x", color='gray', ls=':')</pre></li>
+<li>例：y軸のみにグリッド線を引く
+<pre>plt.grid(axis="y", color='gray', ls=':')</pre></li>
+<li>例：グリッド線を細くする
+<pre>plt.grid(color='gray', ls=':', lw=0.5)</pre>
+デフォルト値：lw=1
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="graph_e_7">グリッド線を背面に表示する</div></h4>
 <div class="text1">
 グリッド線がグラフの前面に来た場合は、ax.set_axisbelowで背面に移動する
 <pre>ax.set_axisbelow(True)</pre>
@@ -2716,7 +2718,7 @@ Trueでzorder = 0.5になる、デフォルト値は"line"（zorder = 1.5）<br 
 グラフのzorderを0.5未満に設定した場合は、この設定を行ってもグリッド線がグラフの前面に表示される
 </div>
 
-<h4><div class="headline2" id="graph_e_7">図の枠線や目盛りを消す</div></h4>
+<h4><div class="headline2" id="graph_e_8">図の枠線や目盛りを消す</div></h4>
 <div class="text1">
 <ul class="list1">
 <li>枠線と目盛りを全て消す
@@ -2759,7 +2761,7 @@ plt.gca()については、<a href="#graph_1_12">直前に操作したサブプ�
 </li></ul>
 </div>
 
-<h4><div class="headline2" id="graph_e_8">図の枠線の幅を変える</div></h4>
+<h4><div class="headline2" id="graph_e_9">図の枠線の幅を変える</div></h4>
 <div class="text1">
 枠線の幅を太くする（デフォルト値：1.0）
 <pre>
