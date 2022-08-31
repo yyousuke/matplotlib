@@ -815,11 +815,13 @@ ax.plot()でも同じ（axは<a href="#graph_1_2">fig.add_subplot</a>の戻り�
 <pre>plt.plot(x, np.sin(x), linestyle='--')</pre></li>
 <li>例：線の代わりに丸印のマーカーを付ける：
 <pre>plt.plot(x, np.sin(x), linestyle='', marker='o')</pre>
+または
+<pre>plt.plot(x, np.sin(x), linestyle='none', marker='o')</pre>
 マーカーについては、<a href="#graph_2_5">折れ線グラフのマークを変える</a>参照
 </li>
 </ul>
 </div>
-  
+
 <h4><div class="headline2" id="graph_2_4">折れ線グラフの太さを変える</div></h4>
 <div class="text1">
 <pre>plt.plot(x, np.sin(x), lw=線の太さ)</pre>
@@ -830,8 +832,19 @@ ax.plot()でも同じ（axは<a href="#graph_1_2">fig.add_subplot</a>の戻り�
 
 <h4><div class="headline2" id="graph_2_5">折れ線グラフのマークを変える</div></h4>
 <div class="text1">
+マークの種類はmarker、マーカーの大きさはmarkersize（またはms）で変更
+<ul class="list1">
+<li>マークの種類を変える：
 <pre>plt.plot(x, np.cos(x), marker='マーカーの名前')</pre>
 マーカーの名前は<a href="./options.html#marker">指定可能なマーカーの一覧</a>参照
+</li><br />
+<li>丸印のマーカーを大きくする：
+<pre>plt.plot(x, np.cos(x), marker='o', markersize=8)</pre>
+または
+<pre>plt.plot(x, np.cos(x), marker='o', ms=8)</pre>
+markersizeのデフォルト値：6
+</li><br />
+</ul>
 </div>
 
 <h4><div class="headline2" id="graph_2_6">折れ線グラフのマークを塗り潰す</div></h4>
@@ -843,8 +856,10 @@ ax.plot()でも同じ（axは<a href="#graph_1_2">fig.add_subplot</a>の戻り�
 
 <h4><div class="headline2" id="graph_2_7">階段状のグラフ</div></h4>
 <div class="text1">
-折れ線グラフの表示を階段状のグラフに変えることもできる
+デフォルトで折れ線グラフとなっている表示を階段状のグラフに変える
 <pre>plt.plot(x, np.cos(x), drawstyle=’スタイルの名前’)</pre>
+または
+<pre>plt.plot(x, np.cos(x), ds=’スタイルの名前’)</pre>
 <ul class="list1">
 <li>折れ線グラフ（デフォルト）：
 <pre>plt.plot(x, np.cos(x), drawstyle=’default’)</pre></li>
@@ -863,9 +878,9 @@ ax.plot()でも同じ（axは<a href="#graph_1_2">fig.add_subplot</a>の戻り�
 <div class="text1">
 plt.axhlineで水平方向、plt.axvlineで鉛直方向の線を引く
 <ul class="list1">
-<li>x=0の線を付ける
+<li>x=0の線を付ける（黒の破線）
 <pre>plt.axvline(x=0, color='k', ls='--')</pre></li>
-<li>y=0の線を付ける
+<li>y=0の線を付ける（黒の破線）
 <pre>plt.axhline(y=0, color='k', ls='--')</pre></li>
 </ul>
 </div>
@@ -878,7 +893,8 @@ plt.plot(x, np.cos(x), color='k')
 plt.plot(x, np.sin(x), color='k')
 plt.fill_between(x, np.sin(x), np.cos(x), color='gray', alpha=0.4)</pre>
 で２つの折れ線グラフの間が灰色で塗り潰される<br />
-cos(x)が正の場合に0とcos(x)の間を塗り潰す
+cos(x)が正の場合に0とcos(x)の間を塗り潰す（不透明度0.4）<br />
+＊alphaは、0で透明、1で不透明
 <pre>
 plt.plot(x, np.cos(x), color='k')
 plt.fill_between(x, 0, np.cos(x), where=np.cos(x)&gt; 0, color='gray', alpha=0.4)</pre>
@@ -902,6 +918,12 @@ cos(x)が実線、sin(x)が破線であることが凡例として表示され�
 <ul class="list1">
 <li>例：グリッド線を灰色の点線にする
 <pre>plt.grid(color='gray', ls=':')</pre></li>
+<li>例：x軸のみにグリッド線を引く
+<pre>plt.grid(axis="x", color='gray', ls=':')</pre></li>
+<li>例：y軸のみにグリッド線を引く
+<pre>plt.grid(axis="y", color='gray', ls=':')</pre></li>
+<li>例：グリッド線を細くする
+<pre>plt.grid(color='gray', ls=':', lw=0.5)</pre></li>
 </ul>
 </div>
 
@@ -1136,6 +1158,7 @@ plt.hist(データ)
 </div>
 
 
+
 <!-- 散布図 -->
 <h3><div class="headline1" id="graph_5">散布図</div></h3>
 <h4><div class="headline2" id="graph_5_1">散布図を描く</div></h4>
@@ -1243,6 +1266,7 @@ np.linspace(最小値, 最大値, データ数)を使い、設定したデータ
 name = "{s1:s}{f1:4.3f}{s2:s}{f2:4.3f}".format(s1="y = ", f1=a, s2="x + ", f2=b)
 plt.text(テキストのx座標, テキストのy座標, name, fontsize=14, color='k') # 回帰式を表示</pre>
 </div>
+
 
 
 <!-- 矢羽 -->
@@ -1859,6 +1883,7 @@ for partname, edgecolor, linestyle, linewidth in zip(partnames, edgecolors, line
 </div>
 
 
+
 <!-- 流線関数 -->
 <h3><div class="headline1" id="graph_12">流線関数</div></h3>
 <h4><div class="headline2" id="graph_12_1">流線関数を描く</div></h4>
@@ -2043,6 +2068,7 @@ fig, ax = plt.subplots()
 ax.legend(custom_lines, ['Low', 'Medium', 'High']) # 青、オレンジ、赤の順に並ぶ
 </pre>
 </div> 
+
 
 
 <!-- カラーバー -->
@@ -2747,7 +2773,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/08/28</p>
+<p>最終更新日：2022/08/31</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
