@@ -44,6 +44,7 @@
       <li><a href="#time_5">1ヶ月後、1年後を計算する</a></li>
       <li><a href="#time_6">月末の日を計算する</a></li>
       <li><a href="#time_7">ISOフォーマットで表示する</a></li>
+      <li><a href="#time_8">時間方向のループを回す</a></li>
      </ul>
   </li></ul>
   <!-- ディレクトリ -->
@@ -362,6 +363,32 @@ time = datetime(2022, 3, 8, 12, 31, 12)
 print(dt.isoformat(timespec='minutes'))
 </pre>
 2022-03-08T12:31
+</li><br />
+</ul>
+</div>
+<br />
+<br />
+
+<h4><div class="headline2" id="time_8">時間方向のループを回す</div></h4>
+<div class="text1">
+多重ループは遅くなるので時刻変数は1つのみとし、timedeltaを足して時刻を進める
+<ul class="list1">
+<li>time_staからtime_endまで
+<pre>
+from datetime import datetime timedelta
+time_sta = datetime(2022, 9, 1, 0, 30, 0) # 開始時刻
+time_end = datetime(2022, 9, 2, 12, 30, 0) # 終了時刻
+time_step = timedelta(hours=1) # 時刻を進める間隔（1時間）
+time_now = time_sta
+while True:
+&nbsp; &nbsp; if time_now <= time_end:
+&nbsp; &nbsp; &nbsp; &nbsp; latest_time = time_now.strftime("%Y-%m-%d %H:%M:%S")
+&nbsp; &nbsp; &nbsp; &nbsp; print(latest_time)
+&nbsp; &nbsp; else:
+&nbsp; &nbsp; &nbsp; &nbsp; break # time_endを超えたら終了
+&nbsp; &nbsp; # time_step分時刻を進める
+&nbsp; &nbsp; time_now = time_now + time_step
+</pre>
 </li><br />
 </ul>
 </div>
@@ -726,7 +753,7 @@ outputfilename = output.txt
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/08/15</p>
+<p>最終更新日：2022/09/02</p>
 <p>Copyright (C) 2021-2022, Yousuke Yamashita</p>
 </footer>
 </html>
