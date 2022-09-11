@@ -423,8 +423,13 @@ sys.path.append(os.pardir)
 <div class="text1">
 sample.pyのようなファイル名で作成する
 <ul class="list1">
-<li>スクリプトの最初の行
-<pre>#!/usr/bin/env python3</pre></li><br />
+<li>スクリプトの最初の行（shebang：シバン、シェバン）
+<pre>#!/usr/bin/env python3</pre>
+＊現在の環境で設定されているpython3が起動される<br /><br />
+cron等で実行する際には、次のようにインタプリタの絶対パスを記載する
+<pre>#!/opt/local/bin/python3.9</pre>
+＊MacPortsでインストールしたpython3.9が起動される<br />
+＊指定したパスに存在しなければエラー</li><br />
 <li>スクリプトの最初で、必要なモジュールをまとめてインポートする
 <pre>
 import matplotlib.pyplot as plt
@@ -2775,7 +2780,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/08/31</p>
+<p>最終更新日：2022/09/11</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
