@@ -93,6 +93,12 @@
       <li><a href="#config_3">設定ファイルの書き出し</a></li>
      </ul>
   </li></ul>
+  <!-- 例外処理 -->
+  <ul class="list1"><li><a href="#exception">例外処理</a>
+    <ul class="list2">
+      <li><a href="#exception_1">例外処理の概要</a></li>
+     </ul>
+  </li></ul>
 </div>
 
 <small><a href="#top">[top]</a></small> <br />
@@ -637,7 +643,7 @@ Webページのコンテンツのある場所で以下のコマンドを実行�
 
 
 
-<!-- 設定ファイル-->
+<!-- 設定ファイル -->
 <h3><div class="headline1" id="config">設定ファイル</div></h3>
 <h4><div class="headline2" id="config_1">設定ファイルの形式</div></h4>
 <div class="text1">
@@ -743,6 +749,21 @@ outputfilename = output.txt
 <br />
 
 
+<!-- 例外処理 -->
+<h3><div class="headline1" id="exception">例外処理の概要</div></h3>
+<h4><div class="headline2" id="exception_1">例外処理の概要</div></h4>
+<div class="text1">
+すべての例外は BaseException（例外の基底クラス）から派生するが、BaseExceptionはユーザのコードでは使用しない<br />
+コード中で例外を検出、生成する場合には、Exceptionから派生した組み込み例外を用いる<br />
+例えば、モジュールのロードで問題が発生した場合には、ImportError、ファイルが存在しない、ディスク容量超過などシステム関連のエラーは OSError、など<br />
+詳細については、<a href="https://docs.python.org/ja/3/library/exceptions.html">組み込み例外</a>参照
+</div>
+<br />
+<br />
+
+
+
+
 <br />
 <br />
 <br />
@@ -753,7 +774,7 @@ outputfilename = output.txt
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/09/02</p>
+<p>最終更新日：2022/09/12</p>
 <p>Copyright (C) 2021-2022, Yousuke Yamashita</p>
 </footer>
 </html>
