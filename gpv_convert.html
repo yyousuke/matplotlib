@@ -49,8 +49,10 @@
 <h4><div class="headline2" id="conv_1_1">プログラムの置き場所</div></h4>
 <div class="text1">
 <ul class="list1">
-<li>gsm_convert.ipynb
-<p><a href="https://colab.research.google.com/drive/1emhkraJ6hvr6PppuCo8dd1Y9I9TZ4Kcm" target="_blank">https://colab.research.google.com/drive/1emhkraJ6hvr6PppuCo8dd1Y9I9TZ4Kcm</a></p></li>
+<li>gsm_convert.ipynb（気圧面データを取得する場合）
+<p><a href="https://colab.research.google.com/drive/1emhkraJ6hvr6PppuCo8dd1Y9I9TZ4Kcm" target="_blank">https://colab.research.google.com/drive/1emhkraJ6hvr6PppuCo8dd1Y9I9TZ4Kcm</a></p></li><br />
+<li>gsm_convert_sur.ipynb（表面データを取得する場合）
+<p><a href="https://colab.research.google.com/drive/1kf91TzOY2GM-K7pDWZoFfldjiXzftsVe" target="_blank">https://colab.research.google.com/drive/1kf91TzOY2GM-K7pDWZoFfldjiXzftsVe</a></p></li>
 </ul>
 </div>
 
@@ -80,7 +82,8 @@
 <pre>dset = "MSM"</pre>
 </li>
 <li>予報時刻からの経過時間の設定<br />
-3時間毎に指定可能、整数値
+気圧面データの場合、3時間毎に指定可能（整数値）<br />
+表面データの場合、1時間毎に指定可能
 <pre>fcst_end = 36</pre>
 </li>
 </ul>
@@ -93,14 +96,15 @@
 &nbsp; 次に、RISHのサーバからデータダウンロード、wgrib2を使ったNetCDFファイルへの変換が始まります。その間、次のような表示が出ています（しばらく時間がかかります）。
 <pre>data lev = plev , fcst_time = 20220523000000</pre>
 <br />
-&nbsp; NetCDFファイルを読み込み、3次元データに変換してNetCDF形式で出力します。初回実行時には、出力データについて記載されたoutput.jsonを読みます。次のように、出力されたファイルの情報を表示した後、ダウンロードが始まります。
+&nbsp; NetCDFファイルを読み込み、気圧面データの場合、3次元データに変換してNetCDF形式で出力します。初回実行時には、出力データについて記載されたoutput.jsonを読みます。次のように、出力されたファイルの情報を表示した後、ダウンロードが始まります。
 <pre>
 output file name =  Z__C_RJTD_20220523000000_GSM_GPV_Rjp_L-pall.nc
 -rw-r--r-- 1 root root 91215712 May 25 09:55 Z__C_RJTD_20220523000000_GSM_GPV_Rjp_L-pall.nc
 </pre>
 <img src="./images/conv-fig1.png" class="size3" border="1" alt="Fig" /><br /><br />
 &nbsp; ダウンロードが終了すると、ファイルを保存するダイアログが現れるので、ローカルPCに保存します。<br /><br />
-&nbsp; 2回目以降にはwgrib2のビルドは行われず、既にビルドされたものが用いられます。1日程度アクセスしない場合には一時領域のファイルが消えるため、再度wgrib2のビルドが行われます。
+&nbsp; 2回目以降にはwgrib2のビルドは行われず、既にビルドされたものが用いられます。1日程度アクセスしない場合には一時領域のファイルが消えるため、再度wgrib2のビルドが行われます。<br />
+&nbsp; 表面データの場合、Z__C_RJTD_20220523000000_GSM_GPV_Rjp_Lsurf.ncのようなファイル名になります。
 </div>
 
 
@@ -110,7 +114,7 @@ output file name =  Z__C_RJTD_20220523000000_GSM_GPV_Rjp_L-pall.nc
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/08/10</p>
+<p>最終更新日：2022/09/24</p>
 <p>Copyright (C) 2022, Yousuke Yamashita</p>
 </footer>
 </html>
