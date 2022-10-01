@@ -47,11 +47,11 @@
       <li><a href="#time_8">時間方向のループを回す</a></li>
      </ul>
   </li></ul>
-  <!-- ディレクトリ -->
-  <ul class="list1"><li><a href="#dir">ディレクトリ</a>
+  <!-- ディレクトリ、ファイル -->
+  <ul class="list1"><li><a href="#dir">ディレクトリ、ファイル</a>
     <ul class="list2">
       <li><a href="#dir_1">ディレクトリのパスを結合する</a></li>
-      <li><a href="#dir_2">ディレクトリの一覧を取得する</a></li>
+      <li><a href="#dir_2">ディレクトリ内の一覧を取得する</a></li>
       <li><a href="#dir_3">ディレクトリ、ファイルの所有者、グループを変更する</a></li>
      </ul>
   </li></ul>
@@ -403,8 +403,8 @@ while True:
 <br />
 
 
-<!-- ディレクトリ -->
-<h3><div class="headline1" id="dir">ディレクトリ</div></h3>
+<!-- ディレクトリ、ファイル -->
+<h3><div class="headline1" id="dir">ディレクトリ、ファイル</div></h3>
 <h4><div class="headline2" id="dir_1">ディレクトリのパスを結合する</div></h4>
 <div class="text1">
 os.path.joinを使う
@@ -420,24 +420,34 @@ UNIX環境では/、Windows環境では¥が設定されるので、OSに依存�
 <br />
 <br />
 
-<h4><div class="headline2" id="dir_2">ディレクトリの一覧を取得する</div></h4>
+<h4><div class="headline2" id="dir_2">ディレクトリ内の一覧を取得する</div></h4>
 <div class="text1">
-os.listdirを使う
+os.listdirを使うと、ディレクトリ内のファイル、サブディレクトリ一覧を取得できる
+<ul class="list1">
+<li>現在のディレクトリ内の一覧を表示する
+<pre>
+import os
+print(os.listdir("."))
+</pre>
+</li><br />
+<li>ディレクトリ内のファイル一覧を取得し、パスを表示
 <pre>
 import os
 input_dir = "ディレクトリのパス"
-files = os.listdir(input_dir)
-for f in files:
+files = os.listdir(input_dir) # この時点ではディレクトリも含まれる
+for f in [f for f in files if os.path.isfile(f)]:
 &nbsp; &nbsp; print(os.path.join(input_dir, f))
 </pre>
-ファイル一覧をリストとして取得し、パスを表示
+ファイルの場合にTrueを返すos.path.isfile()を使った
+</li><br />
+</ul>
 </div>
 <br />
 <br />
 
 <h4><div class="headline2" id="dir_3">ディレクトリ、ファイルの所有者、グループを変更する</div></h4>
 <div class="text1">
-os.chmodを使う
+os.chownを使う
 <pre>
 import os
 os.chown(“ディレクトリ、ファイル名”, uid, gid)
@@ -447,6 +457,7 @@ os.chown(“ディレクトリ、ファイル名”, uid, gid)
 </div>
 <br />
 <br />
+
 
 
 <!-- 環境変数 -->
