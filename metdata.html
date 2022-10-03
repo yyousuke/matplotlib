@@ -228,7 +228,9 @@ df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0], date_parser=
 df = pd.read_csv("ファイル名", オプション)
 lons = np.array([l + 360. if l &lt; 0 else l for l in df.loc[:, "longitude"]])
 </pre>
-経度ラベルがlongitudeの場合
+経度ラベルがlongitudeの場合<br />
+リスト内包表記で経度データを読み、0度より小さい場合に360度を足す<br />
+Numpyのndarrayに格納する（np.arrayをpd.SeriesにするとSeriesになる）
 </li>
 </ul>
 </div>
@@ -799,7 +801,7 @@ d = gt['変数名'][:, :, :] # 変数名に対応するデータ取得（次元�
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/08/20</p>
+<p>最終更新日：2022/10/03</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
