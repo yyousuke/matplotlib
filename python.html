@@ -52,8 +52,9 @@
     <ul class="list2">
       <li><a href="#dir_1">ディレクトリのパスを結合する</a></li>
       <li><a href="#dir_2">ディレクトリ内の一覧を取得する</a></li>
-      <li><a href="#dir_3">ディレクトリ、ファイルの所有者、グループを変更する</a></li>
-      <li><a href="#dir_4">ディレクトリを作成する</a></li>
+      <li><a href="#dir_3">ワイルドカードでファイル一覧を取得する</a></li>
+      <li><a href="#dir_4">ディレクトリ、ファイルの所有者、グループを変更する</a></li>
+      <li><a href="#dir_5">ディレクトリを作成する</a></li>
      </ul>
   </li></ul>
   <!-- 環境変数 -->
@@ -446,7 +447,23 @@ for f in [f for f in files if os.path.isfile(f)]:
 <br />
 <br />
 
-<h4><div class="headline2" id="dir_3">ディレクトリ、ファイルの所有者、グループを変更する</div></h4>
+<h4><div class="headline2" id="dir_3">ワイルドカードでファイル一覧を取得する</div></h4>
+<div class="text1">
+glob.glob関数を使う
+<pre>
+import glob
+files = glob.glob(“ワイルドカードを含む記述”)
+</pre>
+直下のtest1/*.txtをリストにする
+<pre>
+import glob
+files = glob.glob(“test1/*.txt”)
+</pre>
+</div>
+<br />
+<br />
+
+<h4><div class="headline2" id="dir_4">ディレクトリ、ファイルの所有者、グループを変更する</div></h4>
 <div class="text1">
 os.chownを使う
 <pre>
@@ -459,7 +476,7 @@ os.chown(“ディレクトリ、ファイル名”, uid, gid)
 <br />
 <br />
 
-<h4><div class="headline2" id="dir_4">ディレクトリを作成する</div></h4>
+<h4><div class="headline2" id="dir_5">ディレクトリを作成する</div></h4>
 <div class="text1">
 os.makedirsを使う
 <pre>
@@ -812,7 +829,7 @@ outputfilename = output.txt
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/10/02</p>
+<p>最終更新日：2022/10/06</p>
 <p>Copyright (C) 2021-2022, Yousuke Yamashita</p>
 </footer>
 </html>
