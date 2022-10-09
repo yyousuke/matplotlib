@@ -51,10 +51,12 @@
   <ul class="list1"><li><a href="#dir">ディレクトリ、ファイル</a>
     <ul class="list2">
       <li><a href="#dir_1">ディレクトリのパスを結合する</a></li>
-      <li><a href="#dir_2">ディレクトリ内の一覧を取得する</a></li>
-      <li><a href="#dir_3">ワイルドカードでファイル一覧を取得する</a></li>
-      <li><a href="#dir_4">ディレクトリ、ファイルの所有者、グループを変更する</a></li>
-      <li><a href="#dir_5">ディレクトリを作成する</a></li>
+      <li><a href="#dir_2">ディレクトリ、ファイルが存在するか確認する</a></li>
+      <li><a href="#dir_3">ディレクトリ内の一覧を取得する</a></li>
+      <li><a href="#dir_4">ワイルドカードでファイル一覧を取得する</a></li>
+      <li><a href="#dir_5">ディレクトリ、ファイルの所有者、グループを変更する</a></li>
+      <li><a href="#dir_6">ディレクトリを作成する</a></li>
+      <li><a href="#dir_7">ディレクトリ、ファイルを削除する</a></li>
      </ul>
   </li></ul>
   <!-- 環境変数 -->
@@ -397,7 +399,7 @@ time_end = datetime(2022, 9, 2, 12, 30, 0) # 終了時刻
 time_step = timedelta(hours=1) # 時刻を進める間隔（1時間）
 time_now = time_sta
 while True:
-&nbsp; &nbsp; if time_now <= time_end:
+&nbsp; &nbsp; if time_now &lt;= time_end:
 &nbsp; &nbsp; &nbsp; &nbsp; latest_time = time_now.strftime("%Y-%m-%d %H:%M:%S")
 &nbsp; &nbsp; &nbsp; &nbsp; print(latest_time)
 &nbsp; &nbsp; else:
@@ -429,7 +431,39 @@ UNIX環境では/、Windows環境では¥が設定されるので、OSに依存�
 <br />
 <br />
 
-<h4><div class="headline2" id="dir_2">ディレクトリ内の一覧を取得する</div></h4>
+<h4><div class="headline2" id="dir_2">ディレクトリ、ファイルが存在するか確認する</div></h4>
+<div class="text1">
+os.path.existsを使う
+<pre>
+import os
+os.path.exists(“ディレクトリ、ファイルのパス“)
+</pre>
+存在すればTrueが返る
+<ul class="list1">
+<li>ディレクトリが存在するか確認する
+<pre>
+os.path.isdir(“ディレクトリのパス“)
+</pre>
+ディレクトリが存在する場合はTrue
+</li><br />
+<li>ファイルが存在するか確認する
+<pre>
+os.path.isfile(“ファイルのパス“)
+</pre>
+ファイルが存在する場合はTrue
+</li><br />
+<li>リンクを確認する
+<pre>
+os.path.islink(“ディレクトリ、ファイルのパス“)
+</pre>
+存在するリンクの場合はTrue
+</li><br />
+</ul>
+</div>
+<br />
+<br />
+
+<h4><div class="headline2" id="dir_3">ディレクトリ内の一覧を取得する</div></h4>
 <div class="text1">
 os.listdirを使うと、ディレクトリ内のファイル、サブディレクトリ一覧を取得できる
 <ul class="list1">
@@ -454,7 +488,7 @@ for f in [f for f in files if os.path.isfile(f)]:
 <br />
 <br />
 
-<h4><div class="headline2" id="dir_3">ワイルドカードでファイル一覧を取得する</div></h4>
+<h4><div class="headline2" id="dir_4">ワイルドカードでファイル一覧を取得する</div></h4>
 <div class="text1">
 glob.glob関数を使う
 <pre>
@@ -470,7 +504,7 @@ files = glob.glob(“test1/*.txt”)
 <br />
 <br />
 
-<h4><div class="headline2" id="dir_4">ディレクトリ、ファイルの所有者、グループを変更する</div></h4>
+<h4><div class="headline2" id="dir_5">ディレクトリ、ファイルの所有者、グループを変更する</div></h4>
 <div class="text1">
 os.chownを使う
 <pre>
@@ -483,7 +517,7 @@ os.chown(“ディレクトリ、ファイル名”, uid, gid)
 <br />
 <br />
 
-<h4><div class="headline2" id="dir_5">ディレクトリを作成する</div></h4>
+<h4><div class="headline2" id="dir_6">ディレクトリを作成する</div></h4>
 <div class="text1">
 os.makedirsを使う
 <pre>
@@ -495,6 +529,17 @@ os.makedirs(“ディレクトリのパス”)
 <br />
 <br />
 
+<h4><div class="headline2" id="dir_7">ディレクトリ、ファイルを削除する</div></h4>
+<div class="text1">
+os.removeを使う
+<pre>
+import os
+os.remove(“削除するディレクトリ、ファイルのパス”)
+</pre>
+＊ディレクトリの場合、rm -r ディレクトリのパス と同じ動作をする
+</div>
+<br />
+<br />
 
 
 <!-- 環境変数 -->
@@ -692,7 +737,7 @@ print(not any([False, False, True]))
 
 <!-- 集合 -->
 <h3><div class="headline1" id="set">集合</div></h3>
-<h4><div class="headline2" id="set_1">>pythonにおける集合</div></h4>
+<h4><div class="headline2" id="set_1">pythonにおける集合</div></h4>
 <div class="text1">
 集合を作成する場合は、set()か{}を用いる。
 <pre>
@@ -704,13 +749,13 @@ print(set_a)
 <br />
 <br />
 
-<h4><div class="headline2" id="set_2">>集合同士の演算</div></h4>
+<h4><div class="headline2" id="set_2">集合同士の演算</div></h4>
 <div class="text1">
 集合同士の演算が可能
 <pre>
 set_a = set("abc") # {'a', 'b', 'c'}
 set_b = set("cde") # {'c', 'e', 'd'}
-print(aaa & bbb) # and演算
+print(aaa &amp; bbb) # and演算
 print(aaa | bbb) # or演算
 </pre>
 ＊{'c'}と{'b', 'c', 'e', 'd', 'a'}を表示
@@ -865,7 +910,7 @@ outputfilename = output.txt
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/10/08</p>
+<p>最終更新日：2022/10/09</p>
 <p>Copyright (C) 2021-2022, Yousuke Yamashita</p>
 </footer>
 </html>
