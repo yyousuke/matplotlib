@@ -57,6 +57,7 @@
       <li><a href="#dir_5">ディレクトリ、ファイルの所有者、グループを変更する</a></li>
       <li><a href="#dir_6">ディレクトリを作成する</a></li>
       <li><a href="#dir_7">ディレクトリ、ファイルを削除する</a></li>
+      <li><a href="#dir_8">シンボリックリンクを作成する</a></li>
      </ul>
   </li></ul>
   <!-- 環境変数 -->
@@ -541,6 +542,18 @@ os.remove(“削除するディレクトリ、ファイルのパス”)
 <br />
 <br />
 
+<h4><div class="headline2" id="dir_8">シンボリックリンクを作成する</div></h4>
+<div class="text1">
+os.symlinkを使う
+<pre>
+import os
+os.symlink(“リンク元のパス、リンク先のパス”)
+</pre>
+</div>
+<br />
+<br />
+
+
 
 <!-- 環境変数 -->
 <h3><div class="headline1" id="env">環境変数、パス</div></h3>
@@ -910,7 +923,7 @@ outputfilename = output.txt
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/10/09</p>
+<p>最終更新日：2022/10/11</p>
 <p>Copyright (C) 2021-2022, Yousuke Yamashita</p>
 </footer>
 </html>
