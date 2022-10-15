@@ -38,13 +38,14 @@
   <ul class="list1"><li><a href="#time">時刻形式</a>
     <ul class="list2">
       <li><a href="#time_1">時刻形式データの作成</a></li>
-      <li><a href="#time_2">時刻形式データから年、月、日などを取り出</a></li>
+      <li><a href="#time_2">時刻形式データから年、月、日などを取り出す</a></li>
       <li><a href="#time_3">時刻形式データから書式指定して取り出す</a></li>
       <li><a href="#time_4">時刻形式データの演算</a></li>
       <li><a href="#time_5">1ヶ月後、1年後を計算する</a></li>
       <li><a href="#time_6">月末の日を計算する</a></li>
-      <li><a href="#time_7">ISOフォーマットで表示する</a></li>
-      <li><a href="#time_8">時間方向のループを回す</a></li>
+      <li><a href="#time_7">当日の00UTCを取得する</a></li>
+      <li><a href="#time_8">ISOフォーマットで表示する</a></li>
+      <li><a href="#time_9">時間方向のループを回す</a></li>
      </ul>
   </li></ul>
   <!-- ディレクトリ、ファイル -->
@@ -327,7 +328,19 @@ time_new = time + relativedelta(months=1) - relativedelta(days=1)
 <br />
 <br />
 
-<h4><div class="headline2" id="time_7">ISOフォーマットで表示する</div></h4>
+<h4><div class="headline2" id="time_7">当日の00UTCを取得する</div></h4>
+<div class="text1">
+datetime.utcnowで取得した現在時刻を書き換える
+<pre>
+from datetime import datetime
+time = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+</pre>
+時、分、行、マイクロ秒を全て0に書き換え当日の00UTCにする
+</div>
+<br />
+<br />
+
+<h4><div class="headline2" id="time_8">ISOフォーマットで表示する</div></h4>
 <div class="text1">
 datetime.datetimeのisoformatメソッドを利用する
 <ul class="list1">
@@ -388,7 +401,7 @@ print(dt.isoformat(timespec='minutes'))
 <br />
 <br />
 
-<h4><div class="headline2" id="time_8">時間方向のループを回す</div></h4>
+<h4><div class="headline2" id="time_9">時間方向のループを回す</div></h4>
 <div class="text1">
 多重ループは遅くなるので時刻変数は1つのみとし、timedeltaを足して時刻を進める
 <ul class="list1">
@@ -923,7 +936,7 @@ outputfilename = output.txt
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/10/12</p>
+<p>最終更新日：2022/10/15</p>
 <p>Copyright (C) 2021-2022, Yousuke Yamashita</p>
 </footer>
 </html>
