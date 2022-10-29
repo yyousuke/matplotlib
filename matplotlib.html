@@ -112,6 +112,7 @@
       <li><a href="#graph_3_11">棒グラフにエラーバーを付ける</a></li>
       <li><a href="#graph_3_12">棒グラフ非表示でエラーバーのみにする</a></li>
       <li><a href="#graph_3_13">棒グラフにハッチを付ける</a></li>
+      <li><a href="#graph_3_14">棒グラフの色を正負で塗り分ける</a></li>
     </ul>
   </li></ul>
   <!-- ヒストグラム -->
@@ -1046,8 +1047,16 @@ plt.bar(x軸のデータ, y軸のデータ, yerr=y軸のエラーバーデータ
 
 <h4><div class="headline2" id="graph_3_13">棒グラフにハッチを付ける</div></h4>
 <div class="text1">
+hatchオプションを使う
 <pre>plt.bar(x軸のデータ, y軸のデータ, alpha=1.0, hatch='ハッチのパターン', fill=None)</pre>
 パターンは<a href="./options.html#hatch">ハッチのパターン</a>参照
+</div>
+
+<h4><div class="headline2" id="graph_3_14">棒グラフの色を正負で塗り分ける</div></h4>
+<div class="text1">
+y軸のデータが正の場合に赤、負の場合に青のcolorsリストを作成する
+<pre>colors = ['r' if d &gt; 0 else 'b' for d in y軸のデータ]
+plt.bar(x軸のデータ, y軸のデータ, color=colors, width=幅)</pre>
 </div>
 
 
@@ -2781,7 +2790,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/09/12</p>
+<p>最終更新日：2022/10/29</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
