@@ -104,7 +104,7 @@
       <li><a href="#graph_3_3">棒グラフの枠線の色を変える</a></li>      
       <li><a href="#graph_3_4">棒グラフを半透明にする</a></li>
       <li><a href="#graph_3_5">棒グラフの幅を変える</a></li>
-      <li><a href="#graph_3_6">棒グラフの枠線を太くする</a></li>
+      <li><a href="#graph_3_6">棒グラフの枠線を変更する</a></li>
       <li><a href="#graph_3_7">棒グラフを横に並べる</a></li>
       <li><a href="#graph_3_8">積み上げ棒グラフを描く</a></li>
       <li><a href="#graph_3_9">横棒に変える</a></li>
@@ -979,11 +979,27 @@ ax.bar()でも同じ（axは<a href="#graph_1_2">fig.add_subplot</a>の戻り値
 widthはx軸上の幅で指定する
 </div>
 
-<h4><div class="headline2" id="graph_3_6">棒グラフの枠線を太くする</div></h4>
+<h4><div class="headline2" id="graph_3_6">棒グラフの枠線を変更する</div></h4>
 <div class="text1">
-linewidthまたはlwを使う
-<pre>plt.bar(x軸のデータ, y軸のデータ, lw=数字)</pre>
-linewidthのデフォルト値：1
+枠線の幅を変更する場合、linewidthまたはlwを用いる
+<pre>plt.bar(x軸のデータ, y軸のデータ, edgecolor='色の名前', lw=数字)</pre>
+linewidthのデフォルト値：1<br />
+edgecolorの指定がない場合、またはedgecolor='none'の場合、枠線は描かれない
+<ul class="list1">
+<li>枠線の幅を太くする（幅2の黒線）
+<pre>plt.bar(x軸のデータ, y軸のデータ, edgecolor='k',  lw=2)</pre></li>
+<li>枠線の幅を細くする（幅0.5の黒線）
+<pre>plt.bar(x軸のデータ, y軸のデータ, edgecolor='k', lw=0.5)</pre></li>
+</ul>
+枠線の線種を変更する場合linestyleまたはlsを用いる
+<pre>plt.bar(x軸のデータ, y軸のデータ, edgecolor='色の名前', ls='文字列')</pre>
+linestyleのデフォルト値：'-'（実線）
+<ul class="list1">
+<li>枠線を破線にする
+<pre>plt.bar(x軸のデータ, y軸のデータ, edgecolor='k', ls='--')</pre>
+<a href="./options.html#linestyle">線種の一覧</a>参照
+</li>
+</ul>
 </div>
 
 <h4><div class="headline2" id="graph_3_7">棒グラフを横に並べる</div></h4>
@@ -2790,7 +2806,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/10/29</p>
+<p>最終更新日：2022/10/30</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
