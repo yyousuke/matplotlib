@@ -43,9 +43,10 @@
       <li><a href="#time_4">時刻形式データの演算</a></li>
       <li><a href="#time_5">1ヶ月後、1年後を計算する</a></li>
       <li><a href="#time_6">月末の日を計算する</a></li>
-      <li><a href="#time_7">当日の00UTCを取得する</a></li>
-      <li><a href="#time_8">ISOフォーマットで表示する</a></li>
-      <li><a href="#time_9">時間方向のループを回す</a></li>
+      <li><a href="#time_7">年初からの日数を計算する</a></li>      
+      <li><a href="#time_8">当日の00UTCを取得する</a></li>
+      <li><a href="#time_9">ISOフォーマットで表示する</a></li>
+      <li><a href="#time_10">時間方向のループを回す</a></li>
      </ul>
   </li></ul>
   <!-- ディレクトリ、ファイル -->
@@ -337,7 +338,20 @@ time_new = time + relativedelta(months=1) - relativedelta(days=1)
 <br />
 <br />
 
-<h4><div class="headline2" id="time_7">当日の00UTCを取得する</div></h4>
+<h4><div class="headline2" id="time_7">年初からの日数を計算する</div></h4>
+<div class="text1">
+datetimeの演算を利用する
+<pre>
+from datetime import datetime
+doy = (datetime(2021, 6, 21) - datetime(2021, 1, 1)).days
+print(doy)
+</pre>
+171が表示される（1/1が0、1/2が1、、、で計算されたもの）
+</div>
+<br />
+<br />
+
+<h4><div class="headline2" id="time_8">当日の00UTCを取得する</div></h4>
 <div class="text1">
 datetime.utcnowで取得した現在時刻を書き換える
 <pre>
@@ -349,7 +363,7 @@ time = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
 <br />
 <br />
 
-<h4><div class="headline2" id="time_8">ISOフォーマットで表示する</div></h4>
+<h4><div class="headline2" id="time_9">ISOフォーマットで表示する</div></h4>
 <div class="text1">
 datetime.datetimeのisoformatメソッドを利用する
 <ul class="list1">
@@ -410,7 +424,7 @@ print(dt.isoformat(timespec='minutes'))
 <br />
 <br />
 
-<h4><div class="headline2" id="time_9">時間方向のループを回す</div></h4>
+<h4><div class="headline2" id="time_10">時間方向のループを回す</div></h4>
 <div class="text1">
 多重ループは遅くなるので時刻変数は1つのみとし、timedeltaを足して時刻を進める
 <ul class="list1">
@@ -500,7 +514,7 @@ print(os.listdir("."))
 <pre>
 import os
 input_dir = "ディレクトリのパス"
-files = os.listdir(input_dir) # この時点ではディレクトリも含まれる
+files = os.listdir(input_dir) # この時点ではサブディレクトリも含まれる
 for f in [f for f in files if os.path.isfile(f)]:
 &nbsp; &nbsp; print(os.path.join(input_dir, f))
 </pre>
@@ -1016,7 +1030,7 @@ print(str(res.returncode)) # 終了ステータスの表示
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/10/16</p>
+<p>最終更新日：2022/10/31</p>
 <p>Copyright (C) 2021-2022, Yousuke Yamashita</p>
 </footer>
 </html>
