@@ -731,6 +731,14 @@ os.environ['PYTHONPATH'] = '設定したいパス'
 <li>改行コード（LF）を取り除く
 <pre>"文字列".replace('\n', '')</pre>
 </li>
+<li>改行コードを取り除く（rstrip使用）
+<pre>"文字列".rstrip()</pre>
+末尾の文字が取り除かれる
+</li><br />
+<li>両端（先頭、末尾）の文字を取り除く
+<pre>"文字列".strip()</pre>
+改行記号の他に先頭の空白なども取り除きたい場合
+</li><br />
 <li>タブを取り除く場合
 <pre>"文字列".replace('\t', '')</pre>
 </li>
@@ -740,6 +748,19 @@ splitlinesでLFもCRLFも分割し、joinで結合する
 </li><br />
 <li>改行コードをLFに置き換える
 <pre>"¥n".join("文字列".splitlines())</pre>
+</li>
+<li>読み取った文章から全ての改行記号を取り除く
+<pre>
+with open(file_name) as f:
+&nbsp; &nbsp; words = f.readlines()
+res = [line.rstrip() for line in words]</pre>
+resには行毎のリストが入る
+</li><br />
+<li>検索した文字列が含まれる行のみリストに
+<pre>
+with open(file_name) as f:
+&nbsp; &nbsp; words = f.readlines()
+res = [line.rstrip() for line in words if '文字列' in line]</pre>
 </li>
 </ul>
 </div>
@@ -1030,7 +1051,7 @@ print(str(res.returncode)) # 終了ステータスの表示
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/10/31</p>
+<p>最終更新日：2022/11/01</p>
 <p>Copyright (C) 2021-2022, Yousuke Yamashita</p>
 </footer>
 </html>
