@@ -714,9 +714,21 @@ m.pcolor(x, y, d, cmap='jet')
 </pre>
 色テーブルは<a href="./options.html#cmap">色テーブルの一覧</a>参照
 </li><br />
+<li>範囲を限定する
+<pre>cs = m.pcolor(x, y, d)
+cs.set_clim(0, 1)</pre>
+0から1の範囲に限定してカラープロットを描く</li><br />
+<li>カラーバーを付ける
+<pre>cs = m.pcolor(x, y, d)
+cs.set_clim(0, 1)
+cbar = plt.colorbar(shrink=0.40, orientation='vertical', format='%5.1f')
+cbar.set_label("カラーバーに付けるラベル", fontsize=12)
+</pre>
+縦向きで0.4倍に縮小されたカラーバーで、数字は小数点以下1位まで表示<br />
+カラーバーの調整方法については、<a href="matplotlib.html#colorbar_1">カラーバー</a>参照</li><br />
 <li>Warningの抑制
 <pre>m.pcolor(x, y, d, cmap='jet', shading='auto')</pre>
-matplotlib-3.3からshadingオプションの警告が出るようになった</li>
+matplotlib-3.3からshadingオプションの警告が出るようになった</li><br />
 </ul>
 </div>
 
@@ -784,7 +796,7 @@ m.contour(x, y, data, clevs, linewidths=0.8, colors='k') # 等高線を描く
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/05/17</p>
+<p>最終更新日：2022/11/02</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
