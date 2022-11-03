@@ -74,8 +74,9 @@
       <li><a href="#cartopy_3_4">陰影を描く</a></li>
       <li><a href="#cartopy_3_5">陰影にカラーバーを付ける</a></li>
       <li><a href="#cartopy_3_6">矢羽をプロットする</a></li>
-      <li><a href="#cartopy_3_7">文字をプロットする</a></li>
-      <li><a href="#cartopy_3_8">マーカーをプロットする</a></li>
+      <li><a href="#cartopy_3_7">矢印をプロットする</a></li>
+      <li><a href="#cartopy_3_8">文字をプロットする</a></li>
+      <li><a href="#cartopy_3_9">マーカーをプロットする</a></li>
     </ul>
   </li></ul>
   <!-- 図の体裁 -->
@@ -655,7 +656,78 @@ ax.barbs(x, y, u, v, length=4)
 </ul>
 </div>
 
-<h4><div class="headline2" id="cartopy_3_7">文字をプロットする</div></h4>
+
+<h4><div class="headline2" id="cartopy_3_7">矢印をプロットする</div></h4>
+<div class="text1">
+<pre>
+ax.quiver(経度データ, 緯度データ, 東西風データ, 南北風データ)
+</pre>
+矢印の調整方法については、matplotlibの<a href="matplotlib.html#graph_7">矢印</a>参照<br />
+<ul class="list1">
+<li>例：２次元データlons, lats, u, vから矢印をプロット
+<pre>
+ax.quiver(x, y, u, v)
+</pre></li>
+<li>例：矢印を6おきにプロット
+<pre>
+ax.quiver(lons[::6, ::6], lats[::6, ::6], uwnd[::6, ::6], vwnd[::6, ::6])
+</pre></li>
+<li>例：矢印の色を青色にする
+<pre>
+ax.quiver(x, y, u, v, color='b')
+</pre>
+色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li><br />
+<li>例：矢印の幅と長さを変える
+<pre>
+ax.quiver(x, y, u, v, width=.003, scale=300.)
+</pre>
+</li>
+<li>例：矢印の頭の幅を大きくする
+<pre>
+ax.quiver(x, y, u, v, headwidth=3.75)
+</pre>
+</li>
+<li>例：矢印の凡例を付ける (図枠の中)
+<pre>
+Q = ax.quiver(x, y, u, v, color='k', width=.003, scale=300., headwidth=3.75)
+ax.quiverkey(Q, 0.97, 0.93, 10,  '10', color='k', labelsep=0.01)
+</pre>
+ax.quiverの戻り値Qを使い、ax.quiverkeyで凡例を描く<br />
+図の横軸範囲を0〜1までとした場合の0.97、縦軸の0.93の位置に描く<br />
+整数の10は凡例に用いる矢印のサイズ、文字列の'10'は表示する文字<br />
+labelsepは凡例と文字の隙間（デフォルト値：0.1）
+</li><br />
+<li>例：矢印の凡例を図枠の下に付ける
+<pre>
+Q = ax.quiver(x, y, u, v, color='k', width=.003, scale=300., headwidth=3.75)
+ax.quiverkey(Q, 0.97, -0.04, 10,  '10', color='k', labelpos='S', labelsep=0.03)
+</pre>
+縦軸範囲の-0.04の位置に描くと図枠の下に表示される<br />
+凡例の文字を凡例の矢印の下に付けるため、labelpos='S'とした<br />
+labelpos='S'の場合、labelsepの値は大きめに取る
+</li><br />
+<li>例：矢印の凡例に付ける文字を大きくする
+<pre>
+Q = ax.quiver(x, y, u, v, color='k', width=.003, scale=300., headwidth=3.75)
+ax.quiverkey(Q, 0.97, 0.93, 10,  '10', color='k', labelsep=0.01, fontproperties={'size': 14})
+</pre>
+fontpropertiesでサイズを変更する（デフォルトは11）
+</li><br />
+<li>例：図枠の一部を塗り潰して上に矢印の凡例を付ける
+<pre>
+Q = ax.quiver(x, y, u, v, color='k', width=.003, scale=300., headwidth=3.75, zorder=4)
+# 矢印の凡例を描く領域を作成
+rect = plt.Rectangle((155, 70), 25, 20, facecolor='gray', edgecolor=None, zorder=4)
+ax.add_patch(rect)
+ax.quiverkey(Q, 0.97, 0.93, 10,  '10', color='k', labelsep=0.01)
+</pre>
+ax.add_patch(rect)で、灰色に塗り潰した矩形領域を155E、70Nから180E、90Nまで追加する<br />
+最初の(155, 70)が始点の座標、２番目は経度幅、３番目は緯度幅を表す
+</li><br />
+</ul>
+</div>
+
+<h4><div class="headline2" id="cartopy_3_8">文字をプロットする</div></h4>
 <div class="text1">
 ax.textを使う
 テキストの調整方法については、matplotlibの<a href="matplotlib.html#text_1">テキスト</a>参照<br />
@@ -674,7 +746,7 @@ ax.text(x, y, "表示するテキスト", color='r')
 </ul>
 </div>
 
-<h4><div class="headline2" id="cartopy_3_8">マーカーをプロットする</div></h4>
+<h4><div class="headline2" id="cartopy_3_9">マーカーをプロットする</div></h4>
 <div class="text1">
 <pre>
 ax.plot(x座標, y座標, オプション)
@@ -808,7 +880,7 @@ for pref in prefs:
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/10/20</p>
+<p>最終更新日：2022/11/03</p>
 <p>Copyright (C) 2019-2022, Yousuke Yamashita</p>
 </footer>
 </html>
