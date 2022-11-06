@@ -302,7 +302,17 @@ ax.add_feature(cfeature.LAND, zorder=3) # 陸に色を付ける
 ax.add_feature(cfeature.OCEAN, zorder=1) # 海に色を付ける
 </pre>
 経度線・緯度線については、<a href ="#cartopy_1_3">cartopyで経度線・緯度線を描く</a>参照
-</li>
+</li><br />
+<li>例：陸と海、湖の解像度を指定する（50mの地図を使う）
+<pre>
+ax.add_feature(cfeature.LAND.with_scale('50m'), edgecolor='k', lw=0.5)
+ax.add_feature(cfeature.OCEAN.with_scale('50m'), edgecolor='k', lw=0.5) 
+ax.add_feature(cfeature.LAKES.with_scale('50m'), edgecolor='k', lw=0.5)
+</pre>
+黒色の幅0.5の枠を描く
+110m、50m、10mを指定可能<br />
+<a href="https://www.naturalearthdata.com/downloads/">Natural Earth地図データ</a>参照
+</li><br />
 </ul>
 </div>
 
@@ -880,7 +890,7 @@ for pref in prefs:
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/11/03</p>
+<p>最終更新日：2022/11/06</p>
 <p>Copyright (C) 2019-2022, Yousuke Yamashita</p>
 </footer>
 </html>
