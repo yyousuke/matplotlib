@@ -663,6 +663,11 @@ ax.barbs(x, y, u, v, color='b')
 ax.barbs(x, y, u, v, length=4)
 </pre>
 </li>
+<li>例：風速の小さい矢羽を描かない
+<pre>
+ax.barbs(x, y, u, v, sizes=dict(emptybarb=0.0))
+</pre>
+</li>
 </ul>
 </div>
 
@@ -890,7 +895,7 @@ for pref in prefs:
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/11/06</p>
+<p>最終更新日：2022/11/07</p>
 <p>Copyright (C) 2019-2022, Yousuke Yamashita</p>
 </footer>
 </html>
