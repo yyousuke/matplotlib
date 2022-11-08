@@ -148,7 +148,7 @@ gl = ax.gridlines(crs=ccrs.PlateCarree(), linewidth=0.5, linestyle='--', color='
 </pre>
 線の幅はlinewidth、線種はlinestyle、色はcolorで設定<br />
 船種は<a href="./options.html#linestyle">線種一覧</a>、色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li><br />
-<li>例：経度線・緯度線を不透明度0.8幅1の黒点線で描く
+<li>例：経度線・緯度線を不透明度0.8、幅1の黒点線で描く
 <pre>
 gl = ax.gridlines(crs=ccrs.PlateCarree(), linewidth=1, linestyle=':', color='k', alpha=0.8)
 </pre>
@@ -378,7 +378,8 @@ gradsのlatlonやBasemapのprojection='cyl'に相当する図法で、緯度線�
 <pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.Mercator(central_longitude=180.0, min_latitude=-60.0, max_latitude=60.0))</pre></li>
 <li>例：経度線・緯度線ラベルを付ける
 <pre>gl = ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=True)</pre>
-cartopyバージョン0.18以降で対応
+cartopyバージョン0.18以降で対応<br />
+調整方法は<a href="#cartopy_1_3">cartopyで経度線・緯度線を描く</a>参照
 </li><br />
 </ul>
 </div>
@@ -419,7 +420,8 @@ ax.set_extent([100, 170, 10, 70]) # 領域の限定
 </li>
 <li>例：経度線・緯度線ラベルを付ける
 <pre>gl = ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=True)</pre>
-cartopyバージョン0.18以降で対応
+cartopyバージョン0.18以降で対応<br />
+調整方法は<a href="#cartopy_1_3">cartopyで経度線・緯度線を描く</a>参照
 </li><br />
 </ul>
 </div>
@@ -444,7 +446,8 @@ cartopyバージョン0.18以降で対応
 <pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.Robinson(central_longitude=180.0))</pre></li>
 <li>例：経度線・緯度線ラベルを付ける
 <pre>gl = ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=True)</pre>
-cartopyバージョン0.18以降で対応
+cartopyバージョン0.18以降で対応<br />
+調整方法は<a href="#cartopy_1_3">cartopyで経度線・緯度線を描く</a>参照
 </li><br />
 </ul>
 </div>
@@ -458,7 +461,8 @@ cartopyバージョン0.18以降で対応
 <pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.Mollweide(central_longitude=180.0))</pre></li>
 <li>例：経度線・緯度線ラベルを付ける
 <pre>gl = ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=True)</pre>
-cartopyバージョン0.18以降で対応
+cartopyバージョン0.18以降で対応<br />
+調整方法は<a href="#cartopy_1_3">cartopyで経度線・緯度線を描く</a>参照
 </li><br />
 </ul>
 </div>
@@ -472,7 +476,8 @@ cartopyバージョン0.18以降で対応
 <pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.LambertCylindrical(central_longitude=180.0))</pre></li>
 <li>例：経度線・緯度線ラベルを付ける
 <pre>gl = ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=True)</pre>
-</li>
+調整方法は<a href="#cartopy_1_3">cartopyで経度線・緯度線を描く</a>参照
+</li><br />
 </ul>
 </div>
 
@@ -485,7 +490,8 @@ cartopyバージョン0.18以降で対応
 <pre>ax = fig.add_subplot(1, 1, 1, projection=ccrs.Miller(central_longitude=180.0))</pre></li>
 <li>例：経度線・緯度線ラベルを付ける
 <pre>gl = ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=True)</pre>
-</li>
+調整方法は<a href="#cartopy_1_3">cartopyで経度線・緯度線を描く</a>参照
+</li><br />
 </ul>
 </div>
 
