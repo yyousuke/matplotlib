@@ -548,8 +548,20 @@ os.chownを使う
 import os
 os.chown("ディレクトリ、ファイル名", uid, gid)
 </pre>
-＊指定されたuid、gidに変更する<br />
+＊指定されたuid、gid（整数型）に変更する<br />
 ＊いずれかを変更しない場合には、-1を指定する
+<ul class="list1">
+<li>tmp01のGIDを5000に変更する
+<pre>
+os.chown("tmp01", -1, 5000)
+</pre>
+</li>
+<li>tmp01/file01.txtのUIDを1040に変更する
+<pre>
+os.chown("tmp01/file01.txt", 1040, -1)
+</pre>
+</li>
+</ul>
 </div>
 <br />
 <br />
@@ -1051,7 +1063,7 @@ print(str(res.returncode)) # 終了ステータスの表示
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/11/01</p>
+<p>最終更新日：2022/11/10</p>
 <p>Copyright (C) 2021-2022, Yousuke Yamashita</p>
 </footer>
 </html>
