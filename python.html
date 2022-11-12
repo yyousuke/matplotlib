@@ -555,11 +555,13 @@ os.chown("ディレクトリ、ファイル名", uid, gid)
 <pre>
 os.chown("tmp01", -1, 5000)
 </pre>
-</li>
+実行するユーザが変更前・変更後の両方のグループに所属していない場合はエラー
+</li><br />
 <li>tmp01/file01.txtのUIDを1040に変更する
 <pre>
 os.chown("tmp01/file01.txt", 1040, -1)
 </pre>
+所有者を変更できるのはroot権限で実行した場合のみ<br />
 </li>
 </ul>
 </div>
@@ -1063,7 +1065,7 @@ print(str(res.returncode)) # 終了ステータスの表示
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/11/10</p>
+<p>最終更新日：2022/11/12</p>
 <p>Copyright (C) 2021-2022, Yousuke Yamashita</p>
 </footer>
 </html>
