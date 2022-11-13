@@ -114,6 +114,8 @@
   <ul class="list1"><li><a href="#exception">例外処理</a>
     <ul class="list2">
       <li><a href="#exception_1">例外処理の概要</a></li>
+      <li><a href="#exception_2">例外処理の記述方法</a></li>
+      <li><a href="#exception_3">例外を補足し終了コードを返す</a></li>
      </ul>
   </li></ul>
   <!-- 外部コマンド -->
@@ -1006,6 +1008,36 @@ outputfilename = output.txt
 コード中で例外を検出、生成する場合には、Exceptionから派生した組み込み例外を用いる<br />
 例えば、モジュールのロードで問題が発生した場合には、ImportError、ファイルが存在しない、ディスク容量超過などシステム関連のエラーは OSError、など<br />
 詳細については、<a href="https://docs.python.org/ja/3/library/exceptions.html">組み込み例外</a>参照
+</div>
+<br />
+<br />
+
+<h4><div class="headline2" id="exception_2">例外処理の記述方法</div></h4>
+<div class="text1">
+OSErrorの場合
+<pre>
+try:
+&nbsp; &nbsp; 処理内容（ファイルを開けるなど）
+except OSError as e:
+&nbsp; &nbsp; raise OSError(e)
+</pre>
+OSErrorの内容を表示する
+</div>
+<br />
+<br />
+
+<h4><div class="headline2" id="exception_3">例外を補足し終了コードを返す</div></h4>
+<div class="text1">
+スクリプトの最上位で例外を補足し、終了コードを返す場合
+<pre>
+if __name__ == "__main__":
+&nbsp; &nbsp; try:
+&nbsp; &nbsp; &nbsp; &nbsp; main()
+&nbsp; &nbsp; except Exception:
+&nbsp; &nbsp; &nbsp; &nbsp; raise SystemExit(-1)
+&nbsp; &nbsp; raise SystemExit(0)
+</pre>
+main関数が正常終了した場合は0、異常終了した場合は-1を返す
 </div>
 <br />
 <br />
