@@ -116,6 +116,7 @@
       <li><a href="#exception_1">例外処理の概要</a></li>
       <li><a href="#exception_2">例外処理の記述方法</a></li>
       <li><a href="#exception_3">例外を補足し終了コードを返す</a></li>
+      <li><a href="#exception_4">subprocessの例外を補足する</a></li>
      </ul>
   </li></ul>
   <!-- 外部コマンド -->
@@ -1042,6 +1043,25 @@ main関数が正常終了した場合は0、異常終了した場合は-1を返�
 <br />
 <br />
 
+<h4><div class="headline2" id="exception_4">subprocessの例外を補足する</div></h4>
+<div class="text1">
+subprocessの終了コードを判定する
+<pre>
+com_list = ['コマンド', 'オプション1', 'オプション2', ...]
+try:
+&nbsp; &nbsp; res = subprocess.run(com_list,
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;stdout=subprocess.PIPE,
+&nbsp; &nbsp; &nbsp; &nbsp; stderr=subprocess.PIPE)
+except Exception:
+&nbsp; &nbsp; exception = sys.exc_info()[1]
+&nbsp; &nbsp; raise Exception(exception)
+if res.returncode != 0:
+&nbsp; &nbsp; raise Exception(Abort with return code ' + str(res.returncode))
+</pre>
+</div>
+<br />
+<br />
+
 
 <!-- 外部コマンド -->
 <h3><div class="headline1" id="ext">外部コマンド</div></h3>
@@ -1097,7 +1117,7 @@ print(str(res.returncode)) # 終了ステータスの表示
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/11/12</p>
+<p>最終更新日：2022/11/16</p>
 <p>Copyright (C) 2021-2022, Yousuke Yamashita</p>
 </footer>
 </html>
