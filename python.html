@@ -100,6 +100,7 @@
   <ul class="list1"><li><a href="#web">Web</a>
     <ul class="list2">
       <li><a href="#web_1">pythonでwebサーバを起動</a></li>
+      <li><a href="#web_2">ファイルをダウンロードする</a></li>
      </ul>
   </li></ul>
   <!-- 設定ファイル -->
@@ -403,7 +404,7 @@ time = datetime(2022, 3, 8, 12, 31, 12)
 print(dt.isoformat(sep=' ', timespec='milliseconds'))
 </pre>
 2022-03-08 12:31:12.000<br />
-sep=は省略可能
+sepオプションは省略可能
 </li><br />
 <li>マイクロ秒まで表示する
 <pre>
@@ -466,7 +467,7 @@ dir2 = "dir_name2"
 dir_path = os.path.join(dir1, dir2)
 </pre>
 dir_pathには、UNIX環境ではdir_name1/dir_name2が入る<br />
-UNIX環境では/、Windows環境では¥が設定されるので、OSに依存しないコードが書ける
+UNIX環境では/、Windows環境では&yen;が設定されるので、OSに依存しないコードが書ける
 </div>
 <br />
 <br />
@@ -893,6 +894,32 @@ Webページのコンテンツのある場所で以下のコマンドを実行�
 <br />
 <br />
 
+<h4><div class="headline2" id="web_2">ファイルをダウンロードする</div></h4>
+<div class="text1">
+urllib.requestを用いる
+<pre>
+import urllib.request
+urllib.request.urlretrieve("URL", "保存するファイルのパス")
+</pre>
+</div>
+<br />
+<br />
+
+<h4><div class="headline2" id="web_3">ダウンロードにリトライ回数を設定する</div></h4>
+<div class="text1">
+再帰関数を用いる
+<pre>
+import urllib.request
+def download(cnt=2):
+&nbsp; &nbsp; try:
+&nbsp; &nbsp; &nbsp; &nbsp; urllib.request.urlretrieve("URL", "保存するファイルのパス")
+&nbsp; &nbsp; except OSError:
+&nbsp; &nbsp; &nbsp; &nbsp; time.sleep(10.0)  # 10秒間待つ
+&nbsp; &nbsp; &nbsp; &nbsp; downloadcnt=cnt - 1)  # cntを減らして再帰
+</pre>
+</div>
+<br />
+<br />
 
 
 <!-- 設定ファイル -->
@@ -1118,7 +1145,7 @@ print(str(res.returncode)) # 終了ステータスの表示
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/11/17</p>
+<p>最終更新日：2022/11/18</p>
 <p>Copyright (C) 2021-2022, Yousuke Yamashita</p>
 </footer>
 </html>
