@@ -9,6 +9,9 @@ body{
 	margin-right:10px;
 }
 
+a:link { color: #0000ff; }
+a:visited { color: #0000ff; }
+	
 div#nesting{
 	font-family:Verdana, Arial, Helvetica, sans-serif;
 	font-size:14px;
@@ -48,6 +51,7 @@ h1{
 	font-family:Verdana, Arial, Helvetica, sans-serif;
 	font-size:32px;
 	font-weight:bold;
+	text-align:center;
 	color:#000000;
 	background-color:#eeeeff;
 	padding-top:10px;
