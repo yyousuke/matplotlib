@@ -911,6 +911,8 @@ urllib.request.urlretrieve("URL", "保存するファイルのパス")
 <pre>
 import urllib.request
 def download(cnt=2):
+&nbsp; &nbsp; if cnt <= 0:
+&nbsp; &nbsp; &nbsp; &nbsp; raise RecursionError('maximum recursion count exceeded')
 &nbsp; &nbsp; try:
 &nbsp; &nbsp; &nbsp; &nbsp; urllib.request.urlretrieve("URL", "保存するファイルのパス")
 &nbsp; &nbsp; except OSError:
@@ -1145,7 +1147,7 @@ print(str(res.returncode)) # 終了ステータスの表示
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/11/20</p>
+<p>最終更新日：2022/11/21</p>
 <p>Copyright (C) 2021-2022, Yousuke Yamashita</p>
 </footer>
 </html>
