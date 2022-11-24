@@ -193,8 +193,9 @@
       <li><a href="#graph_9_5">陰影にカラーバーを付ける</a></li>
       <li><a href="#graph_9_6">陰影にハッチを付ける</a></li>
       <li><a href="#graph_9_7">陰影を描く値をログスケールにする</a></li>
-      <li><a href="#graph_9_8">欠損値を灰色の陰影で塗り潰す</a></li>
-      <li><a href="#graph_9_9">欠損値の周辺を滑らかにしない</a></li>
+      <li><a href="#graph_9_8">陰影を描く範囲をデータ範囲とは異なるものにする</a></li>
+      <li><a href="#graph_9_9">欠損値を灰色の陰影で塗り潰す</a></li>
+      <li><a href="#graph_9_10">欠損値の周辺を滑らかにしない</a></li>
     </ul>
   </li></ul>
 <!-- 箱ひげ図 -->
@@ -1575,7 +1576,7 @@ ZがNumpyのndarrayの場合。最小値よりも小さい最大の整数をnp.f
 
 <h4><div class="headline2" id="graph_9_4">陰影を付ける範囲を変更する</div></h4>
 <div class="text1">
-陰影を付ける最小値、最大値は、それぞれvmin、vmaxオプションで指定
+陰影のカラースケールの基準となる下限、上限は、それぞれvmin、vmaxオプションで指定
 <pre>plt.contourf(x軸上の位置, y軸上の位置, z軸データ, vmin=数字, vmax=数字)</pre>
 <ul class="list1">
 <li>例：Zが３〜９の範囲で色を変化させる
@@ -1587,7 +1588,7 @@ cmap.set_under('gray') # 下限を下回った場合に灰色
 cmap.set_over('w') # 上限を超えた場合に白
 plt.contourf(X, Y, Z, cmap=cmap, vmin=3, vmax=9)
 </pre>
-＊matplotlib 3.3以降では、plt.get_cmapの返り値を変更すると警告が出るようになり、3.6以降ではエラーとなる予定。その場合には以下のように指定
+＊matplotlib 3.3以降では、plt.get_cmapの戻り値を変更すると警告が出るようになり、3.6以降ではエラーとなる予定。その場合には以下のように指定
 <pre>
 import matplotlib as mpl
 cmap = mpl.cm.get_cmap("bwr").copy() # 色テーブル取得
@@ -1595,6 +1596,8 @@ cmap.set_under('gray') # 下限を下回った場合に灰色
 cmap.set_over('w') # 上限を超えた場合に白
 plt.contourf(X, Y, Z, cmap=cmap, vmin=3, vmax=9)
 </pre>
+cmapの取得は次のように行なってもよい
+<pre>cmap = copy.copy(mpl.cm.get_cmap("bwr"))</pre>
 </li>
 </ul>
 </div>
@@ -1641,7 +1644,23 @@ plt.contourf(x軸上の位置, y軸上の位置, z軸データ,  norm=LogNorm())
 </pre>
 </div>
 
-<h4><div class="headline2" id="graph_9_8">欠損値を灰色の陰影で塗り潰す</div></h4>
+<h4><div class="headline2" id="graph_9_8">陰影を描く範囲をデータ範囲とは異なるものにする</div></h4>
+<div class="text1">
+levelsオプションで指定した範囲をデータ範囲より狭くすると範囲外は描かれないため、levelsオプションではデータ範囲をvmin、vmaxオプションで陰影を描く範囲を指定する。
+<pre>
+import matplotlib as mpl
+import copy
+levels = [-40, -20, -18, -16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 40]
+cmap = mpl.cm.get_cmap("bwr").copy() # 色テーブル取得
+cmap.set_under('gray') # 下限を下回った場合に灰色
+cmap.set_over('w') # 上限を超えた場合に白
+plt.contourf(X, Y, Z, cmap=cmap, vmin=-20, vmax=20)
+</pre>
+データ範囲が-40から40、陰影を描く範囲を-20から20とする場合
+</div>
+
+
+<h4><div class="headline2" id="graph_9_9">欠損値を灰色の陰影で塗り潰す</div></h4>
 <div class="text1">
 z軸データ（d）の０番目の軸のデータの一部（０からmaskoutの１つ前まで）を欠損にした場合
 <pre>
@@ -1663,7 +1682,7 @@ patches.Rectangleの引数は、開始点の座標、横幅、高さの順<br />
 欠損値のデータは透明になるので、背景色を灰色にすると欠損値が灰色で塗り潰される（描く順を最背面にするためzorder=-10を指定）<br />
 </div>
 
-<h4><div class="headline2" id="graph_9_9">欠損値の周辺を滑らかにしない</div></h4>
+<h4><div class="headline2" id="graph_9_10">欠損値の周辺を滑らかにしない</div></h4>
 <div class="text1">
 デフォルトでは欠損値の周辺が滑らかに補完される。corner_mask=Falseとすることで角張った形に変わる。
 <pre>
@@ -2806,7 +2825,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/11/20</p>
+<p>最終更新日：2022/11/23</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
