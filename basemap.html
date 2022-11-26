@@ -779,7 +779,7 @@ fig = plt.figure() # プロット領域の作成
 m = Basemap(projection='npstere', lon_0=180, boundinglat=20) # 北極中心の極投影図法
 
 # 緯度・経度座標の準備（単位は度）
-delta = 360./(nlons-1)
+delta = 360. / (nlons - 1)
 lons = (delta * np.indices((nlats, nlons))[1, :, :]) # 東経0度から2.5度刻み
 lats = (90. - delta * np.indices((nlats, nlons))[0, :, :]) # 北緯90度から2.5度刻み
 x, y = m(lons, lats) # 図法の経度、緯度に変換する
@@ -796,7 +796,7 @@ m.contour(x, y, data, clevs, linewidths=0.8, colors='k') # 等高線を描く
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/11/20</p>
+<p>最終更新日：2022/11/26</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
