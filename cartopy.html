@@ -94,7 +94,7 @@
 
 <small><a href="#top">[top]</a></small> <br />
 <br />
-<hr width="105%" />
+<hr />
 <br />
 
 <!-- ここから本文 -->
@@ -535,6 +535,8 @@ ax.contour(経度データ, 緯度データ, 等高線のデータ)
 <ul class="list1">
 <li>例：<a href="#cartopy_3_1">作成した経度・緯度データ</a>と２次元の等高線データ(d)で作図
 <pre>ax.contour(x, y, d)</pre></li>
+<li>例：<a href="#cartopy_2_1">正距円筒図法</a>以外で作図する場合
+<pre>ax.contour(x, y, d, transform=ccrs.PlateCarree())</pre></li>
 <li>例：等高線の幅を細くする
 <pre>ax.contour(x, y, d, linewidths=0.8)</pre>
 デフォルト値：1<br />
@@ -623,6 +625,8 @@ ax.contourf(経度データ, 緯度データ, 陰影のデータ)
 <ul class="list1">
 <li>例：<a href="#cartopy_3_1">作成した経度・緯度データ</a>と２次元の等高線データ(d)で作図
 <pre>ax.contourf(x, y, d)</pre></li>
+<li>例：<a href="#cartopy_2_1">正距円筒図法</a>以外で作図する場合
+<pre>ax.contourf(x, y, d, transform=ccrs.PlateCarree())</pre></li>
 <li>例：陰影を描く値を指定する
 <pre>ax.contourf(x, y, d, clevs, levels=[0, 1, 2, 3, 4, 5, 6])</pre>
 等高線は0から5まで1毎に描く（levelsで指定、描く値より１大きく設定する）</li><br />
@@ -654,6 +658,10 @@ ax.barbs(経度データ, 緯度データ, 東西風データ, 南北風デー�
 <li>例：２次元データlons, lats, u, vから矢羽をプロット
 <pre>
 ax.barbs(x, y, u, v)
+</pre></li>
+<li>例：<a href="#cartopy_2_1">正距円筒図法</a>以外で作図する場合
+<pre>
+ax.barbs(x, y, u, v, transform=ccrs.PlateCarree())
 </pre></li>
 <li>例：矢羽を6おきにプロット
 <pre>
@@ -688,6 +696,10 @@ ax.quiver(経度データ, 緯度データ, 東西風データ, 南北風デー�
 <li>例：２次元データlons, lats, u, vから矢印をプロット
 <pre>
 ax.quiver(x, y, u, v)
+</pre></li>
+<li>例：<a href="#cartopy_2_1">正距円筒図法</a>以外で作図する場合
+<pre>
+ax.quiver(x, y, u, v, transform=ccrs.PlateCarree())
 </pre></li>
 <li>例：矢印を6おきにプロット
 <pre>
@@ -725,7 +737,8 @@ ax.quiverkey(Q, 0.97, -0.04, 10,  '10', color='k', labelpos='S', labelsep=0.03)
 </pre>
 縦軸範囲の-0.04の位置に描くと図枠の下に表示される<br />
 凡例の文字を凡例の矢印の下に付けるため、labelpos='S'とした<br />
-labelpos='S'の場合、labelsepの値は大きめに取る
+labelpos='S'の場合、labelsepの値は大きめに取る<br />
+＊plt.savefigで保存する場合、bbox_inches='tight'を使用すると凡例が入らないので注意
 </li><br />
 <li>例：矢印の凡例に付ける文字を大きくする
 <pre>
@@ -764,6 +777,12 @@ ax.text(x, y, "表示するテキスト", fontsize=9)
 <pre>
 ax.text(x, y, "表示するテキスト", color='r')
 </pre></li>
+<li>例：図枠に対する位置で指定する
+<pre>
+ax.text(x, y, "表示するテキスト", color='r', transform=ax.transAxes)
+</pre>
+図枠の左下を(0, 0)、右上を(1, 1)とした位置を指定
+</li>
 </ul>
 </div>
 
@@ -779,9 +798,13 @@ ax.plot(x, y, marker="o", color="w")
 </pre>
 マーカーの名前は<a href="./options.html#marker">指定可能なマーカーの一覧</a>参照<br />
 色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li><br />
+<li>例：<a href="#cartopy_2_1">正距円筒図法</a>以外で作図する場合
+<pre>
+ax.plot(x, y, marker="o", color="w", transform=ccrs.PlateCarree())
+</pre></li>
 <li>例：マーカーをマゼンタの三角にする場合
 <pre>
-ax.plot(x, y, marker="m", color="^")
+ax.plot(x, y,  color="m", marker="^")
 </pre></li>
 <li>例：マーカーを水色の丸にする場合
 <pre>
@@ -897,11 +920,11 @@ for pref in prefs:
 </div>
 
 <small><a href="#top">[top]</a></small> <br />
-<hr width="105%" />
+<hr />
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/11/20</p>
+<p>最終更新日：2022/12/11</p>
 <p>Copyright (C) 2019-2022, Yousuke Yamashita</p>
 </footer>
 </html>
