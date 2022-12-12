@@ -49,6 +49,7 @@
       <li><a href="#cartopy_1_8">cartopyで国境線を描く</a></li>
       <li><a href="#cartopy_1_9">cartopyで河川を描く</a></li>
       <li><a href="#cartopy_1_10">cartopyで海岸線を描く際のWarningを消す</a></li>
+      <li><a href="#cartopy_1_11">cartopyの描画速度を速くする</a></li>
     </ul>
   </li></ul>
   <!-- cartopyの地図 -->
@@ -349,6 +350,14 @@ ShapelyDeprecationWarningが出る場合
 <pre>
 import warnings
 warnings.filterwarnings('ignore')
+</pre>
+</div>
+
+<h4><div class="headline2" id="cartopy_1_11">cartopyの描画速度を速くする</div></h4>
+<div class="text1">
+cartopy v0.20で、スレッドセーフが保証されている場合には、次のように環境変数を設定することで描画速度が速くなることがある
+<pre>
+% export PYPROJ_GLOBAL_CONTEXT=ON
 </pre>
 </div>
 
