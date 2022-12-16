@@ -2223,23 +2223,40 @@ cbar.ax.yaxis.set_minor_locator(ticker.目盛り線の設定) # 縦方向カラ�
 <ul class="list1">
 <li>例：縦方向カラーバーの大目盛り、小目盛りを自動設定
 <pre>
+cbar = plt.colorbar(オプション)
 cbar.ax.yaxis.set_major_locator(ticker.AutoLocator()) # 大目盛り
 cbar.ax.yaxis.set_minor_locator(ticker.AutoMinorLocator()) # 小目盛り
 </pre>
 </li>
 <li>例：横方向カラーバーの大目盛り、小目盛りを自動設定
 <pre>
+cbar = plt.colorbar(オプション)
 cbar.ax.xaxis.set_major_locator(ticker.AutoLocator()) # 大目盛り
 cbar.ax.xaxis.set_minor_locator(ticker.AutoMinorLocator()) # 小目盛り
 </pre>
 </li>
-
-<li>例：縦方向カラーバーの大目盛り、小目盛りの値を指定する
+<li>例：縦方向カラーバーの大目盛り、小目盛りの値を任意の値に設定する
 <pre>
+cbar = plt.colorbar(オプション)
 cbar.ax.yaxis.set_major_locator(ticker.FixedLocator([1, 5, 10, 50, 100])) # 大目盛り
 cbar.ax.yaxis.set_minor_locator(ticker.FixedLocator(np.arange(1, 100, 1)))) # 小目盛り
 </pre>
-大目盛りは、1、5、10、50、100、小目盛りは1から99まで1毎</li><br />
+大目盛りは、1、5、10、50、100、小目盛りは1から99まで1毎<br />
+横方向の場合は、yaxisではなくxaxisを変更する</li><br />
+<li>例：横方向カラーバーの大目盛りに任意の値を設定し、小目盛りを描かない
+<pre>
+cbar = plt.colorbar(オプション)
+cbar.ax.xaxis.set_major_locator(ticker.FixedLocator([3, 5, 8, 10, 15])) # 大目盛り
+cbar.ax.xaxis.set_minor_locator(ticker.NullLocator()) # 小目盛り
+</pre>
+</li>
+<li>例：colorbarを描く際に大目盛りの値を設定する方法
+<pre>
+cbar = plt.colorbar(オプション, ticks=[3, 5, 8, 10, 15])
+cbar.ax.xaxis.set_minor_locator(ticker.NullLocator()) # 小目盛り
+</pre>
+colorbarのオプションticksには、np.arrayやリストなどを与えることができる
+</li><br />
 </ul>
 </div>
 
@@ -2825,7 +2842,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/11/23</p>
+<p>最終更新日：2022/12/16</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
