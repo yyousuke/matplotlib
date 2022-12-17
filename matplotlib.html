@@ -419,7 +419,6 @@ sys.path.append(os.pardir)
 </div>
 
 
-
 <!-- スクリプトの基本 -->
 <h3><div class="headline1" id="matplotlib_2">matplotlib作図スクリプトの基本</div></h3>
 <h4><div class="headline2" id="matplotlib_2_1">python3スクリプト</div></h4>
@@ -626,7 +625,6 @@ py39の部分はpythonのバージョンによって変わる</li><br />
 （%はコマンドプロンプト）</li>
 </ul>
 </div>
-
 
 
 <!-- グラフの基本 -->
@@ -1176,7 +1174,6 @@ plt.hist(データ)
 </div>
 
 
-
 <!-- 散布図 -->
 <h3><div class="headline1" id="graph_5">散布図</div></h3>
 <h4><div class="headline2" id="graph_5_1">散布図を描く</div></h4>
@@ -1284,7 +1281,6 @@ np.linspace(最小値, 最大値, データ数)を使い、設定したデータ
 name = "{s1:s}{f1:4.3f}{s2:s}{f2:4.3f}".format(s1="y = ", f1=a, s2="x + ", f2=b)
 plt.text(テキストのx座標, テキストのy座標, name, fontsize=14, color='k') # 回帰式を表示</pre>
 </div>
-
 
 
 <!-- 矢羽 -->
@@ -1696,6 +1692,7 @@ plt.contourf(x軸上の位置, y軸上の位置, z軸データ,  corner_mask=Fal
 </pre>
 </div>
 
+
 <!-- 箱ひげ図 -->
 <h3><div class="headline1" id="graph_10">箱ひげ図</div></h3>
 <h4><div class="headline2" id="graph_10_1">箱ひげ図を描く</div></h4>
@@ -1842,7 +1839,6 @@ plt.boxplot(データ2, positions=np.arange(1.2, n+1, 1))
 </div>
 
 
-
 <!-- バイオリンプロット -->
 <h3><div class="headline1" id="graph_11">バイオリンプロット</div></h3>
 <h4><div class="headline2" id="graph_11_1">バイオリンプロットを描く</div></h4>
@@ -1924,7 +1920,6 @@ for partname, edgecolor, linestyle, linewidth in zip(partnames, edgecolors, line
 </div>
 
 
-
 <!-- 流線関数 -->
 <h3><div class="headline1" id="graph_12">流線関数</div></h3>
 <h4><div class="headline2" id="graph_12_1">流線関数を描く</div></h4>
@@ -1979,7 +1974,6 @@ ax.streamplot(X, Y, U, V, color=spd, cmap=plt.cm.autumn)
 </pre></li>
 </ul>
 </div>
-
 
 
 <!-- 凡例 -->
@@ -2109,7 +2103,6 @@ fig, ax = plt.subplots()
 ax.legend(custom_lines, ['Low', 'Medium', 'High']) # 青、オレンジ、赤の順に並ぶ
 </pre>
 </div> 
-
 
 
 <!-- カラーバー -->
@@ -2301,7 +2294,6 @@ cbar.ax.set_xticklabels(cs, ["lab1", "lab2", "lab3"])</pre>
 </div>
 
 
-
 <!-- テキスト -->
 <h3><div class="headline1" id="text_1">テキスト</div></h3>
 <h4><div class="headline2" id="text_1_1">テキストをプロットする</div></h4>
@@ -2349,7 +2341,6 @@ ax.text()でも同じ（axは<a href="#graph_1_2">fig.add_subplot</a>の戻り�
 <pre>plt.legend(xloc, yloc, rotation=70)</pre></li>
 </ul>
 </div>
-
 
 
 <!-- アニメーション -->
@@ -2426,7 +2417,6 @@ for t in np.arange(開始, 終了, 間隔):
 anim = animation.ArtistAnimation(fig, imgs)
 </pre>
 </div>
-
 
 
 <!-- 軸の体裁 -->
