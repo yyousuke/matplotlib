@@ -189,13 +189,14 @@
       <li><a href="#graph_9_1">陰影を描く</a></li>
       <li><a href="#graph_9_2">陰影の色を値に応じて変える</a></li>
       <li><a href="#graph_9_3">陰影を付ける間隔を変える</a></li> 
-      <li><a href="#graph_9_4">陰影を付ける範囲を変更する</a></li>
-      <li><a href="#graph_9_5">陰影にカラーバーを付ける</a></li>
-      <li><a href="#graph_9_6">陰影にハッチを付ける</a></li>
-      <li><a href="#graph_9_7">陰影を描く値をログスケールにする</a></li>
-      <li><a href="#graph_9_8">陰影を描く範囲をデータ範囲とは異なるものにする</a></li>
-      <li><a href="#graph_9_9">欠損値を灰色の陰影で塗り潰す</a></li>
-      <li><a href="#graph_9_10">欠損値の周辺を滑らかにしない</a></li>
+      <li><a href="#graph_9_4">陰影を変える個数を指定する</a></li> 
+      <li><a href="#graph_9_5">陰影を付ける範囲を変更する</a></li>
+      <li><a href="#graph_9_6">陰影にカラーバーを付ける</a></li>
+      <li><a href="#graph_9_7">陰影にハッチを付ける</a></li>
+      <li><a href="#graph_9_8">陰影を描く値をログスケールにする</a></li>
+      <li><a href="#graph_9_9">陰影を描く範囲をデータ範囲とは異なるものにする</a></li>
+      <li><a href="#graph_9_10">欠損値を灰色の陰影で塗り潰す</a></li>
+      <li><a href="#graph_9_11">欠損値の周辺を滑らかにしない</a></li>
     </ul>
   </li></ul>
 <!-- 箱ひげ図 -->
@@ -1574,7 +1575,13 @@ ZがNumpyのndarrayの場合。最小値よりも小さい最大の整数をnp.f
 </ul>
 </div>
 
-<h4><div class="headline2" id="graph_9_4">陰影を付ける範囲を変更する</div></h4>
+<h4><div class="headline2" id="graph_9_4">陰影を変える個数を指定する</div></h4>
+<div class="text1">
+levelsオプションに陰影を変える個数を与える
+<pre>plt.contourf(x軸上の位置, y軸上の位置, z軸データ, levels=陰影の色を変える個数)</pre>
+</div>
+
+<h4><div class="headline2" id="graph_9_5">陰影を付ける範囲を変更する</div></h4>
 <div class="text1">
 陰影のカラースケールの基準となる下限、上限は、それぞれvmin、vmaxオプションで指定
 <pre>plt.contourf(x軸上の位置, y軸上の位置, z軸データ, vmin=数字, vmax=数字)</pre>
@@ -1598,11 +1605,11 @@ plt.contourf(X, Y, Z, cmap=cmap, vmin=3, vmax=9)
 </pre>
 cmapの取得は次のように行なってもよい
 <pre>cmap = copy.copy(mpl.cm.get_cmap("bwr"))</pre>
-</li>
+</li><br />
 </ul>
 </div>
 
-<h4><div class="headline2" id="graph_9_5">陰影にカラーバーを付ける</div></h4>
+<h4><div class="headline2" id="graph_9_6">陰影にカラーバーを付ける</div></h4>
 <div class="text1">
 <pre>plt.colorbar()</pre>
 デフォルトでは縦方向のカラーバーが右側に付けられる
@@ -1620,7 +1627,7 @@ plt.colorbarの戻り値cbarを使いラベルを付ける</li><br />
 カラーバーの調整方法については、<a href="#colorbar_1">カラーバー</a>参照<br />
 </div>
 
-<h4><div class="headline2" id="graph_9_6">陰影にハッチを付ける</div></h4>
+<h4><div class="headline2" id="graph_9_7">陰影にハッチを付ける</div></h4>
 <div class="text1">
 hatchesオプションを使う
 <pre>plt.contourf(x軸上の位置, y軸上の位置, z軸データ, hatches='ハッチパターンのリスト')</pre>
@@ -1635,7 +1642,7 @@ levelsは陰影を描く値、cmapは色テーブル（<a href="#graph_9_4">陰�
 </ul>
 </div>
 
-<h4><div class="headline2" id="graph_9_7">陰影を描く値をログスケールにする</div></h4>
+<h4><div class="headline2" id="graph_9_8">陰影を描く値をログスケールにする</div></h4>
 <div class="text1">
 matplotlib.colorsのLogNormを使う
 <pre>
@@ -1644,9 +1651,9 @@ plt.contourf(x軸上の位置, y軸上の位置, z軸データ,  norm=LogNorm())
 </pre>
 </div>
 
-<h4><div class="headline2" id="graph_9_8">陰影を描く範囲をデータ範囲とは異なるものにする</div></h4>
+<h4><div class="headline2" id="graph_9_9">陰影を描く範囲をデータ範囲とは異なるものにする</div></h4>
 <div class="text1">
-levelsオプションで指定した範囲をデータ範囲より狭くすると範囲外は描かれないため、levelsオプションではデータ範囲をvmin、vmaxオプションで陰影を描く範囲を指定する。
+levelsオプションで指定した範囲をデータ範囲より狭くすると範囲外は描かれないため、levelsオプションではデータ範囲を、vmin、vmaxオプションで陰影を描く範囲を指定する。
 <pre>
 import matplotlib as mpl
 import copy
@@ -1654,13 +1661,12 @@ levels = [-40, -20, -18, -16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 
 cmap = mpl.cm.get_cmap("bwr").copy() # 色テーブル取得
 cmap.set_under('gray') # 下限を下回った場合に灰色
 cmap.set_over('w') # 上限を超えた場合に白
-plt.contourf(X, Y, Z, cmap=cmap, vmin=-20, vmax=20)
+plt.contourf(X, Y, Z, cmap=cmap, levels=levels, vmin=-20, vmax=20)
 </pre>
 データ範囲が-40から40、陰影を描く範囲を-20から20とする場合
 </div>
 
-
-<h4><div class="headline2" id="graph_9_9">欠損値を灰色の陰影で塗り潰す</div></h4>
+<h4><div class="headline2" id="graph_9_10">欠損値を灰色の陰影で塗り潰す</div></h4>
 <div class="text1">
 z軸データ（d）の０番目の軸のデータの一部（０からmaskoutの１つ前まで）を欠損にした場合
 <pre>
@@ -1682,7 +1688,7 @@ patches.Rectangleの引数は、開始点の座標、横幅、高さの順<br />
 欠損値のデータは透明になるので、背景色を灰色にすると欠損値が灰色で塗り潰される（描く順を最背面にするためzorder=-10を指定）<br />
 </div>
 
-<h4><div class="headline2" id="graph_9_10">欠損値の周辺を滑らかにしない</div></h4>
+<h4><div class="headline2" id="graph_9_11">欠損値の周辺を滑らかにしない</div></h4>
 <div class="text1">
 デフォルトでは欠損値の周辺が滑らかに補完される。corner_mask=Falseとすることで角張った形に変わる。
 <pre>
@@ -2842,7 +2848,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/12/16</p>
+<p>最終更新日：2022/12/17</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
