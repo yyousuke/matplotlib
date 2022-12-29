@@ -1516,7 +1516,7 @@ cs.clabel(cs.levels[::2], fmt="%d", fontsize=12) # ４の倍数の値にラベ�
 <pre>
 # levelsに4の倍数をリストとして入れる
 levels = range(math.floor(Z.min() - math.fmod(Z.min(), 4)), math.ceil(Z.max()) + 1, 4)
-cs = plt.contour(X, Y, Z, colors='k', levels=levels, linewidths=[1.2, 0.8, 0.8, 0.8, 0.8]) # 4hPaの等高線を描く
+cs = plt.contour(X, Y, Z, colors='k', levels=levels, linewidths=[1.2, 0.8, 0.8, 0.8, 0.8]) # 4 hPaの等高線を描く
 cs.clabel(cs.levels[::5], fmt="%d", fontsize=12) # 5飛ばし（20 hPa毎）にラベルを付ける
 </pre></li>
 </ul>
@@ -1999,7 +1999,7 @@ ax.legend()でも同じ（axは<a href="#graph_1_2">fig.add_subplot</a>の戻り
 <div class="text1">
 <pre>plt.legend(loc='upper left', bbox_to_anchor=(1.05, 1.1), borderaxespad=0)</pre>
 図全体の右側、上側にアンカーを設定：bbox_to_anchor=(1.05, 1.1)<br />
-凡例の左上がちょうどアンカーに重なるようにする：loc='upper left'、borderaxespad=0
+凡例の左上がちょうどアンカーの位置にくるように、loc='upper left'、borderaxespad=0とした
 </div>
 
 <h4><div class="headline2" id="legend_1_4">凡例の枠線を丸くしない</div></h4>
@@ -2838,7 +2838,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/12/17</p>
+<p>最終更新日：2022/12/29</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
