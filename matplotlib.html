@@ -1065,7 +1065,9 @@ plt.bar(x軸のデータ, y軸のデータ, yerr=y軸のエラーバーデータ
 <div class="text1">
 hatchオプションを使う
 <pre>plt.bar(x軸のデータ, y軸のデータ, alpha=1.0, hatch='ハッチのパターン', fill=None)</pre>
-パターンは<a href="./options.html#hatch">ハッチのパターン</a>参照
+パターンは<a href="./options.html#hatch">ハッチのパターン</a>参照<br />
+棒グラフに色を付ける場合
+<pre>plt.bar(x軸のデータ, y軸のデータ, alpha=1.0, hatch='ハッチのパターン', fill=True, color='色')</pre>
 </div>
 
 <h4><div class="headline2" id="graph_3_14">棒グラフの色を正負で塗り分ける</div></h4>
@@ -1098,7 +1100,7 @@ ax.hist()でも同じ（axは<a href="#graph_1_2">fig.add_subplot</a>の戻り�
 
 <h4><div class="headline2" id="graph_4_4">ヒストグラムを半透明にする</div></h4>
 <div class="text1">
-<pre>plt.hist(データ, alpha=数字</pre>
+<pre>plt.hist(データ, alpha=数字)</pre>
 0〜1の範囲で指定する（0で透明、1で不透明）、デフォルト値：1.0
 </div>
 
@@ -2838,7 +2840,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2022/12/29</p>
+<p>最終更新日：2022/12/30</p>
 <p>Copyright (C) 2018-2022, Yousuke Yamashita</p>
 </footer>
 </html>
