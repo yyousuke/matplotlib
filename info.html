@@ -35,7 +35,13 @@ cartopyでは、最初に地図を描く際に地理情報データを取得し�
 <h3><div class="headline-scroll" id="20210731">Basemapで南極大陸を描く際の不具合について（2021/07/31）</div></h3>
 <div class="text1">
 Basemap1.2.2で行われた更新後に、一部の図法で南極大陸が描かれないか東半球側にしか描かれない不具合が発生しています。
-現在確認しているものは、正距円筒図法、モルワイデ図法、ロビンソン図法、ランベルト正積円筒図法、ミラー図法です。なお、正射投影図法、ランベルト正角円錐図法、極投影図法、正距方位図法については問題なく作図できています。
+現在確認しているものは、正距円筒図法、モルワイデ図法、ロビンソン図法、ランベルト正積円筒図法、ミラー図法です。なお、正射投影図法、ランベルト正角円錐図法、極投影図法、正距方位図法については問題なく作図できています。<br />
+<br />
+回避するためには、次のように経度の中心を-180&deg;とします。2023/01現在、東経／西経180&deg;のみ正常に作図できます。
+<pre>
+m = Basemap(projection='cyl', lon_0=-180)
+</pre>
+（正距円筒図法の場合）
 </div>
 <br />
 <br />
@@ -46,7 +52,7 @@ Basemap1.2.2で行われた更新後に、一部の図法で南極大陸が描�
 「気象データ解析のためのmatplotlibの使い⽅」の<a href="./met_sample.zip" target="_blank">サンプルプログラム</a>では、気象庁ホームページのデータをスクレイピングしていることから、ホームページリニューアル後に動作確認を行いました。スクレイピングしているアメダスデータのリンクに変更がないため、現時点でサンプルプログラムが正常に動作することを確認できました。<br />
 一方、imshow_sample2.pyに限っては、ひまわりの可視・赤外画像をダウンロードしており、リニューアルに伴うリンク切れにより、現在は正常にダウンロードを行うことができません。
 <br />
-<font color="red">＊2021/09/03版時点で地図データ取得時の不具合が解消されました</font>
+<span style="COLOR:red">＊2021/09/03版時点で地図データ取得時の不具合が解消されました</span>
 </div>
 <br />
 <br />
@@ -71,7 +77,7 @@ export PROJ_LIB=/opt/local/lib/proj7/share/proj
 <h3><div class="headline-scroll" id="20200725">Basemapをインポートできない不具合の解決方法（2020/07/25）</div></h3>
 <div class="text1">
 2020年7月20日頃のアップデートに伴い、MacPortsでインストールされるmatplotlibがバージョン3.2.2から3.3.0になりました。それに伴いmatplotlib.cbookではdedent関数が削除されました。
-他方、Basemapはバージョン1.2.1のまま更新されないので、mpl_toolkits.basemapをインポートしようとした際に、存在しないdedent関数を呼び出そうとしてエラーが発生します。このエラーはBasemap使用時に不可避な部分で発生しており、<font color="red">既にアップデートが適用されてしまった場合には、修正を行わないとBasemapが使用できません</font>。<br />
+他方、Basemapはバージョン1.2.1のまま更新されないので、mpl_toolkits.basemapをインポートしようとした際に、存在しないdedent関数を呼び出そうとしてエラーが発生します。このエラーはBasemap使用時に不可避な部分で発生しており、<span style="COLOR:red">既にアップデートが適用されてしまった場合には、修正を行わないとBasemapが使用できません</span>。<br />
 以下は、pythonバージョン3.8の場合に出力されるエラーの内容です。バージョン3.6や3.7でも同様のエラーが発生します。
 <pre>
 File"/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/mpl_toolkits/basemap/__init__.py", line 50, in &lt;module&gt;
@@ -109,7 +115,7 @@ py38-matplotlib @3.2.2_0+cairo+webagg (active)
 py38-matplotlib @3.3.0_1+cairo+webagg
 </pre>
 </li></ul>
-<font color="red">＊Basemapバージョン1.2.2で修正されました</font>
+<span style="COLOR:red">＊Basemapバージョン1.2.2で修正されました</span>
 </div>
 <br />
 <br />
@@ -127,7 +133,7 @@ AttributeError: 'DataFrame' object has no attribute 'ix'
 ＊DataFrameで.ixを利用している場合、<a href="matplotlib.html#matplotlib_2_3">スクリプト実行時のWarning表示を消す</a>に記載された方法で、.locか.ilocに変更する必要があります。<br />
 サンプルプログラムやドキュメントの該当箇所の更新は、しばらくお待ちください。<br />
 <br />
-<font color="red">＊2020/02/23版のサンプルプログラムで対応しました</font>
+<span style="COLOR:red">＊2020/02/23版のサンプルプログラムで対応しました</span>
 </div>
 <br />
 <br />
@@ -139,7 +145,7 @@ Basemap1.2.1のコード（MacPortsで導入したpython3.8の場合、/opt/loca
 <pre>
 b = np.where(np.isposinf(np.where(np.isneginf(b),-1.e20,b)),1.e20,b)
 </pre>
-<font color="red">＊Basemapバージョン1.2.2で修正されました</font>
+<span style="COLOR:red">＊Basemapバージョン1.2.2で修正されました</span>
 </div>
 <br />
 <br />
@@ -153,7 +159,7 @@ Segmentation fault: 11
 </pre>
 現在のところ、lon_0の範囲を-90から45までにするしか回避方法はありません。<br />
 <br />
-<font color="red">＊Basemapバージョン1.2.2で修正されました</font>
+<span style="COLOR:red">＊Basemapバージョン1.2.2で修正されました</span>
 </div>
 <br />
 <br />
@@ -241,7 +247,7 @@ tri=Trueオプションを使わないように書き換える（この場合に
 </li>
 </ul></li>
 </ul>
-<font color="red">＊basemap1.2.0で不具合が解消された（2019/11/08）</font>
+<span style="COLOR:red">＊basemap1.2.0で不具合が解消された（2019/11/08）</span>
 </div>
 <br />
 <br />
@@ -282,7 +288,7 @@ epsgf = open(os.path.join(pyproj_datadir,'epsg'))
 </pre>
 </ul></li>
 </ul>
-<font color="red">＊basemap1.2.0で不具合が解消された（2019/11/08）</font>
+<span style="COLOR:red">＊basemap1.2.0で不具合が解消された（2019/11/08）</span>
 </div>
 <br />
 <br />
@@ -294,13 +300,13 @@ MacPortを使い2018/10/18現在のmatplotlib最新版（3.0.0）に更新した
 <p>ファイル：/opt/local/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mpl_toolkits/basemap/__init__.py</p><br />
 <pre>
 17行目<br />
-# from matplotlib.cbook <font color="red">import is_scalar</font>, dedent <br />
-from matplotlib.cbook <font color="red">import is_scalar_or_string</font>, dedent<br />
+# from matplotlib.cbook <span style="COLOR:red">import is_scalar</span>, dedent <br />
+from matplotlib.cbook <span style="COLOR:red">import is_scalar_or_string</span>, dedent<br />
 4987行目<br />
-# elif masked and <font color="red">is_scalar(masked)</font>:<br />
-elif masked and <font color="red">is_scalar_or_string(masked)</font>:<br />
+# elif masked and <span style="COLOR:red">is_scalar(masked)</span>:<br />
+elif masked and <span style="COLOR:red">is_scalar_or_string(masked)</span>:<br />
 </pre>
-＊<font color="red">basemap1.2.0で不具合が修正された（2019/11/08）</font>
+＊<span style="COLOR:red">basemap1.2.0で不具合が修正された（2019/11/08）</span>
 </div>
 <br />
 <br />
@@ -308,11 +314,11 @@ elif masked and <font color="red">is_scalar_or_string(masked)</font>:<br />
 <br />
 <br />
 <small><a href="#top">[top]</a></small> <br />
-<hr width="105%"/>
+<hr />
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/01/01</p>
+<p>最終更新日：2023/01/06</p>
 <p>Copyright (C) 2018-2023, Yousuke Yamashita</p>
 </footer>
 </html>
