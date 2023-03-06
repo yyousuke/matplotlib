@@ -301,8 +301,8 @@ dateutil.relativedeltaを使うと加算・減算が可能
 <pre>
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-time = datetime(2021, 9, 4, 12, 0, 0)
-time_new = time + relativedelta(months=1)
+time_cur = datetime(2021, 9, 4, 12, 0, 0)
+time_new = time_cur + relativedelta(months=1)
 </pre>
 9/4 12時から1ヶ月後の10/4 12時になる
 </li><br />
@@ -310,8 +310,8 @@ time_new = time + relativedelta(months=1)
 <pre>
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-time = datetime(2021, 9, 4, 12, 0, 0)
-time_new = time + relativedelta(years=2)
+time_cur = datetime(2021, 9, 4, 12, 0, 0)
+time_new = time_cur + relativedelta(years=2)
 </pre>
 2021/9/4 12時から1年後の2022/9/4 12時になる
 </li><br />
@@ -319,8 +319,8 @@ time_new = time + relativedelta(years=2)
 <pre>
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-time = datetime(2021, 9, 4, 12, 0, 0)
-time_new = time + relativedelta(years=4)
+time_cur = datetime(2021, 9, 4, 12, 0, 0)
+time_new = time_cur + relativedelta(years=4)
 </pre>
 閏年をまたいでも、4年後の同じ日の2025/9/4 12時になる
 </li>
@@ -335,8 +335,8 @@ dateutil.relativedeltaの１ヶ月後の計算を応用して月末の日を計�
 <pre>
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-time = datetime(2021, 8, 1, 0, 0, 0)
-time_new = time + relativedelta(months=1) - relativedelta(days=1)
+time_cur = datetime(2021, 8, 1, 0, 0, 0)
+time_new = time_cur + relativedelta(months=1) - relativedelta(days=1)
 </pre>
 </div>
 <br />
@@ -1147,7 +1147,7 @@ print(str(res.returncode)) # 終了ステータスの表示
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/01/01</p>
+<p>最終更新日：2023/03/06</p>
 <p>Copyright (C) 2021-2023, Yousuke Yamashita</p>
 </footer>
 </html>
