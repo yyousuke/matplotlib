@@ -160,7 +160,11 @@ CSV（Comma-Separated Values）は、カンマ区切りのテキストデータ
 pandasのread_csvを用いる方法
 <pre>import pandas as pd
 df = pd.read_csv("ファイル名")</pre>
+<br />
+読み込み時にUnicodeDecodeErrorが出る場合（UTF-8でない場合にエラーとなる）
+<pre>df = pd.read_csv("ファイル名", encoding='shift_jis')</pre>
 </div>
+
 
 <h4><div class="headline2" id="csv_1_3">CSVファイルの時刻処理</div></h4>
 <div class="text1">
@@ -200,6 +204,9 @@ namesに与えるリストの要素数は、データの列数に合わせる
 <li>例：１〜３行目にデータ以外のもの（データの説明など）が入っており、４行目からデータが入っている場合
 <pre>df = pd.read_csv("ファイル名", skiprows=[0, 1, 2], header=None)</pre>
 </li>
+<li>例：最初から50行を読み飛ばしたい場合
+<pre>df = pd.read_csv("ファイル名", skiprows=50)</pre>
+</li>
 </ul>
 </div>
 
@@ -233,6 +240,12 @@ df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0], date_parser=
 <h4><div class="headline2" id="csv_1_6">CSVファイルの列処理</div></h4>
 <div class="text1">
 <ul class="list1">
+<li>例：読み込む列を指定する
+<pre>
+df = pd.read_csv("ファイル名", usecols=[0, 3])
+</pre>
+1列目と4列目を読み込む
+</li><br />
 <li>例：経度データを−180〜180度ではなく0〜360度に
 <pre>
 df = pd.read_csv("ファイル名", オプション)
@@ -812,7 +825,7 @@ d = gt['変数名'][:, :, :] # 変数名に対応するデータ取得（次元�
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/04/08</p>
+<p>最終更新日：2023/04/19</p>
 <p>Copyright (C) 2018-2023, Yousuke Yamashita</p>
 </footer>
 </html>
