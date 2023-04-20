@@ -318,8 +318,9 @@
       <li><a href="#axis_1_14">図の時間軸の表示を調整する</a></li>
       <li><a href="#axis_1_15">軸の上下、左右を逆転させる</a></li>
       <li><a href="#axis_1_16">y軸をログスケールにした時にラベルの数字を整数表示する</a></li>
-      <li><a href="#axis_1_17">y軸をパーセント表示にする</a></li>
-      <li><a href="#axis_1_18">軸の体裁を一括設定する</a></li>
+      <li><a href="#axis_1_17">y軸の目盛り線ラベルをパーセント表示にする</a></li>
+      <li><a href="#axis_1_18">y軸の目盛り線ラベルを指数表記にする</a></li>
+      <li><a href="#axis_1_19">軸の体裁を一括設定する</a></li>
     </ul>
   </li></ul>
   <!-- 図の体裁 -->
@@ -2592,7 +2593,10 @@ plt.rcParams['ytick.color'] = 'r'  # y軸を赤色</pre>
 <h4><div class="headline2" id="axis_1_14">図の時間軸の表示を調整する</div></h4>
 <div class="text1">
 matplotlib.datesを使い時刻表記を変える
-<pre>ax.xaxis.set_major_formatter(mdates.DateFormatter('時刻表記の書式'))</pre>
+<pre>
+import matplotlib.dates as mdate
+ax.xaxis.set_major_formatter(mdates.DateFormatter('時刻表記の書式'))
+</pre>
 <ul class="list1">
 <li>４桁の年/２桁の月表記にする（例：2022/08）
 <pre>ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y/%m'))</pre></li>
@@ -2682,14 +2686,32 @@ ax.yaxis.set_minor_formatter(ticker.NullFormatter())
 </ul>
 </div>
 
-<h4><div class="headline2" id="axis_1_17">y軸をパーセント表示にする</div></h4>
+<h4><div class="headline2" id="axis_1_17">y軸の目盛り線ラベルをパーセント表示にする</div></h4>
 <div class="text1">
 matplotlib.tickerに含まれるPercentFormatterを使う
-<pre>ax.yaxis.set_major_formatter(ticker.PercentFormatter(1.0))</pre>
+<pre>
+import matplotlib.ticker as ticker
+ax.yaxis.set_major_formatter(ticker.PercentFormatter(1.0))
+</pre>
 0〜1が0％〜100%の表記に変わる
 </div>
 
-<h4><div class="headline2" id="axis_1_18">軸の体裁を一括設定する</div></h4>
+<h4><div class="headline2" id="axis_1_18">y軸の目盛り線ラベルを指数表記にする</div></h4>
+<div class="text1">
+値が大きい／小さい場合、指数表記m&times;10<sup>n</sup>のうちmの部分がy軸の目盛り線ラベルに、10<sup>n</sup>の部分がy軸の上に表示される。y軸の目盛り線ラベルを指数表記にするには、matplotlib.tickerに含まれるFuncFormatterを用いる。
+<pre>
+import matplotlib.ticker as ticker
+def major_formatter(x, pos):
+&nbsp; &nbsp; if x == 0:
+&nbsp; &nbsp; &nbsp; &nbsp; return "%.0f" % x
+&nbsp; &nbsp; else:
+&nbsp; &nbsp; &nbsp; &nbsp; return "%.0e" % x
+ax.yaxis.set_major_formatter(ticker.FuncFormatter(major_formatter))
+</pre>
+＊0の目盛り線ラベルは、指数表記ではなく0と表示されるように調整
+</div>
+
+<h4><div class="headline2" id="axis_1_19">軸の体裁を一括設定する</div></h4>
 <div class="text1">
 ax.setを使う（axは<a href="#graph_1_2">サブプロットを作成</a>した際の戻り値）
 <ul class="list1">
@@ -2853,7 +2875,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/04/08</p>
+<p>最終更新日：2023/04/19</p>
 <p>Copyright (C) 2018-2023, Yousuke Yamashita</p>
 </footer>
 </html>
