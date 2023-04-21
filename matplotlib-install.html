@@ -70,6 +70,9 @@ Python環境を構築するため、まずはパッケージ管理ツールConda
 ＊~/.conda/envs/py39 ができる<br />
 作成した実行環境を次のように有効化します。
 <pre>% conda activate py39</pre>
+環境によってはconda activateでエラーが出ることがあるので、その場合には
+<pre>% source activate py39</pre>
+を試してください（csh/tcshの場合には利用不可）。
 </div>
 
 
@@ -94,7 +97,7 @@ Python環境を構築するため、まずはパッケージ管理ツールConda
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/04/12</p>
+<p>最終更新日：2023/04/21</p>
 <p>Copyright (C) 2022-2023, Yousuke Yamashita</p>
 </footer>
 </html>
