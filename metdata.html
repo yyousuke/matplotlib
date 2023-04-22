@@ -41,6 +41,11 @@
 <article>
 <h1 id="top">matplotlib：気象データ処理のTIPS</h1>
 <br />
+<div id="text2">
+<p>作成者：山下陽介（国立環境研究所）</p>
+</div>
+<hr />
+<br />
 
 <!-- 目次 -->
 <h2 id="contents">目次</h2>
@@ -56,6 +61,7 @@
       <li><a href="#csv_1_6">CSVファイルの列処理</a></li>
       <li><a href="#csv_1_7">CSVファイルとして書き出す</a></li>
       <li><a href="#csv_1_8">CSVデータの文字列を数値に変換する</a></li>
+      <li><a href="#csv_1_9">CSVファイル読み込み時のエラー</a></li>
      </ul>
   </li></ul>
   <!--  TSVファイル -->
@@ -160,11 +166,8 @@ CSV（Comma-Separated Values）は、カンマ区切りのテキストデータ
 pandasのread_csvを用いる方法
 <pre>import pandas as pd
 df = pd.read_csv("ファイル名")</pre>
-<br />
-読み込み時にUnicodeDecodeErrorが出る場合（UTF-8でない場合にエラーとなる）
-<pre>df = pd.read_csv("ファイル名", encoding='shift_jis')</pre>
+＊読み込み時にUnicodeDecodeErrorが出る場合は、<a href="#csv_1_9">CSVファイル読み込み時のエラー</a>参照
 </div>
-
 
 <h4><div class="headline2" id="csv_1_3">CSVファイルの時刻処理</div></h4>
 <div class="text1">
@@ -258,7 +261,6 @@ Numpyのndarrayに格納する（np.arrayをpd.SeriesにするとSeriesになる
 </ul>
 </div>
 
-
 <h4><div class="headline2" id="csv_1_7">CSVファイルとして書き出す</div></h4>
 <div class="text1">
 pandasのDataFrameを使う場合
@@ -311,6 +313,14 @@ df = pd.read_csv(StringIO(csv))
 </ul>
 </div>
 
+<h4><div class="headline2" id="csv_1_9">CSVファイル読み込み時のエラー</div></h4>
+<div class="text1">
+読み込み時にUnicodeDecodeErrorが出る場合（UTF-8でない場合には、文字化けではなくエラーとなる）
+<pre>df = pd.read_csv("ファイル名", encoding='shift_jis')</pre>
+＊WindowsのShift JISで読み込む
+</div>
+
+
 <!-- TSVファイル -->
 <h3><div class="headline1" id="tsv_1">TSVファイル</div></h3>
 <h4><div class="headline2" id="tsv_1_1">TSVファイルの形式</div></h4>
@@ -327,6 +337,7 @@ TSV（Tab-Separated Values）は、タブ区切りのテキストデータ
 
 <h4><div class="headline2" id="tsv_1_2">TSVファイルの読み込み</div></h4>
 <div class="text1">
+pandasのread_csvにsepオプションを与える
 <ul class="list1">
 <li>ヘッダ有りの場合
 <pre>df = pd.read_csv("ファイル名", sep='\t')</pre>
@@ -339,10 +350,12 @@ CSVファイルのセパレータがタブであることを指定<br />
 <pre>df = pd.read_csv("ファイル名", sep='\t', header=None, names=('列1の名前', '列2の名前'))</pre>
 </li>
 </ul>
+＊読み込み時にUnicodeDecodeErrorが出る場合は、<a href="#csv_1_9">CSVファイル読み込み時のエラー</a>参照
 </div>
 
 <h4><div class="headline2" id="tsv_1_3">TSVファイルとして書き出す</div></h4>
 <div class="text1">
+pandasのDataFrameを使う場合
 <ul class="list1">
 <li>DataFrameを書き出す
 <pre>pd.DataFrame(d).to_csv("ファイル名", sep='\t')</pre>
@@ -398,6 +411,7 @@ SSV（Space-Separated Values）は、スペース区切りのテキストデー�
 
 <h4><div class="headline2" id="ssv_1_2">SSVファイルの読み込み</div></h4>
 <div class="text1">
+pandasのread_csvにsepオプションを与える
 <ul class="list1">
 <li>ヘッダ有りの場合
 <pre>df = pd.read_csv("ファイル名", sep='\s+')</pre>
@@ -415,12 +429,14 @@ CSVファイルのセパレータがスペースであることを指定する<b
 </li><br />
 <li>ヘッダ無しの場合
 <pre>df = pd.read_fwf("ファイル名", header=None)</pre>
-</li><br />
+</li>
 </ul>
+＊読み込み時にUnicodeDecodeErrorが出る場合は、<a href="#csv_1_9">CSVファイル読み込み時のエラー</a>参照
 </div>
 
 <h4><div class="headline2" id="ssv_1_3">SSVファイルとして書き出す</div></h4>
 <div class="text1">
+pandasのDataFrameを使う場合
 <ul class="list1">
 <li>DataFrameを書き出す
 <pre>pd.DataFrame(d).to_csv("ファイル名", sep=' ')</pre>
@@ -825,7 +841,7 @@ d = gt['変数名'][:, :, :] # 変数名に対応するデータ取得（次元�
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/04/19</p>
+<p>最終更新日：2023/04/22</p>
 <p>Copyright (C) 2018-2023, Yousuke Yamashita</p>
 </footer>
 </html>
