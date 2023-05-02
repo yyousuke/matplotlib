@@ -2502,7 +2502,12 @@ ax.set_xticksを使う場合、ax.xaxis.set_major_locatorは設定しない
 <div class="text1">
 plt.rcParamsの設定を変更する
 <ul class="list1">
-<li>文字サイズをデフォルトの10から12に変更する
+<li>x軸主目盛り線ラベルの文字サイズを12に設定する
+<pre>ax.axes.tick_params(labelsize=12)</pre>
+axは<a href="#graph_1_2">サブプロットを作成</a>した際の戻り値</li><br />
+<li>y軸主目盛り線ラベルの文字サイズを16に設定する
+<pre>ax.axes.tick_params(labelsize=16)</pre></li>
+<li>全体の文字サイズをデフォルトの10から12に変更する
 <pre>plt.rcParams["font.size"] = 12</pre>
 サイズは文字列では指定できない</li>
 </ul>
@@ -2875,7 +2880,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/04/27</p>
+<p>最終更新日：2023/05/02</p>
 <p>Copyright (C) 2018-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
