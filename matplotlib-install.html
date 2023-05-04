@@ -88,7 +88,20 @@ Python環境を構築するため、まずはパッケージ管理ツールConda
 % conda install basemap
 % conda install cartopy
 </pre>
-＊python3.10以降では、basemapの導入に失敗することがあります。
+</div>
+
+<h4><div class="headline2" id="install_2_2">python3.10以降の場合</div></h4>
+<div class="text1">
+python3.10以降では、Condaを使ってbasemapを導入できないケースがあります。その場合には、以下の手順でbasemapのみpipでインストールします（以下の例はpython3.11の場合）。
+<pre>
+% conda create -n py311 python=3.11
+% conda activate py311
+% conda install pandas
+% conda install netcdf4
+% conda install cartopy
+% pip install basemap
+</pre>
+既に作成してあるConda環境の場合、basemapインストール時に不整合が起こることがあるため、basemap用に新規作成することを推奨します。
 </div>
 
 <br />
@@ -97,7 +110,7 @@ Python環境を構築するため、まずはパッケージ管理ツールConda
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/04/27</p>
+<p>最終更新日：2023/05/04</p>
 <p>Copyright (C) 2022-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
