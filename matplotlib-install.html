@@ -24,9 +24,9 @@
 <!-- Changes the logical window size used when displaying a page mobile browsers -->
 <meta name = "viewport" content = "width = device-width, initial-scale=1, user-scalable=yes" />
 
-<meta name="robots" content="all" />
-<meta name="http-equiv" content="X-Robots-Tag : all" />
-<meta name="googlebot" content="all" />
+<meta name="robots" content="nofollow" />
+<meta name="http-equiv" content="X-Robots-Tag : nofollow" />
+<meta name="googlebot" content="nofollow" />
 <meta name="description" content="" />
 <meta name="keywords" content="matplotlib" />
 <link href="design.css" rel="stylesheet" type="text/css" />
@@ -77,7 +77,7 @@ Python環境を構築するため、まずはパッケージ管理ツールConda
 <div class="text1">
 ここでは、conda実行環境を複数用意して、使いたい環境に切り替える方法を紹介します。Python3.9環境をpy39という名前で作成するには、次のようにします。Pythonのバージョンを変えたい場合には、python=3.9の部分を変更します。
 <pre>% conda create -n py39 python=3.9</pre>
-＊~/.conda/envs/py39 ができる<br />
+＊Intel oneAPIの場合、~/.conda/envs/py39/ができる<br />
 作成した実行環境を次のように有効化します。
 <pre>% conda activate py39</pre>
 環境によってはconda activateでエラーが出ることがあるので、その場合には
@@ -89,15 +89,20 @@ Python環境を構築するため、まずはパッケージ管理ツールConda
 <h3><div class="headline1" id="install_2">パッケージのインストール</div></h3>
 <h4><div class="headline2" id="install_2_1">サンプルプログラムで利用するパッケージ</div></h4>
 <div class="text1">
-<a href="./met_sample.zip" target="_blank">サンプルプログラム</a>では、次のパッケージを利用しています。インストールを行う際には、
+<a href="./met_sample.zip" target="_blank">サンプルプログラム</a>では、Condaで追加導入するパッケージが必要です。インストールを行う際には、
 <pre>% conda install パッケージ名</pre>
-を用います。サンプルプログラムの実行に必要なパッケージは、以下の手順で導入可能です。
+を用います。サンプルプログラムの実行に必要なパッケージは、以下の手順で導入します（python3.9以前）。
 <pre>
 % conda install pandas
 % conda install netcdf4
 % conda install basemap
 % conda install cartopy
 </pre>
+なお、「3章　matplotlib の基本」のインタラクティブ環境を利用する場合には、次のようにipythonを導入しておきます。
+<pre>
+% conda install ipython
+</pre>
+なお、basemap_ortho.pyでは、Linuxのwgrib2コマンドを利用するため、試してみる場合にはインストールが必要になります。CentOS、Alma Linux、Rocky LinuxなどRed Hat系ではEPEL（Extra Packages for Enterprise Linux）リポジトリに含まれます。Ubuntuなどでは、ソースコードからビルドします（<a href="#install_2_3">Windows10/11のWSL2上に構築する場合</a>参照）。
 </div>
 
 <h4><div class="headline2" id="install_2_2">python3.10以降の場合</div></h4>
@@ -114,7 +119,56 @@ python3.10以降では、Condaを使ってbasemapを導入できないケース�
 % pip install basemap
 % pip install basemap-data-hires
 </pre>
-既に作成してあるConda環境の場合、basemapインストール時に不整合が起こることがあるため、basemap用に新規作成することを推奨します。
+既に作成されているConda環境の場合、basemapインストール時に不整合が生じることがあるため、basemap用に新規作成することを推奨します。
+なお、「3章　matplotlib の基本」のインタラクティブ環境を利用する場合には、次のようにipythonを導入しておきます。
+<pre>
+% conda install ipython
+</pre>
+</div>
+
+<h4><div class="headline2" id="install_2_3">Windows10/11のWSL2上に構築する場合</div></h4>
+<div class="text1">
+Windows 10/11では、<a href="https://learn.microsoft.com/ja-jp/windows/wsl/" target="_blank">Windows Subsystem for Linux 2（WSL2）</a>を利用して、Windows上にLinux仮想マシンを構築できるようになっています。ここでは、Ubuntu 22.04上のminicondaでの導入例を示します。まずは、検索機能を使ってPower Shellを検索し、次のように現在デフォルトとなっているUbuntu 22.04を導入します。
+<pre>% wsl --install</pre>
+検索機能で「wsl」を検索して起動します。以降の手順は、物理マシンのUbuntu 22.04上にサンプルプログラム実行環境を構築する場合にも適用可能です。サンプルプログラムでは、X Window Systemを利用するため、次のように導入します。
+<pre>% sudo apt install x11-apps</pre>
+次に、minicondaをインストールします。
+<pre>
+% wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+% chmod +x Miniconda3-latest-Linux-x86_64.sh
+% sh Miniconda3-latest-Linux-x86_64.sh
+% . .bashrc（condaの設定を反映）
+</pre>
+Minicondaの環境は~/miniconda3/envs/py311/に作成されます。Condaを使ってpython環境を整備します（<a href="#install_2_2">python3.10以降の場合</a>と同じ）。
+<br />
+met_sample.zipをダウンロードします。
+<pre>% wget https://yyousuke.github.io/matplotlib/met_sample.zip</pre>
+ZIPを開くためunzipをインストールしておきます。
+<pre>
+% sudo apt install unzip
+% unzip met_sample.zip
+</pre>
+basemap_ortho.pyの実行に必要なwgrib2は次の手順でビルドします。
+<pre>
+% wget https://www.ftp.cpc.ncep.noaa.gov/wd51we/wgrib2/wgrib2.tgz.v3.1.1
+% sudo apt install gcc
+% sudo apt install gfortran
+% sudo apt install make
+% tar -zxvf wgrib2.tgz.v3.1.1
+% export CC=gcc
+% export FC=gfortran
+% cd grib2 ; make
+</pre>
+ビルドしたwgrib2コマンドをホームディレクトリ直下のbin/に配置する場合の例です。
+<pre>
+% mkdir ~/bin
+% cp -p wgrib2/wgrib2 ~/bin
+</pre>
+常に有効にする場合には、~/.bashrcの最後に追記します。
+<pre>% export PATH=”~/bin:$PATH”</pre>
+現在ログインしている端末で有効にします。
+<pre>% . .bashrc</pre>
+この状態でサンプルプログラムが実行可能になっています。
 </div>
 
 <br />
@@ -123,7 +177,7 @@ python3.10以降では、Condaを使ってbasemapを導入できないケース�
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/05/05</p>
+<p>最終更新日：2023/05/06</p>
 <p>Copyright (C) 2022-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
