@@ -36,7 +36,7 @@
 <meta property="og:url" content="https://yyousuke.github.io/matplotlib/matplotlib-install.html" />
 <meta property="og:image" content="https://yyousuke.github.io/matplotlib/images/logo.png" />
 <meta property="og:site_name" content="気象データ解析のためのmatplotlibの使い方" />
-<meta property="og:description" content="macOS用で構築する「気象データ解析のためのmatplotlibの使い方」のサンプルプログラム実行環境をLinux上で構築するための手順を紹介" />
+<meta property="og:description" content="macOSで構築する「気象データ解析のためのmatplotlibの使い方」のサンプルプログラム実行環境をLinux上で構築するための手順を紹介" />
 <meta property="fb:app_id" content="902607720378666" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@yyousuke1109" />
@@ -91,7 +91,7 @@ Python環境を構築するため、まずはパッケージ管理ツールConda
 <div class="text1">
 <a href="./met_sample.zip" target="_blank">サンプルプログラム</a>では、Condaで追加導入するパッケージが必要です。インストールを行う際には、
 <pre>% conda install パッケージ名</pre>
-を用います。サンプルプログラムの実行に必要なパッケージは、以下の手順で導入します（python3.9以前）。
+を用います。サンプルプログラムの実行に必要なパッケージは、以下の手順で導入します（python3.9以前の場合。python3.10以降の場合には、<a href="#install_2_2">python3.10以降の場合</a>参照）。
 <pre>
 % conda install pandas
 % conda install netcdf4
@@ -102,7 +102,7 @@ Python環境を構築するため、まずはパッケージ管理ツールConda
 <pre>
 % conda install ipython
 </pre>
-なお、basemap_ortho.pyでは、Linuxのwgrib2コマンドを利用するため、試してみる場合にはインストールが必要になります。CentOS、Alma Linux、Rocky LinuxなどRed Hat系ではEPEL（Extra Packages for Enterprise Linux）リポジトリに含まれます。Ubuntuなどでは、ソースコードからビルドします（<a href="#install_2_3">Windows10/11のWSL2上のLinuxに構築する場合</a>参照）。
+なお、basemap_ortho.pyでは、Linuxのwgrib2コマンドを利用するため、試してみる場合にはインストールが必要になります。CentOS、RHEL、Alma Linux、Rocky LinuxなどRed Hat系では<a href="https://docs.fedoraproject.org/ja/epel/">EPEL（Extra Packages for Enterprise Linux）</a>リポジトリに含まれます（導入方法はOSやバージョンにより異なるので、EPELのリンク先を参照してください）。Ubuntuなどでは、ソースコードからビルドします（<a href="#install_2_3">Windows10/11のWSL2上のLinuxに構築する場合</a>参照）。
 </div>
 
 <h4><div class="headline2" id="install_2_2">python3.10以降の場合</div></h4>
@@ -159,7 +159,7 @@ ZIPを開くためunzipをインストールしておきます。
 % sudo apt install unzip
 % unzip met_sample.zip
 </pre>
-basemap_ortho.pyの実行に必要なwgrib2は次の手順でビルドします。
+basemap_ortho.pyの実行に必要なwgrib2は次の手順でビルドします。なお最新版はv3.1.2ですが、コンパイル時にエラーが出るためv3.1.1を使います。
 <pre>
 % wget https://www.ftp.cpc.ncep.noaa.gov/wd51we/wgrib2/wgrib2.tgz.v3.1.1
 % sudo apt install gcc
