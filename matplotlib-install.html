@@ -128,9 +128,9 @@ python3.10以降では、Condaを使ってbasemapを導入できないケース�
 
 <h4><div class="headline2" id="install_2_3">Windows10/11のWSL2上のLinuxに構築する場合</div></h4>
 <div class="text1">
-Windows 10/11では、<a href="https://learn.microsoft.com/ja-jp/windows/wsl/" target="_blank">Windows Subsystem for Linux 2（WSL2）</a>を利用して、Windows上にLinux仮想マシンを構築できるようになっています。ここでは、Ubuntu 22.04上のminicondaでの導入例を示します。まずは、検索機能を使ってPower Shellを検索し、次のように現在デフォルトとなっているUbuntu 22.04を導入します。
+Windows 10/11では、<a href="https://learn.microsoft.com/ja-jp/windows/wsl/" target="_blank">Windows Subsystem for Linux 2（WSL2）</a>を利用して、Windows上にLinux仮想マシンを構築できるようになっています。ここでは、Ubuntu 22.04上のminicondaでの導入例を示します。まずは、検索機能を使って「Power Shell」を検索し、次のように現在デフォルトとなっているUbuntu 22.04を導入します。
 <pre>% wsl --install</pre>
-検索機能で「wsl」を検索して起動します。以降の手順は、物理マシンのUbuntu 22.04上にサンプルプログラム実行環境を構築する場合にも適用可能です。サンプルプログラムでは、X Window Systemを利用するため、次のように導入します。
+検索機能で「wsl」を検索して起動します。Power Shell上でwslと入力しても起動できます。なお以降の手順は、物理マシンのUbuntu 22.04上にサンプルプログラム実行環境を構築する場合にも適用可能です。サンプルプログラムでは、X Window Systemを利用するため、次のように導入します。
 <pre>% sudo apt install x11-apps</pre>
 次に、minicondaをインストールします。
 <pre>
