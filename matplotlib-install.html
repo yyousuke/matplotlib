@@ -102,7 +102,7 @@ Python環境を構築するため、まずはパッケージ管理ツールConda
 <pre>
 % conda install ipython
 </pre>
-なお、basemap_ortho.pyでは、Linuxのwgrib2コマンドを利用するため、試してみる場合にはインストールが必要になります。CentOS、Alma Linux、Rocky LinuxなどRed Hat系ではEPEL（Extra Packages for Enterprise Linux）リポジトリに含まれます。Ubuntuなどでは、ソースコードからビルドします（<a href="#install_2_3">Windows10/11のWSL2上に構築する場合</a>参照）。
+なお、basemap_ortho.pyでは、Linuxのwgrib2コマンドを利用するため、試してみる場合にはインストールが必要になります。CentOS、Alma Linux、Rocky LinuxなどRed Hat系ではEPEL（Extra Packages for Enterprise Linux）リポジトリに含まれます。Ubuntuなどでは、ソースコードからビルドします（<a href="#install_2_3">Windows10/11のWSL2上のLinuxに構築する場合</a>参照）。
 </div>
 
 <h4><div class="headline2" id="install_2_2">python3.10以降の場合</div></h4>
@@ -126,7 +126,7 @@ python3.10以降では、Condaを使ってbasemapを導入できないケース�
 </pre>
 </div>
 
-<h4><div class="headline2" id="install_2_3">Windows10/11のWSL2上に構築する場合</div></h4>
+<h4><div class="headline2" id="install_2_3">Windows10/11のWSL2上のLinuxに構築する場合</div></h4>
 <div class="text1">
 Windows 10/11では、<a href="https://learn.microsoft.com/ja-jp/windows/wsl/" target="_blank">Windows Subsystem for Linux 2（WSL2）</a>を利用して、Windows上にLinux仮想マシンを構築できるようになっています。ここでは、Ubuntu 22.04上のminicondaでの導入例を示します。まずは、検索機能を使ってPower Shellを検索し、次のように現在デフォルトとなっているUbuntu 22.04を導入します。
 <pre>% wsl --install</pre>
@@ -140,6 +140,17 @@ Windows 10/11では、<a href="https://learn.microsoft.com/ja-jp/windows/wsl/" t
 % . .bashrc（condaの設定を反映）
 </pre>
 Minicondaの環境は~/miniconda3/envs/py311/に作成されます。Condaを使ってpython環境を整備します（<a href="#install_2_2">python3.10以降の場合</a>と同じ）。
+<pre>
+% conda create -n py311 python=3.11
+% conda activate py311
+% conda install pandas
+% conda install netcdf4
+% conda install cartopy
+% conda install lxml
+% conda install scipy
+% pip install basemap
+% pip install basemap-data-hires
+</pre>
 <br />
 met_sample.zipをダウンロードします。
 <pre>% wget https://yyousuke.github.io/matplotlib/met_sample.zip</pre>
