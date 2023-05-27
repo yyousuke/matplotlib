@@ -331,7 +331,7 @@ time_new = time_cur + relativedelta(months=1)
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 time_cur = datetime(2021, 9, 4, 12, 0, 0)
-time_new = time_cur + relativedelta(years=2)
+time_new = time_cur + relativedelta(years=1)
 </pre>
 2021/9/4 12時から1年後の2022/9/4 12時になる
 </li><br />
@@ -394,54 +394,60 @@ datetime.datetimeのisoformatメソッドを利用する
 <li>デフォルトのISO date表示
 <pre>
 from datetime import datetime
-time = datetime(2022, 3, 8, 12, 31, 12)
+dt = datetime(2022, 3, 8, 12, 31, 12)
 print(dt.isoformat())
 print(type(dt.isoformat()))
-</pre>
-2022-03-08T12:31:12（デフォルトでは日付と時刻の間にTが入り、秒まで）<br />
+出力：
+2022-03-08T12:31:12（デフォルトでは日付と時刻の間にTが入り、秒まで）
 &lt;class 'str'&gt;（文字型に変換されている）
+</pre>
 </li><br />
 <li>日付と時刻の間を空白にする
 <pre>
 from datetime import datetime
-time = datetime(2022, 3, 8, 12, 31, 12)
+dt = datetime(2022, 3, 8, 12, 31, 12)
 print(dt.isoformat(' '))
-</pre>
+出力：
 2022-03-08 12:31:12
+</pre>
 </li><br />
 <li>ミリ秒まで表示する
 <pre>
 from datetime import datetime
-time = datetime(2022, 3, 8, 12, 31, 12)
+dt = datetime(2022, 3, 8, 12, 31, 12)
 print(dt.isoformat(timespec='milliseconds'))
-</pre>
+出力：
 2022-03-08T12:31:12.000
+</pre>
 </li><br />
 <li>日付と時刻の間を空白、ミリ秒まで表示
 <pre>
 from datetime import datetime
-time = datetime(2022, 3, 8, 12, 31, 12)
+dt = datetime(2022, 3, 8, 12, 31, 12)
 print(dt.isoformat(sep=' ', timespec='milliseconds'))
+出力：
+2022-03-08 12:31:12.000
 </pre>
-2022-03-08 12:31:12.000<br />
 sepオプションは省略可能
 </li><br />
 <li>マイクロ秒まで表示する
 <pre>
 from datetime import datetime
-time = datetime(2022, 3, 8, 12, 31, 12, 30)
+dt = datetime(2022, 3, 8, 12, 31, 12, 30)
 print(dt.isoformat(timespec='microseconds'))
+出力：
+2022-03-08T12:31:12.000030
 </pre>
-2022-03-08T12:31:12.000030<br />
 datetimeの7番目の引数にマイクロ秒を与えることができる
 </li><br />
 <li>分まで表示する
 <pre>
 from datetime import datetime
-time = datetime(2022, 3, 8, 12, 31, 12)
+dt = datetime(2022, 3, 8, 12, 31, 12)
 print(dt.isoformat(timespec='minutes'))
-</pre>
+出力：
 2022-03-08T12:31
+</pre>
 </li><br />
 </ul>
 </div>
@@ -743,20 +749,25 @@ os.environ['PYTHONPATH'] = '設定したいパス'
 文字列のメソッドを利用する
 <ul class="list1">
 <li>全て小文字にする
-<pre>"ABc".lower()</pre>
-出力：abc</li><br />
+<pre>"ABc".lower()
+出力：abc</pre>
+</li><br />
 <li>全て大文字にする
-<pre>"aBc".upper()</pre>
-出力：ABC</li><br />
+<pre>"aBc".upper()
+出力：ABC</pre>
+</li><br />
 <li>大文字と小文字を逆にする
-<pre>"aBc".swapcase()</pre>
-出力：AbC</li><br />
+<pre>"aBc".swapcase()
+出力：AbC</pre>
+</li><br />
 <li>先頭のみ大文字にする
-<pre>"aBc".capitalize()</pre>
-出力：Abc</li><br />
+<pre>"aBc".capitalize()
+出力：Abc</pre>
+</li><br />
 <li>単語の先頭を大文字にする
-<pre>"the abc".title()</pre>
-出力：The Abc</li><br />
+<pre>"the abc".title()
+出力：The Abc</pre>
+</li><br />
 </ul>
 </div>
 <br />
@@ -844,7 +855,7 @@ print(all([True, True, False]))
 
 <h4><div class="headline2" id="if_3">いずれかの要素がTrueか判定する</div></h4>
 <div class="text1">
-allを用いる
+anyを用いる
 <pre>
 print(any([True, False, False]))
 出力：True
@@ -1100,7 +1111,7 @@ subprocessの終了コードを判定する
 com_list = ['コマンド', 'オプション1', 'オプション2', ...]
 try:
 &nbsp; &nbsp; res = subprocess.run(com_list,
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;stdout=subprocess.PIPE,
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; stdout=subprocess.PIPE,
 &nbsp; &nbsp; &nbsp; &nbsp; stderr=subprocess.PIPE)
 except Exception:
 &nbsp; &nbsp; exception = sys.exc_info()[1]
@@ -1167,7 +1178,7 @@ print(str(res.returncode)) # 終了ステータスの表示
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/05/20</p>
+<p>最終更新日：2023/05/27</p>
 <p>Copyright (C) 2021-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
