@@ -903,10 +903,15 @@ print(set_a)
 <pre>
 set_a = set("abc") # {'a', 'b', 'c'}
 set_b = set("cde") # {'c', 'e', 'd'}
-print(aaa &amp; bbb) # and演算
-print(aaa | bbb) # or演算
+print(set_a &amp; set_b) # and演算
+出力；{'c'}
+print(set_a | set_b) # or演算
+出力：{'b', 'c', 'e', 'd', 'a'}
+print(set_b - set_a) # 集合の差
+出力： {'e', 'd'}
+print(set_a - set_b) # 集合の差
+出力： {'b', 'a'}
 </pre>
-＊{'c'}と{'b', 'c', 'e', 'd', 'a'}を表示
 </div>
 <br />
 <br />
@@ -1179,7 +1184,7 @@ print(str(res.returncode)) # 終了ステータスの表示
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/05/30</p>
+<p>最終更新日：2023/05/31</p>
 <p>Copyright (C) 2021-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
