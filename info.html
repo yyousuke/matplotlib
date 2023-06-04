@@ -62,14 +62,20 @@ Traceback (most recent call last):
 &nbsp; File "lib/cartopy/trace.pyx", line 56, in init cartopy.trace
 <span style="COLOR:red">ImportError: cannot import name lgeos</span>
 </pre>
-このエラーは、cartopyのインポート時に内部でインポートされるcartopy.traceでlgeoをインポートできないことを表しています。このlgeosがshapely.geosに含まれていないため、以下でも同じエラーとなります。
+このエラーは、cartopyのインポート時に内部でインポートされるcartopy.traceでlgeosをインポートできないことを表しています。このlgeosがshapely.geosに含まれていないため、以下でも同じエラーとなります。
 <pre>&gt;&gt;&gt; from shapely.geos import lgeos
 Traceback (most recent call last):
 &nbsp; File "&lt;stdin&gt;", line 1, in &lt;module&gt;
 &nbsp; <span style="COLOR:red">ImportError: cannot import name 'lgeos' from 'shapely.geos' </span> (/opt/local/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/shapely/geos.py)
 </pre>
 解決策としては、shapelyのバージョンを次のように1.8.5に戻します。コマンド中のpy310はpythonのバージョンに合わせて読み替えてください。
-<pre>% sudo port deactivate py310-shapely
+<pre>インストールされているバージョンの確認
+% port installed py310-shapely
+The following ports are currently installed:
+&nbsp; py310-shapely @1.8.5_1
+&nbsp; py310-shapely @2.0.1_1 (active)
+現在のバージョンをdeactivateし、1.8.5_1をactivate
+% sudo port deactivate py310-shapely
 % sudo port activate py310-shapely @1.8.5_1
 確認
 % port installed py310-shapely
