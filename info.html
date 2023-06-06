@@ -96,7 +96,7 @@ MacPortsで導入したPython3.9でmatplotlibをimport（import matplotlib.pyplo
 <br />
 回避するためには、次のようにimportlib_resourcesを追加します。
 <pre>
-sudo port install py39-importlib-resources
+% sudo port install py39-importlib-resources
 </pre>
 </div>
 <br />
@@ -203,7 +203,7 @@ py38-matplotlib @3.3.0_1+cairo+webagg
 それに伴い、pythonで.ixを使うプログラムを実行すると、次のようなエラーが発生します。
 <pre>
 "/opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/pandas/core/generic.py", line 5273, in __getattr__
-    return object.__getattribute__(self, name)
+&nbsp; return object.__getattribute__(self, name)
 AttributeError: 'DataFrame' object has no attribute 'ix'
 </pre>
 <br />
@@ -334,10 +334,10 @@ tri=Trueオプションを使わないように書き換える（この場合に
 2019年４月頃のpyprojの更新（バージョン2.1.3）の際、内部で使用されるprojのバージョンが5から6に更新され、同時にpyproj.pyproj_datadirが廃止されています。その影響で、MacPortsで更新（port upgrade outdated）を行うと、Basemapの読み込み時に以下のエラーが発生します。現時点ではエラー回避のコードがMacPortsから提供されていないため、更新は推奨されません。
 <pre>
 Traceback (most recent call last):
-  File "ファイル名", line 9, in &lt;module&gt;
-    from mpl_toolkits.basemap import Basemap
-  File "/opt/local/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mpl_toolkits/basemap/__init__.py", line 152, in &lt;module&gt;
-    epsgf = open(os.path.join(pyproj.pyproj_datadir,'epsg'))
+&nbsp; File "ファイル名", line 9, in &lt;module&gt;
+&nbsp; from mpl_toolkits.basemap import Basemap
+&nbsp; File "/opt/local/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mpl_toolkits/basemap/__init__.py", line 152, in &lt;module&gt;
+&nbsp; epsgf = open(os.path.join(pyproj.pyproj_datadir,'epsg'))
 AttributeError: module 'pyproj' has no attribute 'pyproj_datadir'
 </pre>
 <ul class="list1">
@@ -358,7 +358,7 @@ pyproj.datadir.get_data_dir()で取得されるディレクトリは、/opt/loca
 <p>% cd /opt/local/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mpl_toolkits/basemap</p>
 <p>% sudo vi __init__.py</p>
 <pre>
-#epsgf = open(os.path.join(pyproj.pyproj_datadir,'epsg')) # 152行目（元のコード）
+# epsgf = open(os.path.join(pyproj.pyproj_datadir,'epsg')) # 152行目（元のコード）
 # エラー回避のため、proj5のepsgファイルを読み込み
 pyproj_datadir = "/opt/local/lib/proj5/share/proj/"
 epsgf = open(os.path.join(pyproj_datadir,'epsg'))
@@ -395,7 +395,7 @@ elif masked and <span style="COLOR:red">is_scalar_or_string(masked)</span>:<br /
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/06/04</p>
+<p>最終更新日：2023/06/06</p>
 <p>Copyright (C) 2018-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
