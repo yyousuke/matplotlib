@@ -51,7 +51,7 @@
 <article>
 <h3><div class="headline-scroll" id="20230604">cartopyでのlgeosインポートエラー（2023/06/04）</div></h3>
 <div class="text1">
-2023年5月のアップデートに伴い、MacPortsでインストールされるshapelyのバージョンが1.8.5から2.0.1になりました。このバージョンでは、cartopyy-0.21.0が内部でインポートしているlgeosが含まれないようになったため、以下のようなImportErrorが発生します（Python3.10の場合のエラーメッセージ例）。このエラーは、cartopyインポート時に不可避な部分で発生しており、<span style="COLOR:red">既にアップデートが適用されてしまった場合には、shapelyのバージョンを1.8.5に戻す必要があります</span>。なお、<span style="COLOR:red">2023/06/09版で更新されたcartopy-0.21.1で不具合が解消されたため、最新版への更新をお薦めします</span>。
+2023年5月のアップデートに伴い、MacPortsでインストールされるshapelyのバージョンが1.8.5から2.0.1になりました。このバージョンでは、cartopyy-0.21.0が内部でインポートしているlgeosが含まれないようになったため、以下のようなImportErrorが発生します（Python3.10の場合のエラーメッセージ例）。このエラーは、cartopyインポート時に不可避な部分で発生しており、cartopyy-0.21.0でshapely-2.0.1のアップデートが適用されてしまった場合には、shapelyのバージョンを1.8.5に戻す必要があります。なお、<span style="COLOR:red">2023/06/09にMacPortsで更新されたcartopy-0.21.1で一連の不具合が解消されたため、最新版への更新をお薦めします</span>。
 <pre>&gt;&gt;&gt; import cartopy
 Traceback (most recent call last):
 &nbsp; File "&lt;stdin&gt;", line 1, in &lt;module&gt;
