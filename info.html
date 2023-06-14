@@ -51,7 +51,7 @@
 <article>
 <h3><div class="headline-scroll" id="20230604">cartopyでのlgeosインポートエラー（2023/06/04）</div></h3>
 <div class="text1">
-2023年5月のアップデートに伴い、MacPortsでインストールされるshapelyのバージョンが1.8.5から2.0.1になりました。このバージョンでは、cartopyが内部でインポートしているlgeosが含まれないようになったため、以下のようなImportErrorが発生します（Python3.10の場合のエラーメッセージ例）。このエラーは、cartopyインポート時に不可避な部分で発生しており、<span style="COLOR:red">既にアップデートが適用されてしまった場合には、shapelyのバージョンを1.8.5に戻す必要があります</span>。
+2023年5月のアップデートに伴い、MacPortsでインストールされるshapelyのバージョンが1.8.5から2.0.1になりました。このバージョンでは、cartopyy-0.21.0が内部でインポートしているlgeosが含まれないようになったため、以下のようなImportErrorが発生します（Python3.10の場合のエラーメッセージ例）。このエラーは、cartopyインポート時に不可避な部分で発生しており、<span style="COLOR:red">既にアップデートが適用されてしまった場合には、shapelyのバージョンを1.8.5に戻す必要があります</span>。なお、<span style="COLOR:red">2023/06/09版で更新されたcartopy-0.21.1で不具合が解消されたため、最新版への更新をお薦めします</span>。
 <pre>&gt;&gt;&gt; import cartopy
 Traceback (most recent call last):
 &nbsp; File "&lt;stdin&gt;", line 1, in &lt;module&gt;
@@ -83,7 +83,6 @@ The following ports are currently installed:
 &nbsp; py310-shapely @1.8.5_1 (active)
 &nbsp; py310-shapely @2.0.1_1
 </pre>
-<span style="COLOR:red">＊2023/06/09版で更新されたcartopy-0.21.1で不具合が解消されました</span>
 </div>
 <br />
 <br />
@@ -396,7 +395,7 @@ elif masked and <span style="COLOR:red">is_scalar_or_string(masked)</span>:<br /
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/06/13</p>
+<p>最終更新日：2023/06/14</p>
 <p>Copyright (C) 2018-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
