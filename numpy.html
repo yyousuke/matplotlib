@@ -72,8 +72,9 @@
   <ul class="list1"><li><a href="#array_1">Numpyの配列</a>
     <ul class="list2">
       <li><a href="#array_1_1">配列ndarrayの作成</a></li>
-      <li><a href="#array_1_2">配列の要素の入れ替え</a></li>
-      <li><a href="#array_1_3">Numpy配列成分の演算</a></li>
+      <li><a href="#array_1_2">配列の要素の置換</a></li>
+      <li><a href="#array_1_3">配列の軸の入れ替え</a></li>
+      <li><a href="#array_1_4">Numpy配列成分の演算</a></li>
      </ul>
   </li></ul>
 </div>
@@ -189,7 +190,21 @@ d = np.zeros((ndim, kdim, jdim, idim), dtype=np.int32) # 全ての要素が0、�
 </ul>
 </div>
 
-<h4><div class="headline2" id="array_1_2">配列の要素の入れ替え</div></h4>
+<h4><div class="headline2" id="array_1_2">配列の要素の置換</div></h4>
+<div class="text1">
+<ul class="list1">
+<li>条件を満たす要素の置換<br />
+負の値を0に置換
+<pre>var[var <= 0] = 0</pre>
+</li>
+<li>条件が真と偽で置換する値を変える<br />
+負の値なら-1、正の値なら0に置換する
+<pre>var = np.where(var <= 0, -1, 0)</pre>
+</li>
+</ul>
+</div>
+
+<h4><div class="headline2" id="array_1_3">配列の軸の入れ替え</div></h4>
 <div class="text1">
 <ul class="list1">
 <li>配列の転置<br />
@@ -216,7 +231,7 @@ np.dot(x, y)
 <br />
 <br />
 
-<h4><div class="headline2" id="array_1_3">Numpy配列成分の演算</div></h4>
+<h4><div class="headline2" id="array_1_4">Numpy配列成分の演算</div></h4>
 <div class="text1">
 Numpyの機能で演算できる場合は、極力そちらを使う。
 <ul class="list1">
@@ -251,7 +266,7 @@ for ij in itertools.product(i_list, j_list):
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/04/27</p>
+<p>最終更新日：2023/06/19</p>
 <p>Copyright (C) 2018-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
