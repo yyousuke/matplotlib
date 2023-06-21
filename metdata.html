@@ -486,15 +486,22 @@ dはlistやnumpyのndarrayなど</li><br />
 
 <h4><div class="headline2" id="json_1_2">JSONファイルの読み込み</div></h4>
 <div class="text1">
-jsonモジュールを使う
+<ul class="list1">
+<li>jsonモジュールを使う
 <pre>import pandas as pd
 import json
-with open(‘’ファイル名, 'rt') as fin:
+with open('ファイル名', 'rt') as fin:
 &nbsp; &nbsp; data = fin.read()
 df = pd.DataFrame(json.loads(data))</pre>
 データの名前を指定する場合
 <pre>obj = json.loads(data)
 df = pd.DataFrame(obj[‘データ名’])</pre>
+</li><br />
+<li>Pandasで直接読み込み
+<pre>import pandas as pd
+df = pd.read_json('ファイル名')
+</li><br />
+</ul>
 </div>
 
 <h4><div class="headline2" id="json_1_3">JSONファイルの書き出し</div></h4>
@@ -851,7 +858,7 @@ d = gt['変数名'][:, :, :] # 変数名に対応するデータ取得（次元�
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/05/10</p>
+<p>最終更新日：2023/06/21</p>
 <p>Copyright (C) 2018-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
