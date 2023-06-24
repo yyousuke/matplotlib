@@ -750,8 +750,9 @@ pygribモジュールを用いると、直接GRIB2ファイルを読み込むこ
 import pygrib
 grbs = pygrib.open("ファイル名") # GRIB2ファイルを開く
 grb1 = grbs.select(forecastTime=1)[0] # 1時間後の０番目の変数
+grbt = grbs.select(name="Temperature") # 気温の変数を選択
 </pre>
-ファイルの読み込みに時間がかかるため、<a href="#grib2_1_2">GRIB2ファイルの読み込み</a>に記述した方法に切り替えた方が良い。
+ファイルの読み込みに時間がかかるため、読み込み処理が多い場合には<a href="#grib2_1_2">GRIB2ファイルの読み込み</a>に記述した方法に切り替えた方が良い。
 </div>
 
 <h4><div class="headline2" id="grib2_1_4">wgrib2による単純バイナリファイルへの変換</div></h4>
@@ -858,7 +859,7 @@ d = gt['変数名'][:, :, :] # 変数名に対応するデータ取得（次元�
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/06/21</p>
+<p>最終更新日：2023/06/24</p>
 <p>Copyright (C) 2018-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
