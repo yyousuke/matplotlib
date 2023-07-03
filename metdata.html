@@ -495,7 +495,7 @@ with open('ファイル名', 'rt') as fin:
 df = pd.DataFrame(json.loads(data))</pre>
 データの名前を指定する場合
 <pre>obj = json.loads(data)
-df = pd.DataFrame(obj[‘データ名’])</pre>
+df = pd.DataFrame(obj['データ名'])</pre>
 </li><br />
 <li>Pandasで直接読み込み
 <pre>import pandas as pd
@@ -510,7 +510,7 @@ jsonモジュールを使う
 <pre>
 import json
 d = ...
-with open(‘’ファイル名, 'w') as fout:
+with open('ファイル名', 'w') as fout:
 &nbsp; &nbsp; json.dump(d, fout)
 df = pd.DataFrame(json.loads(data))</pre>
 データの形式については、<a href="#json_1_1">JSONファイルの形式</a>参照
@@ -650,11 +650,11 @@ np.array(d).astype('&lt;f8').tofile("ファイル名")
 <pre>import netCDF4</pre><br />
 インポートでエラーが出る場合
 <ul class="list1">
-<li>MacPortsでpython3.9のnetcdfライブラリをインストール
+<li>MacPortsでpython3.11のnetcdfライブラリをインストール
 <pre>
-% sudo port install py39-netcdf4
+% sudo port install py311-netcdf4
 </pre>
-＊pythonのバージョンが異なる場合には、py39の部分を対応するものに変える<br />
+＊pythonのバージョンが異なる場合には、py311の部分を対応するものに変える<br />
 ＊HomebrewやAnacondaを使っている場合には、競合を避けるためMacPortsは使わない方が良い
 </li>
 </ul>
@@ -808,8 +808,8 @@ import pandas as pd
 df = pd.read_hdf("ファイル名")
 </pre></li>
 <li>例：h5pyを使った方法<br />
-Python3.9の場合、MacPortsを使い次のようにインストール（バージョンが異なる場合はpy39の部分を変える）
-<pre>% sudo port install py39-h5py</pre>
+Python3.11の場合、MacPortsを使い次のようにインストール（バージョンが異なる場合はpy311の部分を変える）
+<pre>% sudo port install py311-h5py</pre>
 ２次元データをdに格納する場合
 <pre>
 import h5py
@@ -859,7 +859,7 @@ d = gt['変数名'][:, :, :] # 変数名に対応するデータ取得（次元�
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/06/24</p>
+<p>最終更新日：2023/07/03</p>
 <p>Copyright (C) 2018-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
