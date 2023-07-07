@@ -425,7 +425,7 @@ pandasのread_csvにsepオプションを与える
 <ul class="list1">
 <li>ヘッダ有りの場合
 <pre>df = pd.read_csv("ファイル名", sep='\s+')</pre>
-CSVファイルのセパレータがスペースであることを指定する<br />
+CSVファイルのセパレータがスペース（連続する任意の文字数のスペース）であることを指定する<br />
 ヘッダが列の名前になる</li><br />
 <li>ヘッダ無しの場合
 <pre>df = pd.read_csv("ファイル名", sep='\s+', header=None)</pre>
@@ -521,6 +521,7 @@ df = pd.DataFrame(json.loads(data))</pre>
 <h3><div class="headline1" id="bin_1">バイナリファイル</div></h3>
 <h4><div class="headline2" id="bin_1_1">バイナリファイルの形式</div></h4>
 <div class="text1">
+ここでは、GrADs等で用いられる下記の形式の単純なバイナリファイルについて記載している。NumPyのnpy、npzとは異なる。<br />
 ４バイト浮動小数点数（単精度）のデータや８バイト浮動小数点数（倍精度）のデータを改行コード無しで並べた単純バイナリ形式<br />
 <ul class="list1">
 <li>例：経度、緯度方向とも10度の等間隔データの場合
@@ -535,7 +536,6 @@ t=1： | 0E, 80N | 10E, 80N | ... | 350E, 80N |
 t=1： | 0E, 90S | 10E, 80N | ... | 350E, 80N |
 </pre>
 | |で囲まれた部分がデータを表していて、１つのサイズが４バイト<br />
-NumPyのnpy、npzとは異なる
 </li>
 </ul>
 </div>
@@ -568,7 +568,7 @@ endian = 'big'
 idim = 288 # 経度方向のサイズ（整数）
 jdim = 145 # 緯度方向のサイズ（整数）
 num_rec = 3 # データの個数（整数）
-datasize = idim * jdim * num_rec # 読み込むデータサイズ（byte）
+datasize = idim * jdim * num_rec # 読み込むデータサイズ（個数）
 if endian == 'big':
 &nbsp; &nbsp; din = np.fromfile('読み込むファイル名', dtype='&gt;f4', count=datasize)
 else:
@@ -589,9 +589,9 @@ idim = 288 # 経度方向のサイズ（整数）
 jdim = 145 # 緯度方向のサイズ（整数）
 tsta = 5 # 開始データ番号（整数、データの先頭番号は１）
 tend = 7 # 終了データ番号（整数、データの先頭番号は１）
-datasize = idim * jdim # 水平方向のデータサイズ（byte）
+datasize = idim * jdim # 水平方向のデータサイズ（個数）
 with open('読み込むファイル名', 'rb') as fin:
-&nbsp; &nbsp; fin.seek(4 * datasize * (tsta - 1), 0) # 開始データの前まで読み飛ばす
+&nbsp; &nbsp; fin.seek(4 * datasize * (tsta - 1), 0) # 開始データの前まで読み飛ばす（単位：byte）
 &nbsp; &nbsp; buf = array.array('f') # ４バイト浮動小数点数
 &nbsp; &nbsp; buf.fromfile(fin, datasize * (tend - tsta + 1)) # データの読み込み
 &nbsp; &nbsp; if sys.byteorder == 'little':
@@ -599,9 +599,10 @@ with open('読み込むファイル名', 'rb') as fin:
 # bufからlistに変換し、x-, y-の配列に
 d = np.array(buf.tolist()).reshape(jdim, idim)
 </pre>
-４バイト浮動小数点数の場合の書式（'f'）<br />
+４バイト浮動小数点数の場合のarray書式（'f'）<br />
 sys.byteorderを使い、ビックエンディアンとリトルエンディアンを判定（システムがリトルエンディアンの場合にビックエンディアンとして読み込むようにしている）<br />
-ここではデータの先頭番号が１としているが、先頭番号を０としたい場合には、tsta - 1をtstaに、tend - tsta + 1をtend - tstaに変える
+ここではデータの先頭番号が１としているが、先頭番号を０としたい場合には、tsta - 1をtstaに、tend - tsta + 1をtend - tstaに変える<br />
+８バイト浮動小数点数の場合、array書式（'d'）となり、fin.seekで読み飛ばすサイズは8*datasize*レコード数（byte）、となる
 </li>
 </ul>
 </div>
@@ -826,7 +827,7 @@ d = hdf['データセットの名前'][:, :] # データセットの名前に対
 <h3><div class="headline1" id="gtool3_1">GTOOL3ファイル</div></h3>
 <h4><div class="headline2" id="gtool3_1_1">GTOOL3ファイルの形式</div></h4>
 <div class="text1">
-GTOOL3形式は、気候モデルMIROCの出力に用いられているバイナリ形式で、ヘッダ部とデータ部のセットで構成されている。ヘッダ部にはデータ部の格納形式やサイズ、欠損値、日時などが16 文字&#215;64欄の文字データとして格納されている。また、データの経度、緯度、高度方向の格子点数や、格子点値が記述された格子情報ファイル名なども格納され、データの名前、作成 、作成日時なども記述することができる。データ部はビックエンディアン、リトルエンディアンどちらも許容されており、機種依存性がある。
+GTOOL3形式は、気候モデルMIROCの出力に用いられているバイナリ形式で、ヘッダ部とデータ部のセットで構成され改行コードで区切られている。ヘッダ部にはデータ部の格納形式やサイズ、欠損値、日時などが16 文字&#215;64欄の文字データとして格納されている。また、データの経度、緯度、高度方向の格子点数や、格子点値が記述された格子情報ファイル名なども格納され、データの名前、作成 、作成日時なども記述することができる。データ部は単純バイナリで、ビックエンディアン、リトルエンディアンどちらも許容されており、機種依存性がある。
 <ul class="list1">
 <li>GTOOL3ファイルの形式
 <pre>
@@ -859,7 +860,7 @@ d = gt['変数名'][:, :, :] # 変数名に対応するデータ取得（次元�
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/07/05</p>
+<p>最終更新日：2023/07/07</p>
 <p>Copyright (C) 2018-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
