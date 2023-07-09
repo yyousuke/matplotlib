@@ -108,6 +108,13 @@
       <li><a href="#bin_1_4">バイナリファイルの書き出し</a></li>
     </ul>
   </li></ul>
+  <!--  Numpy独自のバイナリファイル -->
+  <ul class="list1"><li><a href="#bin_2">Numpy独自のバイナリファイル</a>
+    <ul class="list2">
+      <li><a href="#bin_2_1">Numpy独自のバイナリファイルの形式</a></li>
+      <li><a href="#bin_2_2">Numpy独自のバイナリファイルの読み書き</a></li>
+    </ul>
+  </li></ul>  
   <!--  NetCDFファイル -->
   <ul class="list1"><li><a href="#nc_1">NetCDFファイル</a>
     <ul class="list2">
@@ -521,7 +528,7 @@ df = pd.DataFrame(json.loads(data))</pre>
 <h3><div class="headline1" id="bin_1">バイナリファイル</div></h3>
 <h4><div class="headline2" id="bin_1_1">バイナリファイルの形式</div></h4>
 <div class="text1">
-ここでは、GrADs等で用いられる下記の形式の単純なバイナリファイルについて記載している。NumPyのnpy、npzとは異なる。<br />
+ここでは、GrADS等で用いられる下記の形式の単純なバイナリファイルについて記載している。<a href="#bin_2">NumPy独自のバイナリ（npy、npz）</a>とは異なる。<br />
 ４バイト浮動小数点数（単精度）のデータや８バイト浮動小数点数（倍精度）のデータを改行コード無しで並べた単純バイナリ形式<br />
 <ul class="list1">
 <li>例：単精度で経度、緯度方向とも10度の等間隔データの場合
@@ -638,11 +645,53 @@ np.array(d).astype('&lt;f8').tofile("ファイル名")
 </div>
 
 
+<!--  Numpy独自のバイナリファイル -->
+<h3><div class="headline1" id="bin_2">Numpy独自のバイナリファイル</div></h3>
+<h4><div class="headline2" id="bin_2_1">Numpy独自のバイナリファイルの形式</div></h4>
+<div class="text1">
+Numpyでは、内部で使われている配列ndarrayをNumpy独自のバイナリファイル（npy、npz）として保存できる。配列のデータ型や形状を保持でき、npyでは1つの配列、npzでは複数の配列を保存できる。このバイナリ形式はNumpy独自であり機種依存性もあるため、基本的には同じマシンでNumpyを利用して読み書きを行う。
+</div>
+
+<h4><div class="headline2" id="bin_2_2">Numpy独自のバイナリファイルの読み書き</div></h4>
+<div class="text1">
+モジュールをインポートする
+<pre>import numpy as np</pre><br />
+<ul class="list1">
+<li>Numpyを使って読み込む（npy、npz共通）
+<pre>d = np.load('ファイルへのパス')</pre>
+</li><br />
+<li>Numpyを使って書き出す（npy）
+<pre>np.save('ファイルへのパス', d)</pre>
+＊dは配列ndarray
+</li><br />
+<li>Numpyを使って書き出す（npz）
+<pre>np.savez('ファイルへのパス', d1, d2)</pre>
+＊d1, d2は配列ndarray
+</li><br />
+<li>Numpyを使って書き出す（npz、キーワードあり）
+<pre>np.savez('ファイルへのパス', data=d, lons=lons, lats=lats)</pre>
+＊d、lons、latsは配列ndarray
+</li><br />
+<li>Numpyを使って書き出す（npz、キーワードあり、圧縮）
+<pre>np.savez_compressed('ファイルへのパス', data=d, lons=lons, lats=lats)</pre>
+</li><br />
+<li>Numpyを使って読み込む（npz、キーワードあり）
+<pre>d = np.load('ファイルへのパス')
+lons = d['lons']
+lats = d['lats']
+data = d['data']
+</pre>
+＊lons、lats、dataに保存した配列が入る
+</li><br />
+</ul>
+</div>
+
+
 <!--  NetCDFファイル -->
 <h3><div class="headline1" id="nc_1">NetCDFファイル</div></h3>
 <h4><div class="headline2" id="nc_1_1">NetCDFファイルの形式</div></h4>
 <div class="text1">
-データと一緒に格子点の情報やデータの説明も一緒に格納されている。データの説明も格納できるため、データを作成したモデルの名前や作成者、変数の導出方法、参照元の文献やURL などを記述しておけば、利用者がデータの中身を理解しやすい。また、格納されたデータを機種に依存することなく取り出せるため、データの配布に適している。
+NetCDFファイルには、データと一緒に格子点の情報やデータの説明も一緒に格納されている。データの説明も格納できるため、データを作成したモデルの名前や作成者、変数の導出方法、参照元の文献やURL などを記述しておけば、利用者がデータの中身を理解しやすい。また、格納されたデータを機種に依存することなく取り出せるため、データの配布に適している。
 </div>
 
 <h4><div class="headline2" id="nc_1_2">NetCDFのモジュール</div></h4>
@@ -721,6 +770,7 @@ var1 = grp.variables['変数名1'][:]
 var2 = grp.variables['変数名2'][:]
 </pre>
 </div>
+
 
  <!--  GRIB2ファイル -->
 <h3><div class="headline1" id="grib2_1">GRIB2ファイル</div></h3>
@@ -860,7 +910,7 @@ d = gt['変数名'][:, :, :] # 変数名に対応するデータ取得（次元�
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/07/08</p>
+<p>最終更新日：2023/07/09</p>
 <p>Copyright (C) 2018-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
