@@ -90,9 +90,9 @@ dtypeの指定を行うと警告が出る
 index_listのサイズは行数、columns_listのサイズは列数と一致させる
 </li><br />
 <li>csvファイルから作成する方法
-<pre>df = pd.read_csv("ファイル名")</pre></li>
+<pre>df = pd.read_csv('ファイル名')</pre></li>
 <li>読み込んだwebページから作成する方法
-<pre>df = pd.io.html.read_html("URL")</pre>
+<pre>df = pd.io.html.read_html('URL')</pre>
 ＊テーブルになっているページから数値を取り出す
 </li><br />
 </ul>
@@ -104,8 +104,9 @@ index_listのサイズは行数、columns_listのサイズは列数と一致さ�
 <div class="text1">
 <ul class="list1">
 <li>ndarrayに列ラベルを付けて追加
-<pre>df['列ラベル'] = np.array(データ)</pre>
-データの個数はdfの行数と一致している必要あり
+<pre>df['列ラベル'] = np.array(data)</pre>
+dataはリストやタプル、ndarray、pandas DataFrameなど<br />
+dataの個数はdfの行数と一致している必要あり
 </li><br />
 <li>列同士の演算結果を追加
 <pre>df['列ラベル'] = df.loc['列1'] - df.loc['列2']</pre>
@@ -276,7 +277,7 @@ DataFrame（df）のdf.info()メソッドを使う<br />
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/07/10</p>
+<p>最終更新日：2023/07/21</p>
 <p>Copyright (C) 2021-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>

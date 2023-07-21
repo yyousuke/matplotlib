@@ -777,7 +777,7 @@ var2 = grp.variables['変数名2'][:]
 <h3><div class="headline1" id="grib2_1">GRIB2ファイル</div></h3>
 <h4><div class="headline2" id="grib2_1_1">GRIB2ファイルの形式</div></h4>
 <div class="text1">
-WMOが定めたバイナリデータの交換形式のうち、2001年に制定された第２版を指す。後述の<a href="#grib1_1">GRIB1形式</a>とは互換性がない。格納されたデータを機種に依存することなく取り出すことができ、データと一緒に格子点の情報や変数の簡単な説明等も格納できる。詳細については<a href="https://qiita.com/e_toyoda/items/ce7497e1a633b16f1ff1">Qiitaの記事</a>に詳しい。
+WMOが定めたバイナリデータの交換形式のうち、2001年に制定された第2版を指す。後述の<a href="#grib1_1">GRIB1形式</a>とは互換性がない。格納されたデータを機種に依存することなく取り出すことができ、データと一緒に格子点の情報や変数の簡単な説明等も格納できる。詳細については<a href="https://qiita.com/e_toyoda/items/ce7497e1a633b16f1ff1">Qiitaの記事</a>に詳しい。
 </div>
 
 <h4><div class="headline2" id="grib2_1_2">GRIB2ファイルの読み込み</div></h4>
@@ -801,7 +801,7 @@ pygribモジュールを用いると、直接GRIB2ファイルを読み込むこ
 <pre>
 import pygrib
 grbs = pygrib.open("ファイル名") # GRIB2ファイルを開く
-grb1 = grbs.select(forecastTime=1)[0] # 1時間後の０番目の変数
+grb1 = grbs.select(forecastTime=1)[0] # 1時間後の0番目の変数
 grbt = grbs.select(name="Temperature") # 気温の変数を選択
 </pre>
 ファイルの読み込みに時間がかかるため、読み込み処理が多い場合には<a href="#grib2_1_2">GRIB2ファイルの読み込み</a>に記述した方法に切り替えた方が良い。
@@ -817,7 +817,7 @@ grbt = grbs.select(name="Temperature") # 気温の変数を選択
 ＊-no_headerはヘッダ無し、-ieeeはビックエンディアン<br />
 ＊-order we:nsで、西から東、北から南の順に並べ替えて出力<br />
 ＊下層が先になるように、sort -nr -k5 -t':'で並べ替えを行っている<br />
-＊最初のwgrib2は、ファイルの中に含まれる変数をリスト化するためのもので、２回目のwgrib2は、リストを読み込んで入力ファイルからリストに対応するデータをファイルに書き出すためのもの。grepやsortでリストのうち必要な変数の取り出しや並べ替えを行う。<br />
+＊最初のwgrib2は、ファイルの中に含まれる変数をリスト化するためのもので、2回目のwgrib2は、リストを読み込んで入力ファイルからリストに対応するデータをファイルに書き出すためのもの。grepやsortでリストのうち必要な変数の取り出しや並べ替えを行う。<br />
 ＊追加書き込みを行う際には、wgrib2 入力ファイル.grb -i -no_header -append -order we:ns -ieee -o 出力ファイル.bin<br />
 </div>
 
@@ -826,7 +826,7 @@ grbt = grbs.select(name="Temperature") # 気温の変数を選択
 <h3><div class="headline1" id="grib1_1">GRIB1ファイル</div></h3>
 <h4><div class="headline2" id="grib1_1_1">GRIB1ファイルの形式</div></h4>
 <div class="text1">
-WMOが定めたバイナリデータの交換形式のうち、1989年に制定された第１版を指す。前述の<a href="#grib2_1">GRIB2形式</a>とは互換性がない。格納されたデータを機種に依存することなく取り出せ、データと一緒に格子点の情報や変数の簡単な説明等も格納できる。
+WMOが定めたバイナリデータの交換形式のうち、1989年に制定された第1版を指す。前述の<a href="#grib2_1">GRIB2形式</a>とは互換性がない。格納されたデータを機種に依存することなく取り出せ、データと一緒に格子点の情報や変数の簡単な説明等も格納できる。
 </div>
 
 <h4><div class="headline2" id="grib1_1_2">GRIB1ファイルの読み込み</div></h4>
@@ -838,7 +838,7 @@ GRIB1形式は、pythonで直接読むことはできないが、GrADSに付属�
 </pre>
 ＊-nhはヘッダ無し、-ieeeはビックエンディアン<br />
 ＊下層が先になるように、sort -nr -k5 -t':'で並べ替えを行っている<br />
-＊最初のwgribは、ファイルの中に含まれる変数をリスト化するためのもので、２回目のwgribは、リストを読み込んで入力ファイルからリストに対応するデータをファイルに書き出すためのもの。grepやsortでリストのうち必要な変数の取り出しや並べ替えを行う。<br />
+＊最初のwgribは、ファイルの中に含まれる変数をリスト化するためのもので、2回目のwgribは、リストを読み込んで入力ファイルからリストに対応するデータをファイルに書き出すためのもの。grepやsortでリストのうち必要な変数の取り出しや並べ替えを行う。<br />
 ＊追加書き込みを行う際には、wgrib -i -nh -ieee -append 入力ファイル.grb 出力ファイル.bin<br />
 </div>
 
@@ -911,7 +911,7 @@ d = gt['変数名'][:, :, :] # 変数名に対応するデータ取得（次元�
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/07/09</p>
+<p>最終更新日：2023/07/21</p>
 <p>Copyright (C) 2018-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
