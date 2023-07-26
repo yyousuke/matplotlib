@@ -747,7 +747,7 @@ cs.set_clim(0, 1)</pre>
 <pre>cs = m.pcolor(x, y, d)
 cs.set_clim(0, 1)
 cbar = plt.colorbar(shrink=0.4, orientation='vertical', format='%5.1f')
-cbar.set_label("カラーバーに付けるラベル", fontsize=12)
+cbar.set_label('カラーバーに付けるラベル', fontsize=12)
 </pre>
 縦向きで0.4倍に縮小されたカラーバーで、数字は小数点以下1位まで表示し全体で５文字以上<br />
 カラーバーの調整方法については、<a href="matplotlib.html#colorbar_1">カラーバー</a>参照</li><br />
@@ -777,7 +777,7 @@ matplotlibのplt.titleを使う
 <pre>
 levels = np.arange(960, 1061, 4) # 細実線を描く値
 cs = m.contour(x, y, d, levels=levels, colors='k', linewidths=[1.2, 0.8, 0.8, 0.8, 0.8]) # 4hPaで細実線、20hPaで太実線
-cs.clabel(cs.levels[::5], fmt="%d", fontsize=12) # 5飛ばし（20 hPa毎）にラベルを付ける
+cs.clabel(cs.levels[::5], fmt='%d', fontsize=12) # 5飛ばし（20 hPa毎）にラベルを付ける
 </pre>
 dはSLPデータ、linewidths=[1.2, 0.8, 0.8, 0.8, 0.8]とすることで、4hPa毎の細線、20hPa毎の太線を描く
 </li><br />
@@ -792,7 +792,7 @@ import numpy as np
 nlons = 144 # 経度方向のデータ数
 nlats = 73 # 緯度方向のデータ数
 datasize = nlons * nlats
-din = np.fromfile("入力ファイル名", dtype='&lt;f4', count=datasize) # バイナリファイルから入力
+din = np.fromfile('入力ファイル名', dtype='&lt;f4', count=datasize) # バイナリファイルから入力
 data = np.zeros((nlats, nlons+1)) # 値が0の配列を作成
 data[:, 0:nlons] = din.reshape(nlats, nlons) # 0〜357.5度までコピー
 data[:, nlons] = data[:, 0] # 0度のデータを360度のデータにコピー
@@ -821,7 +821,7 @@ m.contour(x, y, data, clevs, linewidths=0.8, colors='k') # 等高線を描く
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/05/11</p>
+<p>最終更新日：2023/07/25</p>
 <p>Copyright (C) 2018-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
