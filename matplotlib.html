@@ -2729,7 +2729,8 @@ def major_formatter(x, pos):
 &nbsp; &nbsp; &nbsp; &nbsp; return "%.0e" % x
 ax.yaxis.set_major_formatter(ticker.FuncFormatter(major_formatter))
 </pre>
-＊0の目盛り線ラベルは、指数表記ではなく0と表示されるように調整
+＊0の目盛り線ラベルは、指数表記ではなく0と表示されるように調整<br />
+＊小数第一位まで表示するには、"%.0e"を"%.1e"に変更する
 </div>
 
 <h4><div class="headline2" id="axis_1_19">軸の体裁を一括設定する</div></h4>
@@ -2896,7 +2897,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/07/27</p>
+<p>最終更新日：2023/08/01</p>
 <p>Copyright (C) 2018-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
