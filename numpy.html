@@ -175,6 +175,12 @@ isinstance(x, numbers.Number)
 np.array(var)
 </pre>
 </li>
+<li>配列ndarrayの作成（作成後に形状変更）<br />
+入力データvarの要素数が6で(3, 2)の2次元配列にする場合
+<pre>
+np.array(var).reshape(3, 2)
+</pre>
+</li>
 <li>配列ndarrayの作成（定数）<br />
 配列全部を同じ値に初期化する
 <pre>
@@ -241,13 +247,11 @@ import itertools
 i_list = np.arange(idim)
 j_list = np.arange(jdim)
 for ij in itertools.product(i_list, j_list):
-&nbsp; &nbsp;  i = ij[0]
+&nbsp; &nbsp; i = ij[0]
 &nbsp; &nbsp; j = ij[1]
 &nbsp; &nbsp; 処理
 </pre>
-
 </li>
-
 </ul>
 </div>
 <br />
@@ -265,7 +269,7 @@ for ij in itertools.product(i_list, j_list):
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/07/21</p>
+<p>最終更新日：2023/08/23</p>
 <p>Copyright (C) 2018-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
