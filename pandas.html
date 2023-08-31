@@ -150,6 +150,8 @@ dfが２次元配列の場合。new_colname1に変更する場合
 <pre>df_new = df.resample('M').mean()</pre></li>
 <li>時間軸のデータを月毎に合計する方法
 <pre>df_new = df.resample('M').sum()</pre></li>
+<li>月毎に合計、平均、最小、最大を求める
+<pre>df_new = df.resample('M').agg(['sum', 'mean', 'min', 'max'])</pre></li>
 </ul>
 </div>
 <br />
@@ -277,7 +279,7 @@ DataFrame（df）のdf.info()メソッドを使う<br />
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/07/21</p>
+<p>最終更新日：2023/09/01</p>
 <p>Copyright (C) 2021-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
