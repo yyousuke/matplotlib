@@ -68,6 +68,7 @@
       <li><a href="#time_9">年初の00UTCを取得する</a></li>
       <li><a href="#time_10">ISOフォーマットで表示する</a></li>
       <li><a href="#time_11">時間方向のループを回す</a></li>
+      <li><a href="#time_12">毎日の同じ時刻の計算</a></li>
      </ul>
   </li></ul>
   <!-- ディレクトリ、ファイル -->
@@ -490,6 +491,32 @@ while True:
 </pre>
 </li><br />
 </ul>
+</div>
+<br />
+<br />
+
+<h4><div class="headline2" id="time_12">毎日の同じ時刻の計算</div></h4>
+<div class="text1">
+開始時刻（1970-01-01 00:00:00）からの差を1日で割った余りを求める
+<ul class="list1">
+<li>Pandasの場合
+<pre>import pandas as pd
+base_time = pd.Timestamp(0)
+time = (df_time - base_time) % pd.Timedelta(1, 'D')
+</pre>
+</li><br />
+<li>Numpyの場合
+<pre>import numpy as np
+base_time = np.datetime64(0, 'ns')
+time = (df_time.to_numpy() - base_time) % np.timedelta64(1, 'D')
+</pre>
+</li><br />
+</ul>
+<pre>
+from datetime import datetime
+time = datetime.utcnow().replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
+</pre>
+月を1月、日を1日とし、時、分、行、マイクロ秒を全て0に書き換え年初の00UTCにする
 </div>
 <br />
 <br />
@@ -1198,7 +1225,7 @@ print(str(res.returncode)) # 終了ステータスの表示
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/08/27</p>
+<p>最終更新日：2023/09/01</p>
 <p>Copyright (C) 2021-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
