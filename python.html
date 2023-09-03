@@ -504,6 +504,7 @@ while True:
 base_time = pd.Timestamp(0)
 time = (df_time - base_time) % pd.Timedelta(1, 'D')
 </pre>
+＊df_timeはPandasのSeriesで時刻情報が入っている場合
 </li><br />
 <li>Numpyの場合
 <pre>import numpy as np
@@ -1220,7 +1221,7 @@ print(str(res.returncode)) # 終了ステータスの表示
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/09/02</p>
+<p>最終更新日：2023/09/03</p>
 <p>Copyright (C) 2021-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
