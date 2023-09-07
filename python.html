@@ -511,6 +511,7 @@ time = (df_time - base_time) % pd.Timedelta(1, 'D')
 base_time = np.datetime64(0, 'ns')
 time = (df_time.to_numpy() - base_time) % np.timedelta64(1, 'D')
 </pre>
+＊df_timeはPandasのSeriesかDataFrame
 </li><br />
 </ul>
 </div>
@@ -1221,7 +1222,7 @@ print(str(res.returncode)) # 終了ステータスの表示
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/09/03</p>
+<p>最終更新日：2023/09/07</p>
 <p>Copyright (C) 2021-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
