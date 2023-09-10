@@ -899,8 +899,9 @@ GTOOL3の読み込みには、<a href="https://github.com/hyungjun/gtool3/" targ
 <pre>
 from gtool3 import gtopen
 gt = gtopen("ファイル名") # GTOOL3ファイルを開く
-d = gt['変数名'][:, :, :] # 変数名に対応するデータ取得（次元はデータに合わせる）
+d = gt['変数名'][:, :, :, :] # 変数名に対応するデータ取得（次元はデータに合わせる）
 </pre>
+＊時刻、高度、緯度、経度が入ったデータの場合<br />
 ＊変数名や次元はgt.varsで表示できる。<br />
 ＊気候モデルのMIROCの出力を用いた処理方法は、<a href="https://isotope.iis.u-tokyo.ac.jp/~kanon/src/gtool4python.html">PythonでGTOOL3ファイルを処理する</a>に詳しい。
 </div>
