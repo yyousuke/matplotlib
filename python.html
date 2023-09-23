@@ -109,6 +109,7 @@
       <li><a href="#if_2">全ての要素がTrueか判定する</a></li>
       <li><a href="#if_3">いずれかの要素がTrueか判定する</a></li>
       <li><a href="#if_4">全ての要素がFalseか判定する</a></li>
+      <li><a href="#if_5">オブジェクト同士の比較</a></li>
      </ul>
   </li></ul>
   <!-- 集合 -->
@@ -876,6 +877,8 @@ bにはTrueかFalseが入っている
 <img src="./tables/Table4-4-2.png" class="size2" alt="Table" />
 </ul>
 </div>
+<br />
+<br />
 
 <h4><div class="headline2" id="if_2">全ての要素がTrueか判定する</div></h4>
 <div class="text1">
@@ -890,6 +893,8 @@ print(all([True, True, False]))
 ＊allの引数には、リスト、タプル、集合が使用可能<br />
 参考：<a href="https://note.nkmk.me/python-all-any-usage/">Pythonの組み込み関数all(), any()の使い方</a>
 </div>
+<br />
+<br />
 
 <h4><div class="headline2" id="if_3">いずれかの要素がTrueか判定する</div></h4>
 <div class="text1">
@@ -903,6 +908,8 @@ print(any([False, False, False]))
 ＊１つでもTrueが含まれていればTrueが表示される<br />
 ＊allの引数には、リスト、タプル、集合が使用可能
 </div>
+<br />
+<br />
 
 <h4><div class="headline2" id="if_4">全ての要素がFalseか判定する</div></h4>
 <div class="text1">
@@ -915,6 +922,28 @@ print(not any([False, False, True]))
 </pre>
 ＊anyの否定を取ることで、全ての要素がFalseの場合を判定できる<br />
 ＊allの引数には、リスト、タプル、集合が使用可能
+</div>
+<br />
+<br />
+
+<h4><div class="headline2" id="if_5">オブジェクト同士の比較</div></h4>
+<div class="text1">
+isinstence関数を用いる
+<pre>isinstance(object, classinfo) </pre>
+１番目の引数のオブジェクトが、２番目の引数で指定したデータ型のオブジェクトかサブクラスのオブジェクトの場合にTrueとなる
+<ul class="list1">
+<li>整数型か判断する
+<pre>isinstance(1, int) 
+出力：True
+</pre>
+<li>文字列型か判断する
+<pre>isinstance(1, str) 
+出力：False
+<pre>isinstance("1", str) 
+出力：True
+</pre>
+</li>
+</ul>
 </div>
 <br />
 <br />
@@ -1222,7 +1251,7 @@ print(str(res.returncode)) # 終了ステータスの表示
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/09/07</p>
+<p>最終更新日：2023/09/23</p>
 <p>Copyright (C) 2021-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
