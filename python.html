@@ -939,8 +939,17 @@ isinstence関数を用いる
 <li>文字列型か判断する
 <pre>isinstance(1, str) 
 出力：False
-<pre>isinstance("1", str) 
+isinstance("1", str) 
 出力：True
+</pre>
+</li>
+<li>整数か浮動小数点数のどちらかとの一致を判断する
+<pre>isinstance(1, (int, float)) 
+出力：True
+isinstance(1.5, (int, float)) 
+出力：True
+isinstance("1.5", (int, float)) 
+出力：False
 </pre>
 </li>
 </ul>
@@ -1251,7 +1260,7 @@ print(str(res.returncode)) # 終了ステータスの表示
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/09/23</p>
+<p>最終更新日：2023/09/24</p>
 <p>Copyright (C) 2021-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
