@@ -952,6 +952,18 @@ isinstance("1.5", (int, float))
 出力：False
 </pre>
 </li>
+<li>bool型のな場合
+<pre>isinstance(True, int)
+出力：True
+<pre>isinstance(False, int)
+出力：True
+<pre>isinstance(True, bool)
+出力：True
+<pre>isinstance(False, bool)
+出力：True
+</pre>
+</li>
+
 </ul>
 </div>
 <br />
@@ -1260,7 +1272,7 @@ print(str(res.returncode)) # 終了ステータスの表示
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/09/24</p>
+<p>最終更新日：2023/09/25</p>
 <p>Copyright (C) 2021-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
