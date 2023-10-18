@@ -936,6 +936,7 @@ isinstence関数を用いる
 <pre>isinstance(1, int) 
 出力：True
 </pre>
+</li>
 <li>文字列型か判断する
 <pre>isinstance(1, str) 
 出力：False
@@ -955,15 +956,17 @@ isinstance("1.5", (int, float))
 <li>bool型のな場合
 <pre>isinstance(True, int)
 出力：True
+</pre>
 <pre>isinstance(False, int)
 出力：True
+</pre>
 <pre>isinstance(True, bool)
 出力：True
+</pre>
 <pre>isinstance(False, bool)
 出力：True
 </pre>
 </li>
-
 </ul>
 </div>
 <br />
@@ -1035,7 +1038,7 @@ urllib.request.urlretrieve("URL", "保存するファイルのパス")
 <pre>
 import urllib.request
 def download(cnt=2):
-&nbsp; &nbsp; if cnt <= 0:
+&nbsp; &nbsp; if cnt &lt;= 0:
 &nbsp; &nbsp; &nbsp; &nbsp; raise RecursionError('maximum recursion count exceeded')
 &nbsp; &nbsp; try:
 &nbsp; &nbsp; &nbsp; &nbsp; urllib.request.urlretrieve("URL", "保存するファイルのパス")
@@ -1272,7 +1275,7 @@ print(str(res.returncode)) # 終了ステータスの表示
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/09/25</p>
+<p>最終更新日：2023/10/18</p>
 <p>Copyright (C) 2021-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
