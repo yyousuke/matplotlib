@@ -124,6 +124,7 @@
     <ul class="list2">
       <li><a href="#web_1">pythonでwebサーバを起動</a></li>
       <li><a href="#web_2">ファイルをダウンロードする</a></li>
+      <li><a href="#web_3">ダウンロードにリトライ回数を設定する</a></li>
      </ul>
   </li></ul>
   <!-- 設定ファイル -->
@@ -620,15 +621,15 @@ os.chown("ディレクトリ、ファイル名", uid, gid)
 ＊指定されたuid、gid（整数型）に変更する<br />
 ＊いずれかを変更しない場合には、-1を指定する
 <ul class="list1">
-<li>tmp01のGIDを5000に変更する
+<li>dir01のGIDを5000に変更する
 <pre>
-os.chown("tmp01", -1, 5000)
+os.chown("dir01", -1, 5000)
 </pre>
 実行するユーザが変更前・変更後の両方のグループに所属していない場合はエラー
 </li><br />
-<li>tmp01/file01.txtのUIDを1040に変更する
+<li>dir01/file01.txtのUIDを1040に変更する
 <pre>
-os.chown("tmp01/file01.txt", 1040, -1)
+os.chown("dir01/file01.txt", 1040, -1)
 </pre>
 所有者を変更できるのはroot権限で実行した場合のみ<br />
 </li>
@@ -1044,7 +1045,7 @@ def download(cnt=2):
 &nbsp; &nbsp; &nbsp; &nbsp; urllib.request.urlretrieve("URL", "保存するファイルのパス")
 &nbsp; &nbsp; except OSError:
 &nbsp; &nbsp; &nbsp; &nbsp; time.sleep(10.0)  # 10秒間待つ
-&nbsp; &nbsp; &nbsp; &nbsp; downloadcnt=cnt - 1)  # cntを減らして再帰
+&nbsp; &nbsp; &nbsp; &nbsp; download(cnt=cnt - 1)  # cntを減らして再帰
 </pre>
 </div>
 <br />
@@ -1275,7 +1276,7 @@ print(str(res.returncode)) # 終了ステータスの表示
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/10/18</p>
+<p>最終更新日：2023/10/21</p>
 <p>Copyright (C) 2021-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
