@@ -161,6 +161,7 @@
     <ul class="list2">
       <li><a href="#img_1_1">画像ファイルの読み込み（Pillow）</a></li>
       <li><a href="#img_1_2">画像ファイルの書き出し（Pillow）</a></li>
+      <li><a href="#img_1_3">読み込んだ画像の処理（Pillow）</a></li>
     </ul>
   </li></ul>
 </div>
@@ -919,10 +920,61 @@ d = gt['変数名'][:, :, :, :] # 変数名に対応するデータ取得（次�
 <h3><div class="headline1" id="img_1">画像ファイル</div></h3>
 <h4><div class="headline2" id="img_1_1">画像ファイルの読み込み（Pillow）</div></h4>
 <div class="text1">
+ここでは、様々な画像フォーマットに対応しているPillowを利用した読み込み方法を紹介しています。Pillowでは、PNG、BMP、GIF、JPEG、TIFF、EPSなど、主要な形式の読み書きに対応しています。読み込む場合には、
+<pre>from PIL import Image
+im = Image.open("画像ファイルのパス")
+</pre>
+Numpyで扱う場合には、次のようにndarrayに変換します。
+<pre>im = np.asarray(im)</pre>
+urllibを利用して、web上の画像を読み込むことも可能です。
+<pre>from PIL import Image
+import urllib.request
+im = Image.open(urllib.request.urlopen("URLを指定"))
+</pre>
 </div>
 
 <h4><div class="headline2" id="img_1_2">画像ファイルの書き出し（Pillow）</div></h4>
 <div class="text1">
+Pillowで書き出す場合には、
+<pre>im.save("画像ファイル名")</pre>
+書き出す画像の質を指定する場合（jpg）、
+<pre>im.save("画像ファイル名.jpg", quality=95)</pre>
+</div>
+
+<h4><div class="headline2" id="img_1_3">読み込んだ画像の処理（Pillow）</div></h4>
+<div class="text1">
+Pillowの機能としてグレースケール変換、切り出し、サイズの変更などが可能。
+<ul class="list1">
+<li>グレースケール変換
+<pre>from PIL import Image
+im = Image.open("画像ファイルのパス")
+im_gray = im.convert('L') # グレースケールに変換
+</pre>
+</li>
+<li>切り出し
+<pre>im = im.crop((0, 50, 600, 300))</pre>
+座標は(left, upper, right, lower)で指定する<br />
+tupleで与えるので、括弧が2重になっている
+</li><br />
+<li>サイズの変更
+<pre>im = im.resize((128, 128))</pre>
+128x128ピクセルに変換する
+</li><br />
+<li>サイズの変更（手法の指定）
+<pre>im = im.resize((128, 128), Image.LANCZOS)</pre>
+LANCZOSフィルターを用いる<br />
+デフォルトはNEARESTフィルター<br />
+NEAREST、BOX、BILINEAR、HAMMING、BICUBIC、LANCZOSが指定可能（後のものほど高品質で処理時間かかる）
+<li>画像の回転
+<pre>im = im.rotate(90))</pre>
+90度回転する
+</li><br />
+<li>カラー画像のRGB成分を取り出す
+<pre>r, g, b = im.split()</pre>
+</li>
+<li>取り出したRGB成分をBRGに入れ替える
+<pre>im = Image.merge("RGB", (b, r, g))</pre>
+</li>
 </div>
 
 
