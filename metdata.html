@@ -796,7 +796,8 @@ GRIB2ファイルの読み込みを行うには、まずGRIB2からNetCDFへ変�
 </pre>
 で導入できる。wgrib2を用いて次のように変換する。
 <pre>% wgrib2 入力ファイル名 -netcdf 出力ファイル名</pre>
-変換後のファイルは、<a href="#nc_1">NetCDF</a>に記述した方法で読み込み可能
+変換後のファイルは、<a href="#nc_1">NetCDF</a>に記述した方法で読み込み可能<br />
+＊wgrib2のバージョン3.1.2ではJPEG2000のエラーが発生するデータが存在する。バージョン3.1.3では解消された。
 </div>
 
 <h4><div class="headline2" id="grib2_1_3">pygribを使ったGRIB2ファイルの読み込み</div></h4>
@@ -983,7 +984,7 @@ NEAREST、BOX、BILINEAR、HAMMING、BICUBIC、LANCZOSが指定可能（後の�
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/11/05</p>
+<p>最終更新日：2023/11/07</p>
 <p>Copyright (C) 2018-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
