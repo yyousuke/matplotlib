@@ -1266,6 +1266,25 @@ print(str(res.returncode)) # 終了ステータスの表示
 <br />
 
 
+<!-- その他 -->
+<h3><div class="headline1" id="misc">その他</div></h3>
+<h4><div class="headline2" id="misc_1">QRコードを生成する</div></h4>
+<div class="text1">
+pyqrcodeを使う（pngで書き出す際はpypngも必要）。MacPortsの場合には、
+<pre>% sudo port install py311-pypng py311-pyqrcode</pre>
+py311の部分はpythonのバージョンに合わせて変更する。次のようにQRコードを生成する。
+<pre>
+import pyqrcode
+# QRコード生成
+code = pyqrcode.create("URLやメールアドレスなど", error='L', version=3, mode='binary')
+# pngで保存
+code.png("ファイル名.png", scale=5, module_color=[0, 0, 0, 128], background=[255, 255, 255])
+</pre>
+</div>
+<br />
+<br />
+
+
 <br />
 <br />
 <br />
@@ -1276,7 +1295,7 @@ print(str(res.returncode)) # 終了ステータスの表示
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/10/21</p>
+<p>最終更新日：2023/11/09</p>
 <p>Copyright (C) 2021-2023, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
