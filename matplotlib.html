@@ -2619,13 +2619,13 @@ import matplotlib.dates as mdate
 ax.xaxis.set_major_formatter(mdates.DateFormatter('時刻表記の書式'))
 </pre>
 <ul class="list1">
-<li>４桁の年/２桁の月表記にする（例：2022/08）
+<li>4桁の年/2桁の月表記にする（例：2022/08）
 <pre>ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y/%m'))</pre></li>
-<li>２桁の年/２桁の月表記にする（例：22/08）
+<li>2桁の年/2桁の月表記にする（例：22/08）
 <pre>ax.xaxis.set_major_formatter(mdates.DateFormatter('%y/%m'))</pre></li>
-<li>２桁の月/２桁の日表記にする（例：08/21）
+<li>2桁の月/2桁の日表記にする（例：08/21）
 <pre>ax.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))</pre></li>
-<li>３文字の月 ２桁の日表記にする（例：Aug 21）
+<li>3文字の月 2桁の日表記にする（例：Aug 21）
 <pre>ax.xaxis.set_major_formatter(mdates.DateFormatter('%b %d'))</pre></li>
 </ul>
 時刻表記の書式については<a href="forms.html#time">時刻表記に用いられる書式指定子一覧</a>参照
@@ -2855,28 +2855,28 @@ plt.axis('off')
 plt.gca().spines['right'].set_visible(False)
 plt.gca().yaxis.set_ticks_position('left')
 </pre>
-１行目だけでは右側の目盛りと目盛り線が残ってしまうので、２行目で左側だけ残す指定を行なっている
+1行目だけでは右側の目盛りと目盛り線が残ってしまうので、2行目で左側だけ残す指定を行なっている
 </li><br />
 <li>上側の枠線と目盛りを消す場合
 <pre>
 plt.gca().spines['top'].set_visible(False)
 plt.gca().xaxis.set_ticks_position('bottom')
 </pre>
-１行目だけでは上側の目盛りと目盛り線が残ってしまうので、２行目で下側だけ残す指定を行なっている
+1行目だけでは上側の目盛りと目盛り線が残ってしまうので、2行目で下側だけ残す指定を行なっている
 </li><br />
 <li>左側の枠線と目盛りを消す場合
 <pre>
 plt.gca().spines['left'].set_visible(False)
 plt.gca().yaxis.set_ticks_position('right')
 </pre>
-２行目の指定で、右側に目盛りと目盛り線を付けている
+2行目の指定で、右側に目盛りと目盛り線を付けている
 </li><br />
 <li>下側の枠線と目盛りを消す場合
 <pre>
 plt.gca().spines['bottom'].set_visible(False)
 plt.gca().xaxis.set_ticks_position('top')
 </pre>
-２行目の指定で、上側に目盛りと目盛り線を付けている
+2行目の指定で、上側に目盛りと目盛り線を付けている
 </li><br />
 </ul>
 plt.gca()については、<a href="#graph_1_12">直前に操作したサブプロットの情報を取得する</a>参照
