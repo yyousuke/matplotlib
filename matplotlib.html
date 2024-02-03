@@ -94,7 +94,7 @@
       <li><a href="#graph_1_6">複雑なサブプロットの配置</a></li>
       <li><a href="#graph_1_7">複数のサブプロットに１つのタイトルを付ける</a></li>
       <li><a href="#graph_1_8">サブプロットの中に別のサブプロットを配置</a></li>
-      <li><a href="#graph_1_9">２軸グラフを作成する</a></li>
+      <li><a href="#graph_1_9">2軸グラフを作成する</a></li>
       <li><a href="#graph_1_10">サブプロットのサイズを調整する</a></li>
       <li><a href="#graph_1_11">複数のサブプロットを配置した時のx軸、y軸ラベルの付け方</a></li>
       <li><a href="#graph_1_12">直前に操作したサブプロットの情報を取得する</a></li>
@@ -111,7 +111,7 @@
       <li><a href="#graph_2_6">折れ線グラフのマークを塗り潰す</a></li>
       <li><a href="#graph_2_7">階段状のグラフ</a></li>
       <li><a href="#graph_2_8">折れ線グラフにx=0、y=0の線を付ける</a></li>
-      <li><a href="#graph_2_9">２つの折れ線グラフの間を塗り潰す</a></li>
+      <li><a href="#graph_2_9">2つの折れ線グラフの間を塗り潰す</a></li>
       <li><a href="#graph_2_10">折れ線グラフに凡例を付ける</a></li>
       <li><a href="#graph_2_11">折れ線グラフをログスケールで表示する</a></li>
     </ul>
@@ -146,7 +146,7 @@
       <li><a href="#graph_4_6">ヒストグラムのビンの間隔を設定する</a></li>
       <li><a href="#graph_4_7">ヒストグラムに凡例を付ける</a></li>
       <li><a href="#graph_4_8">ヒストグラムを描く際に合計を１にする</a></li>
-      <li><a href="#graph_4_9">２つのヒストグラムを同時に描く</a></li>
+      <li><a href="#graph_4_9">2つのヒストグラムを同時に描く</a></li>
       <li><a href="#graph_4_10">ヒストグラムを横に並べる</a></li>
       <li><a href="#graph_4_11">積み上げヒストグラムを描く</a></li>
       <li><a href="#graph_4_12">ヒストグラムと一緒にカーネル密度推定のグラフを描く</a></li>
@@ -757,7 +757,7 @@ ax2 = plt.axes([0.20, 0.27, 0.3, 0.2]) # 小枠の作成</pre>
 与えるリストの要素は、x軸上の座標、y軸上の座標、横幅、縦幅の順
 </div>
 
-<h4><div class="headline2" id="graph_1_9">２軸グラフを作成する</div></h4>
+<h4><div class="headline2" id="graph_1_9">2軸グラフを作成する</div></h4>
 <div class="text1">
 <pre>
 ax1 = fig.add_subplot(2, 1, 1)
@@ -924,7 +924,7 @@ cos(x)とsin(x)の間を塗り潰す
 plt.plot(x, np.cos(x), color='k')
 plt.plot(x, np.sin(x), color='k')
 plt.fill_between(x, np.sin(x), np.cos(x), color='gray', alpha=0.4)</pre>
-で２つの折れ線グラフの間が灰色で塗り潰される<br />
+で2つの折れ線グラフの間が灰色で塗り潰される<br />
 cos(x)が正の場合に0とcos(x)の間を塗り潰す（不透明度0.4）<br />
 ＊alphaは、0で透明、1で不透明
 <pre>
@@ -1063,7 +1063,7 @@ for n in np.arange(3):
 
 <h4><div class="headline2" id="graph_3_11">棒グラフにエラーバーを付ける</div></h4>
 <div class="text1">
-エラーバーの書式をerror_kwで与え、エラーバーのデータをyerrで与える。透明度が0.3、ヒゲのキャップサイズが3の場合
+エラーバーの書式をerror_kwで与え、エラーバーのデータをyerrで与える。例えば、棒グラフで平均値を、エラーバーで標準偏差を表示する。次は、透明度が0.3、ヒゲのキャップサイズが3の場合
 <pre>
 error_config = {'ecolor': '0.3', 'capsize': 3}
 plt.bar(x軸のデータ, y軸のデータ, yerr=y軸のエラーバーデータ, error_kw=error_config)</pre>
@@ -1166,14 +1166,14 @@ plt.hist(データ, bins=edges)</pre>
 凡例を調整する方法は<a href="#legend_1">凡例</a>参照
 </div>
 
-<h4><div class="headline2" id="graph_4_8">ヒストグラムを描く際に合計を１にする</div></h4>
+<h4><div class="headline2" id="graph_4_8">ヒストグラムを描く際に合計を1にする</div></h4>
 <div class="text1">
 <pre>plt.hist(データ, density=True)</pre>
 </div>
 
-<h4><div class="headline2" id="graph_4_9">２つのヒストグラムを同時に描く</div></h4>
+<h4><div class="headline2" id="graph_4_9">2つのヒストグラムを同時に描く</div></h4>
 <div class="text1">
-半透明にしたヒストグラムを使い、２つのヒストグラムが重なる部分も判別できるようにする
+半透明にしたヒストグラムを使い、2つのヒストグラムが重なる部分も判別できるようにする
 <pre>
 plt.hist(データ1, color='b', alpha=0.4)
 plt.hist(データ2, color='r', alpha=0.4)</pre>
@@ -1181,7 +1181,7 @@ plt.hist(データ2, color='r', alpha=0.4)</pre>
 
 <h4><div class="headline2" id="graph_4_10">ヒストグラムを横に並べる</div></h4>
 <div class="text1">
-１つ目のデータを青色、２つ目のデータを赤色で塗り潰す
+1つ目のデータを青色、2つ目のデータを赤色で塗り潰す
 <pre>plt.hist([データ1, データ2], color=['b', 'r'], label=["ラベル1", "ラベル2"])</pre>
 リストを渡すことができる
 </div>
@@ -1268,7 +1268,7 @@ fig.colorbar(cs)</pre></li>
 
 <h4><div class="headline2" id="graph_5_8">散布図に複数のデータを同時に描く</div></h4>
 <div class="text1">
-１番目のデータを青、２番目のデータを赤で描く
+1番目のデータを青、2番目のデータを赤で描く
 <pre>
 plt.scatter(x軸のデータ1, y軸のデータ2, color='b')
 plt.scatter(x軸のデータ1, y軸のデータ2, color='r')</pre>
@@ -1480,12 +1480,12 @@ colorではなくcolorsなので注意<br />
 levelsオプションに等高線を描きたい値のリストを渡す
 <pre>plt.contour(x軸上の位置, y軸上の位置, z軸データ, levels=等高線を描く値のリスト)</pre>
 <ul class="list1">
-<li>例：１、２、５、10、12の値を描く
+<li>例：1、2、5、10、12の値を描く
 <pre>
 levels = [1, 2, 5, 10, 12] # 等高線の値のリスト
 plt.contour(X, Y, Z, levels=levels)
 </pre></li>
-<li>例：２から20まで２毎等間隔に描く
+<li>例：2から20まで2毎等間隔に描く
 <pre>
 levels = np.arange(2, 20, 2) # 値のリスト作成
 plt.contour(X, Y, Z, levels=levels)
@@ -1516,16 +1516,16 @@ cs.clabel(fmt="%.1f") # ラベルを付ける
 </ul>
 </div>
 
-<h4><div class="headline2" id="graph_8_7">等高線のラベルを１つ飛ばしに付ける</div></h4>
+<h4><div class="headline2" id="graph_8_7">等高線のラベルを1つ飛ばしに付ける</div></h4>
 <div class="text1">
-スライスの記法[::2]を使い、等高線のリストを１つ飛ばしでcs.clabelに渡す
+スライスの記法[::2]を使い、等高線のリストを1つ飛ばしでcs.clabelに渡す
 <pre>
 cs = plt.contour(X, Y, Z, colors='k', levels=levels) # 等高線を描く
 clevels = cs.levels # 等高線を描いたレベルを取得
 cs.clabel(clevels[::2], fmt="%d", fontsize=12) # ラベルを付ける
 </pre>
 <ul class="list1">
-<li>例：等高線を２の倍数、ラベルを４の倍数の値に付ける
+<li>例：等高線を2の倍数、ラベルを4の倍数の値に付ける
 <pre>
 # levelsに2の倍数をリストとして入れる
 levels = range(math.floor(Z.min() - math.fmod(Z.min(), 2)), math.ceil(Z.max()) + 1, 2)
@@ -1534,10 +1534,10 @@ cs.clabel(cs.levels[::2], fmt="%d", fontsize=12) # ４の倍数の値にラベ�
 </pre></li>
 <li>例：実線と破線を描くオプションと組み合わせる
 <pre>
-# levelsに２の倍数をリストとして入れる
+# levelsに2の倍数をリストとして入れる
 levels = range(math.floor(Z.min() - math.fmod(Z.min(), 2)), math.ceil(Z.max()) + 1, 2)
 cs = plt.contour(X, Y, Z, colors='k', levels=levels, linestyles=['-', ':']) # 等高線を描く
-cs.clabel(cs.levels[::2], fmt="%d", fontsize=12) # ４の倍数の値にラベルを付ける
+cs.clabel(cs.levels[::2], fmt="%d", fontsize=12) # 4の倍数の値にラベルを付ける
 </pre></li>
 <li>例：20 hPa毎に太実線、4 hPa毎に細実線
 <pre>
@@ -1567,8 +1567,8 @@ cs.clabel(cs.levels[::5], fmt="%d", fontsize=12) # 5飛ばし（20 hPa毎）に�
 <div class="text1">
 <pre>plt.contourf(x軸上の位置, y軸上の位置, z軸データ)</pre>
 ax.contourf()でも同じ（axは<a href="#graph_1_2">fig.add_subplot</a>の戻り値）<br />
-x軸上の位置、y軸上の位置は２次元メッシュデータで与える<br />
-１次元データ(x, y)から２次元メッシュデータ(X, Y)を作成する場合には
+x軸上の位置、y軸上の位置は2次元メッシュデータで与える<br />
+1次元データ(x, y)から2次元メッシュデータ(X, Y)を作成する場合には
 <pre>X, Y = np.meshgrid(x, y)</pre>
 </div>
 
@@ -1609,9 +1609,9 @@ levelsオプションに陰影を変える個数を与える
 陰影のカラースケールの基準となる下限、上限は、それぞれvmin、vmaxオプションで指定
 <pre>plt.contourf(x軸上の位置, y軸上の位置, z軸データ, vmin=数字, vmax=数字)</pre>
 <ul class="list1">
-<li>例：Zが３〜９の範囲で色を変化させる
+<li>例：Zが3〜9の範囲で色を変化させる
 <pre>plt.contourf(X, Y, Z, cmap='bwr', vmin=3, vmax=9)</pre></li>
-<li>例：Zが３〜９の範囲で色を変化させ、範囲外の色を指定する
+<li>例：Zが3〜9の範囲で色を変化させ、範囲外の色を指定する
 <pre>
 import matplotlib as mpl
 cmap = mpl.cm.get_cmap("bwr").copy() # 色テーブル取得
@@ -1660,7 +1660,7 @@ hatchesオプションを使う
 <pre>plt.contourf(x軸上の位置, y軸上の位置, z軸データ, hatches='ハッチパターンのリスト')</pre>
 パターンは<a href="./options.html#hatch">ハッチのパターン</a>参照
 <ul class="list1">
-<li>例：３種類のハッチパターンを繰り返す
+<li>例：3種類のハッチパターンを繰り返す
 <pre>
 plt.contourf(X, Y, Z, levels=levels, cmap=cmap, vmin=3, vmax=9, hatches=['//', '..', 'xx'] ) 
 </pre>
@@ -1957,9 +1957,9 @@ for partname, edgecolor, linestyle, linewidth in zip(partnames, edgecolors, line
 <div class="text1">
 <pre>plt.streamplot(x軸上の位置, y軸上の位置, 東西風, 南北風)</pre>
 ax.streamplot()でも同じ（axは<a href="#graph_1_2">fig.add_subplot</a>の戻り値）<br />
-x軸上の位置、y軸上の位置は２次元メッシュデータで与える<br />
+x軸上の位置、y軸上の位置は2次元メッシュデータで与える<br />
 東西風、南北風は２次元の配列<br />
-１次元データ(x, y)から２次元メッシュデータ(X, Y)を作成する場合には
+1次元データ(x, y)から２次元メッシュデータ(X, Y)を作成する場合には
 <pre>X, Y = np.meshgrid(x, y)</pre>
 </div>
 
@@ -1977,9 +1977,9 @@ x軸上の位置、y軸上の位置は２次元メッシュデータで与える
 <div class="text1">
 流線関数の間隔はdensity、線の幅はlinewidthで指定
 <pre>plt.streamplot(x軸上の位置, y軸上の位置, 東西風, 南北風, density=数字, linewidth=数字)</pre>
-densityのデフォルト値は１、linewidthのデフォルト値は１
+densityのデフォルト値は1、linewidthのデフォルト値は1
 <ul class="list1">
-<li>例：流線関数の幅を２にする
+<li>例：流線関数の幅を2にする
 <pre>plt.streamplot(X, Y, U, V, linewidths=2)</pre></li>
 <li>例：流線関数の間隔を広くする
 <pre>plt.streamplot(X, Y, U, V, density=0.5)</pre></li>
@@ -2897,7 +2897,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/01/01</p>
+<p>最終更新日：2024/02/03</p>
 <p>Copyright (C) 2018-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
