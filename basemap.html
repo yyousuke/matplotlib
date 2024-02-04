@@ -415,7 +415,7 @@ lat_0は-90から90まで許容されているが、45より大きい値を指�
 <h4><div class="headline2" id="basemap_3_1">経度・緯度データの作成</div></h4>
 <div class="text1">
 <ul class="list1">
-<li>np.indicesを使い２次元配列を作成<br />
+<li>np.indicesを使い2次元配列を作成<br />
 nlonsが経度方向のデータ数、nlatsが緯度方向のデータ数で、全球の格子点データの場合。緯度方向は北極が先、南極が後の場合。
 <pre>
 delta = 360. / (nlons - 1)
@@ -425,19 +425,19 @@ m = Basemap(オプション)
 x, y = m(lons, lats)
 </pre>
 Numpyのnp.indicesを使い、経度(lons)、緯度(lats)データを作成し、図法に対応した(x, y)データに変換する</li><br />
-<li>経度、緯度の１次元データから作成
-lonが経度の１次元データ、latが緯度の１次元データの場合。
+<li>経度、緯度の1次元データから作成
+lonが経度の1次元データ、latが緯度の1次元データの場合。
 <pre>
 lons, lats = np.meshgrid(lon, lat)
 m = Basemap(オプション)
 x, y = m(lons, lats)
 </pre>
-１次元目が緯度、２次元目が経度の２次元データになる。</li><br />
+1次元目が緯度、2次元目が経度の2次元データになる。</li><br />
 <li>緯度データの範囲が−180〜180度の場合に、0〜360度の範囲に変換する
 <pre>
 lon = np.array([l + 360. if l &lt; 0 else l for l in lon])
 </pre>
-lonが経度の１次元データの場合</li><br />
+lonが経度の1次元データの場合</li><br />
 <li>緯度データの範囲変更（ndarrayの場合）
 <pre>
 lon[lon &lt; 0] = lon[lon &lt; 0] + 360.
@@ -452,7 +452,7 @@ m = Basemap(オプション)
 x, y = m(経度データ, 緯度データ)
 m.contour(x, y, 等高線のデータ)
 </pre>
-経度データ、緯度データ、等高線のデータは２次元
+経度データ、緯度データ、等高線のデータは2次元
 <ul class="list1">
 <li>例：<a href="#basemap_3_1">作成した経度・緯度データ</a>と等高線のデータ（d）で作図
 <pre>
@@ -479,7 +479,7 @@ cs = m.contour(x, y, d, levels=[0, 1, 2, 3, 4, 5])
 cs.clabel()
 </pre>
 m.contourの戻り値を使い、等高線のラベルを付ける</li><br />
-<li>例：等高線を２から20まで2毎等間隔に描く
+<li>例：等高線を2から20まで2毎等間隔に描く
 <pre>
 levels = np.arange(2, 20, 2) # 値のリスト作成
 m.contour(x, y, d, levels=levels)
@@ -498,13 +498,13 @@ m.contour(x, y, d, levels=levels) # 等高線を描く
 </pre>
 ZがNumpyのndarrayの場合。最小値よりも小さい最大の整数をnp.floor(Z.min())、最大値よりも大きい最小の整数をnp.ceil(Z.max())で取得、<a href="numpy.html#math">Numpyの数学関数</a>、<a href="numpy.html#stat">Numpyの統計処理</a>参照
 </li><br />
-<li>例：等高線のラベルを１つ飛ばしに付ける
+<li>例：等高線のラベルを1つ飛ばしに付ける
 <pre>
 cs = m.contour(x, y, d, levels=levels)
 clevels = cs.levels
 cs.clabel(clevels[::2])
 </pre>
-cs.clabelにラベルを付ける値をclevels[::2]で与えることで、等高線のラベルを１つ飛ばしに付ける</li><br />
+cs.clabelにラベルを付ける値をclevels[::2]で与えることで、等高線のラベルを1つ飛ばしに付ける</li><br />
 <li>例：データの最小値から最大値の範囲内で1.5毎等間隔に描きラベルを付ける
 <pre>
 levels = np.arange(np.floor(d.min()), np.ceil(d.max()), 1.5) # 値のリスト作成
@@ -608,7 +608,7 @@ x, y = m(経度データ, 緯度データ)
 m.barbs(x, y, 東西風データ, 南北風データ)
 </pre>
 <ul class="list1">
-<li>例：２次元データlons, lats, u, vから矢羽をプロット
+<li>例：2次元データlons, lats, u, vから矢羽をプロット
 <pre>
 m = Basemap()
 x, y = m(lons, lats)
@@ -664,7 +664,7 @@ m.plot(x, y, "マーカーの色と種類")
 <pre>
 m.plot(x, y, "wo")
 </pre>
-色、マーカーをまとめて記述（それぞれ１文字のみ可能、順番はどちらでも良い）<br />
+色、マーカーをまとめて記述（それぞれ1文字のみ可能、順番はどちらでも良い）<br />
 マーカーの名前は<a href="./options.html#marker">指定可能なマーカーの一覧</a>参照<br />
 色の名前は<a href="./options.html#color">色の名前一覧</a>参照</li><br />
 <li>例：マーカーを白色の丸にする場合（色の名前とマーカーの種類は別々に記述）
@@ -725,7 +725,7 @@ m.pcolor(x, y, カラープロットのデータ)
 経度データ、緯度データ、カラープロットのデータは２次元<br />
 pcolorの代わりにpcolormeshを使うこともできる
 <ul class="list1">
-<li>例：２次元データlons, lats, dから疑似カラープロットを描く
+<li>例：2次元データlons, lats, dから疑似カラープロットを描く
 <pre>
 m = Basemap()
 x, y = m(lons, lats)
@@ -749,7 +749,7 @@ cs.set_clim(0, 1)
 cbar = plt.colorbar(shrink=0.4, orientation='vertical', format='%5.1f')
 cbar.set_label('カラーバーに付けるラベル', fontsize=12)
 </pre>
-縦向きで0.4倍に縮小されたカラーバーで、数字は小数点以下1位まで表示し全体で５文字以上<br />
+縦向きで0.4倍に縮小されたカラーバーで、数字は小数点以下1位まで表示し全体で5文字以上<br />
 カラーバーの調整方法については、<a href="matplotlib.html#colorbar_1">カラーバー</a>参照</li><br />
 <li>Warningの抑制
 <pre>m.pcolor(x, y, d, cmap='jet', shading='auto')</pre>
@@ -821,7 +821,7 @@ m.contour(x, y, data, clevs, linewidths=0.8, colors='k') # 等高線を描く
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/01/01</p>
+<p>最終更新日：2024/02/04</p>
 <p>Copyright (C) 2018-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>

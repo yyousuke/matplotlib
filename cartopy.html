@@ -536,19 +536,19 @@ cartopyバージョン0.18以降で対応<br />
 <h4><div class="headline2" id="cartopy_3_1">経度・緯度データの作成</div></h4>
 <div class="text1">
 <ul class="list1">
-<li>np.meshgridを使い２次元配列を作成<br />
+<li>np.meshgridを使い2次元配列を作成<br />
 nlonsが経度方向のデータ数、nlatsが緯度方向のデータ数で、全球の格子点データの場合。緯度方向は北極が先、南極が後の場合。
 <pre>
 delta = 360. / (nlons - 1)
-lon = delta * np.arange(nlons) # １次元の経度データ
-lat = 90. - delta * np.arange(nlons) # １次元の緯度データ
-x, y = np.meshgrid(lon - 180.0, lat) # ２次元の経度・緯度座標の準備
+lon = delta * np.arange(nlons) # 1次元の経度データ
+lat = 90. - delta * np.arange(nlons) # 2次元の緯度データ
+x, y = np.meshgrid(lon - 180.0, lat) # 2次元の経度・緯度座標の準備
 </pre>
 Numpyのnp.meshgridを使い、経度(lons)、緯度(lats)データを作成する。<br />
-１次元目が緯度、２次元目が−180度を開始点とする経度の２次元データになる。<br />
+1次元目が緯度、2次元目が−180度を開始点とする経度の2次元データになる。<br />
 central_longitude=180の場合、データの経度も変更する</li><br />
 <li>NetCDFファイルから読み込んだ経度、緯度の１次元データから作成
-lonが経度の１次元データ、latが緯度の１次元データの場合。
+lonが経度の1次元データ、latが緯度の1次元データの場合。
 <pre>
 import netCDF4
 nc = netCDF4.Dataset('ファイル名', 'r') # NetCDFファイルを開く
@@ -556,7 +556,7 @@ lon = nc.variables['lon'][:] # 経度データ読み込み
 lat = nc.variables['lat'][:] # 緯度データ読み込み
 x, y = np.meshgrid(lon - 180.0, lat) # ２次元の経度・緯度座標の準備
 </pre>
-１次元目が緯度、２次元目が経度の２次元データになる。<br />
+1次元目が緯度、2次元目が経度の2次元データになる。<br />
 NetCDFファイルについては<a href="metdata.html#nc_1">NetCDFファイル</a>参照</li>
 </ul>
 <br />
@@ -583,7 +583,7 @@ linewidthではなくlinewidthsなので注意
 ax.contour(x, y, slp_jul, clevs, levels=[0, 1, 2, 3, 4, 5])
 </pre>
 等高線は0から5まで1毎に描く（levelsで指定）</li><br />
-<li>例：等高線を２から20まで2毎等間隔に描く
+<li>例：等高線を2から20まで2毎等間隔に描く
 <pre>
 clevs = np.arange(2, 20, 2) # 値のリスト作成
 cs = ax.contour(x, y, d,  levels=clevs)
@@ -626,13 +626,13 @@ clevels = cs.levels # ラベルを付ける値
 cs.clabel(clevels, fontsize=12,  fmt="%d") # 等高線ラベル
 </pre>
 文字の大きさはfontsize、ラベルの数値のフォーマットはfmtで指定する（ここでは整数値にするためfmt="%d"）。</li><br />
-<li>例：等高線のラベルを１つ飛ばしに付ける
+<li>例：等高線のラベルを1つ飛ばしに付ける
 <pre>
 cs = ax.contour(x, y, d, levels=clevs)
 clevels = cs.levels # ラベルを付ける値
 cs.clabel(clevels[::2]) # 等高線ラベル
 </pre>
-cs.clabelにラベルを付ける値をclevels[::2]で与えることで、等高線のラベルを１つ飛ばしに付ける</li><br />
+cs.clabelにラベルを付ける値をclevels[::2]で与えることで、等高線のラベルを1つ飛ばしに付ける</li><br />
 <li>例：データの最小値から最大値の範囲内で1.5毎等間隔に描きラベルを付ける
 <pre>
 levels = np.arange(np.floor(d.min()), np.ceil(d.max()), 1.5) # 値のリスト作成
@@ -659,13 +659,13 @@ ax.contourf(経度データ, 緯度データ, 陰影のデータ)
 </pre>
 オプションや調整方法は、matplotlibの<a href="matplotlib.html#graph_9">陰影</a>参照
 <ul class="list1">
-<li>例：<a href="#cartopy_3_1">作成した経度・緯度データ</a>と２次元の等高線データ(d)で作図
+<li>例：<a href="#cartopy_3_1">作成した経度・緯度データ</a>と2次元の等高線データ(d)で作図
 <pre>ax.contourf(x, y, d)</pre></li>
 <li>例：<a href="#cartopy_2_1">正距円筒図法</a>以外で作図する場合
 <pre>ax.contourf(x, y, d, transform=ccrs.PlateCarree())</pre></li>
 <li>例：陰影を描く値を指定する
 <pre>ax.contourf(x, y, d, clevs, levels=[0, 1, 2, 3, 4, 5, 6])</pre>
-等高線は0から5まで1毎に描く（levelsで指定、描く値より１大きく設定する）</li><br />
+等高線は0から5まで1毎に描く（levelsで指定、描く値より1大きく設定する）</li><br />
 <li>例：陰影の色テーブルを指定する（青〜白〜赤と変化）
 <pre>ax.contourf(x, y, d, clevs, cmap='bwr')</pre>
 色テーブルは<a href="./options.html#cmap">色テーブルの一覧</a>参照
@@ -698,7 +698,7 @@ ax.barbs(経度データ, 緯度データ, 東西風データ, 南北風デー�
 </pre>
 矢羽の調整方法については、matplotlibの<a href="matplotlib.html#graph_6">矢羽</a>参照<br />
 <ul class="list1">
-<li>例：２次元データlons, lats, u, vから矢羽をプロット
+<li>例：2次元データlons, lats, u, vから矢羽をプロット
 <pre>
 ax.barbs(x, y, u, v)
 </pre></li>
@@ -736,7 +736,7 @@ ax.quiver(経度データ, 緯度データ, 東西風データ, 南北風デー�
 </pre>
 矢印の調整方法については、matplotlibの<a href="matplotlib.html#graph_7">矢印</a>参照<br />
 <ul class="list1">
-<li>例：２次元データlons, lats, u, vから矢印をプロット
+<li>例：2次元データlons, lats, u, vから矢印をプロット
 <pre>
 ax.quiver(x, y, u, v)
 </pre></li>
@@ -799,7 +799,7 @@ ax.add_patch(rect)
 ax.quiverkey(Q, 0.97, 0.93, 10,  '10', color='k', labelsep=0.01)
 </pre>
 ax.add_patch(rect)で、灰色に塗り潰した矩形領域を155E、70Nから180E、90Nまで追加する<br />
-最初の(155, 70)が始点の座標、２番目は経度幅、３番目は緯度幅を表す
+最初の(155, 70)が始点の座標、2番目は経度幅、3番目は緯度幅を表す
 </li><br />
 </ul>
 </div>
@@ -893,7 +893,7 @@ matplotlibのax.set_titleを使う（plt.titleでも同じ）
 <pre>
 import matplotlib.path as mpath
 center, radius = [0.5, 0.5], 0.5 # 円の中心座標と半径
-theta = np.linspace(0, 2 * np.pi, 100) # 0〜2πの位相
+theta = np.linspace(0, 2 * np.pi, 100) # 0〜2&pi;の位相
 verts = np.vstack([np.sin(theta), np.cos(theta)]).T # 円形の座標作成
 circle = mpath.Path(verts * radius + center) # 中心座標(0.5, 0.5)、半径0.5の円形
 ax.set_boundary(circle, transform=ax.transAxes) # 円形の領域でマスク
@@ -911,16 +911,16 @@ ax.set_boundary(circle, transform=ax.transAxes) # 円形の領域でマスク
 <h4><div class="headline2" id="cartopy_e_4">0度と360度を滑らかにつなげる</div></h4>
 <div class="text1">
 <ul class="list1">
-<li>経度、緯度が１次元データの場合<br />
+<li>経度、緯度が1次元データの場合<br />
 cartopy.utilのadd_cyclic_pointを使う
 <pre>
 from cartopy.util import add_cyclic_point
 d_cyclic, lons_cyclic = add_cyclic_point(d, coord=lons) # 0度の値を360度にコピー
 ax.contourf(lons_cyclic, lats, d_cyclic)
 </pre>
-＊２次元データd(緯度方向, 経度方向)、１次元の経度・緯度データlons、lats
+＊2次元データd(緯度方向, 経度方向)、1次元の経度・緯度データlons、lats
 </li><br />
-<li>経度、緯度が２次元データの場合<br />
+<li>経度、緯度が2次元データの場合<br />
 Basemapの<a href="basemap.html#basemap_e_3">極投影図法で0度と360度を滑らかにつなげる</a>参照
 </li><br />
 </ul>
@@ -968,7 +968,7 @@ for pref in prefs:
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/01/21</p>
+<p>最終更新日：2024/02/04</p>
 <p>Copyright (C) 2019-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
