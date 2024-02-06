@@ -304,7 +304,7 @@ QH6256 qhull internal error (qh_lib_check): Cannot continue due to QH6249..  Lib
 <ul class="list1">
 <li>既にMacPortsの更新を適用してしまった場合のプログラム変更例
 <ul class="list2">
-<li>変更前（lats、lonsが２次元の緯度、経度配列、dが２次元の気象データの場合）
+<li>変更前（lats、lonsが2次元の緯度、経度配列、dが2次元の気象データの場合）
 <pre>
 m = Basemap(オプション)
 lats_1d= np.ravel(lats)
@@ -312,7 +312,7 @@ lons_1d= np.ravel(lons)
 
 m.contour(lons_1d, lats_1d, d, tri=True, colors='blue', linestyles='-')
 </pre>
-tri=Trueの場合には、緯度、経度データを１次元で与えるので、このようにしている
+tri=Trueの場合には、緯度、経度データを1次元で与えるので、このようにしている
 </li><br />
 <li>変更後
 <pre>
@@ -320,7 +320,7 @@ m = Basemap(オプション)
 
 m.contour(lons, lats, d, tri=True, colors='blue', linestyles='-')
 </pre>
-tri=Trueオプションを使わないように書き換える（この場合には、緯度、経度の配列を２次元で与える）
+tri=Trueオプションを使わないように書き換える（この場合には、緯度、経度の配列を2次元で与える）
 </li>
 </ul></li>
 </ul>
@@ -331,7 +331,7 @@ tri=Trueオプションを使わないように書き換える（この場合に
 
 <h3><div class="headline-scroll" id="20190523">MacPorts更新後のBasemapエラー（2019/05/23）</div></h3>
 <div class="text1">
-2019年４月頃のpyprojの更新（バージョン2.1.3）の際、内部で使用されるprojのバージョンが5から6に更新され、同時にpyproj.pyproj_datadirが廃止されています。その影響で、MacPortsで更新（port upgrade outdated）を行うと、Basemapの読み込み時に以下のエラーが発生します。現時点ではエラー回避のコードがMacPortsから提供されていないため、更新は推奨されません。
+2019年4月頃のpyprojの更新（バージョン2.1.3）の際、内部で使用されるprojのバージョンが5から6に更新され、同時にpyproj.pyproj_datadirが廃止されています。その影響で、MacPortsで更新（port upgrade outdated）を行うと、Basemapの読み込み時に以下のエラーが発生します。現時点ではエラー回避のコードがMacPortsから提供されていないため、更新は推奨されません。
 <pre>
 Traceback (most recent call last):
 &nbsp; File "ファイル名", line 9, in &lt;module&gt;
@@ -395,7 +395,7 @@ elif masked and <span style="COLOR:red">is_scalar_or_string(masked)</span>:<br /
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/01/01</p>
+<p>最終更新日：2024/02/06</p>
 <p>Copyright (C) 2018-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
