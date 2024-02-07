@@ -52,7 +52,7 @@
 <h1 id="top">matplotlib：チュートリアル</h1>
 <br />
 <div id="text2">
-<p>&nbsp; これからmatplotlibを使ってみようと思っている人向けに、チュートリアルを作成しました。内容は<a href="matplotlib-3.pdf">「３章　matplotlibの基本」</a>に載せているチュートリアルを元にしていますが、まだ手元にpython環境を構築していないことを前提としていますので、ブラウザ上で簡単に試すことができるGoogle Colaboratory上での作図方法を紹介しています。既に手元でpythonを利用できるようになっていれば、<a href="matplotlib-3.pdf">「matplotlibの基本」</a>を試すことも可能です。なお図表番号は「matplotlibの基本」と合わせています。</p>
+<p>&nbsp; これからmatplotlibを使ってみようと思っている人向けに、チュートリアルを作成しました。内容は<a href="matplotlib-3.pdf">「3章　matplotlibの基本」</a>に載せているチュートリアルを元にしていますが、まだ手元にpython環境を構築していないことを前提としていますので、ブラウザ上で簡単に試すことができるGoogle Colaboratory上での作図方法を紹介しています。既に手元でpythonを利用できるようになっていれば、<a href="matplotlib-3.pdf">「matplotlibの基本」</a>を試すことも可能です。なお図表番号は「matplotlibの基本」と合わせています。</p>
 <p>作成者：山下陽介（国立環境研究所）</p>
 </div>
 <br />
@@ -97,20 +97,20 @@ x = np.linspace(-np.pi, np.pi)
 plt.plot(x, np.cos(x), color='k', ls='-', label='cos(x)')
 </pre>
 <a href="./figs/tutorial-fig2.png"><img src="./figs/tutorial-fig2.png" class="size2" alt="Fig" /></a><br /><br />
-引数として渡したcolor='k', ls='-'がオプションで、それぞれ色（黒）、線種（実線）を意味しています。colorには図３−２−２のような色指定が可能で、color='k'とc='k'、color='red'、c='red'のいずれも同じです。<br /><br />
+引数として渡したcolor='k', ls='-'がオプションで、それぞれ色（黒）、線種（実線）を意味しています。colorには図3−2−2のような色指定が可能で、color='k'とc='k'、color='red'、c='red'のいずれも同じです。<br /><br />
 <a href="./figs/Fig3-2-2.png" ><img src="./figs/Fig3-2-2.png" class="size2" alt="Fig" /></a><br />
-図３−２−２　matplotlibの色指定。赤ならcolor="r"、またはc="r"のように指定する<br /><br />
+図3−2−2　matplotlibの色指定。赤ならcolor="r"、またはc="r"のように指定する<br /><br />
 
 <a href="./figs/Fig3-2-3.png"><img src="./figs/Fig3-2-3.png" class="size3" alt="Fig" /></a><br />
-図３−２−３　matplotlibで指定可能な色の一覧（<a href="https://pythondatascience.plavox.info/wp-content/uploads/2016/06/colorpalette.png">https://pythondatascience.plavox.info/wp-content/uploads/2016/06/colorpalette.png</a>）<br /><br />
-どうしても自分で色を作りたい場合は、color='#d62728'のように、'#rrggbb'の書式でRGBの０〜255の値を２桁の16進数で入力します。<br /><br />
+図3−2−3　matplotlibで指定可能な色の一覧（<a href="https://pythondatascience.plavox.info/wp-content/uploads/2016/06/colorpalette.png">https://pythondatascience.plavox.info/wp-content/uploads/2016/06/colorpalette.png</a>）<br /><br />
+どうしても自分で色を作りたい場合は、color='#d62728'のように、'#rrggbb'の書式でRGBの0〜255の値を2桁の16進数で入力します。<br /><br />
 sin(x)も重ねてみます。<br />
 <pre>
 plt.plot(x, np.sin(x), color='r', ls='--', label='sin(x)')
 </pre>
 <a href="./figs/tutorial-fig3.png" ><img src="./figs/tutorial-fig3.png" class="size2" alt="Fig" /></a><br /><br />
-sin(x)を描く際に、ls='--'で線種を破線に変えています。線種として使用可能なものを表３−２−１にまとめました。<br /><br />
-表３−２−１　matplotlibのlinestyleで指定可能な線種一覧<br />
+sin(x)を描く際に、ls='--'で線種を破線に変えています。線種として使用可能なものを表3−2−1にまとめました。<br /><br />
+表3−2−1　matplotlibのlinestyleで指定可能な線種一覧<br />
 <a href="./tables/Table3-2-1.png"><img src="./tables/Table3-2-1.png" class="size2" alt="Table" /></a><br /><br />
 
 線を区別するためにplt.legend で凡例も追加します。
@@ -119,11 +119,11 @@ plt.legend(loc='best')
 </pre>
 <a href="./figs/tutorial-fig4.png"><img src="./figs/tutorial-fig4.png" class="size2" alt="Fig" /></a><br /><br />
 
-凡例の場所はloc=’best’では自動指定ですが、loc=’upper left’のように強制的に位置を指定することも可能です（図３−２−５）。
+凡例の場所はloc=’best’では自動指定ですが、loc=’upper left’のように強制的に位置を指定することも可能です（図3−2−5）。
 <br /><br />
 
 <a href="./figs/Fig3-2-5.png" ><img src="./figs/Fig3-2-5.png" class="size2" alt="Fig" /></a><br />
-図３−２−５　plt.legendで指定可能な位置。他にbestで自動指定も可能<br /><br />
+図3−2−5　plt.legendで指定可能な位置。他にbestで自動指定も可能<br /><br />
 </div>
 
 <h4><div class="headline2" id="tutorial_2_3">グラフにマーカーを追加する</div></h4>
@@ -139,9 +139,9 @@ plt.legend(loc='best')
 plt.plot(x, np.arctan(x), color='b', ls='-', label='arctan(x)', marker='o', fillstyle='none')
 </pre>
 <a href="./figs/tutorial-fig6.png" ><img src="./figs/tutorial-fig6.png" class="size2" alt="Fig" /></a><br /><br />
-matplotlib では数多くのマーカーが用意されています（表３−３−１）。
+matplotlib では数多くのマーカーが用意されています（表3−3−1）。
 <br /><br />
-表３−３−１　matplotlibで指定可能なマーカーの一覧<br />
+表3−3−1　matplotlibで指定可能なマーカーの一覧<br />
 <a href="./tables/Table3-3-1.png"><img src="./tables/Table3-3-1.png" class="size3" alt="Table" /></a><br /><br />
 marker='o'では塗りつぶしを変えることもできるので試してみましょう。まずmarker='o’, fillstyle='full'でclosed circle にしてみます。
 <pre>
@@ -156,15 +156,15 @@ plt.plot(x, np.arcsinh(x), color='c', ls='-', label='arcsinh(x)', marker='o', fi
 plt.legend(loc='best')
 </pre>
 <a href="./figs/tutorial-fig8.png"><img src="./figs/tutorial-fig8.png" class="size2" alt="Fig" /></a><br /><br />
-他にも様々な塗りつぶしオプションがあるので一覧にしました（表３−３−２）。
+他にも様々な塗りつぶしオプションがあるので一覧にしました（表3−3−2）。
 <br /><br />
-表３−３−２　matplotlibのfillstyleで指定可能な塗り潰しオプション一覧<br />
+表3−3−2　matplotlibのfillstyleで指定可能な塗り潰しオプション一覧<br />
 <a href="./tables/Table3-3-2.png"><img src="./tables/Table3-3-2.png" class="size1" alt="Table" /></a><br /><br />
 </div>
 
 <h4><div class="headline2" id="tutorial_2_4">グラフを上下に並べる</div></h4>
 <div class="text1">
-これまでは、ウィンドウに１つのサブプロットのみでしたが、グラフを並べて表示したいこともあるでしょう。サブプロットは複数配置可能ですので、試してみましょう。fig.add_subplot を使い縦に２つの図を並べてみます。
+これまでは、ウィンドウに1つのサブプロットのみでしたが、グラフを並べて表示したいこともあるでしょう。サブプロットは複数配置可能ですので、試してみましょう。fig.add_subplot を使い縦に2つの図を並べてみます。
 <pre>
 import numpy as np
 import matplotlib.pyplot as plt
@@ -175,7 +175,7 @@ ax1 = fig.add_subplot(2, 1, 1)
 ax2 = fig.add_subplot(2, 1, 2) 
 </pre>
 <a href="./figs/tutorial-fig9.png"><img src="./figs/tutorial-fig9.png" class="size2" alt="Fig" /></a><br /><br />
-fig.add_subplotの最初の引数が縦に並べる数、２つ目が横に並べる数、３つ目がサブプロットのうちの何番目に当たるかを表します。ax1が上のサブプロット、ax2が下のサブプロットに対応します。それぞれのサブプロットに図を描くには、ここで定義したax1、ax2を使います。<br /><br />
+fig.add_subplotの最初の引数が縦に並べる数、2つ目が横に並べる数、3つ目がサブプロットのうちの何番目に当たるかを表します。ax1が上のサブプロット、ax2が下のサブプロットに対応します。それぞれのサブプロットに図を描くには、ここで定義したax1、ax2を使います。<br /><br />
 これまでのように[−π, π]の範囲を作成し、上のサブプロットax1にsinh(x)を描き凡例を追加してみます。サブプロットを指定して描く場合は、先ほどのplt.plotの代わりにax1.plotのように指定します。凡例についても同様で、plt.legendの代わりにax1.legendを使います。
 <pre>
 x = np.linspace(-np.pi, np.pi)
@@ -191,9 +191,9 @@ ax2.legend(loc='best')
 <a href="./figs/tutorial-fig11.png"><img src="./figs/tutorial-fig11.png" class="size2" alt="Fig" /></a><br /><br />
 </div>
 
-<h4><div class="headline2" id="tutorial_2_5">４つのグラフを並べる</div></h4>
+<h4><div class="headline2" id="tutorial_2_5">4つのグラフを並べる</div></h4>
 <div class="text1">
-１つのウィンドウに４つのサブプロットを追加することもできます。新たに次のようなコードを入力していきます。
+1つのウィンドウに4つのサブプロットを追加することもできます。新たに次のようなコードを入力していきます。
 <pre>
 import matplotlib.pyplot as plt
 %matplotlib inline
@@ -203,7 +203,7 @@ fig = plt.figure(figsize=(9, 6))
 <pre>
 ax1 = fig.add_subplot(2, 2, 1)
 </pre>
-でウィンドウの左上に図が出てきます。３つ目の引数の１番目が左上、２番目が右上、３番目が左下、４番目が右下に対応します。サブプロットの(0.4、0.4)の位置にplt.textでテキストを書いてみます。一番目の引数が横の位置、二番目の引数が縦の位置、３番目の引数がテキストで、fontsize=20で文字の大きさを指定できます。
+でウィンドウの左上に図が出てきます。3つ目の引数の1番目が左上、2番目が右上、3番目が左下、4番目が右下に対応します。サブプロットの(0.4、0.4)の位置にplt.textでテキストを書いてみます。1番目の引数が横の位置、2番目の引数が縦の位置、3番目の引数がテキストで、fontsize=20で文字の大きさを指定できます。
 <pre>
 plt.text(0.4, 0.4, "(2,2,1)", fontsize=20, color='k')
 </pre>
@@ -232,7 +232,7 @@ import numpy as np
 x = np.linspace(-np.pi, np.pi)
 ax1.plot(x, x * np.sin(x), color='r', ls='--', drawstyle='default')
 </pre>
-他に３種類の設定が使えるので、ax2〜ax4に並べてみます（図３−４−４）。
+他に３種類の設定が使えるので、ax2〜ax4に並べてみます。
 ax2：drawstyle='steps-post'：階段状（後側）
 ax3: drawstyle='steps-pre' または 'steps'：前側
 ax4：drawstyle='steps-mid'：中央
@@ -241,11 +241,11 @@ ax2.plot(x, x * np.sin(x), color='r', ls='-', drawstyle='steps-post')
 ax3.plot(x, x * np.sin(x), color='r', ls='-', drawstyle='steps-pre')
 ax4.plot(x, x * np.sin(x), color='r', ls='-', drawstyle='steps-mid')
 </pre>
-３種類の階段状のグラフは、よく見ないと違いが分かりませんが、グラフの両端をみると、前側、後側、両方、のいずれに飛び出しているかが違っています。<br />
+3種類の階段状のグラフは、よく見ないと違いが分かりませんが、グラフの両端をみると、前側、後側、両方、のいずれに飛び出しているかが違っています。<br />
 <a href="./figs/tutorial-fig16.png"><img src="./figs/tutorial-fig16.png" class="size2" alt="Fig" /></a><br /><br />
-最後に折れ線グラフで使用できるオプション一覧を表３−４−１にまとめておきます。
+最後に折れ線グラフで使用できるオプション一覧を表3−4−1にまとめておきます。
 <br /><br />
-表３−４−１　matplotlibのpyplot.plotのオプション一覧<br />
+表3−4−1　matplotlibのpyplot.plotのオプション一覧<br />
 <a href="./tables/Table3-4-1.png"><img src="./tables/Table3-4-1.png" class="size2" alt="Table" /></a><br /><br />
 </div>
 
@@ -271,9 +271,9 @@ plt.title("sinh(x)", fontsize=24)
 </pre>
 <a href="./figs/tutorial-fig18.png"><img src="./figs/tutorial-fig18.png" class="size2" alt="Fig" /></a><br /><br />
 
-ちなみに、fontsizeは整数の他に文字列で指定することもでき、"xx-small"、"x-small"、"small"、"medium"、"large"、"x-large"、"xx-large"を指定可能です。fontweightというオプションで文字の太さを変えることもでき、０〜1000の整数か、"ultralight"、"light"、"normal"、"regular"、"book"、"medium"、"roman"、"semibold"、"demibold"、"demi"、"bold"、"heavy"、"extra bold"、"black"の文字列を指定可能です。例えば太字にするには、fontweight="bold"です。fontsizeオプションは見た目に反映されますが、fontweightオプションは細かく設定しても変わらないようです（表３−５−１）。
+ちなみに、fontsizeは整数の他に文字列で指定することもでき、"xx-small"、"x-small"、"small"、"medium"、"large"、"x-large"、"xx-large"を指定可能です。fontweightというオプションで文字の太さを変えることもでき、0〜1000の整数か、"ultralight"、"light"、"normal"、"regular"、"book"、"medium"、"roman"、"semibold"、"demibold"、"demi"、"bold"、"heavy"、"extra bold"、"black"の文字列を指定可能です。例えば太字にするには、fontweight="bold"です。fontsizeオプションは見た目に反映されますが、fontweightオプションは細かく設定しても変わらないようです（表3−5−1）。
 <br /><br />
-表３−５−１　文字列の大きさと太さを指定するオプション一覧<br />
+表3−5−1　文字列の大きさと太さを指定するオプション一覧<br />
 <a href="./tables/Table3-5-1.png"><img src="./tables/Table3-5-1.png" class="size2" alt="Table" /></a><br /><br />
 
 軸の大目盛りの間隔を変更し、ラベルの付いていない小目盛りも追加します。目盛り線の設定にはmatplotlib.tickerを使います。ticker.AutoLocator()が大目盛り、ticker.AutoMinorLocator()が小目盛りの自動設定を返し、xaxis.set_major_locatorや、xaxis.set_minor_locatorの値を置き換えます。x軸に小目盛りが追加されたでしょうか。大目盛りの方はticker.AutoLocator()の値が1毎だったので、変更はありません。
@@ -298,7 +298,7 @@ ax.set_ylabel("y-axis", fontsize=20, color='r')
 </pre>
 <a href="./figs/tutorial-fig21.png"><img src="./figs/tutorial-fig21.png" class="size2" alt="Fig" /></a><br /><br />
 
-plt.subplots_adjustでずの大きさを調整してみます。hspace=0.8で水平を８割の大きさに、bottom=0.2で下に２割の空きを付けます。ラベルが図からはみ出した場合などの調整に使います。
+plt.subplots_adjustでずの大きさを調整してみます。hspace=0.8で水平を8割の大きさに、bottom=0.2で下に2割の空きを付けます。ラベルが図からはみ出した場合などの調整に使います。
 <pre>
 plt.subplots_adjust(hspace=0.8, bottom=0.2)
 </pre>
@@ -317,7 +317,7 @@ plt.axvline(x=0, color='k', ls='--')
 </pre>
 <a href="./figs/tutorial-fig24.png"><img src="./figs/tutorial-fig24.png" class="size2" alt="Fig" /></a><br /><br />
 
-折れ線グラフと一緒に使える機能をもう１つ紹介しておきます。まずは点線でcosh(x)を重ねます。sinh(x)よりcosh(x)の値が大きいので、plt.fill_between（ax.fill_betweenも同じ）を使い、その間を灰色で塗り潰してみます。１番目の引数がx軸、２番目の引数がy軸を塗り潰す下限値、３番目の引数がy軸を塗り潰す上限値を表しています。color='gray', alpha=0.4で灰色の半透明な色で塗り潰します。
+折れ線グラフと一緒に使える機能をもう1つ紹介しておきます。まずは点線でcosh(x)を重ねます。sinh(x)よりcosh(x)の値が大きいので、plt.fill_between（ax.fill_betweenも同じ）を使い、その間を灰色で塗り潰してみます。1番目の引数がx軸、2番目の引数がy軸を塗り潰す下限値、3番目の引数がy軸を塗り潰す上限値を表しています。color='gray', alpha=0.4で灰色の半透明な色で塗り潰します。
 <pre>
 ax.plot(x, np.cosh(x), color='k', ls='--')
 ax.fill_between(x, np.sinh(x), np.cosh(x), color='gray', alpha=0.4)
@@ -335,20 +335,20 @@ plt.title("sinh(x) &amp; cosh(x)", fontsize=24)
 表３−５−２　図の体裁を整える時に用いるメソッド一覧<br />
 <a href="./tables/Table3-5-2.png"><img src="./tables/Table3-5-2.png" class="size2" alt="Table" /></a><br /><br />
 
-これらのメソッドのうちplt.textでは、書式の設定で様々なオプションが出てきたので、ここで表３−５−３にまとめておきます。なお、最初の行のx、yを除けば、plt.textと同じオプションをplt.title、plt.xlabel、plt.ylabelでも使うことができます。
+これらのメソッドのうちplt.textでは、書式の設定で様々なオプションが出てきたので、ここで表3−5−3にまとめておきます。なお、最初の行のx、yを除けば、plt.textと同じオプションをplt.title、plt.xlabel、plt.ylabelでも使うことができます。
 <br /><br />
-表３−５−３　matplotlibのpyplot.textの主要オプション一覧<br />
+表3−5−3　matplotlibのpyplot.textの主要オプション一覧<br />
 <a href="./tables/Table3-5-3.png"><img src="./tables/Table3-5-3.png" class="size2" alt="Table" /></a><br />
 使用方法：plt.text(x, y, s)、plt.text(x, y, s, オプション)<br /><br />
 
-表３−５−３には、これまでに出てこなかったオプションとして、水平方向の位置を指定するhorizontalalignment（省略形：ha）、鉛直方向の位置を指定するverticalalignment（省略形：va）があります。haには'center'、'right'、'left'を指定可能で、vaには'top'、'bottom'、'center'、'baseline'、'center_baseline'を指定可能です（表３−５−４）。x、yで指定する中央の位置を点線で示しています。
+表3−5−3には、これまでに出てこなかったオプションとして、水平方向の位置を指定するhorizontalalignment（省略形：ha）、鉛直方向の位置を指定するverticalalignment（省略形：va）があります。haには'center'、'right'、'left'を指定可能で、vaには'top'、'bottom'、'center'、'baseline'、'center_baseline'を指定可能です（表3−5−4）。x、yで指定する中央の位置を点線で示しています。
 <br /><br />
-表３−５−４　文字列の水平位置と鉛直位置を指定するオプション、点線は中央の位置<br />
+表3−5−4　文字列の水平位置と鉛直位置を指定するオプション、点線は中央の位置<br />
 <a href="./tables/Table3-5-4.png"><img src="./tables/Table3-5-4.png" class="size2" alt="Table" /></a><br /><br />
 
-これまでに、Numpyを使った関数の作成が度々出てきました。Numpyには便利な機能が多数含まれていますが、ここでは関数の作成や簡単な計算に用いることができる主要な数学関数を紹介しておきます（表３−５−５）。
+これまでに、Numpyを使った関数の作成が度々出てきました。Numpyには便利な機能が多数含まれていますが、ここでは関数の作成や簡単な計算に用いることができる主要な数学関数を紹介しておきます（表3−5−5）。
 <br /><br />
-表３−５−５　Numpyの主要な数学関数一覧<br />
+表3−5−5　Numpyの主要な数学関数一覧<br />
 <a href="./tables/Table3-5-5.png"><img src="./tables/Table3-5-5.png" class="size2" alt="Table" /></a><br /><br />
 </div>
 
@@ -358,7 +358,7 @@ plt.title("sinh(x) &amp; cosh(x)", fontsize=24)
 </article>
 </body>
 <footer>
-<p>最終更新日：2023/05/13</p>
-<p>Copyright (C) 2018-2023, Yousuke Yamashita, CC BY 4.0</p>
+<p>最終更新日：2024/02/07</p>
+<p>Copyright (C) 2018-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
