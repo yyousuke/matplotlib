@@ -168,7 +168,7 @@ w = pd.read_csv(input_filedir_w, index_col=[0], parse_dates=[0])  # 鉛直速度
 qua = pd.read_csv(input_filedir_qua, index_col=[0], parse_dates=[0])  # データ品
 </pre>
 &nbsp; 読み込んだデータの品質管理情報を使い、欠損値、疑問値を除きます。また矢羽の作図プログラムに合わせ、風向、風速データを東西風速、南北風速に変換します。取り出された鉛直速度データと変換後の東西風速、南北風速データは、いずれも高度がx軸、時間がy軸になっているため、転置（T）メソッドを使いx軸が時間、y軸が高度になるように変換しておきます。<br />
-&nbsp; 作図の際にx軸、y軸のデータとして用いられる時間（time）、高度（height）データは１次元データであるが、作図プログラムに合わせ２次元のx、y軸メッシュデータに変換します。
+&nbsp; 作図の際にx軸、y軸のデータとして用いられる時間（time）、高度（height）データは1次元データであるが、作図プログラムに合わせ2次元のx、y軸メッシュデータに変換します。
 <pre>
 # 時間ー高度面
 time = w.index
@@ -190,7 +190,7 @@ X, Y = np.meshgrid(time, height)
 fig = plt.figure(figsize=(12, 5))
 ax = fig.add_subplot(1, 1, 1)
 </pre>
-&nbsp; 作成したサブプロットは、作図するためのツール（メソッド）を持っています。まずは矢羽を描くツールax.barbsを使いサブプロット上に矢羽を描きます。デフォルトの時間軸の方向は左から右ですが、方向を右から左へ変更するため、ax.invert_xaxis()を行います。矢羽を描くツールがx座標、y座標、東西風u、南北風vの１次元データを利用するため、引数の配列も１次元に合わせる必要があります。X.flatten()は、x座標の２次元データを１次元データに変換するツールで、y座標、東西風u、南北風vも同様に１次元データに変換します。 zorderは描画の順番で、数字が大きいほど上に描かれることを意味します。
+&nbsp; 作成したサブプロットは、作図するためのツール（メソッド）を持っています。まずは矢羽を描くツールax.barbsを使いサブプロット上に矢羽を描きます。デフォルトの時間軸の方向は左から右ですが、方向を右から左へ変更するため、ax.invert_xaxis()を行います。矢羽を描くツールがx座標、y座標、東西風u、南北風vの1次元データを利用するため、引数の配列も１次元に合わせる必要があります。X.flatten()は、x座標の2次元データを1次元データに変換するツールで、y座標、東西風u、南北風vも同様に1次元データに変換します。 zorderは描画の順番で、数字が大きいほど上に描かれることを意味します。
 <pre>
 ax.invert_xaxis() # 時間軸を右から左へ
 ax.barbs(X.flatten(), Y.flatten(), u.flatten(), v.flatten(),
@@ -208,7 +208,7 @@ cs = ax.scatter(X.flatten(), Y.flatten(), c=w.flatten(),
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cmap=cmap,
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; zorder=1)
 </pre>
-&nbsp; 陰影を描くツールax.contourfでは、２次元のデータを入力します。先ほど作成したX、Yの２次元メッシュデータと鉛直速度wの２次元データを使います。levelsオプションは陰影を描く値で、−４から４まで１毎に変化させます。それに合わせvmin=-4、vmax=4を設定します。色テーブルは、cmapオプションにcmap=cmapとして与えます。extend='both'は、色テーブルの範囲の上下も値を描くことを表しています。色テーブルは"coolwarm"を使い、範囲の上限を上回った場合と下限を下回った場合の色は、色テーブルが格納されたcmapに対して設定します。ここでは、cmap.set_over('r')で上限を上回った場合に赤色、cmap.set_under('b')で下限を下回った場合に青色を設定しています。デフォルトでは欠損値の周辺が滑らかに補完されてしまうため、欠損値の周辺が補完されないようにcorner_mask=Falseとしています。
+&nbsp; 陰影を描くツールax.contourfでは、2次元のデータを入力します。先ほど作成したX、Yの2次元メッシュデータと鉛直速度wの2次元データを使います。levelsオプションは陰影を描く値で、−4から4まで1毎に変化させます。それに合わせvmin=-4、vmax=4を設定します。色テーブルは、cmapオプションにcmap=cmapとして与えます。extend='both'は、色テーブルの範囲の上下も値を描くことを表しています。色テーブルは"coolwarm"を使い、範囲の上限を上回った場合と下限を下回った場合の色は、色テーブルが格納されたcmapに対して設定します。ここでは、cmap.set_over('r')で上限を上回った場合に赤色、cmap.set_under('b')で下限を下回った場合に青色を設定しています。デフォルトでは欠損値の周辺が滑らかに補完されてしまうため、欠損値の周辺が補完されないようにcorner_mask=Falseとしています。
 <pre>
 cmap = copy.copy(mpl.cm.get_cmap("coolwarm")) # 色テーブル
 cmap.set_over('r') # 上限を上回った場合に赤
@@ -227,7 +227,7 @@ cbar = fig.colorbar(cs, orientation='vertical')
 cbar.set_label("Vertical velocity (m/s)", fontsize=12)
 </pre>
 
-&nbsp; 図の体裁を整えるため、x軸とy軸の表示を変更します。まずx軸の目盛り線を付ける間隔は、ax.xaxis.set_major_locator、およびax.xaxis.set_minor_locatorで設定します。引数として与えているticker.MultipleLocatorには、ラベルを付ける間隔を日単位で与えます。ここでは、x軸の大目盛り線は３時間毎（1日の1/8）、小目盛り線は１時間毎（1/24）に付けています。x軸のラベルの書式を変更するため、ax.set_xticklabelsの設定を変更し文字サイズを小さく（size="small"）、ラベルは斜めにしています（rotation=70）。目盛り線ラベルの書式も変更しており、大目盛り線ラベルはax.xaxis.set_major_formatter、小目盛り線ラベルはax.xaxis.set_minor_formatterで変更します。ここでは、大目盛り線ラベルの表示形式は'%m/%d %Hh'（月/日 時h）とし、小目盛り線にはラベルを付けない（ticker.NullFormatter）設定にしています。
+&nbsp; 図の体裁を整えるため、x軸とy軸の表示を変更します。まずx軸の目盛り線を付ける間隔は、ax.xaxis.set_major_locator、およびax.xaxis.set_minor_locatorで設定します。引数として与えているticker.MultipleLocatorには、ラベルを付ける間隔を日単位で与えます。ここでは、x軸の大目盛り線は3時間毎（1日の1/8）、小目盛り線は１時間毎（1/24）に付けています。x軸のラベルの書式を変更するため、ax.set_xticklabelsの設定を変更し文字サイズを小さく（size="small"）、ラベルは斜めにしています（rotation=70）。目盛り線ラベルの書式も変更しており、大目盛り線ラベルはax.xaxis.set_major_formatter、小目盛り線ラベルはax.xaxis.set_minor_formatterで変更します。ここでは、大目盛り線ラベルの表示形式は'%m/%d %Hh'（月/日 時h）とし、小目盛り線にはラベルを付けない（ticker.NullFormatter）設定にしています。
 <pre>
 # x軸の目盛り
 ax.xaxis.set_major_locator(ticker.MultipleLocator(1 / 8))
@@ -265,7 +265,7 @@ plt.savefig(output_filename, dpi=300, bbox_inches='tight')
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/01/01</p>
+<p>最終更新日：2024/02/09</p>
 <p>Copyright (C) 2020-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
