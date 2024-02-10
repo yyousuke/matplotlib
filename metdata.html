@@ -197,16 +197,16 @@ df = pd.read_csv("ファイル名")</pre>
 <h4><div class="headline2" id="csv_1_3">CSVファイルの時刻処理</div></h4>
 <div class="text1">
 <ul class="list1">
-<li>例：１列目が時刻データの場合
+<li>例：1列目が時刻データの場合
 <pre>df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0])</pre>
 parse_datesには時刻データとして処理する列、index_colにはindexとして扱う列を指定<br />
 時刻データはdf.indexになる
 </li><br />
-<li>例：１列目が年、２列目が月のように複数列に時刻データが入っている場合
+<li>例：1列目が年、2列目が月のように複数列に時刻データが入っている場合
 <pre>df = pd.read_csv("ファイル名", parse_dates=[[0, 1]], index_col=[0])</pre>
 時刻データはdf.indexになり、年、月単独のデータは参照できない
 </li><br />
-<li>例：１列目が月、２列目が年のように並びが逆の場合
+<li>例：1列目が月、2列目が年のように並びが逆の場合
 <pre>df = pd.read_csv("ファイル名", parse_dates=[[1, 0]], index_col=[0])</pre>
 </li>
 <li>例：読み込んだ年、月の時刻データも残したい場合
@@ -219,17 +219,17 @@ parse_datesには時刻データとして処理する列、index_colにはindex�
 <h4><div class="headline2" id="csv_1_4">CSVファイルの行処理</div></h4>
 <div class="text1">
 <ul class="list1">
-<li>例：１行目にヘッダがなく、１行目からデータが入っている場合
+<li>例：1行目にヘッダがなく、1行目からデータが入っている場合
 <pre>df = pd.read_csv("ファイル名", header=None)</pre>
 </li>
 <li>例：ヘッダがない場合に、読み込み時に任意のヘッダを付ける
-<pre>df = pd.read_csv("ファイル名", header=None, names=[名前１, 名前２, , ,名前n])</pre>
+<pre>df = pd.read_csv("ファイル名", header=None, names=[名前1, 名前2, , ,名前n])</pre>
 namesに与えるリストの要素数は、データの列数に合わせる
 </li><br />
-<li>例：１〜３行目にデータ以外のもの（データの説明など）が入っており、４行目がヘッダの場合
+<li>例：1〜3行目にデータ以外のもの（データの説明など）が入っており、4行目がヘッダの場合
 <pre>df = pd.read_csv("ファイル名", skiprows=[0, 1, 2])</pre>
 </li>
-<li>例：１〜３行目にデータ以外のもの（データの説明など）が入っており、４行目からデータが入っている場合
+<li>例：1〜3行目にデータ以外のもの（データの説明など）が入っており、4行目からデータが入っている場合
 <pre>df = pd.read_csv("ファイル名", skiprows=[0, 1, 2], header=None)</pre>
 </li>
 <li>例：最初から50行を読み飛ばしたい場合
@@ -538,7 +538,7 @@ df = pd.DataFrame(json.loads(data))</pre>
 <h4><div class="headline2" id="bin_1_1">バイナリファイルの形式</div></h4>
 <div class="text1">
 ここでは、GrADS等で用いられる下記の形式の単純なバイナリファイルについて記載している。<a href="#bin_2">NumPy独自のバイナリ（npy、npz）</a>とは異なる。<br />
-４バイト浮動小数点数（単精度）のデータや８バイト浮動小数点数（倍精度）のデータを改行コード無しで並べた単純バイナリ形式<br />
+4バイト浮動小数点数（単精度）のデータや8バイト浮動小数点数（倍精度）のデータを改行コード無しで並べた単純バイナリ形式<br />
 <ul class="list1">
 <li>例：単精度で経度、緯度方向とも10度の等間隔データの場合
 <pre>
@@ -551,17 +551,17 @@ t=1： | 0E, 80N | 10E, 80N | ... | 350E, 80N |
 ...
 t=1： | 0E, 90S | 10E, 80N | ... | 350E, 80N |
 </pre>
-| |で囲まれた部分がデータを表していて、１つのサイズが４バイト<br />
+| |で囲まれた部分がデータを表していて、1つのサイズが4バイト<br />
 </li>
 </ul>
 </div>
 
 <h4><div class="headline2" id="bin_1_2">バイナリファイルのエンディアン</div></h4>
 <div class="text1">
-エンディアン：２バイト以上のデータを保存する場合の保存順序の規則<br />
+エンディアン：2バイト以上のデータを保存する場合の保存順序の規則<br />
 ビックエンディアン（Big Endian）とリトルエンディアン（Little endian）の２種類
 <ul class="list1">
-<li>例：４バイトの場合
+<li>例：4バイトの場合
 <pre>
 データ：AABBCCDD
 
@@ -591,7 +591,7 @@ else:
 &nbsp; &nbsp; din = np.fromfile('読み込むファイル名', dtype='&lt;f4', count=datasize)
 d = din.reshape(num_rec, jdim, idim)
 </pre>
-ビックエンディアンの単精度（４バイト）浮動小数点数の場合がdtype='&gt;f4'の書式に対応<br />
+ビックエンディアンの単精度（4バイト）浮動小数点数の場合がdtype='&gt;f4'の書式に対応<br />
 リトルエンディアンの場合にはdtype='&lt;f4'となる<br />
 書式の一覧は<a href="numpy.html#dtype_2">Numpyバイナリデータ読み書きの書式一覧</a>参照
 </li><br />
@@ -608,17 +608,17 @@ tend = 7 # 終了データ番号（整数、データの先頭番号は１）
 datasize = idim * jdim # 水平方向のデータサイズ（個数）
 with open('読み込むファイル名', 'rb') as fin:
 &nbsp; &nbsp; fin.seek(4 * datasize * (tsta - 1), 0) # 開始データの前まで読み飛ばす（単位：byte）
-&nbsp; &nbsp; buf = array.array('f') # ４バイト浮動小数点数
+&nbsp; &nbsp; buf = array.array('f') # 4バイト浮動小数点数
 &nbsp; &nbsp; buf.fromfile(fin, datasize * (tend - tsta + 1)) # データの読み込み
 &nbsp; &nbsp; if sys.byteorder == 'little':
 &nbsp; &nbsp; &nbsp; &nbsp; buf.byteswap()
 # bufからlistに変換し、x-, y-の配列に
 d = np.array(buf.tolist()).reshape(jdim, idim)
 </pre>
-４バイト浮動小数点数の場合のarray書式（'f'）<br />
+4バイト浮動小数点数の場合のarray書式（'f'）<br />
 sys.byteorderを使い、ビックエンディアンとリトルエンディアンを判定（システムがリトルエンディアンの場合にビックエンディアンとして読み込むようにしている）<br />
-ここではデータの先頭番号が１としているが、先頭番号を０としたい場合には、tsta - 1をtstaに、tend - tsta + 1をtend - tstaに変える<br />
-８バイト浮動小数点数の場合、array書式（'d'）となり、fin.seekで読み飛ばすサイズは8*datasize*レコード数（byte）、となる
+ここではデータの先頭番号が１としているが、先頭番号を0としたい場合には、tsta - 1をtstaに、tend - tsta + 1をtend - tstaに変える<br />
+8バイト浮動小数点数の場合、array書式（'d'）となり、fin.seekで読み飛ばすサイズは8*datasize*レコード数（byte）、となる
 </li>
 </ul>
 </div>
@@ -804,16 +804,17 @@ GRIB2ファイルの読み込みを行うには、まずGRIB2からNetCDFへ変�
 <div class="text1">
 pygribモジュールを用いると、直接GRIB2ファイルを読み込むことができた。
 <pre>
-% sudo port install py39-pygrib
+% sudo port install py310-pygrib
 </pre>
-で導入できる（python3.9の場合。異なるバージョンではpy39の部分を変える）。pygribでは次のようにデータを取り出す。
+で導入できる（python3.10の場合。異なるバージョンではpy310の部分を変える）。pygribでは次のようにデータを取り出す。
 <pre>
 import pygrib
 grbs = pygrib.open("ファイル名") # GRIB2ファイルを開く
 grb1 = grbs.select(forecastTime=1)[0] # 1時間後の0番目の変数
 grbt = grbs.select(name="Temperature") # 気温の変数を選択
 </pre>
-ファイルの読み込みに時間がかかるため、読み込み処理が多い場合には<a href="#grib2_1_2">GRIB2ファイルの読み込み</a>に記述した方法に切り替えた方が良い。
+ファイルの読み込みに時間がかかるため、読み込み処理が多い場合には<a href="#grib2_1_2">GRIB2ファイルの読み込み</a>に記述した方法に切り替えた方が良い。<br />
+＊MacPortsでは、python3.11以降のpygribが提供されていない。
 </div>
 
 <h4><div class="headline2" id="grib2_1_4">wgrib2による単純バイナリファイルへの変換</div></h4>
@@ -984,7 +985,7 @@ NEAREST、BOX、BILINEAR、HAMMING、BICUBIC、LANCZOSが指定可能（後の�
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/01/01</p>
+<p>最終更新日：2024/02/10</p>
 <p>Copyright (C) 2018-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
