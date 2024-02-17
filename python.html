@@ -166,6 +166,7 @@
   <ul class="list1"><li><a href="#misc">その他</a>
     <ul class="list2">
       <li><a href="#misc_1">QRコードを生成する</a></li>
+      <li><a href="#misc_2">base64でエンコードする</a></li>
      </ul>
   </li></ul>
 </div>
@@ -1368,6 +1369,16 @@ code.png("ファイル名.png", scale=5, module_color=[0, 0, 0, 128], background
 <br />
 <br />
 
+<h4><div class="headline2" id="misc_2">base64でエンコードする</div></h4>
+<div class="text1">
+base64を使う。MacPortsの場合には、
+<pre>% sudo port install base64</pre>
+次のように文字列をbase64に変換する。
+<pre>import base64
+enc = base64.b64encode('文字列')</pre>
+</div>
+<br />
+<br />
 
 <br />
 <br />
@@ -1379,7 +1390,7 @@ code.png("ファイル名.png", scale=5, module_color=[0, 0, 0, 128], background
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/02/10</p>
+<p>最終更新日：2024/02/17</p>
 <p>Copyright (C) 2021-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
