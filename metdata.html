@@ -819,7 +819,7 @@ grbt = grbs.select(name="Temperature") # 気温の変数を選択
 
 <h4><div class="headline2" id="grib2_1_4">wgrib2による単純バイナリファイルへの変換</div></h4>
 <div class="text1">
-<a href="https://www.cpc.ncep.noaa.gov/products/wesley/wgrib2/">wgrib2コマンド</a>を使うと、単純バイナリファイルに変換可能。北極が先、下層が先に入ったビックエンディアンの単純バイナリファイルに変換する場合
+<a href="https://www.cpc.ncep.noaa.gov/products/wesley/wgrib2/">wgrib2コマンド</a>を使うと、単純バイナリファイルに変換可能。変換したファイルの読み込み方法は<a href="#bin_1_3">バイナリファイルの読み込み</a>参照。北極が先、下層が先に入ったビックエンディアンの単純バイナリファイルに変換する場合
 <pre>
 % wgrib2 -v 入力ファイル.grb | grep "変数名" | grep "時刻" | sort -nr -k5 -t':' \
   | wgrib2 入力ファイル.grb -i -no_header -order we:ns -ieee -o 出力ファイル.bin
@@ -841,7 +841,7 @@ WMOが定めたバイナリデータの交換形式のうち、1989年に制定�
 
 <h4><div class="headline2" id="grib1_1_2">GRIB1ファイルの読み込み</div></h4>
 <div class="text1">
-GRIB1形式は、pythonで直接読むことはできないが、GrADSに付属しているwgribコマンドを使うことで、単純バイナリファイルに変換可能。JRA-55客観解析データの気圧面データを使い、下層が先に入ったビックエンディアンの単純バイナリファイルに変換する場合
+GRIB1形式は、pythonで直接読むことはできないが、GrADSに付属しているwgribコマンドを使うことで、単純バイナリファイルに変換可能。変換したファイルの読み込み方法は<a href="#bin_1_3">バイナリファイルの読み込み</a>参照。JRA-55客観解析データの気圧面データを使い、下層が先に入ったビックエンディアンの単純バイナリファイルに変換する場合
 <pre>
 % wgrib -v 入力ファイル.grb | grep ":GRIBIDを記述," | sort -nr -k5 -t':' \
   | wgrib -i -nh -ieee 入力ファイル.grb -o 出力ファイル.bin
@@ -985,7 +985,7 @@ NEAREST、BOX、BILINEAR、HAMMING、BICUBIC、LANCZOSが指定可能（後の�
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/02/10</p>
+<p>最終更新日：2024/02/18</p>
 <p>Copyright (C) 2018-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
