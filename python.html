@@ -1376,6 +1376,85 @@ base64を使う。MacPortsの場合には、
 次のように文字列をbase64に変換する。
 <pre>import base64
 enc = base64.b64encode('文字列')</pre>
+<br />
+DIASで提供されているJRA-3Q（<a href="https://doi.org/10.20783/DIAS.645" target="_blank">doi:10.20783/DIAS.645</a>）のダウンロードスクリプトに適用する場合
+<ul class="list1">
+<li>気圧面データ（1.25&deg;&times;1.25&deg;）の場合（変数毎に別ファイル）
+<pre>import base64
+from datetime import datetime, timedelta
+
+base_url = 'https://data.diasjp.net/dl/storages/downloadCmd/'
+prefix = 'anl_p125'
+time_str = datetime(2024, 1, 1, 0, 0, 0) # 開始時刻
+time_end = datetime(2024, 1, 31, 18, 0, 0) # 終了時刻
+time_step = timedelta(hours=6) # 6時間毎
+for var in ['ugrd', 'vgrd', 'depr', 'hgt', 'rh', 'spfh', 'vvel', 'relv', 'reld', 'vpot', 'strm']:
+&nbsp; &nbsp; ofirst = True
+&nbsp; &nbsp; time = time_str
+&nbsp; &nbsp; time_bef = time_str - time_step
+&nbsp; &nbsp; while True:
+&nbsp; &nbsp; &nbsp; &nbsp; if time > time_end:
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  break
+&nbsp; &nbsp; &nbsp; &nbsp; if time.month != time_bef.month or ofirst: # 月に1度実行
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; YYMM = time.strftime('%Y%m') # YYMM形式
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; dir_path = '/JRA3Q/Hist/Daily/' + prefix + '/' + YYMM + '/'
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; file_name0 = prefix + '_' + var + '_L42.' + YYMM + '.ctl'
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; file_name1 = prefix + '_' + var + '_L42.' + YYMM + '.idx'
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for file_name in [file_name0, file_name1]:
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; dir_file = dir_path + file_name
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; enc = base64.b64encode(dir_file) # base64エンコード
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; access.dl(base_url + enc, dir_path, file_name) # ダウンロード（DIASのコード参照）
+&nbsp; &nbsp; &nbsp; &nbsp; # 6時間毎のデータのダウンロード
+&nbsp; &nbsp; &nbsp; &nbsp; ftime = time.strftime('%Y%m%d%H')
+&nbsp; &nbsp; &nbsp; &nbsp; file_name = prefix + '_' + var + '.' + ftime
+&nbsp; &nbsp; &nbsp; &nbsp; dir_file = dir_path + file_name
+&nbsp; &nbsp; &nbsp; &nbsp; enc = base64.b64encode(dir_file) # base64エンコード
+&nbsp; &nbsp; &nbsp; &nbsp; access.dl(base_url + enc, dir_path, file_name) # ダウンロード（DIASのコード参照）
+&nbsp; &nbsp; &nbsp; &nbsp; time_bef = time
+&nbsp; &nbsp; &nbsp; &nbsp; time = time + time_step
+&nbsp; &nbsp; &nbsp; &nbsp; if ofirst:
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ofirst = False
+</pre>
+＊DIASで取得できるスクリプトに上記のコードを追記する
+</li><br />
+<li>表面データ（1.25&deg;&times;1.25&deg;）の場合（変数別のファイルなし）
+<pre>
+import base64
+from datetime import datetime, timedelta
+
+base_url = 'https://data.diasjp.net/dl/storages/downloadCmd/'
+prefix = 'anl_surf125'
+time_str = datetime(2024, 1, 1, 0, 0, 0) # 開始時刻
+time_end = datetime(2024, 1, 31, 18, 0, 0) # 終了時刻
+time_step = timedelta(hours=6) # 6時間毎
+ofirst = True
+time = time_str
+time_bef = time_str - time_step
+while True:
+&nbsp; &nbsp; if time > time_end:
+&nbsp; &nbsp; &nbsp; &nbsp;  break
+&nbsp; &nbsp; if time.month != time_bef.month or ofirst: # 月に1度実行
+&nbsp; &nbsp; &nbsp; &nbsp; YYMM = time.strftime('%Y%m') # YYMM形式
+&nbsp; &nbsp; &nbsp; &nbsp; dir_path = '/JRA3Q/Hist/Daily/' + prefix + '/' + YYMM + '/'
+&nbsp; &nbsp; &nbsp; &nbsp; file_name0 = prefix + '.' + YYMM + '.ctl'
+&nbsp; &nbsp; &nbsp; &nbsp; file_name1 = prefix + '.' + YYMM + '.idx'
+&nbsp; &nbsp; &nbsp; &nbsp; for file_name in [file_name0, file_name1]:
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; dir_file = dir_path + file_name
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; enc = base64.b64encode(dir_file) # base64エンコード
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; access.dl(base_url + enc, dir_path, file_name) # ダウンロード（DIASのコード参照）
+&nbsp; &nbsp; # 6時間毎のデータのダウンロード
+&nbsp; &nbsp; ftime = time.strftime('%Y%m%d%H')
+&nbsp; &nbsp; file_name = prefix + '.' + ftime
+&nbsp; &nbsp; dir_file = dir_path + file_name
+&nbsp; &nbsp; enc = base64.b64encode(dir_file) # base64エンコード
+&nbsp; &nbsp; access.dl(base_url + enc, dir_path, file_name) # ダウンロード（DIASのコード参照）
+&nbsp; &nbsp; time_bef = time
+&nbsp; &nbsp; time = time + time_step
+&nbsp; &nbsp; if ofirst:
+&nbsp; &nbsp; &nbsp; &nbsp; ofirst = False
+</pre>
+</li><br />
+</ul>
 </div>
 <br />
 <br />
@@ -1390,7 +1469,7 @@ enc = base64.b64encode('文字列')</pre>
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/02/17</p>
+<p>最終更新日：2024/02/24</p>
 <p>Copyright (C) 2021-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
