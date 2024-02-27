@@ -877,7 +877,7 @@ res = [line.rstrip() for line in words if '文字列' in line]</pre>
 
 <h4><div class="headline2" id="char_3">文字列からboolへの変換</div></h4>
 <div class="text1">
-文字列が"true"、"t"、"yes"、"1"のいずれかの場合にTrueとする。大文字・小文字は区別しない。
+文字列が"true"、"t"、"yes"、"1"のいずれかの場合にTrueとする。大文字・小文字を区別しないようにするため、lower()で小文字に変換している
 <pre>
 b = "文字列".lower() in ["true", "t", "yes", "1"]
 </pre>
@@ -1469,7 +1469,7 @@ while True:
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/02/24</p>
+<p>最終更新日：2024/02/27</p>
 <p>Copyright (C) 2021-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
