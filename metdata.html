@@ -73,6 +73,7 @@
       <li><a href="#csv_1_8">CSVデータの文字列を数値に変換する</a></li>
       <li><a href="#csv_1_9">CSVファイル読み込み時のエラー</a></li>
       <li><a href="#csv_1_10">圧縮されたCSVファイルの読み込み</a></li>
+      <li><a href="#csv_1_11">CSVファイルを圧縮して書き出し</a></li>
      </ul>
   </li></ul>
   <!--  TSVファイル -->
@@ -352,11 +353,20 @@ df = pd.read_csv(StringIO(csv))
 ＊WindowsのShift JISで読み込む
 </div>
 
-<h4><div class="headline2" id="csv_1_10">圧縮されたCSVファイルの読み込みー</div></h4>
+<h4><div class="headline2" id="csv_1_10">圧縮されたCSVファイルの読み込み</div></h4>
 <div class="text1">
- pd.read_csvにcompressionオプションを付ける。
+ pd.read_csvのcompressionオプションは、デフォルトで'infer'なので、ファイルの拡張子を見て圧縮ファイルかどうか判断してくれる
+<pre>df = pd.read_csv("ファイル名")</pre>
+具体的に圧縮形式を指定する場合、 pd.read_csvにcompressionオプションを付ける。
 <pre>df = pd.read_csv("ファイル名", compression="bz2")</pre>
 ＊bz2で圧縮されたCSVファイルを読み込む
+</div>
+
+<h4><div class="headline2" id="csv_1_11">CSVファイルを圧縮して書き出し</div></h4>
+<div class="text1">
+pandasのDataFrameの書き出しの際にcompressionオプションを付ける
+<pre>df.to_csv("ファイル名.gz", compression='gzip')</pre>
+＊gzipで圧縮したCSVファイルを書き出す
 </div>
 
 
@@ -999,7 +1009,7 @@ NEAREST、BOX、BILINEAR、HAMMING、BICUBIC、LANCZOSが指定可能（後の�
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/03/01</p>
+<p>最終更新日：2024/03/02</p>
 <p>Copyright (C) 2018-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
