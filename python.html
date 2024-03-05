@@ -83,7 +83,7 @@
       <li><a href="#dir_7">ディレクトリ、ファイルを削除する</a></li>
       <li><a href="#dir_8">シンボリックリンクを作成する</a></li>
       <li><a href="#dir_9">ディレクトリ、ファイルをコピー、移動する</a></li>
-      <li><a href="#dir_10">カレントディレクトリを移動する</a></li>
+      <li><a href="#dir_10">カレントディレクトリを移動する</a></li>   
      </ul>
   </li></ul>
   <!-- 環境変数 -->
@@ -92,6 +92,7 @@
       <li><a href="#env_1">環境変数を取得する</a></li>
       <li><a href="#env_2">環境変数を追加・上書きする</a></li>
       <li><a href="#env_3">pythonパッケージへのパスを追加する</a></li>
+      <li><a href="#env_4">コマンドにパスが通っているか確認する</a></li>   
      </ul>
   </li></ul>
   <!-- 文字列 -->
@@ -796,6 +797,23 @@ os.environ['PYTHONPATH'] = '設定したいパス'
 </li>
 </ul>
 </div>
+
+<h4><div class="headline2" id="env_4">コマンドにパスが通っているか確認するる</div></h4>
+<div class="text1">
+shutil.whichを使う
+<pre>
+import shutil
+shutil.which("コマンド名")
+</pre>
+＊コマンドにパスが通っていれば、パスが表示される。<br /><br />
+パスが通っていない場合の処理を指定する場合
+<pre>
+import shutil
+if shutil.which("コマンド名") is None:
+&nbsp; &nbsp; print("Not Found: コマンド名")
+</pre>
+＊パスが通っていない場合Noneを返すのを利用する
+</div>
 <br />
 <br />
 
@@ -1469,7 +1487,7 @@ while True:
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/02/27</p>
+<p>最終更新日：2024/03/05</p>
 <p>Copyright (C) 2021-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
