@@ -522,12 +522,28 @@ df.ix[[0, 2], ["A", "B"]なら、df.iloc[[0, 2], df.columns.get_indexer(["A", "B
 </li><br />
 <!-- 4 -->
 <li> MatplotlibDeprecationWarning: You are modifying the state of a globally registered colormap.の警告が出る場合
+<ul class="list2">
+<li>matplotlib 3.7以降、colormaps.get_cmapを使う場合
 <pre>
 import matplotlib as mpl
 import copy
-cmap = copy.copy(mpl.cm.get_cmap("色テーブル"))
+cmap = copy.copy(mpl.colormaps.get_cmap("色テーブル"))
 </pre>
-＊matplotlib 3.3以降では、plt.get_cmapの戻り値を変更すると警告が出るようになり、3.6以降ではエラーとなる予定。
+</li>
+<li>matplotlib 3.7以降、colormapsを使う場合
+<pre>
+import matplotlib as mpl
+import copy
+cmap = copy.copy(mpl.colormaps["色テーブル"])
+</pre></li>
+<li>matplotlib 3.6までは警告が出なかった方法（非推奨、3.9以降でエラー）
+<pre>
+import matplotlib as mpl
+import copy
+cmap = copy.copy(mpl.cm.get_cmap["色テーブル"])
+</pre></li>
+</ul>
+＊matplotlib 3.3以降では、plt.get_cmapの戻り値を変更すると警告が出るようになり、3.6以降ではエラーとなる。3.6まではmpl.cm.get_cmapが使えたが、3.7ではMatplotlibDeprecationWarningが出るようになった。
 </li><br />
 <!-- 5 -->
 <li> xticklabelsでUserWarning: FixedFormatter should only be used together with FixedLocatorの警告が出る場合
@@ -571,7 +587,7 @@ axis=1の0番目の要素を全て置き換える
 </li><br />
 <!-- 7 -->
 <li> pcolorで警告が出る場合<br>
-matplotlib 3.3以降、pcolorでshadingオプションの警告が出るようになった（3.5以降ではエラーとなる予定）
+matplotlib 3.3以降、pcolorでshadingオプションの警告が出るようになった（3.5以降ではエラーとなる）
 <ul class="list2">
 <li>変更前
 <pre>plt.pcolor(x, y, d, cmap='jet')</pre>
@@ -2897,7 +2913,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/02/03</p>
+<p>最終更新日：2024/03/18</p>
 <p>Copyright (C) 2018-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
