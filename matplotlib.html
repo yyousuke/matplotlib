@@ -483,19 +483,19 @@ matplotlib.pyplotについては、<a href="#matplotlib_1_3">matplotlibのモジ
 <h4><div class="headline2" id="matplotlib_2_3">スクリプト実行時のWarning表示を消す</div></h4>
 <div class="text1">
 <ul class="list1">
-<li>register matplotlib convertersの警告が出る場合
+<li>register matplotlib convertersの警告を消す
 <pre>
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
 </pre>
 </li><br />
 <!-- 2 -->
-<li>More than 20 figures have been openedの警告が出る場合
+<li>More than 20 figures have been openedの警告を消す
 <pre>
 matplotlib.rcParams['figure.max_open_warning'] = 0
 </pre>
 同じスクリプトで複数の図を連続作成している場合などに発生<br />
-不要なら作図後にplt.close()を行なった方が良い
+不要なら、警告を消すよりも作図後にplt.close()を行なった方が良い
 </li><br />
 <!-- 3 -->
 <li>.ix is deprecatedの警告が出る場合（.loc、.ilocに書き換える）
@@ -523,14 +523,16 @@ df.ix[[0, 2], ["A", "B"]なら、df.iloc[[0, 2], df.columns.get_indexer(["A", "B
 <!-- 4 -->
 <li> MatplotlibDeprecationWarning: You are modifying the state of a globally registered colormap.の警告が出る場合
 <ul class="list2">
-<li>matplotlib 3.7以降、colormaps.get_cmapを使う場合
+<li>matplotlib 3.7以降、mpl.colormaps.get_cmapを使う場合
 <pre>
 import matplotlib as mpl
 import copy
 cmap = copy.copy(mpl.colormaps.get_cmap("色テーブル"))
+・・・（カラーマップの変更）
 </pre>
-</li>
-<li>matplotlib 3.7以降、colormapsを使う場合
+カラーマップをコピーしてから変更する
+</li><br />
+<li>matplotlib 3.7以降、mpl.colormapsを使う場合
 <pre>
 import matplotlib as mpl
 import copy
@@ -541,9 +543,11 @@ cmap = copy.copy(mpl.colormaps["色テーブル"])
 import matplotlib as mpl
 import copy
 cmap = copy.copy(mpl.cm.get_cmap["色テーブル"])
-</pre></li>
+</pre>
+＊3.6まではmpl.cm.get_cmapが使えたが、3.7ではMatplotlibDeprecationWarningが出るようになった
+</li>
 </ul>
-＊matplotlib 3.3以降では、plt.get_cmapの戻り値を変更すると警告が出るようになり、3.6以降ではエラーとなる。3.6まではmpl.cm.get_cmapが使えたが、3.7ではMatplotlibDeprecationWarningが出るようになった。
+＊matplotlib 3.3以降では、plt.get_cmapの戻り値を変更すると警告が出るようになり、3.6以降ではエラーとなる
 </li><br />
 <!-- 5 -->
 <li> xticklabelsでUserWarning: FixedFormatter should only be used together with FixedLocatorの警告が出る場合
