@@ -2516,7 +2516,9 @@ ax.yaxis.set_minor_locator(ticker.MultipleLocator(2.00))</pre></li>
 <li>ticker.MultipleLocatorを使う例：x軸の大目盛りを3毎、小目盛りを1毎に付ける
 <pre>import matplotlib.ticker as ticker
 ax.xaxis.set_major_locator(ticker.MultipleLocator(3))
-ax.xaxis.set_minor_locator(ticker.MultipleLocator(1))</pre></li>
+ax.xaxis.set_minor_locator(ticker.MultipleLocator(1))</pre>
+＊x軸が時刻データの場合は、大目盛りが3毎、小目盛りが1毎になる
+</li>
 <li>FixedLocatorを使う例：y軸の任意の場所に目盛り線を付ける
 <pre>import matplotlib.ticker as ticker
 ax.yaxis.set_major_locator(ticker.FixedLocator(大目盛り線の値のリスト))
