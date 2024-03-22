@@ -43,6 +43,13 @@
 <br />
 
 <!-- ここから本文 -->
+<h3><div class="headline1" id="import">Pandasのインポート</div></h3>
+<div class="text1">
+<pre>import pandas as pd</pre>
+</div>
+<br />
+<br />
+
 <h3><div class="headline1" id="display">表示数を増やす</div></h3>
 <div class="text1">
 <ul class="list1">
@@ -268,6 +275,20 @@ DataFrame（df）のdf.info()メソッドを使う<br />
 <br />
 <br />
 
+<h3><div class="headline1" id="df_time">時系列の作成</div></h3>
+<div class="text1">
+pd.date_rangeメソッドを使う
+<ul class="list1">
+<li>1日刻みで作成する
+<pre>index = pd.date_range('2024-01-01', '2024-03-31', freq='D')</pre>
+</li>2024/01/01から2024/03/31まで<br />
+<li>1時間刻みで作成する
+<pre>index = pd.date_range('2024-01-01', '2024-03-31', freq='h')</pre>
+</li>freq='H'は将来廃止予定<br />
+</ul>
+</div>
+<br />
+<br />
 
 <br />
 <br />
@@ -279,7 +300,7 @@ DataFrame（df）のdf.info()メソッドを使う<br />
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/01/01</p>
+<p>最終更新日：2024/03/22</p>
 <p>Copyright (C) 2021-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
