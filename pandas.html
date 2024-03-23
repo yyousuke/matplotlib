@@ -100,7 +100,15 @@ index_listのサイズは行数、columns_listのサイズは列数と一致さ�
 <pre>df = pd.read_csv('ファイル名')</pre></li>
 <li>読み込んだwebページから作成する方法
 <pre>df = pd.io.html.read_html('URL')</pre>
-＊テーブルになっているページから数値を取り出す
+webページ内のテーブルから数値を取り出す場合など
+</li><br />
+<li>JSONファイルから作成する方法
+<pre>import json
+with open('ファイル名', 'rt') as fin:
+&nbsp; &nbsp; data = fin.read()
+df = pd.DataFrame(json.loads(data))
+</pre>
+＊JSONの構造によっては、DataFrameに変換する前にjson.loads(data)から変数を切り出す場合もある
 </li><br />
 </ul>
 </div>
@@ -285,6 +293,10 @@ pd.date_rangeメソッドを使う
 <li>1時間刻みで作成する
 <pre>index = pd.date_range('2024-01-01', '2024-03-31', freq='h')</pre>
 </li>freq='H'は将来廃止予定<br />
+<li>2ヶ月刻みで作成する
+<pre>index = pd.date_range('2022-01-01', '2024-12-31', freq='2ME')</pre>
+</li>2022/01/01から2024/12/31まで<br />
+freq='M'は将来廃止予定<br />
 </ul>
 </div>
 <br />
