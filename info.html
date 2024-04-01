@@ -49,6 +49,19 @@
 <a href="/">ホーム</a> &gt; <a href="index.html">matplotlibの使い方</a> &gt; 更新・エラー情報
 </div>
 <article>
+<h3><div class="headline-scroll" id="20240401">MacPortsでのXZ Utilsについて（2024/04/01）</div></h3>
+<div class="text1">
+2024年3月末にXZ Utilsの脆弱性（CVE-2024-3094）が公表されました。この脆弱性の影響を受けているバージョンでは、XZ Utilsに悪意のあるコードが挿入されており、必要な対処の実施が推奨されています（<a href="https://www.jpcert.or.jp/newsflash/2024040101.html" target="_blank">JPCERT</a>）。MacPortsでは、この脆弱性の影響を受けるバージョン5.6.1に更新されていましたが、3月末に影響を受けないバージョン5.4.6にダウングレードされました（<a  href="https://ports.macports.org/port/xz/details/" target="_blank">MacPorts XZ Utils</a>）。<br /><br />
+XZ Utilsのバージョンは
+<pre>% strings /opt/local/bin/xz |grep '(XZ Utils)'</pre>
+で確認可能です。もし脆弱性の影響を受けるバージョン5.6.0か5.6.1が表示された場合には、次のように最新版に更新してください。
+<pre>% sudo port selfupdate
+% sudo port upgrade outdated
+</pre>
+</div>
+<br />
+<br />
+
 <h3><div class="headline-scroll" id="20230604">cartopyでのlgeosインポートエラー（2023/06/04）</div></h3>
 <div class="text1">
 2023年5月のアップデートに伴い、MacPortsでインストールされるshapelyのバージョンが1.8.5から2.0.1になりました。このバージョンでは、cartopyy-0.21.0が内部でインポートしているlgeosが含まれないようになったため、以下のようなImportErrorが発生します（Python3.10の場合のエラーメッセージ例）。このエラーは、cartopyインポート時に不可避な部分で発生しており、shapely-2.0.1のアップデートが適用されてしまった場合には、shapelyのバージョンを1.8.5に戻す必要があります。なお、<span style="COLOR:red">2023/06/09にMacPortsで更新されたcartopy-0.21.1で一連の不具合が解消されたため、MacPortsで取得できる最新版への更新をお薦めします</span>。
@@ -395,7 +408,7 @@ elif masked and <span style="COLOR:red">is_scalar_or_string(masked)</span>:<br /
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/02/06</p>
+<p>最終更新日：2024/04/01</p>
 <p>Copyright (C) 2018-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
