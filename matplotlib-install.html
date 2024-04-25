@@ -75,14 +75,16 @@ Python環境を構築するため、まずはパッケージ管理ツールConda
 
 <h4><div class="headline2" id="install_1_2">Conda環境の作成</div></h4>
 <div class="text1">
-ここでは、conda実行環境を複数用意して、使いたい環境に切り替える方法を紹介します。Python3.9環境をpy39という名前で作成するには、次のようにします。Pythonのバージョンを変えたい場合には、python=3.9の部分を変更します。
-<pre>% conda create -n py39 python=3.9</pre>
-＊Intel oneAPIの場合、~/.conda/envs/py39/ができる<br />
+ここでは、conda実行環境を複数用意して、使いたい環境に切り替える方法を紹介します。Python3.11環境をpy312という名前で作成するには、次のようにします。Pythonのバージョンを変えたい場合には、python=3.12の部分を変更します。
+<pre>% conda create -n py312 python=3.12</pre>
+＊anacondaの場合、~/anaconda3/envs/py312/ができる<br />
+＊minicondaの場合、~/anaconda3/envs/py312/ができる<br />
+＊Intel oneAPIの場合、~/.conda/envs/py312/ができる<br />
 作成した実行環境を次のように有効化します。
-<pre>% conda activate py39</pre>
+<pre>% conda activate py312</pre>
 環境によってはconda activateでエラーが出ることがあるので、その場合には
-<pre>% source activate py39</pre>
-を試してください（csh/tcshの場合には利用不可）。
+<pre>% source activate py312</pre>
+を試してください（csh/tcshの場合には利用不可なので、bashに切り替える）。
 </div>
 
 
@@ -107,10 +109,10 @@ Python環境を構築するため、まずはパッケージ管理ツールConda
 
 <h4><div class="headline2" id="install_2_2">python3.10以降の場合</div></h4>
 <div class="text1">
-python3.10以降では、Condaを使ってbasemapを導入できないケースがあります。その場合には、以下の手順でbasemapのみpipでインストールします（以下の例はpython3.11の場合）。
+python3.10以降では、Condaを使ってbasemapを導入できないケースがあります。その場合には、以下の手順でbasemapのみpipでインストールします（以下の例はpython3.12の場合）。
 <pre>
-% conda create -n py311 python=3.11
-% conda activate py311
+% conda create -n py312 python=3.12
+% conda activate py312
 % conda install pandas
 % conda install netcdf4
 % conda install cartopy
@@ -139,10 +141,11 @@ Windows 10/11では、<a href="https://learn.microsoft.com/ja-jp/windows/wsl/" t
 % sh Miniconda3-latest-Linux-x86_64.sh
 % . .bashrc（condaの設定を反映）
 </pre>
-Minicondaの環境は~/miniconda3/envs/py311/に作成されます。Condaを使ってpython環境を整備します（<a href="#install_2_2">python3.10以降の場合</a>と同じ）。
+まずは、Minicondaの環境を作成します。
+<pre>% conda create -n py312 python=3.12</pre>
+Minicondaの環境は~/miniconda3/envs/py312/に作成されます。Condaを使ってpython環境を整備します（<a href="#install_2_2">python3.10以降の場合</a>と同じ）。
 <pre>
-% conda create -n py311 python=3.11
-% conda activate py311
+% conda activate py312
 % conda install pandas
 % conda install netcdf4
 % conda install cartopy
@@ -159,17 +162,20 @@ ZIPを開くためunzipをインストールしておきます。
 % sudo apt install unzip
 % unzip met_sample.zip
 </pre>
-basemap_ortho.pyの実行に必要なwgrib2は次の手順でビルドします。なお最新版はv3.1.2ですが、コンパイル時にエラーが出るためv3.1.1を使います。
+basemap_ortho.pyの実行に必要なwgrib2は次の手順でビルドします。なお、以前のバージョンのv.3.1.1は同様にコンパイル可能ですが、v3.1.2ではコンパイル時にエラーが出ます。
 <pre>
-% wget https://www.ftp.cpc.ncep.noaa.gov/wd51we/wgrib2/wgrib2.tgz.v3.1.1
+% wget https://www.ftp.cpc.ncep.noaa.gov/wd51we/wgrib2/wgrib2.tgz.v3.1.3
 % sudo apt install gcc
 % sudo apt install gfortran
 % sudo apt install make
-% tar -zxvf wgrib2.tgz.v3.1.1
+% tar -zxvf wgrib2.tgz.v3.1.3
 % export CC=gcc
 % export FC=gfortran
 % cd grib2 ; make
 </pre>
+なお、コンパイル時にcmakeがないというエラーが発生する場合、
+<pre>% sudo apt install cmake</pre>
+を行いインストールします。<br />
 ビルドしたwgrib2コマンドをホームディレクトリ直下のbin/に配置する場合の例です。
 <pre>
 % mkdir ~/bin
@@ -188,7 +194,7 @@ basemap_ortho.pyの実行に必要なwgrib2は次の手順でビルドします�
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/02/08</p>
+<p>最終更新日：2024/04/25</p>
 <p>Copyright (C) 2022-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
