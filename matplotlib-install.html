@@ -75,7 +75,7 @@ Python環境を構築するため、まずはパッケージ管理ツールConda
 
 <h4><div class="headline2" id="install_1_2">Conda環境の作成</div></h4>
 <div class="text1">
-ここでは、conda実行環境を複数用意して、使いたい環境に切り替える方法を紹介します。Python3.11環境をpy312という名前で作成するには、次のようにします。Pythonのバージョンを変えたい場合には、python=3.12の部分を変更します。
+ここでは、conda実行環境を複数用意して、使いたい環境に切り替える方法を紹介します。Python3.12環境をpy312という名前で作成するには、次のようにします。Pythonのバージョンを変えたい場合には、python=3.12の部分を変更します。
 <pre>% conda create -n py312 python=3.12</pre>
 ＊anacondaの場合、~/anaconda3/envs/py312/ができる<br />
 ＊minicondaの場合、~/anaconda3/envs/py312/ができる<br />
@@ -121,6 +121,7 @@ python3.10以降では、Condaを使ってbasemapを導入できないケース�
 % pip install basemap
 % pip install basemap-data-hires
 </pre>
+＊-nオプションで作成する環境の名前を設定します。ここではpython3.12を表すpy312としました。<br />
 既に作成されているConda環境の場合、basemapインストール時に不整合が生じることがあるため、basemap用に新規作成することを推奨します。
 なお、「3章　matplotlib の基本」のインタラクティブ環境を利用する場合には、次のようにipythonを導入しておきます。
 <pre>
@@ -194,7 +195,7 @@ basemap_ortho.pyの実行に必要なwgrib2は次の手順でビルドします�
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/04/25</p>
+<p>最終更新日：2024/04/26</p>
 <p>Copyright (C) 2022-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
