@@ -386,7 +386,7 @@ matplotlib.pyplotモジュールをインポートする
 <div class="text1">
 ファイル名の拡張子を判断して自動で変換される
 <pre>plt.savefig("ファイル名")</pre>
-現在、eps、jpeg、jpg、pdf、pgf、png、ps、raw、rgba、svg、svgz、tif、tiffに対応
+現在、eps、jpeg、jpg、pdf、pgf、png、ps、raw、rgba、svg、svgz、tif、tiffに対応（3.6.0以降ではwebpにも対応）
 <ul class="list1">
 <li>解像度を300 dpiに変えるには（デフォルト値：100）
 <pre>plt.savefig("ファイル名", dpi=300)</pre></li>
@@ -1634,22 +1634,23 @@ levelsオプションに陰影を変える個数を与える
 <li>例：Zが3〜9の範囲で色を変化させ、範囲外の色を指定する
 <pre>
 import matplotlib as mpl
-cmap = mpl.cm.get_cmap("bwr").copy() # 色テーブル取得
-cmap.set_under('gray') # 下限を下回った場合に灰色
-cmap.set_over('w') # 上限を超えた場合に白
-plt.contourf(X, Y, Z, cmap=cmap, vmin=3, vmax=9)
-</pre>
-cmapの取得は次のように行なってもよい
-<pre>cmap = copy.copy(mpl.cm.get_cmap("bwr"))</pre>
-＊matplotlib 3.3以降では、plt.get_cmapの戻り値を変更すると警告が出るようになり、3.6以降ではエラーとなる予定。
-<br /><br />
-matplotlib 3.2以前の場合には以下のような指定も可能だが、推奨されない。
-<pre>
 cmap = plt.get_cmap('bwr') # 色テーブル取得
 cmap.set_under('gray') # 下限を下回った場合に灰色
 cmap.set_over('w') # 上限を超えた場合に白
 plt.contourf(X, Y, Z, cmap=cmap, vmin=3, vmax=9)
 </pre>
+cmapの取得は次のように行なってもよい
+<pre>cmap = mpl.colormaps.get_cmap("bwr")</pre>
+<br />
+＊matplotlib 3.7以降では、次の記述でMatplotlibDeprecationWarningの警告が出る
+<pre>cmap = mpl.cm.get_cmap("bwr")</pre>
+＊matplotlib 3.3から3.6では、plt.get_cmapの戻り値を変更すると警告が出ており、下記のようにcopyしたものを利用していた。
+<pre>import matplotlib as mpl
+import copy
+cmap = copy.copy(mpl.colormaps.get_cmap("bwr"))</pre>
+または
+<pre>cmap = mpl.colormaps.get_cmap("bwr").copy()</pre>
+<br /><br />
 </li><br />
 </ul>
 </div>
@@ -2919,7 +2920,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/03/18</p>
+<p>最終更新日：2024/05/05</p>
 <p>Copyright (C) 2018-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>

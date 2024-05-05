@@ -7,7 +7,7 @@
 Webページとして表示する場合には、https://yyousuke.github.io/matplotlib/ を開いてください。
 
 
-## 2023年12月15日版のファイルは以下
+## 2024年5月5日版のファイルは以下
 
     1章　はじめに（matplotlib-1.pdf）
 
