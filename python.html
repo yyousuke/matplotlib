@@ -130,6 +130,15 @@
       <li><a href="#set_2">集合同士の演算</a></li>
     </ul>
   </li></ul>
+  <!-- 辞書 -->
+  <ul class="list1"><li><a href="#dict">辞書</a>
+    <ul class="list2">
+      <li><a href="#dict_1">pythonにおける辞書</a></li>
+      <li><a href="#dict_2">辞書の作成</a></li>
+      <li><a href="#dict_4">辞書の変更・追加</a></li>
+      <li><a href="#dict_5">辞書同士の結合</a></li>
+    </ul>
+  </li></ul>
   <!-- Web -->
   <ul class="list1"><li><a href="#web">Web</a>
     <ul class="list2">
@@ -798,7 +807,7 @@ os.environ['PYTHONPATH'] = '設定したいパス'
 </ul>
 </div>
 
-<h4><div class="headline2" id="env_4">コマンドにパスが通っているか確認するる</div></h4>
+<h4><div class="headline2" id="env_4">コマンドにパスが通っているか確認する</div></h4>
 <div class="text1">
 shutil.whichを使う
 <pre>
@@ -1034,7 +1043,7 @@ list_b = list()</pre>
 <h4><div class="headline2" id="list_3">リストの要素の変更</div></h4>
 <div class="text1">
 リストの要素番号を指定して値を置き換えることが可能
-<pre>list_a[1]=3
+<pre>list_a[1] = 3
 print(list_a)
 出力：[1, 3, 4, 'a', 'b', 'c']
 </pre>
@@ -1073,7 +1082,7 @@ print(list_a)
 <h4><div class="headline2" id="list_6">リスト内包表記</div></h4>
 <div class="text1">
 リストの要素を個別にstrに変換する場合
-<pre>[str(x) for x in list_a]</pre>
+<pre>new_list_a = [str(x) for x in list_a]</pre>
 </div>
 <br />
 
@@ -1106,6 +1115,57 @@ print(set_b - set_a) # 集合の差
 出力： {'e', 'd'}
 print(set_a - set_b) # 集合の差
 出力： {'b', 'a'}
+</pre>
+</div>
+<br />
+<br />
+
+<!-- 辞書 -->
+<h3><div class="headline1" id="dict">辞書</div></h3>
+<h4><div class="headline2" id="dict_1">pythonにおける辞書</div></h4>
+<div class="text1">
+キーと値のセットを順番に並べたもので、中身を変更・追加・削除可能。キーは文字型。値の型はまちまちでも良く、文字列、整数、実数などの他、リストやタプル、Numpyの配列などオブジェクトは何でも入れられる。
+</div>
+<br />
+<br />
+
+<h4><div class="headline2" id="dict_2">辞書の作成</div></h4>
+<div class="text1">
+辞書を作成する場合、次のように記述する
+<pre>dict_a = {'a': 'value_a', 'b': 'value_b'}</pre>
+要素が空の辞書も作成可能
+<pre>dict_a = dict()</pre>
+＊dict_a = {}でも空の辞書になるが、集合と紛らわしい<br />
+dictを使って辞書を作成する場合、次のように記述
+<pre>dict_a = dict(a = 'value_a', b = 'value_b')</pre>
+</div>
+<br />
+<br />
+
+<h4><div class="headline2" id="dict_3">辞書の変更・追加</div></h4>
+<div class="text1">
+新しいキーと値のペアを追加する
+<pre>dict_a = {'a': 'value_a', 'b': 'value_b'}
+dict_a['c'] = 'value_c'
+print(dict_a)
+出力：{'a': 'value_a', 'b': 'value_b', 'c': 'value_c'}
+</pre>
+既に存在しているキーを使用すると、値が更新される
+<pre>dict_a['c'] = 'value_c2'
+print(dict_a)
+出力：{'a': 'value_a', 'b': 'value_b', 'c': 'value_c2'}
+</pre>
+</div>
+<br />
+
+<h4><div class="headline2" id="dict_4">辞書同士の結合</div></h4>
+<div class="text1">
+辞書dict_aとdict_bを結合する場合
+<pre>dict_a = {'a': 'value_a', 'b': 'value_b'}
+dict_b = {'c': 'value_c', 'd': 'value_d'}
+dict_c = {**dict_a, **dict_b}
+print(dict_c)
+出力：{'a': 'value_a', 'b': 'value_b', 'c': 'value_c', 'd': 'value_d'}
 </pre>
 </div>
 <br />
@@ -1283,7 +1343,7 @@ except OSError as e:
 &nbsp; &nbsp; raise OSError(e)
 </pre>
 OSErrorの内容を表示する<br />
-exceptのみでも動作するが、PEP8では組み込み例外の名前を記載することになっている
+exceptのみでも動作するが、PEP8では組み込み例外の名前を記載することになっている（except Exceptionは許容）
 </div>
 <br />
 <br />
@@ -1487,7 +1547,7 @@ while True:
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/03/05</p>
+<p>最終更新日：2024/08/04</p>
 <p>Copyright (C) 2021-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
