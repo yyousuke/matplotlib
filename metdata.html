@@ -301,6 +301,9 @@ dはlistやnumpyのndarrayなど</li><br />
 <li>ヘッダを付けない
 <pre>pd.DataFrame(d).to_csv("ファイル名", header=False)</pre>
 1行目にヘッダ行が入らないファイルができる</li><br />
+<li>indexもヘッダも付けないこともできる
+<pre>pd.DataFrame(d).to_csv("ファイル名", header=False, index=False)</pre>
+データのみのファイルができる</li><br />
 <li>カンマ区切りではなくタブ区切りで出力する（<a href="#tsv_1">TSVファイル</a>にする）
 <pre>pd.DataFrame(d).to_csv("ファイル名", sep='\t')</pre>
 sepで区切り文字をタブにする</li><br />
@@ -1009,7 +1012,7 @@ NEAREST、BOX、BILINEAR、HAMMING、BICUBIC、LANCZOSが指定可能（後の�
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/03/02</p>
+<p>最終更新日：2024/08/16</p>
 <p>Copyright (C) 2018-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
