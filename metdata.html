@@ -200,7 +200,8 @@ df = pd.read_csv("ファイル名")</pre>
 <div class="text1">
 <ul class="list1">
 <li>例：1列目が時刻データの場合
-<pre>df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0])</pre>
+<pre>import pandas as pd
+df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0])</pre>
 parse_datesには時刻データとして処理する列、index_colにはindexとして扱う列を指定<br />
 時刻データはdf.indexになる
 </li><br />
@@ -222,7 +223,8 @@ parse_datesには時刻データとして処理する列、index_colにはindex�
 <div class="text1">
 <ul class="list1">
 <li>例：1行目にヘッダがなく、1行目からデータが入っている場合
-<pre>df = pd.read_csv("ファイル名", header=None)</pre>
+<pre>import pandas as pd
+df = pd.read_csv("ファイル名", header=None)</pre>
 </li>
 <li>例：ヘッダがない場合に、読み込み時に任意のヘッダを付ける
 <pre>df = pd.read_csv("ファイル名", header=None, names=[名前1, 名前2, , ,名前n])</pre>
@@ -243,7 +245,8 @@ namesに与えるリストの要素数は、データの列数に合わせる
 <h4><div class="headline2" id="csv_1_5">CSVファイルの時刻がparse_dates未対応の場合</div></h4>
 <div class="text1">
 日付データへの変換処理をdate_parserに関数で指定
-<pre>df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0], date_parser=parse_dates)</pre>
+<pre>import pandas as pd
+df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0], date_parser=parse_dates)</pre>
 parse_datesが関数名
 <ul class="list1">
 <li>例：時刻形式がGrADSで扱われる「00Z03FEB2020」のような形式の場合
@@ -271,7 +274,7 @@ df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0], date_parser=
 <div class="text1">
 <ul class="list1">
 <li>例：読み込む列を指定する
-<pre>
+<pre>import pandas as pd
 df = pd.read_csv("ファイル名", usecols=[0, 3])
 </pre>
 1列目と4列目を読み込む
@@ -293,7 +296,8 @@ Numpyのndarrayに格納する（np.arrayをpd.SeriesにするとSeriesになる
 pandasのDataFrameを使う場合
 <ul class="list1">
 <li>DataFrameを書き出す
-<pre>pd.DataFrame(d).to_csv("ファイル名")</pre>
+<pre>import pandas as pd
+pd.DataFrame(d).to_csv("ファイル名")</pre>
 dはlistやnumpyのndarrayなど</li><br />
 <li>indexを無効にしてから書き出す
 <pre>pd.DataFrame(d).to_csv("ファイル名", index=False)</pre>
@@ -320,9 +324,16 @@ df.to_csv("ファイル名")</pre>
 indexは時刻データ、meanは平均値、stdは標準偏差の場合で、ヘッダ行ありで書き出す</li><br />
 <li>CSVをbz2圧縮して書き出す
 <pre>import bz2
-import pandas as pd
-df.to_csv('圧縮後のファイル.bz2', compression='bz2')
+df.to_csv("圧縮後のファイル.bz2", compression='bz2')
 </pre>
+</li><br />
+<li>CSVファイルの末尾に行を追記する
+<pre>
+df.to_csv("ファイル名")  # 新しいファイルを作成
+df2.to_csv("ファイル名", mode='a', header=False)  # 追記
+</pre>
+mode='a'が追記を表す（デフォルトはmode='w'で、存在しない場合は新規作成、存在する場合は上書き）<br />
+追記する場合、CSVファイルの途中にヘッダが入らないようにheader=Falseとする
 </li><br />
 </ul>
 </div>
@@ -1012,7 +1023,7 @@ NEAREST、BOX、BILINEAR、HAMMING、BICUBIC、LANCZOSが指定可能（後の�
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/08/16</p>
+<p>最終更新日：2024/08/28</p>
 <p>Copyright (C) 2018-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
