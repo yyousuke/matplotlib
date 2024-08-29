@@ -1113,12 +1113,12 @@ rint(tup_a)
 要素が1の場合、次のような記述ではタプルにならないので注意
 <pre>tup_a = (1)
 print(type(tup_a))
-出力：<class 'int'>
+出力：&lt;class 'int'&gt;
 </pre>
 要素が1の場合、正しくは次のようにカンマを付けて記述する
 <pre>tup_a = (1, )
 print(type(tup_a))
-出力：<class 'tuple'>
+出力：&lt;class 'tuple'&gt;
 </pre>
 </div>
 <br />
@@ -1523,7 +1523,7 @@ for var in ['ugrd', 'vgrd', 'depr', 'hgt', 'rh', 'spfh', 'vvel', 'relv', 'reld',
 &nbsp; &nbsp; time = time_str
 &nbsp; &nbsp; time_bef = time_str - time_step
 &nbsp; &nbsp; while True:
-&nbsp; &nbsp; &nbsp; &nbsp; if time > time_end:
+&nbsp; &nbsp; &nbsp; &nbsp; if time &gt; time_end:
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  break
 &nbsp; &nbsp; &nbsp; &nbsp; if time.month != time_bef.month or ofirst: # 月に1度実行
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; YYMM = time.strftime('%Y%m') # YYMM形式
@@ -1561,7 +1561,7 @@ ofirst = True
 time = time_str
 time_bef = time_str - time_step
 while True:
-&nbsp; &nbsp; if time > time_end:
+&nbsp; &nbsp; if time &gt; time_end:
 &nbsp; &nbsp; &nbsp; &nbsp;  break
 &nbsp; &nbsp; if time.month != time_bef.month or ofirst: # 月に1度実行
 &nbsp; &nbsp; &nbsp; &nbsp; YYMM = time.strftime('%Y%m') # YYMM形式
@@ -1599,7 +1599,7 @@ while True:
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/08/04</p>
+<p>最終更新日：2024/08/29</p>
 <p>Copyright (C) 2021-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>

@@ -200,11 +200,11 @@ d = np.zeros((ndim, kdim, jdim, idim), dtype=np.int32) # 全ての要素が0、�
 <ul class="list1">
 <li>条件を満たす要素の置換<br />
 負の値を0に置換
-<pre>var[var <= 0] = 0</pre>
+<pre>var[var &lt;= 0] = 0</pre>
 </li>
 <li>条件が真と偽で置換する値を変える<br />
 負の値なら-1、正の値なら0に置換する
-<pre>var = np.where(var <= 0, -1, 0)</pre>
+<pre>var = np.where(var &lt;= 0, -1, 0)</pre>
 </li>
 </ul>
 </div>
@@ -269,7 +269,7 @@ for ij in itertools.product(i_list, j_list):
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/01/01</p>
+<p>最終更新日：2024/08/29</p>
 <p>Copyright (C) 2018-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
