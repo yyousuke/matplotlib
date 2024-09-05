@@ -428,7 +428,7 @@ time = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
 
 <h4><div class="headline2" id="time_9">年初の00UTCを取得する</div></h4>
 <div class="text1">
-<a href="#time_8">当日の00UTCを取得する</a>同様に、datetime.utcnowで取得した現在時刻を書き換える
+<a href="#time_8">当日の00UTCを取得する</a>場合と同様に、datetime.utcnowで取得した現在時刻を書き換える
 <pre>
 from datetime import datetime
 time = datetime.utcnow().replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
@@ -524,6 +524,11 @@ while True:
 &nbsp; &nbsp; &nbsp; &nbsp; break # time_endを超えたら終了
 &nbsp; &nbsp; # time_step分時刻を進める
 &nbsp; &nbsp; time_now = time_now + time_step
+</pre>
+＊1日刻みにしたい場合には、time_step = timedelta(days=1)<br />
+＊1ヶ月で刻みたい場合には、dateutil.relativedeltaをimportしてtime_stepを設定する
+<pre>from dateutil.relativedelta import relativedelta
+time_step = timedelta(months=1)
 </pre>
 </li><br />
 </ul>
@@ -1599,7 +1604,7 @@ while True:
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/08/29</p>
+<p>最終更新日：2024/09/05</p>
 <p>Copyright (C) 2021-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
