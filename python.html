@@ -17,6 +17,7 @@
 <link rel="icon" type="image/vnd.microsoft.icon" href="/matplotlib/favicon.ico" />
 <link rel="apple-touch-icon" type="image/png" href="/matplotlib/images/apple-touch-icon-180x180.png" />
 <link rel="icon" type="image/png" href="/matplotlib/images/icon-192x192.png" />
+<link rel="icon" type="image/x-icon" href="/matplotlib/favicon.ico" />
 <!-- Mobile Internet Explorer allows us to activate ClearType technology for smoothing fonts for easy reading -->
 <meta http-equiv="cleartype" content="on" />
 <!-- Specify whether or not telephone numbers in the HTML content should appear as hypertext links -->
@@ -79,6 +80,7 @@
       <li><a href="#dir_3">ディレクトリ内の一覧を取得する</a></li>
       <li><a href="#dir_4">ワイルドカードで一覧を取得する</a></li>
       <li><a href="#dir_5">ディレクトリ、ファイルの所有者、グループを変更する</a></li>
+      <li><a href="#dir_6">ディレクトリ、ファイルのパーミッションを変更する</a></li>
       <li><a href="#dir_7">ディレクトリを作成する</a></li>
       <li><a href="#dir_8">ディレクトリ、ファイルを削除する</a></li>
       <li><a href="#dir_9">シンボリックリンクを作成する</a></li>
@@ -672,6 +674,32 @@ os.chown("dir01/file01.txt", 1040, -1)
 </pre>
 所有者を変更できるのはroot権限で実行した場合のみ<br />
 </li>
+</ul>
+</div>
+<br />
+<br />
+
+<h4><div class="headline2" id="dir_6">ディレクトリ、ファイルのパーミッションを変更する</div></h4>
+<div class="text1">
+os.chmodを使う
+<ul class="list1">
+<li>file01を誰でも読み込み可能にする（所有者は書き込みも可能）
+<pre>
+os.chmod("file01", 0o644)
+</pre>
+＊0644でも有効な場合もあるがエラーが出る場合は、この記述を使う
+</li><br />
+<li>file01を誰でも読み込み実行可能にする（所有者は書き込みも可能）
+<pre>
+os.chmod("file01", 0o755)
+</pre>
+</li><br />
+<li>dir01を誰でも読み込み実行可能にする（所有者は書き込みも可能）
+<pre>
+os.chmod("dir01", 0o755)
+</pre>
+＊ディレクトリには実行可能権限がないとリストを表示できないことに注意
+</li><br />
 </ul>
 </div>
 <br />
@@ -1604,7 +1632,7 @@ while True:
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/09/05</p>
+<p>最終更新日：2024/09/07</p>
 <p>Copyright (C) 2021-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
