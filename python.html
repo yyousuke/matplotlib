@@ -79,11 +79,11 @@
       <li><a href="#dir_3">ディレクトリ内の一覧を取得する</a></li>
       <li><a href="#dir_4">ワイルドカードで一覧を取得する</a></li>
       <li><a href="#dir_5">ディレクトリ、ファイルの所有者、グループを変更する</a></li>
-      <li><a href="#dir_6">ディレクトリを作成する</a></li>
-      <li><a href="#dir_7">ディレクトリ、ファイルを削除する</a></li>
-      <li><a href="#dir_8">シンボリックリンクを作成する</a></li>
-      <li><a href="#dir_9">ディレクトリ、ファイルをコピー、移動する</a></li>
-      <li><a href="#dir_10">カレントディレクトリを移動する</a></li>   
+      <li><a href="#dir_7">ディレクトリを作成する</a></li>
+      <li><a href="#dir_8">ディレクトリ、ファイルを削除する</a></li>
+      <li><a href="#dir_9">シンボリックリンクを作成する</a></li>
+      <li><a href="#dir_10">ディレクトリ、ファイルをコピー、移動する</a></li>
+      <li><a href="#dir_11">カレントディレクトリを移動する</a></li>   
      </ul>
   </li></ul>
   <!-- 環境変数 -->
@@ -677,7 +677,7 @@ os.chown("dir01/file01.txt", 1040, -1)
 <br />
 <br />
 
-<h4><div class="headline2" id="dir_6">ディレクトリを作成する</div></h4>
+<h4><div class="headline2" id="dir_7">ディレクトリを作成する</div></h4>
 <div class="text1">
 os.makedirsを使う
 <pre>
@@ -689,7 +689,7 @@ os.makedirs("ディレクトリのパス")
 <br />
 <br />
 
-<h4><div class="headline2" id="dir_7">ディレクトリ、ファイルを削除する</div></h4>
+<h4><div class="headline2" id="dir_8">ディレクトリ、ファイルを削除する</div></h4>
 <div class="text1">
 os.removeを使う
 <pre>
@@ -701,7 +701,7 @@ os.remove("削除するディレクトリ、ファイルのパス")
 <br />
 <br />
 
-<h4><div class="headline2" id="dir_8">シンボリックリンクを作成する</div></h4>
+<h4><div class="headline2" id="dir_9">シンボリックリンクを作成する</div></h4>
 <div class="text1">
 os.symlinkを使う
 <pre>
@@ -712,7 +712,7 @@ os.symlink("リンク元のパス", "リンク先のパス")
 <br />
 <br />
 
-<h4><div class="headline2" id="dir_9">ディレクトリ、ファイルをコピー、移動する</div></h4>
+<h4><div class="headline2" id="dir_10">ディレクトリ、ファイルをコピー、移動する</div></h4>
 <div class="text1">
 shutilを使う
 <ul class="list1">
@@ -731,7 +731,7 @@ shutil.move("移動元のパス", "移動先のパス")
 <br />
 <br />
 
-<h4><div class="headline2" id="dir_10">カレントディレクトリを移動する</div></h4>
+<h4><div class="headline2" id="dir_11">カレントディレクトリを移動する</div></h4>
 <div class="text1">
 os.chdirを使う
 <pre>
