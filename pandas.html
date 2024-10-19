@@ -134,7 +134,8 @@ dataの個数はdfの行数と一致している必要あり
 
 <h3><div class="headline1" id="df_concat">データの連結</div></h3>
 <div class="text1">
-列ラベルを元にデータを連結する（時系列データの追加など）
+<ul class="list1">
+<li>列ラベルを元にデータを縦に連結する（時系列データの追加など）
 <pre>df_list = [df1, fdf2]
 df = pd.concat(df_list)
 </pre>
@@ -142,6 +143,19 @@ df = pd.concat(df_list)
 <pre>df_list = [df1, fdf2, ...]
 df = pd.concat(df_list)
 </pre>
+</li><br />
+<li>キーとなる列を指定してデータを横に連結する（変数の追加など）
+<pre>df = pd.merge(df1, df2, on='time')</pre>
+df1とdf2を連結する場合。time列を共通に持つ行が残る（内部結合）<br />
+デフォルトなので、how='inner'を付けた場合も同じ
+<pre>df = pd.merge(df1, df2, on='time', how='left')</pre>
+leftを基準にするので、rightにtime列がない行も残る（左外部結合）
+<pre>df = pd.merge(df1, df2, on='time', how='right')</pre>
+rightを基準にするので、leftにtime列がない行も残る（右外部結合）
+<pre>df = pd.merge(df1, df2, on='time', how='outer')</pre>
+leftとrightにtime列がある行はすべて残る（完全外部結合）
+</li><br />
+</ul>
 </div>
 <br />
 <br />
@@ -335,7 +349,7 @@ SeriesのindexやDataFrameのindex、columnsはIndex型となっており、toli
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/09/07</p>
+<p>最終更新日：2024/10/19</p>
 <p>Copyright (C) 2021-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
