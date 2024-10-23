@@ -2526,6 +2526,13 @@ ax.xaxis.set_minor_locator(ticker.MultipleLocator(1))</pre>
 ax.yaxis.set_major_locator(ticker.FixedLocator(大目盛り線の値のリスト))
 ax.yaxis.set_minor_locator(ticker.FixedLocator(小目盛り線の値のリスト))
 </pre></li>
+<li>x軸の時刻大目盛りを半年毎に付ける
+<pre>import matplotlib.dates as mdates
+ax.xaxis.set_major_locator(mdates.MonthLocator(interval=6))</pre>
+</li>
+<li>x軸の時刻小目盛りを1ヶ月毎に付ける
+<pre>ax.xaxis.set_minor_locator(mdates.MonthLocator(interval=1))</pre>
+</li>
 </ul>
 </div>
 
@@ -2560,7 +2567,9 @@ xticklabelsの書式を変更する
 import matplotlib.ticker as ticker
 ax.xaxis.set_major_locator(ticker.FixedLocator(ax.get_xticks().tolist()))
 ax.set_xticklabels(ax.get_xticklabels(), rotation=70, size="small")</pre>
-axは<a href="#graph_1_2">サブプロットを作成</a>した際の戻り値
+axは<a href="#graph_1_2">サブプロットを作成</a>した際の戻り値<br />
+自動的にx軸ラベルの表記を斜めにするには次のようにします。
+<pre>plt.gcf().autofmt_xdate()</pre>
 </div>
 
 <h4><div class="headline2" id="axis_1_7">x軸、y軸の範囲を指定する</div></h4>
@@ -2921,7 +2930,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/09/07</p>
+<p>最終更新日：2024/10/23</p>
 <p>Copyright (C) 2018-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
