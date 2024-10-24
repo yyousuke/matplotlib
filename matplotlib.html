@@ -2663,7 +2663,26 @@ ax.xaxis.set_major_formatter(mdates.DateFormatter('時刻表記の書式'))
 <li>3文字の月 2桁の日表記にする（例：Aug 21）
 <pre>ax.xaxis.set_major_formatter(mdates.DateFormatter('%b %d'))</pre></li>
 </ul>
-時刻表記の書式については<a href="forms.html#time">時刻表記に用いられる書式指定子一覧</a>参照
+時刻表記の書式については<a href="forms.html#time">時刻表記に用いられる書式指定子一覧</a>参照<br />
+<br />
+目盛り線を付ける場所を変える際も、matplotlib.datesを使うことが可能（<a href="#axis_1_3">x軸、y軸の目盛り線の間隔を変更する</a>参照）
+<pre>
+import matplotlib.dates as mdate
+ax.xaxis.set_major_formatter(mdates.MonthLocator(interval=6))
+ax.xaxis.set_minor_formatter(mdates.MonthLocator(interval=1))
+</pre>
+主目盛り線を6ヶ月間隔、副目盛り線を1ヶ月間隔で付ける<br />
+<br />
+x軸の時刻を描く範囲を指定する場合
+<pre>
+from datetime import datetime
+stime = '2018-01-01'
+etime = '2024-12-31'
+x_min = datetime.strptime(stime, '%Y-%m-%d')
+x_max = datetime.strptime(etime, '%Y-%m-%d')
+ax.xlim([x_min, x_max])
+</pre>
+x軸の範囲をstimeからetimeまでに設定する
 </div>
 
 <h4><div class="headline2" id="axis_1_15">軸の上下、左右を逆転させる</div></h4>
@@ -2932,7 +2951,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/10/23</p>
+<p>最終更新日：2024/10/24</p>
 <p>Copyright (C) 2018-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
