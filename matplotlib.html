@@ -2568,7 +2568,7 @@ import matplotlib.ticker as ticker
 ax.xaxis.set_major_locator(ticker.FixedLocator(ax.get_xticks().tolist()))
 ax.set_xticklabels(ax.get_xticklabels(), rotation=70, size="small")</pre>
 axは<a href="#graph_1_2">サブプロットを作成</a>した際の戻り値<br />
-自動的にx軸ラベルの表記を斜めにするには次のようにします。
+自動的にx軸ラベルの表記を斜めにするには次のようにする
 <pre>plt.gcf().autofmt_xdate()</pre>
 </div>
 
@@ -2646,12 +2646,14 @@ plt.rcParams['ytick.color'] = 'r'  # y軸を赤色</pre>
 
 <h4><div class="headline2" id="axis_1_14">図の時間軸の表示を調整する</div></h4>
 <div class="text1">
-matplotlib.datesを使い時刻表記を変える
+matplotlib.datesを使い、主目盛り線ラベルの時刻表記を変える
 <pre>
 import matplotlib.dates as mdate
 ax.xaxis.set_major_formatter(mdates.DateFormatter('時刻表記の書式'))
 </pre>
 <ul class="list1">
+<li>4桁の年-2桁の月-2桁の日表記にする（例：2022-08-31）
+<pre>ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))</pre></li>
 <li>4桁の年/2桁の月表記にする（例：2022/08）
 <pre>ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y/%m'))</pre></li>
 <li>2桁の年/2桁の月表記にする（例：22/08）
