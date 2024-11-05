@@ -927,7 +927,7 @@ d = hdf['データセットの名前'][:, :] # データセットの名前に対
 <h3><div class="headline1" id="gtool3_1">GTOOL3ファイル</div></h3>
 <h4><div class="headline2" id="gtool3_1_1">GTOOL3ファイルの形式</div></h4>
 <div class="text1">
-GTOOL3形式は、気候モデルMIROCの出力に用いられているバイナリ形式で、ヘッダ部とデータ部のセットで構成され改行コードで区切られている。ヘッダ部にはデータ部の格納形式やサイズ、欠損値、日時などが16 文字&#215;64欄の文字データとして格納されている。また、データの経度、緯度、高度方向の格子点数や、格子点値が記述された格子情報ファイル名なども格納され、データの名前、作成 、作成日時なども記述することができる。データ部は単純バイナリで、ビックエンディアン、リトルエンディアンどちらも許容されており、機種依存性がある。
+GTOOL3形式は、気候モデルMIROCの出力に用いられているバイナリ形式で、ヘッダ部とデータ部のセットで構成され改行コードで区切られている。ヘッダ部にはデータ部の格納形式（例えば、1レコードが4バイトか8バイトか）やサイズ、欠損値、日時などが16 文字&#215;64欄の文字データとして格納されている。また、データの経度、緯度、高度方向の格子点数や、格子点値が記述された格子情報ファイル名なども格納され、データの名前、作成 、作成日時なども記述することができる。データ部は単純バイナリで、ビックエンディアン、リトルエンディアンどちらも許容されており、機種依存性がある。
 <ul class="list1">
 <li>GTOOL3ファイルの形式
 <pre>
@@ -961,13 +961,13 @@ d = gt['変数名'][:, :, :, :] # 変数名に対応するデータ取得（次�
 <h3><div class="headline1" id="img_1">画像ファイル</div></h3>
 <h4><div class="headline2" id="img_1_1">画像ファイルの読み込み（Pillow）</div></h4>
 <div class="text1">
-ここでは、様々な画像フォーマットに対応しているPillowを利用した読み込み方法を紹介しています。Pillowでは、PNG、BMP、GIF、JPEG、TIFF、EPSなど、主要な形式の読み書きに対応しています。読み込む場合には、
+ここでは、様々な画像フォーマットに対応しているPillowを利用した読み込み方法を紹介する。Pillowでは、PNG、BMP、GIF、JPEG、TIFF、EPSなど、主要な形式の読み書きに対応している。読み込む場合には、
 <pre>from PIL import Image
 im = Image.open("画像ファイルのパス")
 </pre>
-Numpyで扱う場合には、次のようにndarrayに変換します。
+Numpyで扱う場合には、次のようにndarrayに変換する
 <pre>im = np.asarray(im)</pre>
-urllibを利用して、web上の画像を読み込むことも可能です。
+urllibを利用して、web上の画像を読み込むことも可能
 <pre>from PIL import Image
 import urllib.request
 im = Image.open(urllib.request.urlopen("URLを指定"))
@@ -1026,7 +1026,7 @@ NEAREST、BOX、BILINEAR、HAMMING、BICUBIC、LANCZOSが指定可能（後の�
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/09/07</p>
+<p>最終更新日：2024/11/05</p>
 <p>Copyright (C) 2018-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
