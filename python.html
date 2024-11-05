@@ -514,8 +514,8 @@ print(dt.isoformat(timespec='minutes'))
 <li>time_staからtime_endまで
 <pre>
 from datetime import datetime timedelta
-time_sta = datetime(2022, 9, 1, 0, 30, 0) # 開始時刻
-time_end = datetime(2022, 9, 2, 12, 30, 0) # 終了時刻
+time_sta = datetime(2022, 9, 1, 0, 30, 0) # 開始時刻（2022/09/01 00:30:00）
+time_end = datetime(2022, 9, 2, 12, 30, 0) # 終了時刻（2022/09/02 12:30:00）
 time_step = timedelta(hours=1) # 時刻を進める間隔（1時間）
 time_now = time_sta
 while True:
@@ -1156,14 +1156,7 @@ print(type(tup_a))
 </div>
 <br />
 
-  <!-- タプル 
-  <ul class="list1"><li><a href="#tuple">リスト</a>
-    <ul class="list2">
-      <li><a href="#tuple_1">pythonにおけるタプル</a></li>
-      <li><a href="#tuple_2">タプルの作成</a></li>
-    </ul>
-  </li></ul>
--->
+
 <!-- 集合 -->
 <h3><div class="headline1" id="set">集合</div></h3>
 <h4><div class="headline2" id="set_1">pythonにおける集合</div></h4>
@@ -1632,7 +1625,7 @@ while True:
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/09/09</p>
+<p>最終更新日：2024/11/06</p>
 <p>Copyright (C) 2021-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
