@@ -398,7 +398,14 @@ time_cur = datetime(2021, 8, 1, 0, 0, 0)
 time_new = time_cur + relativedelta(months=1) - relativedelta(days=1)
 print(time_new)
 </pre>
-2021-08-31 00:00:00が表示される
+2021-08-31 00:00:00が表示される<br />
+この計算では月初を指定しないといけないので、time_curがいつでも月末の日を計算できるように変更する
+<pre>
+time_cur = datetime.now()
+time_new = time_cur.replace(day=1) + relativedelta(months=1) - relativedelta(days=1)
+print(time_new.strftime('%Y-%m-%d'))
+</pre>
+今月の月末の日が表示される
 </div>
 <br />
 <br />
@@ -1625,7 +1632,7 @@ while True:
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/11/06</p>
+<p>最終更新日：2024/11/09</p>
 <p>Copyright (C) 2021-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
