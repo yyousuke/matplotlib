@@ -1130,6 +1130,21 @@ print(list_a)
 <div class="text1">
 リストの要素を個別にstrに変換する場合
 <pre>new_list_a = [str(x) for x in list_a]</pre>
+例えば元のlist_aに数値のリストが入っている場合など<br />
+<ul class="list1">
+<li>1〜100までの数字
+<pre>numbers = np.arange(1, 101)
+num_list = [l for l in numbers]
+</pre>
+numbersに含まれるlを順にリストに追加
+</li><br />
+<li>3で割って1余る数のリスト（1〜100まで）
+<pre>numbers = np.arange(1, 101)
+num_list = [l for l in numbers if l % 3 == 1]
+</pre>
+後ろの条件式を満たした場合のみリストに追加される
+</li><br />
+</ul>
 </div>
 <br />
 
@@ -1632,7 +1647,7 @@ while True:
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/11/18</p>
+<p>最終更新日：2024/11/19</p>
 <p>Copyright (C) 2021-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
