@@ -65,8 +65,8 @@
   <!-- matplotlibの基本 -->
   <ul class="list1"><li><a href="#matplotlib_1">matplotlibの基本</a>
     <ul class="list2">
-      <li><a href="#matplotlib_1_1">IPython上での起動方法</a></li>
-      <li><a href="#matplotlib_1_2">IPythonの終了方法</a></li>
+      <li><a href="#matplotlib_1_1">IPython上での操作方法</a></li>
+      <li><a href="#matplotlib_1_2">Jupyter Notebook上での操作方</a></li>
       <li><a href="#matplotlib_1_3">matplotlibのモジュール</a></li>
       <li><a href="#matplotlib_1_4">画面上に表示する</a></li>
       <li><a href="#matplotlib_1_5">画像ファイルを保存する</a></li>
@@ -359,16 +359,24 @@
 <!-- ここから本文 -->
 <!-- matplotlibの基本 -->
 <h3><div class="headline1" id="matplotlib_1">matplotlibの基本</div></h3>
-<h4><div class="headline2" id="matplotlib_1_1">IPython上での起動方法</div></h4>
+<h4><div class="headline2" id="matplotlib_1_1">IPython上での操作方法</div></h4>
 <div class="text1">
-IPython上で作図する場合
+IPython上でpythonを使用する
+<ul class="list1">
+<li>IPythonを起動する
 <pre>% ipython3 --pylab</pre>
-でIPythonをpylabモードで起動する（%はコマンドプロンプト）
+でIPythonをpylabモードで起動する（%はコマンドプロンプト）</li><br />
+<li>IPythonの終了方法
+<pre>quit()</pre></li>
+</ul>
 </div>
 
-<h4><div class="headline2" id="matplotlib_1_2">IPythonの終了方法</div></h4>
+<h4><div class="headline2" id="matplotlib_1_2">Jupyter Notebook上での操作方法</div></h4>
 <div class="text1">
-<pre>quit()</pre>
+
+
+
+<pre></pre>
 </div>
 
 <h4><div class="headline2" id="matplotlib_1_3">matplotlibのモジュール</div></h4>
@@ -380,7 +388,10 @@ matplotlib.pyplotモジュールをインポートする
 
 <h4><div class="headline2" id="matplotlib_1_4">画面上に表示する</div></h4>
 <div class="text1">
+pythonスクリプトをコマンドラインで実行し画面上に表示したい場合、スクリプトの最後を次のようにする
 <pre>plt.show()</pre>
+IPythonをpylabモードで起動した場合は不要<br />
+Jupyter Notebook上で作図する場合は不要<br />
 </div>
 
 <h4><div class="headline2" id="matplotlib_1_5">画像ファイルを保存する</div></h4>
@@ -401,7 +412,7 @@ matplotlib.pyplotモジュールをインポートする
 <h4><div class="headline2" id="matplotlib_1_6">matplotlibのデフォルト設定rcParamsを表示する</div></h4>
 <div class="text1">
 <ul class="list1">
-<li>IPython上
+<li>IPython上やJupyter Notebook上
 <pre>plt.rcParams</pre></li>
 <li>スクリプト内
 <pre>print(plt.rcParams)</pre></li>
@@ -412,8 +423,8 @@ matplotlib.pyplotモジュールをインポートする
 <div class="text1">
 MacPortsでpythonをインストールした場合
 <ul class="list1">
-<li>pythonをバージョン指定して起動（3.11の場合）
-<pre>% python3.11
+<li>pythonをバージョン指定して起動（3.12の場合）
+<pre>% python3.12
 import モジュール名
 </pre>
 ＊モジュールを導入したバージョンで起動し、import可能か確認する
@@ -422,12 +433,12 @@ import モジュール名
 <pre>% python3</pre>
 ＊最初の行にバージョンが表示される
 </li><br />
-<li>デフォルトバージョンを変更（3.11に変える場合）
+<li>デフォルトバージョンを変更（3.12に変える場合）
 <pre>
-% sudo port select --set python3 python311
-% sudo port select --set python python311
+% sudo port select --set python3 python312
+% sudo port select --set python python312
 </pre>
-python3、pythonどちらでも3.11が起動する
+python3、pythonどちらでも3.12が起動する
 </li><br /> 
 </ul>
 標準とは違う場所にあるモジュールをimportする場合
@@ -455,8 +466,8 @@ sample.pyのようなファイル名で作成する
 <pre>#!/usr/bin/env python3</pre>
 ＊現在の環境で設定されているpython3が起動される<br /><br />
 cron等で実行する際には、次のようにインタプリタの絶対パスを記載する
-<pre>#!/opt/local/bin/python3.11</pre>
-＊MacPortsでインストールしたpython3.11が起動される<br />
+<pre>#!/opt/local/bin/python3.12</pre>
+＊MacPortsでインストールしたpython3.12が起動される<br />
 ＊指定したパスに存在しなければエラー</li><br />
 <li>スクリプトの最初で、必要なモジュールをまとめてインポートする
 <pre>
