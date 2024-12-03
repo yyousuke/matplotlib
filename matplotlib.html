@@ -77,11 +77,11 @@
   <!-- matplotlib作図スクリプトの基本 -->
   <ul class="list1"><li><a href="#matplotlib_2">matplotlib作図スクリプトの基本</a>
     <ul class="list2">
-      <li><a href="#matplotlib_2_1">python3スクリプト</a></li>
-      <li><a href="#matplotlib_2_2">python3スクリプトの実行方法</a></li>
+      <li><a href="#matplotlib_2_1">Pythonスクリプト</a></li>
+      <li><a href="#matplotlib_2_2">Pythonスクリプトの実行方法</a></li>
       <li><a href="#matplotlib_2_3">スクリプト実行時のWarning表示を消す</a></li>
-      <li><a href="#matplotlib_2_4">pythonプログラムの文法チェックとインデント合わせ</a></li>
-      <li><a href="#matplotlib_2_5">pythonプログラムをhtmlで表示</a></li>
+      <li><a href="#matplotlib_2_4">Pythonプログラムの文法チェックとインデント合わせ</a></li>
+      <li><a href="#matplotlib_2_5">Pythonプログラムをhtmlで表示</a></li>
     </ul>
   </li></ul>
   <!-- グラフの基本 -->
@@ -376,7 +376,7 @@ IPython上でpythonを使用する
 Webブラウザ上でpythonを使用する
 <ul class="list1">
 <li>Jupyter Notebookを起動する
-<pre>% jupyter-3.12 notebook</pre>
+<pre>% jupyter notebook</pre>
 で起動する（%はコマンドプロンプト）<br />
 バージョンを指定する場合、
 <pre>jupyter-3.12 notebook</pre>
@@ -384,7 +384,8 @@ Webブラウザ上でpythonを使用する
 <li>Jupyter Notebookの終了方法
 <pre>Ctrl+C</pre></li>
 <li>Windowsの場合<br />
-Anaconda NavigatorからJupyter Notebookを起動する</li>
+Anaconda NavigatorからJupyter Notebookを起動する<br />
+anaconda_promptからjupyter notebookでも起動可能</li><br />
 </ul>
 </div>
 
@@ -439,10 +440,10 @@ import モジュール名
 ＊モジュールを導入したバージョンで起動し、import可能か確認する
 </li><br />
 <li>デフォルトのpythonバージョンを確認
-<pre>% python3</pre>
+<pre>% python</pre>
 ＊最初の行にバージョンが表示される
 </li><br />
-<li>デフォルトバージョンを変更（3.12に変える場合）
+<li>デフォルトバージョンを変更（MacPortsで3.12に変える場合）
 <pre>
 % sudo port select --set python3 python312
 % sudo port select --set python python312
@@ -467,7 +468,7 @@ sys.path.append(os.pardir)
 
 <!-- スクリプトの基本 -->
 <h3><div class="headline1" id="matplotlib_2">matplotlib作図スクリプトの基本</div></h3>
-<h4><div class="headline2" id="matplotlib_2_1">python3スクリプト</div></h4>
+<h4><div class="headline2" id="matplotlib_2_1">Pythonスクリプト</div></h4>
 <div class="text1">
 sample.pyのようなファイル名で作成する
 <ul class="list1">
@@ -489,14 +490,14 @@ matplotlib.pyplotについては、<a href="#matplotlib_1_3">matplotlibのモジ
 </ul>
 </div>
 
-<h4><div class="headline2" id="matplotlib_2_2">python3スクリプトの実行方法</div></h4>
+<h4><div class="headline2" id="matplotlib_2_2">Pythonスクリプトの実行方法</div></h4>
 <div class="text1">
 <ul class="list1">
 <li>スクリプトをコマンドラインから直接実行する場合
 <pre>% ./スクリプト名.py</pre>
 最初の行（shebang）が適切に設定されている必要がある</li><br />
-<li>python3コマンドを使って実行する場合
-<pre>% python3 スクリプト名.py</pre>
+<li>pythonコマンドを使って実行する場合
+<pre>% python スクリプト名.py</pre>
 （%はコマンドプロンプト）</li>
 </ul>
 </div>
@@ -646,7 +647,7 @@ doy[doy &gt; 300] = np.nan
 </ul>
 </div>
 
-<h4><div class="headline2" id="matplotlib_2_4">pythonプログラムの文法チェックとインデント合わせ</div></h4>
+<h4><div class="headline2" id="matplotlib_2_4">Pythonプログラムの文法チェックとインデント合わせ</div></h4>
 <div class="text1">
 スクリプト実行前にyapfコマンドを実行すると、文法エラーがある場合には出力し、PEP8に準拠する4文字のインデント合わせと見た目の調整を自動で行ってくれる。flake8を使うと、PEP8から外れたものを表示してくれる。
 <ul class="list1">
@@ -684,8 +685,8 @@ py311の部分はpythonのバージョンによって変わる</li><br />
 pygmentを使うと、ソースコードをhtmlで綺麗に表示することができる
 <ul class="list1">
 <li>pygmentの取得
-<pre>sudo port install py311-pygments</pre>
-py311の部分はpythonのバージョンによって変わる</li><br />
+<pre>sudo port install py312-pygments</pre>
+py312の部分はpythonのバージョンによって変わる</li><br />
 <li>pygmentizeコマンドの実行
 <pre>% pygmentize -f html -l python -O full -o スクリプト名.html スクリプト名.py </pre>
 （%はコマンドプロンプト）</li>
