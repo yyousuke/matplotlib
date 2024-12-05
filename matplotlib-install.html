@@ -64,15 +64,17 @@
 <h3><div class="headline1" id="install_1">準備</div></h3>
 <h4><div class="headline2" id="install_1_1">パッケージ管理ツールConda</div></h4>
 <div class="text1">
-Python環境を構築するため、まずはパッケージ管理ツールCondaを導入します。Anacondaを導入する、軽量版のMinicondaを導入する、Intel oneAPIのcondaコマンドを利用する、など複数の方法がありますので、お好みのものをご利用ください。なお下記のツールには、Linux版の他、Windows版、macOS版もあります。
+Python環境を構築するため、まずはパッケージ管理ツールCondaを導入します。Anacondaを導入する、軽量版のMinicondaやMiniforgeを導入する、Intel oneAPIのcondaコマンドを利用する、など複数の方法がありますので、お好みのものをご利用ください。なお下記のツールには、Linux版の他、Windows版、macOS版もあります。
 <ul class="list1">
 <li><a href="https://www.python.jp/install/anaconda/unix/install.html" target="_blank">Linux版Anacondaのインストール</a></li>
 <li><a href="https://www.anaconda.com/" target="_blank">Anaconda</a>（ダウンロードサイト）</li>
 <li><a href="https://docs.conda.io/en/latest/miniconda.html" target="_blank">Miniconda</a>（Python環境に特化した軽量版）</li>
+<li><a href="https://conda-forge.org/download/" target="_blank">Miniforge</a>（Miniconda+conda-forge、Anacondaが利用できない場合など）</li>
 <li><a href="https://qiita.com/implicit_none/items/35bc4be8f2022903747a" target="_blank">Intel oneAPI Base Toolkit + HPC Toolkit (Intel Fortran)のインストール（Linux版）</a>（Intel Fortran/Pythonと共存させたい場合など）</li>
 </ul>
 ＊AnacondaのWindows版では、インストーラで簡単にPython環境が構築可能です。<br />
-＊macOSのMacPortsなど他のパッケージ管理ツールを利用している場合、Condaを導入すると競合が発生することがあります。
+＊macOSのMacPortsなど他のパッケージ管理ツールを利用している場合、Condaを導入すると競合が発生することがあります。<br />
+＊条件によっては、有償版のAnacondaが必要となります。
 </div>
 
 <h4><div class="headline2" id="install_1_2">Conda環境の作成</div></h4>
@@ -82,6 +84,9 @@ Python環境を構築するため、まずはパッケージ管理ツールConda
 ＊anacondaの場合、~/anaconda3/envs/py312/ができる<br />
 ＊minicondaの場合、~/miniconda3/envs/py312/ができる<br />
 ＊Intel oneAPIの場合、~/.conda/envs/py312/ができる<br />
+なお、conda-forgeのパッケージを利用したい場合、次のように明示しておきます（Miniforgeでは自動的にconnda-forgeとなる）。
+<pre>% conda config --add channels conda-forge
+% conda create -n py312 python=3.12 -c conda-forge --override-channels</pre>
 作成した実行環境を次のように有効化します。
 <pre>% conda activate py312</pre>
 環境によってはconda activateでエラーが出ることがあるので、その場合には
@@ -102,7 +107,11 @@ Python環境を構築するため、まずはパッケージ管理ツールConda
 % conda install basemap
 % conda install cartopy
 </pre>
-なお、「3章　matplotlib の基本」のインタラクティブ環境を利用する場合には、次のようにipythonを導入しておきます。
+さらに、「3章　matplotlib の基本」のインタラクティブ環境をJupyter Notebookで利用する場合には、次のように導入しておきます。
+<pre>
+% conda install jupyter
+</pre>
+なお、軽量なipythonを導入したい場合には、次のように行います（Jupyter Notebookを導入した場合には不要です）。
 <pre>
 % conda install ipython
 </pre>
@@ -112,22 +121,34 @@ Python環境を構築するため、まずはパッケージ管理ツールConda
 <h4><div class="headline2" id="install_2_2">python3.10以降の場合</div></h4>
 <div class="text1">
 python3.10以降では、Condaを使ってbasemapを導入できないケースがあります。その場合には、以下の手順でbasemapのみpipでインストールします（以下の例はpython3.12の場合）。
+<pre>% conda create -n py312 python=3.12</pre>
+＊-nオプションで作成する環境の名前を設定します。ここではpython3.12を表すpy312としました。<br />
+＊conda-forgeを使う場合には次のように行います。
+<pre>% conda create -n py312 python=3.12 -c conda-forge --override-channels</pre>
+作成した環境を有効化します。
+<pre>% conda activate py312</pre>
+サンプルプログラムの実行に必要なパッケージをインストールします。ここでは、「3章　matplotlib の基本」のインタラクティブ環境をJupyter Notebookで利用することを想定しています。
 <pre>
-% conda create -n py312 python=3.12
-% conda activate py312
 % conda install pandas
 % conda install netcdf4
 % conda install cartopy
+% conda install jupyter
 % conda install lxml
 % conda install scipy
+</pre>
+＊conda-forgeを使う場合には次のように行います。
+<pre>
+% conda install pandas -c conda-forge --override-channels
+% conda install netcdf4 -c conda-forge --override-channels
+% conda install cartopy -c conda-forge --override-channels
+% conda install jupyter -c conda-forge --override-channels
+% conda install lxml -c conda-forge --override-channels
+% conda install scipy -c conda-forge --override-channels
+</pre>
+Basemapも利用する場合には、pipで導入します。既に作成されているConda環境の場合、basemapインストール時に不整合が生じることがあるため、basemap用に新規作成することを推奨します。
+<pre>
 % pip install basemap
 % pip install basemap-data-hires
-</pre>
-＊-nオプションで作成する環境の名前を設定します。ここではpython3.12を表すpy312としました。<br />
-既に作成されているConda環境の場合、basemapインストール時に不整合が生じることがあるため、basemap用に新規作成することを推奨します。
-なお、「3章　matplotlib の基本」のインタラクティブ環境を利用する場合には、次のようにipythonを導入しておきます。
-<pre>
-% conda install ipython
 </pre>
 </div>
 
@@ -197,7 +218,7 @@ basemap_ortho.pyの実行に必要なwgrib2は次の手順でビルドします�
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/12/04</p>
+<p>最終更新日：2024/12/05</p>
 <p>Copyright (C) 2022-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
