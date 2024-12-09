@@ -73,20 +73,23 @@ Python環境を構築するため、まずはパッケージ管理ツールConda
 <li><a href="https://qiita.com/implicit_none/items/35bc4be8f2022903747a" target="_blank">Intel oneAPI Base Toolkit + HPC Toolkit (Intel Fortran)のインストール（Linux版）</a>（Intel Fortran/Pythonと共存させたい場合など）</li>
 </ul>
 ＊AnacondaのWindows版では、インストーラで簡単にPython環境が構築可能です。<br />
-＊macOSのMacPortsなど他のパッケージ管理ツールを利用している場合、Condaを導入すると競合が発生することがあります。<br />
+＊macOS上のMacPortsなど、他のパッケージ管理ツールを利用している場合には、Condaを導入すると競合が発生することがあります。<br />
 ＊条件によっては、有償版のAnacondaが必要となります。
 </div>
 
 <h4><div class="headline2" id="install_1_2">Conda環境の作成</div></h4>
 <div class="text1">
-ここでは、conda実行環境を複数用意して、使いたい環境に切り替える方法を紹介します。Python3.12環境をpy312という名前で作成するには、次のようにします。Pythonのバージョンを変えたい場合には、python=3.12の部分を変更します。
+ここでは、conda実行環境を複数用意して、使いたい環境に切り替える方法を紹介します。Python3.12環境をpy312という名前で作成するには、次のようにします。-nオプションで作成する環境の名前を、pythonオプションでPythonのバージョンを指定しています。Pythonのバージョンを変えたい場合にはpython=3.12の部分を変更し、作成する環境の名前も適切なものに変更します。特にチャンネルを指定しない場合、anacondaが使われます（<a href="#install_1_1">複数のconda</a>のうちMiniforgeの場合のみ、conda-forgeがデフォルトとして使われます）。
 <pre>% conda create -n py312 python=3.12</pre>
 ＊anacondaの場合、~/anaconda3/envs/py312/ができる<br />
 ＊minicondaの場合、~/miniconda3/envs/py312/ができる<br />
-＊Intel oneAPIの場合、~/.conda/envs/py312/ができる<br />
-なお、conda-forgeのパッケージを利用したい場合、次のように明示しておきます（Miniforgeでは自動的にconnda-forgeとなる）。
+＊miniforgeの場合、~/miniforge3/envs/py312/ができる<br />
+＊Intel oneAPIの場合、~/.conda/envs/py312/ができる<br /><br />
+なお、Miniforgeを使わずにconda-forgeのパッケージを利用したい場合、次のように明示しておきます。
 <pre>% conda config --add channels conda-forge
 % conda create -n py312 python=3.12 -c conda-forge --override-channels</pre>
+チャンネルの追加を確認したい場合
+<pre>% conda config --show channels</pre><br />
 作成した実行環境を次のように有効化します。
 <pre>% conda activate py312</pre>
 環境によってはconda activateでエラーが出ることがあるので、その場合には
@@ -100,43 +103,37 @@ Python環境を構築するため、まずはパッケージ管理ツールConda
 <div class="text1">
 <a href="./met_sample.zip" target="_blank">サンプルプログラム</a>では、Condaで追加導入するパッケージが必要です。インストールを行う際には、
 <pre>% conda install パッケージ名</pre>
-を用います。サンプルプログラムの実行に必要なパッケージは、以下の手順で導入します（python3.9以前の場合。python3.10以降の場合には、<a href="#install_2_2">python3.10以降の場合</a>参照）。
-<pre>
-% conda install pandas
-% conda install netcdf4
-% conda install basemap
-% conda install cartopy
-</pre>
-さらに、「3章　matplotlib の基本」のインタラクティブ環境をJupyter Notebookで利用する場合には、次のように導入しておきます。
-<pre>
-% conda install jupyter
-</pre>
-なお、軽量なipythonを導入したい場合には、次のように行います（Jupyter Notebookを導入した場合には不要です）。
-<pre>
-% conda install ipython
-</pre>
-なお、basemap_ortho.pyではLinuxのwgrib2コマンドを利用するため、試してみる場合にはインストールが必要になります。CentOS、RHEL、Alma Linux、Rocky LinuxなどRed Hat系では<a href="https://docs.fedoraproject.org/ja/epel/" target="_blank">EPEL（Extra Packages for Enterprise Linux）</a>リポジトリに含まれます（導入方法はOSやバージョンにより異なるので、EPELのリンク先を参照してください）。Ubuntuなどでは、ソースコードからビルドします（<a href="#install_2_3">Windows10/11のWSL2上のLinuxに構築する場合</a>参照）。
-</div>
-
-<h4><div class="headline2" id="install_2_2">python3.10以降の場合</div></h4>
-<div class="text1">
-python3.10以降では、Condaを使ってbasemapを導入できないケースがあります。その場合には、以下の手順でbasemapのみpipでインストールします（以下の例はpython3.12の場合）。
-<pre>% conda create -n py312 python=3.12</pre>
-＊-nオプションで作成する環境の名前を設定します。ここではpython3.12を表すpy312としました。<br />
-＊conda-forgeを使う場合には次のように行います。
-<pre>% conda create -n py312 python=3.12 -c conda-forge --override-channels</pre>
-作成した環境を有効化します。
-<pre>% conda activate py312</pre>
-サンプルプログラムの実行に必要なパッケージをインストールします。ここでは、「3章　matplotlib の基本」のインタラクティブ環境をJupyter Notebookで利用することを想定しています。
+を用います。サンプルプログラムの実行に必要なパッケージは、以下の手順で導入します（Conda-forgeを利用する場合、<a href="#install_2_2">Conda-forgeの場合</a>参照）。
 <pre>
 % conda install pandas
 % conda install netcdf4
 % conda install cartopy
-% conda install jupyter
 % conda install lxml
 % conda install scipy
 </pre>
-＊conda-forgeを使う場合には次のように行います。
+さらに、Webブラウザ上でのインタラクティブ環境をJupyter Notebookで実現したい場合、次のように導入しておきます。
+<pre>% conda install jupyter</pre>
+なお、軽量なipythonで良い場合には、次のように行います（Jupyter Notebookを導入した場合には不要です）。
+<pre>% conda install ipython</pre><br />
+最後にBasemapをインストールします。
+<pre>% conda install basemap</pre>
+Condaを使ってbasemapを導入できないケースがあります。その場合には、以下の手順でbasemapのみpipでインストールします。既に作成されているConda環境の場合、basemapインストール時に不整合が生じることがあるため、basemap用に新規作成することを推奨します。
+<pre>
+% pip install basemap
+% pip install basemap-data-hires
+</pre><br />
+なお、basemap_ortho.pyではLinuxのwgrib2コマンドを利用するため、試してみる場合にはインストールが必要になります。CentOS、RHEL、Alma Linux、Rocky LinuxなどRed Hat系では<a href="https://docs.fedoraproject.org/ja/epel/" target="_blank">EPEL（Extra Packages for Enterprise Linux）</a>リポジトリに含まれます（導入方法はOSやバージョンにより異なるので、EPELのリンク先を参照してください）。Ubuntuなどでは、ソースコードからビルドします（<a href="#install_2_3">Windows10/11のWSL2上のLinuxに構築する場合</a>参照）。
+</div>
+
+<h4><div class="headline2" id="install_2_2">Conda-forgeの場合</div></h4>
+<div class="text1">
+Conda-forgeの場合には、以下のようにチャンネルを明示します（以下の例はpython3.12の場合）。
+<pre>% conda config --add channels conda-forge
+% conda create -n py312 python=3.12 -c conda-forge --override-channels</pre>
+＊-cオプションでconda-forgeを利用することを明示<br />
+作成した実行環境を次のように有効化します。
+<pre>% conda activate py312</pre>
+サンプルプログラムの実行に必要なパッケージをインストールします。ここでは、「3章　matplotlib の基本」のインタラクティブ環境をJupyter Notebookで利用することを想定しています。
 <pre>
 % conda install pandas -c conda-forge --override-channels
 % conda install netcdf4 -c conda-forge --override-channels
@@ -144,11 +141,7 @@ python3.10以降では、Condaを使ってbasemapを導入できないケース�
 % conda install jupyter -c conda-forge --override-channels
 % conda install lxml -c conda-forge --override-channels
 % conda install scipy -c conda-forge --override-channels
-</pre>
-Basemapも利用する場合には、pipで導入します。既に作成されているConda環境の場合、basemapインストール時に不整合が生じることがあるため、basemap用に新規作成することを推奨します。
-<pre>
-% pip install basemap
-% pip install basemap-data-hires
+% conda install basemap
 </pre>
 </div>
 
@@ -173,6 +166,7 @@ Minicondaの環境は~/miniconda3/envs/py312/に作成されます。Condaを使
 % conda install pandas
 % conda install netcdf4
 % conda install cartopy
+% conda install jupyter
 % conda install lxml
 % conda install scipy
 % pip install basemap
@@ -218,7 +212,7 @@ basemap_ortho.pyの実行に必要なwgrib2は次の手順でビルドします�
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/12/05</p>
+<p>最終更新日：2024/12/09</p>
 <p>Copyright (C) 2022-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
