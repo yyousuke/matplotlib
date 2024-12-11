@@ -451,6 +451,14 @@ import モジュール名
 python3、pythonどちらでも3.12が起動する
 </li><br /> 
 </ul>
+Jupyter Notebook上で確認する場合
+<ul class="list1">
+<li>Notebookの起動
+<pre>% jupyter notebook</pre>
+セルにモジュールのインポートを記載し、Shift+Enter
+<pre>import モジュール名</pre>
+</li><br /> 
+</ul>
 標準とは違う場所にあるモジュールをimportする場合
 <ul class="list1">
 <li>スクリプト中にpythonのパスを追加
@@ -486,7 +494,7 @@ import pandas as pd # Pandas
 import numpy as np # Numpy
 </pre>
 matplotlib.pyplotについては、<a href="#matplotlib_1_3">matplotlibのモジュール</a>参照
-</li>
+</li><br />
 </ul>
 </div>
 
@@ -498,7 +506,11 @@ matplotlib.pyplotについては、<a href="#matplotlib_1_3">matplotlibのモジ
 最初の行（shebang）が適切に設定されている必要がある</li><br />
 <li>pythonコマンドを使って実行する場合
 <pre>% python スクリプト名.py</pre>
-（%はコマンドプロンプト）</li>
+（%はコマンドプロンプト）</li><br />
+<li>Jupyter Notebookの場合
+<pre>%run sample.py</pre>
+＊マジックコマンドでスクリプトを実行する（shebangは不要、あっても無視される）
+</li><br />
 </ul>
 </div>
 
@@ -2974,7 +2986,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/12/03</p>
+<p>最終更新日：2024/12/11</p>
 <p>Copyright (C) 2018-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
