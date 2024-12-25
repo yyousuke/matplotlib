@@ -145,7 +145,7 @@ Conda-forgeの場合には、以下のようにチャンネルを明示します
 </pre>
 </div>
 
-<h4><div class="headline2" id="install_2_3">Windows10/11のWSL2上のLinuxに構築する場合</div></h4>
+<h4><div class="headline2" id="install_2_3">Windows11のWSL2上のLinuxに構築する場合</div></h4>
 <div class="text1">
 Windows 11では、<a href="https://learn.microsoft.com/ja-jp/windows/wsl/" target="_blank">Windows Subsystem for Linux 2（WSL2）</a>を利用して、Windows上にLinux仮想マシンを構築できるようになっています。ここでは、Ubuntu 24.04.1上のconda-forgeでの導入例を示します。まずは、検索機能を使って「Power Shell」を検索し、次のように現在デフォルトとなっているUbuntu 24.04.1を導入します。
 <pre>% wsl --install</pre>
@@ -184,14 +184,12 @@ basemap_ortho.pyの実行に必要なwgrib2は次の手順でビルドします�
 % sudo apt install gcc
 % sudo apt install gfortran
 % sudo apt install make
+% sudo apt install cmake
 % tar -zxvf wgrib2.tgz.v3.1.3
 % export CC=gcc
 % export FC=gfortran
 % cd grib2 ; make
 </pre>
-なお、コンパイル時にcmakeがないというエラーが発生する場合、
-<pre>% sudo apt install cmake</pre>
-を行いインストールします。<br />
 ビルドしたwgrib2コマンドをホームディレクトリ直下のbin/に配置する場合の例です。
 <pre>
 % mkdir ~/bin
@@ -210,7 +208,7 @@ basemap_ortho.pyの実行に必要なwgrib2は次の手順でビルドします�
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/12/09</p>
+<p>最終更新日：2024/12/25</p>
 <p>Copyright (C) 2022-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
