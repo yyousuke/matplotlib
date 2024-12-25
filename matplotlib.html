@@ -1352,7 +1352,17 @@ import numpy as np
 corr = np.corrcoef(x軸のデータ, y軸のデータ) # ピアソンの積率相関係数の計算
 name = "{s:s}{f:4.3f}".format(s="r = ", f=corr[1, 0]) # 表示するテキスト設定
 plt.text(テキストのx座標, テキストのy座標, name, fontsize=14, color='k') # 相関係数を表示</pre>
-<a href="#text_1">plt.text()</a>でnameに入れた文字列を表示する。
+<a href="#text_1">plt.text()</a>でnameに入れた文字列を表示する。<br />
+<br />
+x軸のデータ、または、y軸のデータに欠損値を含む場合、Pandasを利用する（x軸のデータがdata_x、y軸のデータがdata_yの場合）。
+<pre>
+import numpy as np
+import pandas as pd
+df = pd.DataFrame({'x': np.array(data_x), 'y': np.array(data_y)})
+df = df.dropna() # 欠損値を除外
+corr = np.corrcoef(df[''x], df['y']) # 欠損値を除外したデータから相関係数を計算
+name = "{s:s}{f:4.3f}".format(s="r = ", f=corr[1, 0]) # 表示するテキスト設定
+plt.text(テキストのx座標, テキストのy座標, name, fontsize=14, color='k') # 相関係数を表示</pre>
 </div>
 
 <h4><div class="headline2" id="graph_5_11">散布図に回帰式を追加する</div></h4>
@@ -2994,7 +3004,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/12/12</p>
+<p>最終更新日：2024/12/25</p>
 <p>Copyright (C) 2018-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
