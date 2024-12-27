@@ -364,7 +364,7 @@
 IPython上でpythonを使用する
 <ul class="list1">
 <li>IPythonを起動する
-<pre>% ipython --pylab</pre>
+<pre>ipython --pylab</pre>
 でIPythonをpylabモードで起動する（%はコマンドプロンプト）</li><br />
 <li>IPythonの終了方法
 <pre>quit()</pre></li>
@@ -376,8 +376,8 @@ IPython上でpythonを使用する
 Webブラウザ上でpythonを使用する
 <ul class="list1">
 <li>Jupyter Notebookを起動する
-<pre>% jupyter notebook</pre>
-で起動する（%はコマンドプロンプト）<br />
+<pre>jupyter notebook</pre>
+で起動（端末でコマンド入力）<br />
 バージョンを指定する場合、
 <pre>jupyter-3.12 notebook</pre>
 3.12の部分は起動したいバージョン</li><br />
@@ -385,15 +385,21 @@ Webブラウザ上でpythonを使用する
 <pre>Ctrl+C</pre>
 ＊Webブラウザ上でNotebookを閉じた後、ターミナルで終了する場合
 </li><br />
-<li>Windowsの場合<br />
+<li>Windowsの場合の起動方法<br />
 Anaconda NavigatorからJupyter Notebookを起動する<br />
 anaconda_promptからjupyter notebookでも起動可能</li><br />
 <li>新規Notebookを作成する<br />
 「New」の項目から「Notebook」を選択する
-</li>
+</li><br />
 <li>Jupyter Notebook上でセルの中身を実行する
 <pre>Shift + Enter</pre>
-</li>
+</li><br />
+<li>Notebookを閉じる<br />
+Webブラウザのタブを閉じる。必要な場合は閉じる前に保存しておく</li><br />
+<li>カーネルの停止<br />
+HomeでNotebookを右クリックし、「Shut Down Kernel」を行う<br />
+Notebookの「Kernel」タブから「Shut Down Kernel」を行うことも可能<br />
+＊Notebookを閉じてもカーネルは停止しないので注意</li>
 </ul>
 </div>
 
@@ -442,19 +448,17 @@ Jupyter Notebook上で作図する場合は不要<br />
 MacPortsでpythonをインストールした場合
 <ul class="list1">
 <li>pythonをバージョン指定して起動（3.12の場合）
-<pre>% python3.12
-import モジュール名
-</pre>
-＊モジュールを導入したバージョンで起動し、import可能か確認する
+<pre>python3.12</pre>
+モジュールを導入したバージョンで起動し、次のようにimport可能か確認する
+<pre>import モジュール名</pre>
 </li><br />
 <li>デフォルトのpythonバージョンを確認
-<pre>% python</pre>
+<pre>python</pre>
 ＊最初の行にバージョンが表示される
 </li><br />
 <li>デフォルトバージョンを変更（MacPortsで3.12に変える場合）
-<pre>
-% sudo port select --set python3 python312
-% sudo port select --set python python312
+<pre>sudo port select --set python3 python312
+sudo port select --set python python312
 </pre>
 python3、pythonどちらでも3.12が起動する
 </li><br /> 
@@ -462,7 +466,7 @@ python3、pythonどちらでも3.12が起動する
 Jupyter Notebook上で確認する場合
 <ul class="list1">
 <li>Notebookの起動
-<pre>% jupyter notebook</pre>
+<pre>jupyter notebook</pre>
 セルにモジュールのインポートを記載し、Shift+Enter
 <pre>import モジュール名</pre>
 </li><br /> 
@@ -510,11 +514,12 @@ matplotlib.pyplotについては、<a href="#matplotlib_1_3">matplotlibのモジ
 <div class="text1">
 <ul class="list1">
 <li>スクリプトをコマンドラインから直接実行する場合
-<pre>% ./スクリプト名.py</pre>
-最初の行（shebang）が適切に設定されている必要がある</li><br />
+<pre>./スクリプト名.py</pre>
+＊端末からスクリプトを実行する<br />
+＊最初の行（shebang）が適切に設定されている必要がある</li><br />
 <li>pythonコマンドを使って実行する場合
-<pre>% python スクリプト名.py</pre>
-（%はコマンドプロンプト）</li><br />
+<pre>python スクリプト名.py</pre>
+</li><br />
 <li>Jupyter Notebookの場合
 <pre>%run sample.py</pre>
 ＊マジックコマンドでスクリプトを実行する（shebangは不要、あっても無視される）
@@ -678,11 +683,11 @@ doy[doy &gt; 300] = np.nan
 <pre>sudo port install py311-yapf</pre>
 py311の部分はpythonのバージョンによって変わる</li><br />
 <li>yapfコマンドの実行（ファイルを変更する場合）
-<pre>% yapf -i スクリプト名.py</pre>
-（%はコマンドプロンプト）<br />
+<pre>yapf -i スクリプト名.py</pre>
+（端末上でコマンドを入力）<br />
 ＊文法エラーがある場合には、実行を中断してエラーを表示する</li><br />
 <li>yapfコマンドの実行（変更点を表示しファイルは変更しない）
-<pre>% yapf -d スクリプト名.py</pre></li>
+<pre>yapf -d スクリプト名.py</pre></li>
 </ul></li><br />
 <!-- 2 flake8 -->
 <li>flake8
@@ -691,10 +696,10 @@ py311の部分はpythonのバージョンによって変わる</li><br />
 <pre>sudo port install py311-flake8</pre>
 py311の部分はpythonのバージョンによって変わる</li><br />
 <li>flake8コマンドの実行
-<pre>% flake8 スクリプト名.py</pre>
+<pre>flake8 スクリプト名.py</pre>
 ＊表示された部分を必要に応じて手動修正する</li><br />
 <li>1行の文字数を79文字から変更する
-<pre>% flake8 --max-line-length=文字数 スクリプト名.py</pre>
+<pre>flake8 --max-line-length=文字数 スクリプト名.py</pre>
 ＊指定した文字数で修正提案が出るようになる</li><br />
 </ul></li><br />
 </ul>
@@ -708,8 +713,8 @@ pygmentを使うと、ソースコードをhtmlで綺麗に表示することが
 <pre>sudo port install py312-pygments</pre>
 py312の部分はpythonのバージョンによって変わる</li><br />
 <li>pygmentizeコマンドの実行
-<pre>% pygmentize -f html -l python -O full -o スクリプト名.html スクリプト名.py </pre>
-（%はコマンドプロンプト）</li>
+<pre>pygmentize -f html -l python -O full -o スクリプト名.html スクリプト名.py </pre>
+</li>
 </ul>
 </div>
 
@@ -1360,7 +1365,7 @@ import numpy as np
 import pandas as pd
 df = pd.DataFrame({'x': np.array(data_x), 'y': np.array(data_y)})
 df = df.dropna() # 欠損値を除外
-corr = np.corrcoef(df[''x], df['y']) # 欠損値を除外したデータから相関係数を計算
+corr = np.corrcoef(df['x'], df['y']) # 欠損値を除外したデータから相関係数を計算
 name = "{s:s}{f:4.3f}".format(s="r = ", f=corr[1, 0]) # 表示するテキスト設定
 plt.text(テキストのx座標, テキストのy座標, name, fontsize=14, color='k') # 相関係数を表示</pre>
 </div>
@@ -3004,7 +3009,7 @@ plt.rcParams["axes.linewidth"] = 1.5
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/12/25</p>
+<p>最終更新日：2024/12/27</p>
 <p>Copyright (C) 2018-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
