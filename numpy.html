@@ -59,7 +59,8 @@
   <!--  Numpyの判定関数 -->
   <ul class="list1"><li><a href="#is">Numpyの判定関数</a>
     <ul class="list2">
-      <li><a href="#is_1">Numpyのスカラー判定</a></li>
+      <li><a href="#is_1">スカラー判定</a></li>
+      <li><a href="#is_2">数であるかどうかを判定</a></li>
      </ul>
   </li></ul>
   <!-- Numpyのデータ形式 -->
@@ -76,6 +77,7 @@
       <li><a href="#array_1_2">配列の要素の置換</a></li>
       <li><a href="#array_1_3">配列の軸の入れ替え</a></li>
       <li><a href="#array_1_4">Numpy配列成分の演算</a></li>
+      <li><a href="#array_1_5">配列</a></li>
      </ul>
   </li></ul>
 </div>
@@ -125,13 +127,19 @@
 
 <!-- Numpyの判定関数 -->
 <h3><div class="headline1" id="is">Numpyの判定関数</div></h3>
-<h4><div class="headline2" id="is_1">Numpyのスカラー判定</div></h4>
+<h4><div class="headline2" id="is_1">スカラー判定</div></h4>
 <div class="text1">
 オブジェクトがスカラーか判定する
 <pre>np.isscalar(var)</pre>
 数値、文字列、bool値はTrue、リスト、タプル、ndarrayなどはFalse<br />
 ＊<p href="https://numpy.org/doc/stable/reference/generated/numpy.isscalar.html">numpy.isscalar</p>参照<br />
-＊数であることを判定したい場合には、以下のようにisinstanceを使う
+</div>
+<br />
+<br />
+
+<h4><div class="headline2" id="is_2">数であるかどうかを判定</div></h4>
+<div class="text1">
+数であることを判定したい場合には、以下のようにisinstanceを使う
 <pre>
 import numbers
 isinstance(x, numbers.Number)
@@ -239,10 +247,10 @@ np.dot(x, y)
 
 <h4><div class="headline2" id="array_1_4">Numpy配列成分の演算</div></h4>
 <div class="text1">
-Numpyの機能で演算できる場合は、極力そちらを使う。
+Numpyの機能で演算できる場合は極力そちらを使い、ループは用いない
 <ul class="list1">
 <li>経度、緯度方向のループを回す場合<br />
-itertoolsを使うと高速化できる
+itertoolsを使うとループを1重化して高速化できる
 <pre>
 import itertools
 i_list = np.arange(idim)
@@ -253,6 +261,28 @@ for ij in itertools.product(i_list, j_list):
 &nbsp; &nbsp; 処理
 </pre>
 </li>
+</ul>
+</div>
+<br />
+<br />
+
+<h4><div class="headline2" id="array_1_5">配列の平均操作</div></h4>
+<div class="text1">
+指定した軸で平均を作成する
+<ul class="list1">
+<li>2次元目の平均を作成する
+<pre>d2 = d.mean(axis=1)</pre>
+＊dが2次元以上の配列の場合<br />
+＊<a href="#stat">Numpyの統計処理</a>参照
+</li><br />
+<li>時間、高度、経度、緯度の4次元配列で時間平均
+<pre>d2 = d.mean(axis=0)</pre>
+＊0次元目に時間軸が入っている場合
+</li><br />
+<li>経度、緯度の2次元配列で東西平均からの偏差
+<pre>d2 = d - np.expand_dims(d.mean(axis=1), axis=1)</pre>
+＊np.expand_dimsで2次元目を追加し、元のdと次元を合わせて演算可能にしている
+＊例えば、dが64&times;128なら、d.mean(axis=1)で64になった配列が、np.expand_dimsで64&times;1になる
 </ul>
 </div>
 <br />
@@ -270,7 +300,7 @@ for ij in itertools.product(i_list, j_list):
 </article>
 </body>
 <footer>
-<p>最終更新日：2024/09/07</p>
+<p>最終更新日：2024/12/30</p>
 <p>Copyright (C) 2018-2024, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
