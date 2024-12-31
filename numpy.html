@@ -77,7 +77,7 @@
       <li><a href="#array_1_2">配列の要素の置換</a></li>
       <li><a href="#array_1_3">配列の軸の入れ替え</a></li>
       <li><a href="#array_1_4">Numpy配列成分の演算</a></li>
-      <li><a href="#array_1_5">配列</a></li>
+      <li><a href="#array_1_5">配列の平均操作</a></li>
      </ul>
   </li></ul>
 </div>
@@ -281,8 +281,23 @@ for ij in itertools.product(i_list, j_list):
 </li><br />
 <li>経度、緯度の2次元配列で東西平均からの偏差
 <pre>d2 = d - np.expand_dims(d.mean(axis=1), axis=1)</pre>
-＊np.expand_dimsで2次元目を追加し、元のdと次元を合わせて演算可能にしている
+＊np.expand_dimsで2次元目を追加し、元のdと次元を合わせて演算可能にしている<br />
 ＊例えば、dが64&times;128なら、d.mean(axis=1)で64になった配列が、np.expand_dimsで64&times;1になる
+</li><br />
+<li>経度、緯度の2次元配列で指定したグリッドで平均
+<pre>d2 = d[jmin:jmax, imin:imax].mean(axis=0).mean(axis=0)</pre>
+＊jmin:jmax、imin:imaxの範囲を取り出し平均する<br />
+＊jmin:jmaxではjmaxの1つ前まで取り出されるので注意
+</li><br />
+<li>条件を満たす要素を平均
+<pre>d2 = d[lats >= 60].mean()</pre>
+緯度が60度以上の場合に平均<br />
+＊配列dと配列latsのサイズは同じでないとエラー
+</li><br />
+<li>複数の条件を満たす要素を平均
+<pre>d2 = d[(lats >= 60)*(lons>120)*(lons=180)].mean()</pre>
+緯度が60度以上、経度120〜180度の場合に平均<br />
+</li><br />
 </ul>
 </div>
 <br />
