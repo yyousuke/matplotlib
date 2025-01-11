@@ -85,10 +85,10 @@ Python環境を構築するため、まずはパッケージ管理ツールConda
 ＊minicondaの場合、~/miniconda3/envs/py312/ができる<br />
 ＊miniforgeの場合、~/miniforge3/envs/py312/ができる<br />
 ＊Intel oneAPIの場合、~/.conda/envs/py312/ができる<br /><br />
-なお、Miniforgeを使わずにconda-forgeのパッケージを利用したい場合、次のように明示しておきます。
+なお、Miniforgeを使わずにconda-forgeのパッケージを利用したい場合、次のようにチャンネルを追加し、チャンネルを明示して実行環境を作成します。
 <pre>% conda config --add channels conda-forge
 % conda create -n py312 python=3.12 -c conda-forge --override-channels</pre>
-チャンネルの追加を確認したい場合
+チャンネルが追加されたか確認したい場合
 <pre>% conda config --show channels</pre><br />
 作成した実行環境を次のように有効化します。
 <pre>% conda activate py312</pre>
@@ -208,7 +208,7 @@ basemap_ortho.pyの実行に必要なwgrib2は次の手順でビルドします�
 </article>
 </body>
 <footer>
-<p>最終更新日：2025/01/01</p>
+<p>最終更新日：2025/01/11</p>
 <p>Copyright (C) 2022-2025, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
