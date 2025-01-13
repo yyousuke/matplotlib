@@ -286,8 +286,8 @@ df = pd.read_csv("ファイル名", オプション)
 lons = np.array([l + 360. if l &lt; 0 else l for l in df.loc[:, "longitude"]])
 </pre>
 経度ラベルがlongitudeの場合<br />
-リスト内包表記で経度データを読み、0度より小さい場合に360度を足す<br />
-Numpyのndarrayに格納する（np.arrayをpd.SeriesにするとSeriesになる）
+経度データを読み、0度より小さい場合に360度を足す<br />
+リスト内包表記でリストにしたものを、Numpyのndarrayに変換して格納する（np.arrayをpd.SeriesにするとSeriesになる）
 </li>
 </ul>
 </div>
@@ -322,7 +322,8 @@ df = pd.DataFrame(
 &nbsp; &nbsp; },
 &nbsp; &nbsp; dtype='float')
 df.to_csv("ファイル名")</pre>
-indexは時刻データ、meanは平均値、stdは標準偏差の場合で、ヘッダ行ありで書き出す</li><br />
+indexは時刻データ、meanは平均値、stdは標準偏差の場合で、ヘッダ行ありで書き出す<br />
+書き出す際にndarrayに変換しているので、元のindex、dmean、dstdはリスト、タプル、1次元の配列、pandasのSeriesなどに対応（サイズが異なるとエラー）</li><br />
 <li>CSVをbz2圧縮して書き出す
 <pre>import bz2
 df.to_csv("圧縮後のファイル.bz2", compression='bz2')
@@ -1026,7 +1027,7 @@ NEAREST、BOX、BILINEAR、HAMMING、BICUBIC、LANCZOSが指定可能（後の�
 </article>
 </body>
 <footer>
-<p>最終更新日：2025/01/01</p>
+<p>最終更新日：2025/01/11</p>
 <p>Copyright (C) 2018-2025, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
