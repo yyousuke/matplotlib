@@ -296,7 +296,11 @@ for ij in itertools.product(i_list, j_list):
 </li><br />
 <li>複数の条件を満たす要素を平均
 <pre>d2 = d[(lats >= 60)*(lons>120)*(lons=180)].mean()</pre>
-緯度が60度以上、経度120〜180度の場合に平均<br />
+緯度が60度以上、経度が120〜180度の場合に平均
+</li><br />
+<li>データに欠損値が含まれる場合
+<pre>d2 = np.nanmean(d[(lats >= 60)*(lons>120)*(lons=180)])</pre>
+緯度が60度以上、経度が120〜180度の場合に欠損値を除いて平均
 </li><br />
 </ul>
 </div>
@@ -315,7 +319,7 @@ for ij in itertools.product(i_list, j_list):
 </article>
 </body>
 <footer>
-<p>最終更新日：2025/01/01</p>
+<p>最終更新日：2025/01/15</p>
 <p>Copyright (C) 2018-2025, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
