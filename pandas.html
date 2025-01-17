@@ -279,16 +279,16 @@ DataFrame（df）のdf.info()メソッドを使う<br />
 </li><br />
 <li>データ行の名前を取得する
 <pre>df.index</pre>
-</li><br />
+</li>
 <li>データ列の名前を取得する
 <pre>df.columns</pre>
-</li><br />
+</li>
 <li>行数を取得する
 <pre>len(df)</pre>
-</li><br />
+</li>
 <li>列数を取得する
 <pre>len(df.columns)</pre>
-</li><br />
+</li>
 <li>サイズを取得する
 <pre>df.size</pre>
 行数&times;列数と一致
@@ -308,17 +308,17 @@ pd.date_rangeメソッドを使う
 <ul class="list1">
 <li>1日刻みで作成する
 <pre>index = pd.date_range('2024-01-01', '2024-03-31', freq='D')</pre>
-</li>2024/01/01から2024/03/31まで<br />
+2024/01/01から2024/03/31まで</li><br />
 <li>1時間刻みで作成する
 <pre>index = pd.date_range('2024-01-01', '2024-03-31', freq='h')</pre>
-</li>freq='H'は将来廃止予定<br />
+freq='H'は将来廃止予定</li><br />
 <li>6時間刻みで作成する
 <pre>index = pd.date_range('2024-01-01', '2024-03-31', freq='6h')</pre>
 </li><br />
 <li>2ヶ月刻みで作成する
 <pre>index = pd.date_range('2022-01-01', '2024-12-31', freq='2ME')</pre>
 </li>2022/01/01から2024/12/31まで<br />
-freq='2M'は将来廃止予定<br />
+freq='2M'は将来廃止予定</li><br />
 </ul>
 </div>
 <br />
@@ -339,10 +339,26 @@ SeriesのindexやDataFrameのindex、columnsはIndex型となっており、toli
 <br />
 <br />
 
-<h3><div class="headline1" id="df_null">欠損か判断する</div></h3>
+<h3><div class="headline1" id="df_null">欠損値の扱い</div></h3>
 <div class="text1">
 DataFrameには、欠損の有無を返すメソッドがある
+<ul class="list1">
+<li>欠損値の判定
 <pre>df.isnull()</pre>
+＊欠損値NaNであればTrue、欠損値でなければFalse
+</li><br />
+<li>列毎にすべて欠損値か判定
+<pre>df.isnull().all()</pre>
+</li>
+<li>行毎にすべて欠損値か判定
+<pre>df.isnull().all(axis=1)</pre>
+</li>
+<li>欠損値の数を列毎に算出する
+<pre>df.isnull().sum()</pre>
+</li>
+<li>欠損値の数を行毎に算出する
+<pre>df.isnull().sum(axis=1)</pre>
+</li><br />
 </div>
 <br />
 <br />
@@ -357,7 +373,7 @@ DataFrameには、欠損の有無を返すメソッドがある
 </article>
 </body>
 <footer>
-<p>最終更新日：2025/01/14</p>
+<p>最終更新日：2025/01/17</p>
 <p>Copyright (C) 2021-2025, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
