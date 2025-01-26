@@ -43,6 +43,34 @@
 <h1 id="top">PandasのTIPS</h1>
 <br />
 
+<!-- 目次 -->
+<h2 id="contents">目次</h2>
+<div class="contents">
+  <ul class="list1"><li><a href="#import">Pandasのインポート</a>
+  </li></ul>
+  <ul class="list1"><li><a href="#display">表示数を増やす</a>
+  </li></ul>
+  <!--  DataFrame -->
+  <ul class="list1"><li><a href="#df">DataFrame</a>
+    <ul class="list2">
+      <li><a href="#df_create">DataFrameの作成</a></li>
+      <li><a href="#df_add">データの追加</a></li>
+      <li><a href="#df_concat">データの連結</a></li>
+      <li><a href="#df_rename">行・列の名前の変更</a></li>
+      <li><a href="#df_resample">リサンプリング</a></li>
+      <li><a href="#df_select">データの選択</a></li>
+      <li><a href="#df_replace">データの置き換え</a></li>
+      <li><a href="#df_sort">データの並べ替え</a></li>
+      <li><a href="#df_info">データの情報を表示</a></li>
+     </ul>
+  </li></ul>
+</div>
+
+<small><a href="#top">[top]</a></small> <br />
+<br />
+<hr width="105%" />
+<br />
+
 <!-- ここから本文 -->
 <h3><div class="headline1" id="import">Pandasのインポート</div></h3>
 <div class="text1">
@@ -67,7 +95,9 @@
 <br />
 <br />
 
-<h3><div class="headline1" id="df_create">DataFrameの作成</div></h3>
+<!-- DataFrame -->
+<h3><div class="headline1" id="df">DataFrame</div></h3>
+<h4><div class="headline2" id="df_create">DataFrameの作成</div></h4>
 <div class="text1">
 <ul class="list1">
 <li>Numpyのndarrayから作成する方法
@@ -116,7 +146,7 @@ df = pd.DataFrame(json.loads(data))
 <br />
 <br />
 
-<h3><div class="headline1" id="df_add">データの追加</div></h3>
+<h4><div class="headline2" id="df_add">データの追加</div></h4>
 <div class="text1">
 <ul class="list1">
 <li>ndarrayに列ラベルを付けて追加
@@ -132,7 +162,7 @@ dataの個数はdfの行数と一致している必要あり
 <br />
 <br />
 
-<h3><div class="headline1" id="df_concat">データの連結</div></h3>
+<h4><div class="headline2" id="df_concat">データの連結</div></h4>
 <div class="text1">
 <ul class="list1">
 <li>列ラベルを元にデータを縦に連結する（時系列データの追加など）
@@ -160,8 +190,7 @@ leftとrightにtime列がある行はすべて残る（完全外部結合）
 <br />
 <br />
 
-
-<h3><div class="headline1" id="df_rename">行・列の名前の変更</div></h3>
+<h4><div class="headline2" id="df_rename">行・列の名前の変更</div></h4>
 <div class="text1">
 <ul class="list1">
 <li>列の名前を変更する場合
@@ -173,7 +202,7 @@ dfが２次元配列の場合。new_colname1に変更する場合
 <br />
 <br />
 
-<h3><div class="headline1" id="df_resample">リサンプリング</div></h3>
+<h4><div class="headline2" id="df_resample">リサンプリング</div></h4>
 <div class="text1">
 <ul class="list1">
 <li>時間軸のデータを日平均する方法
@@ -191,7 +220,7 @@ dfが２次元配列の場合。new_colname1に変更する場合
 <br />
 <br />
 
-<h3><div class="headline1" id="df_select">データの選択</div></h3>
+<h4><div class="headline2" id="df_select">データの選択</div></h4>
 <div class="text1">
 <ul class="list1">
 <li>配列の番号で選択する場合
@@ -211,7 +240,7 @@ Aはdfと同じサイズで条件を表す配列
 <br />
 <br />
 
-<h3><div class="headline1" id="df_replace">データの置き換え</div></h3>
+<h4><div class="headline2" id="df_replace">データの置き換え</div></h4>
 <div class="text1">
 <ul class="list1">
 <li>別のデータから置き換え
@@ -240,7 +269,7 @@ dfのaxis=1の0番目の要素を全て置き換える
 <br />
 <br />
 
-<h3><div class="headline1" id="df_sort">データの並べ替え</div></h3>
+<h4><div class="headline2" id="df_sort">データの並べ替え</div></h4>
 <div class="text1">
 DataFrameのsort_values()メソッドを使う
 <ul class="list1">
@@ -268,8 +297,7 @@ DataFrameのsort_values()メソッドを使う
 <br />
 <br />
 
-
-<h3><div class="headline1" id="df_info">データの情報を表示</div></h3>
+<h4><div class="headline2" id="df_info">データの情報を表示</div></h4>
 <div class="text1">
 <ul class="list1">
 <li>行数・列数、データ列の名前などを表示
@@ -374,7 +402,7 @@ DataFrameには、欠損の有無を返すメソッドがある
 </article>
 </body>
 <footer>
-<p>最終更新日：2025/01/18</p>
+<p>最終更新日：2025/01/26</p>
 <p>Copyright (C) 2021-2025, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
