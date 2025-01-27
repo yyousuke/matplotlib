@@ -48,6 +48,12 @@
 <div class="contents">
   <ul class="list1"><li><a href="#import">Pandasのインポート</a>
   </li></ul>
+  <!--  Pandasの機能 -->
+  <ul class="list1"><li><a href="#function">Pandasの機能</a>
+    <ul class="list2">
+      <li><a href="#pd_display">表示数を増やす</a></li>
+    </ul>
+  </li></ul>
   <ul class="list1"><li><a href="#display">表示数を増やす</a>
   </li></ul>
   <!--  DataFrame -->
@@ -62,6 +68,8 @@
       <li><a href="#df_replace">データの置き換え</a></li>
       <li><a href="#df_sort">データの並べ替え</a></li>
       <li><a href="#df_info">データの情報を表示</a></li>
+      <li><a href="#df_nan">欠損値の扱い</a></li>
+      <li><a href="#df_tolist">リストへの変換</a></li>
      </ul>
   </li></ul>
 </div>
@@ -79,7 +87,9 @@
 <br />
 <br />
 
-<h3><div class="headline1" id="display">表示数を増やす</div></h3>
+<!--  Pandasの機能 -->
+<h3><div class="headline1" id="function">Pandasの機能</div></h3>
+<h4><div class="headline2" id="pd_display">表示数を増やす</div></h4>
 <div class="text1">
 <ul class="list1">
 <li>現在の最大列数を表示
@@ -330,44 +340,7 @@ DataFrame（df）のdf.info()メソッドを使う<br />
 <br />
 <br />
 
-<h3><div class="headline1" id="df_time">時系列の作成</div></h3>
-<div class="text1">
-pd.date_rangeメソッドを使う
-<ul class="list1">
-<li>1日刻みで作成する
-<pre>index = pd.date_range('2024-01-01', '2024-03-31', freq='D')</pre>
-2024/01/01から2024/03/31まで</li><br />
-<li>1時間刻みで作成する
-<pre>index = pd.date_range('2024-01-01', '2024-03-31', freq='h')</pre>
-freq='H'は将来廃止予定</li><br />
-<li>6時間刻みで作成する
-<pre>index = pd.date_range('2024-01-01', '2024-03-31', freq='6h')</pre>
-</li><br />
-<li>2ヶ月刻みで作成する
-<pre>index = pd.date_range('2022-01-01', '2024-12-31', freq='2ME')</pre>
-2022/01/01から2024/12/31まで<br />
-freq='2M'は将来廃止予定</li><br />
-</ul>
-</div>
-<br />
-<br />
-
-<h3><div class="headline1" id="df_tolist">リストへの変換</div></h3>
-<div class="text1">
-SeriesのindexやDataFrameのindex、columnsはIndex型となっており、tolist()、to_list()メソッドが使用可能
-<ul class="list1">
-<li>DataFrameのindexをリストに変換する
-<pre>new_list = df.index.tolist()</pre>
-</li>
-<li>DataFrameのcolumnsをリストに変換する
-<pre>new_list = df.columns.tolist()</pre>
-</li>
-</ul>
-</div>
-<br />
-<br />
-
-<h3><div class="headline1" id="df_null">欠損値の扱い</div></h3>
+<h4><div class="headline2" id="df_nan">欠損値の扱い</div></h4>
 <div class="text1">
 DataFrameには、欠損の有無を返すメソッドがある
 <ul class="list1">
@@ -392,6 +365,44 @@ DataFrameには、欠損の有無を返すメソッドがある
 <br />
 <br />
 
+<h4><div class="headline2" id="df_tolist">リストへの変換</div></h4>
+<div class="text1">
+SeriesのindexやDataFrameのindex、columnsはIndex型となっており、tolist()、to_list()メソッドが使用可能
+<ul class="list1">
+<li>DataFrameのindexをリストに変換する
+<pre>new_list = df.index.tolist()</pre>
+</li>
+<li>DataFrameのcolumnsをリストに変換する
+<pre>new_list = df.columns.tolist()</pre>
+</li>
+</ul>
+</div>
+<br />
+<br />
+
+
+<h3><div class="headline1" id="df_time">時系列の作成</div></h3>
+<div class="text1">
+pd.date_rangeメソッドを使う
+<ul class="list1">
+<li>1日刻みで作成する
+<pre>index = pd.date_range('2024-01-01', '2024-03-31', freq='D')</pre>
+2024/01/01から2024/03/31まで</li><br />
+<li>1時間刻みで作成する
+<pre>index = pd.date_range('2024-01-01', '2024-03-31', freq='h')</pre>
+freq='H'は将来廃止予定</li><br />
+<li>6時間刻みで作成する
+<pre>index = pd.date_range('2024-01-01', '2024-03-31', freq='6h')</pre>
+</li><br />
+<li>2ヶ月刻みで作成する
+<pre>index = pd.date_range('2022-01-01', '2024-12-31', freq='2ME')</pre>
+2022/01/01から2024/12/31まで<br />
+freq='2M'は将来廃止予定</li><br />
+</ul>
+</div>
+<br />
+<br />
+
 <br />
 <br />
 <br />
@@ -402,7 +413,7 @@ DataFrameには、欠損の有無を返すメソッドがある
 </article>
 </body>
 <footer>
-<p>最終更新日：2025/01/26</p>
+<p>最終更新日：2025/01/27</p>
 <p>Copyright (C) 2021-2025, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
