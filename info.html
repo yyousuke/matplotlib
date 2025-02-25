@@ -50,7 +50,9 @@
 <a href="/">ホーム</a> &gt; <a href="index.html">matplotlibの使い方</a> &gt; 更新・エラー情報
 </div>
 <article>
-<h3><div class="headline-scroll" id="20240401">MacPortsでのXZ Utilsについて（2024/04/01）</div></h3>
+<h1 id="top">matplotlib：更新・エラー情報</h1>
+
+<h2 class="headline-scroll" id="20240401">MacPortsでのXZ Utilsについて（2024/04/01）</h2>
 <div class="text1">
 2024年3月末にXZ Utilsの脆弱性（CVE-2024-3094）が公表されました。この脆弱性の影響を受けているバージョンでは、XZ Utilsに悪意のあるコードが挿入されており、必要な対処の実施が推奨されています（<a href="https://www.jpcert.or.jp/newsflash/2024040101.html" target="_blank">JPCERT</a>）。MacPortsでは、この脆弱性の影響を受けるバージョン5.6.1に更新されていましたが、3月末に影響を受けないバージョン5.4.6にダウングレードされました（<a  href="https://ports.macports.org/port/xz/details/" target="_blank">MacPorts XZ Utils</a>）。<br /><br />
 XZ Utilsのバージョンは
@@ -63,7 +65,7 @@ XZ Utilsのバージョンは
 <br />
 <br />
 
-<h3><div class="headline-scroll" id="20230604">cartopyでのlgeosインポートエラー（2023/06/04）</div></h3>
+<h2 class="headline-scroll" id="20230604">cartopyでのlgeosインポートエラー（2023/06/04）</h2>
 <div class="text1">
 2023年5月のアップデートに伴い、MacPortsでインストールされるshapelyのバージョンが1.8.5から2.0.1になりました。このバージョンでは、cartopyy-0.21.0が内部でインポートしているlgeosが含まれないようになったため、以下のようなImportErrorが発生します（Python3.10の場合のエラーメッセージ例）。このエラーは、cartopyインポート時に不可避な部分で発生しており、shapely-2.0.1のアップデートが適用されてしまった場合には、shapelyのバージョンを1.8.5に戻す必要があります。なお、<span style="COLOR:red">2023/06/09にMacPortsで更新されたcartopy-0.21.1で一連の不具合が解消されたため、MacPortsで取得できる最新版への更新をお薦めします</span>。
 <pre>&gt;&gt;&gt; import cartopy
@@ -101,7 +103,7 @@ The following ports are currently installed:
 <br />
 <br />
 
-<h3><div class="headline-scroll" id="20230409">matplotlibのimportエラー（2023/04/09）</div></h3>
+<h2 class="headline-scroll" id="20230409">matplotlibのimportエラー（2023/04/09）</h2>
 <div class="text1">
 MacPortsで導入したPython3.9でmatplotlibをimport（import matplotlib.pyplot）する際に
 <pre><span style="COLOR:red">ModuleNotFoundError: No module named 'importlib_resources'</span></pre>
@@ -116,14 +118,14 @@ MacPortsで導入したPython3.9でmatplotlibをimport（import matplotlib.pyplo
 <br />
 <br />
 
-<h3><div class="headline-scroll" id="20210903">cartopyの地図データ取得時の不具合解消（2021/09/03）</div></h3>
+<h2 class="headline-scroll" id="20210903">cartopyの地図データ取得時の不具合解消（2021/09/03）</h2>
 <div class="text1">
 cartopyでは、最初に地図を描く際に地理情報データを取得しています。取得する地理情報データは、<a href="https://www.naturalearthdata.com/downloads/">Natural Earth地図データ</a>でですが、データを提供しているサーバへアクセスできない状態になっていたため、新規ダウンロードが発生する場合にはエラーとなっていました。本日、Natural Earth地図データへのアクセスが再開し、現在は正常に描画できるようになりました。
 </div>
 <br />
 <br />
 
-<h3><div class="headline-scroll" id="20210731">Basemapで南極大陸を描く際の不具合について（2021/07/31）</div></h3>
+<h2 class="headline-scroll" id="20210731">Basemapで南極大陸を描く際の不具合について（2021/07/31）</h2>
 <div class="text1">
 Basemap1.2.2で行われた更新後に、一部の図法で南極大陸が描かれないか東半球側にしか描かれない不具合が発生しています。
 現在確認しているものは、正距円筒図法、モルワイデ図法、ロビンソン図法、ランベルト正積円筒図法、ミラー図法です。なお、正射投影図法、ランベルト正角円錐図法、極投影図法、正距方位図法については問題なく作図できています。<br />
@@ -137,7 +139,7 @@ m = Basemap(projection='cyl', lon_0=-180)
 <br />
 <br />
 
-<h3><div class="headline-scroll" id="20210224">気象庁HP更新に伴うサンプルプログラムの動作確認について（2021/02/24）</div></h3>
+<h2 class="headline-scroll" id="20210224">気象庁HP更新に伴うサンプルプログラムの動作確認（2021/02/24）</h2>
 <div class="text1">
 本日13時に気象庁ホームページが大幅に更新され、各種リンクが変更となりました。
 「気象データ解析のためのmatplotlibの使い⽅」の<a href="./met_sample.zip" target="_blank">サンプルプログラム</a>では、気象庁ホームページのデータをスクレイピングしていることから、ホームページリニューアル後に動作確認を行いました。スクレイピングしているアメダスデータのリンクに変更がないため、現時点でサンプルプログラムが正常に動作することを確認できました。<br />
@@ -148,7 +150,7 @@ m = Basemap(projection='cyl', lon_0=-180)
 <br />
 <br />
 
-<h3><div class="headline-scroll" id="20201127">macOS Big Sur対応について（2020/11/27）</div></h3>
+<h2 class="headline-scroll" id="20201127">macOS Big Sur対応について（2020/11/27）</h2>
 <div class="text1">
 macOS Big Sur対応のMacPortsが11/15に提供開始されました。MacPortsを使いpython3.8の更新をテストしていましたが、現時点で「気象データ解析のためのmatplotlibの使い⽅」の<a href="./met_sample.zip" target="_blank">サンプルプログラム</a>の実行に必要な環境が整っていることを確認できました。<br />
 なおBasemapは修正が行われていませんので、<a href="#20200725">コードの修正</a>が必要です。また、次のような警告が出ることがあります。
@@ -165,7 +167,7 @@ export PROJ_LIB=/opt/local/lib/proj7/share/proj
 <br />
 <br />
 
-<h3><div class="headline-scroll" id="20200725">Basemapをインポートできない不具合の解決方法（2020/07/25）</div></h3>
+<h2 class="headline-scroll" id="20200725">Basemapをインポートできない不具合の解決方法（2020/07/25）</h2>
 <div class="text1">
 2020年7月20日頃のアップデートに伴い、MacPortsでインストールされるmatplotlibがバージョン3.2.2から3.3.0になりました。それに伴いmatplotlib.cbookではdedent関数が削除されました。
 他方、Basemapはバージョン1.2.1のまま更新されないので、mpl_toolkits.basemapをインポートしようとした際に、存在しないdedent関数を呼び出そうとしてエラーが発生します。このエラーはBasemap使用時に不可避な部分で発生しており、<span style="COLOR:red">既にアップデートが適用されてしまった場合には、修正を行わないとBasemapが使用できません</span>。<br />
@@ -211,7 +213,7 @@ py38-matplotlib @3.3.0_1+cairo+webagg
 <br />
 <br />
 
-<h3><div class="headline-scroll" id="20200205">Pandas1.0.0のDataFrameで.ix廃止（2020/02/05）</div></h3>
+<h2 class="headline-scroll" id="20200205">Pandas1.0.0のDataFrameで.ix廃止（2020/02/05）</h2>
 <div class="text1">
 2020年2月最初のMacPortsで導入されるpandas-1.0.0では、以前のバージョン0.7.3までwarningが出るものの使用できたDataFrameの.ixが廃止されました。 <br />
 それに伴い、pythonで.ixを使うプログラムを実行すると、次のようなエラーが発生します。
@@ -229,7 +231,7 @@ AttributeError: 'DataFrame' object has no attribute 'ix'
 <br />
 <br />
 
-<h3><div class="headline-scroll" id="20200201">解決法：正射投影図法で北緯45度より北側を中心にした場合の不具合（2020/02/01）</div></h3>
+<h2 class="headline-scroll" id="20200201"><small>解決法：正射投影図法で北緯45度より北側を中心にした場合（2020/02/01）</small></h2>
 <div class="text1">
 <a href="#20191212">2019年12月10日頃から発生している正射投影図法で北緯45度より北側を中心にした場合の不具合</a>について、<a href="https://github.com/matplotlib/basemap/issues/484">GitHub</a>に修正方法が記載されたことを、NOAAの方に教えて頂きました。<br />
 Basemap1.2.1のコード（MacPortsで導入したpython3.8の場合、/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/mpl_toolkits/basemap/__init__.py）について、1428行目と1429行目の間に次の１行を挿入する修正を行います。パスの3.7の部分はpythonのバージョンによって異なり、バージョン3.6.xなら3.6、バージョン3.7.xなら3.7です。
@@ -241,7 +243,7 @@ b = np.where(np.isposinf(np.where(np.isneginf(b),-1.e20,b)),1.e20,b)
 <br />
 <br />
 
-<h3><div class="headline-scroll" id="20191212">正射投影図法で北緯45度より北側を中心にした場合の不具合（2019/12/12）</div></h3>
+<h2 class="headline-scroll" id="20191212">正射投影図法で北緯45度より北側を中心にした場合（2019/12/12）</h2>
 <div class="text1">
 2019年12月10日頃から、Basemapの正射投影図法で作図を行う際に、中心の緯度（lon_0）を北緯45度より北側に指定すると、次のようなエラーでpythonが落ちるようになっています。なお、テストした際のGEOSはバージョン3.8.0、Basemapは1.2.1です（MacPorsで導入される最新版）。
 <pre>
@@ -255,7 +257,7 @@ Segmentation fault: 11
 <br />
 <br />
 
-<h3><div class="headline-scroll" id="20191108">Basemap1.2.1で一連の不具合解消（2019/11/08）</div></h3>
+<h2 class="headline-scroll" id="20191108">Basemap1.2.1で一連の不具合解消（2019/11/08）</h2>
 <div class="text1">
 2019年10月から11月始め頃のMacPorts更新の際に適用されるBasemapのバージョンが、1.2.0から1.2.1へ更新されました。それにより、Basemapで発生していた以下の不具合が解消されています。<br />
 <a href="#20190523">2019年4月頃から発生しているepsgファイル読み込みの不具合</a><br />
@@ -266,7 +268,7 @@ python3.6では、py36-matplotlib、py36-matplotlib-basemapのパッケージ名
 <br />
 <br />
 
-<h3><div class="headline-scroll" id="20190830">ログプロットの不具合がmatplotlib3.1.1で解消（2019/08/30）</div></h3>
+<h2 class="headline-scroll" id="20190830">ログプロットの不具合がmatplotlib3.1.1で解消（2019/08/30）</h2>
 <div class="text1">
 2019年5月末から6月始め頃のmatplotlibの更新後（バージョン3.1.0）、y軸をログスケールに取りy軸の値を逆転させた場合（例えば、10 hPaを上端、1000 hPaを下端に取る場合）、正しく設定を行なってもy軸の値が逆転しない（10 hPaが下、1000 hPaが上のまま）という問題が発生していました。なお、ログスケールに設定しない場合には問題は発生していません。この問題は、2019年8月末のmatplotlib-3.1.1への更新時に解消されました。バージョン3.1.0で不具合が発生している場合には、バージョン3.1.1へ更新してください。<br />
 なおMacPortsによる自動更新（port upgrade outdated）を行った場合には、<a href="#20190523">2019年4月頃から発生しているbasemapの問題</a>や<a href="#20190822">Basemapでtriオプション使用不可となる問題</a>が引き続き発生するため、自動更新は推奨されません。
@@ -308,7 +310,7 @@ ax.set_ylim(ax.get_ylim()[::-1])
 <br />
 <br />
 
-<h3><div class="headline-scroll" id="20190822">MacPorts更新後のBasemapでtriオプション使用不可（2019/08/22）</div></h3>
+<h2 class="headline-scroll" id="20190822"><small>MacPorts更新後のBasemapでtriオプション使用不可（2019/08/22）</small></h2>
 <div class="text1">
 最近のMacPortsの更新でqhullライブラリが更新され、Basemapとの不整合が生じています。そのために、MacPortsで更新（port upgrade outdated）を行うと、Basemapのm.contour()やm.contorf()等でtri=Trueとした場合、以下のエラーが発生します。現時点ではエラー回避のための更新がMacPortsから提供されていないため、更新は推奨されません。<a href="#20190523">2019年４月頃から発生しているbasemap問題</a>も引き続き発生します。
 <pre>
@@ -343,7 +345,7 @@ tri=Trueオプションを使わないように書き換える（この場合に
 <br />
 <br />
 
-<h3><div class="headline-scroll" id="20190523">MacPorts更新後のBasemapエラー（2019/05/23）</div></h3>
+<h2 class="headline-scroll" id="20190523">MacPorts更新後のBasemapエラー（2019/05/23）</h2>
 <div class="text1">
 2019年4月頃のpyprojの更新（バージョン2.1.3）の際、内部で使用されるprojのバージョンが5から6に更新され、同時にpyproj.pyproj_datadirが廃止されています。その影響で、MacPortsで更新（port upgrade outdated）を行うと、Basemapの読み込み時に以下のエラーが発生します。現時点ではエラー回避のコードがMacPortsから提供されていないため、更新は推奨されません。
 <pre>
@@ -384,7 +386,7 @@ epsgf = open(os.path.join(pyproj_datadir,'epsg'))
 <br />
 <br />
 
-<h3><div class="headline-scroll" id="20181218">Basemapでimportエラー（2018/12/18）</div></h3>
+<h2 class="headline-scroll" id="20181218">Basemapでimportエラー（2018/12/18）</h2>
 <div class="text1">
 MacPortを使い2018/10/18現在のmatplotlib最新版（3.0.0）に更新した場合、basemap-1.1.0でmatplotlib.cbook内のis_scalarをimportできない不具合が発生します。<br />
 この更新でmatplotlib.cbook内のis_scalarがis_scalar_or_stringに変更されました。一方で、basemap（ver. 1.1.0）の方ではimportする設定が変更されていない不一致があります。バグfixが出るまでは、以下のようにコードを修正することで対応可能です。<br />
@@ -409,7 +411,7 @@ elif masked and <span style="COLOR:red">is_scalar_or_string(masked)</span>:<br /
 </article>
 </body>
 <footer>
-<p>最終更新日：2025/01/01</p>
+<p>最終更新日：2025/02/25</p>
 <p>Copyright (C) 2018-2025, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
