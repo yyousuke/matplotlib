@@ -53,102 +53,67 @@
 <h1 id="top">matplotlib：更新・エラー情報</h1>
 
 <h2 class="headline-scroll" id="20240401">MacPortsでのXZ Utilsについて（2024/04/01）</h2>
-<div class="text1">
-2024年3月末にXZ Utilsの脆弱性（CVE-2024-3094）が公表されました。この脆弱性の影響を受けているバージョンでは、XZ Utilsに悪意のあるコードが挿入されており、必要な対処の実施が推奨されています（<a href="https://www.jpcert.or.jp/newsflash/2024040101.html" target="_blank">JPCERT</a>）。MacPortsでは、この脆弱性の影響を受けるバージョン5.6.1に更新されていましたが、3月末に影響を受けないバージョン5.4.6にダウングレードされました（<a  href="https://ports.macports.org/port/xz/details/" target="_blank">MacPorts XZ Utils</a>）。<br /><br />
-XZ Utilsのバージョンは
-<pre>% strings /opt/local/bin/xz |grep '(XZ Utils)'</pre>
-で確認可能です。もし脆弱性の影響を受けるバージョン5.6.0か5.6.1が表示された場合には、次のように最新版に更新してください。
-<pre>% sudo port selfupdate
-% sudo port upgrade outdated
-</pre>
-</div>
-<br />
-<br />
+	<div class="text1">
+		2024年3月末にXZ Utilsの脆弱性（CVE-2024-3094）が公表されました。この脆弱性の影響を受けているバージョンでは、XZ Utilsに悪意のあるコードが挿入されており、必要な対処の実施が推奨されています（<a href="https://www.jpcert.or.jp/newsflash/2024040101.html" target="_blank">JPCERT</a>）。MacPortsでは、この脆弱性の影響を受けるバージョン5.6.1に更新されていましたが、3月末に影響を受けないバージョン5.4.6にダウングレードされました（<a  href="https://ports.macports.org/port/xz/details/" target="_blank">MacPorts XZ Utils</a>）。<br /><br />
+		XZ Utilsのバージョンは
+		<pre>% strings /opt/local/bin/xz |grep '(XZ Utils)'</pre>
+		で確認可能です。もし脆弱性の影響を受けるバージョン5.6.0か5.6.1が表示された場合には、次のように最新版に更新してください。
+		<pre>% sudo port selfupdate<br />% sudo port upgrade outdated</pre>
+	</div>
+	<br />
+	<br />
 
 <h2 class="headline-scroll" id="20230604">cartopyでのlgeosインポートエラー（2023/06/04）</h2>
-<div class="text1">
-2023年5月のアップデートに伴い、MacPortsでインストールされるshapelyのバージョンが1.8.5から2.0.1になりました。このバージョンでは、cartopyy-0.21.0が内部でインポートしているlgeosが含まれないようになったため、以下のようなImportErrorが発生します（Python3.10の場合のエラーメッセージ例）。このエラーは、cartopyインポート時に不可避な部分で発生しており、shapely-2.0.1のアップデートが適用されてしまった場合には、shapelyのバージョンを1.8.5に戻す必要があります。なお、<span style="COLOR:red">2023/06/09にMacPortsで更新されたcartopy-0.21.1で一連の不具合が解消されたため、MacPortsで取得できる最新版への更新をお薦めします</span>。
-<pre>&gt;&gt;&gt; import cartopy
-Traceback (most recent call last):
-&nbsp; File "&lt;stdin&gt;", line 1, in &lt;module&gt;
-&nbsp; File "/opt/local/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/cartopy/__init__.py", line 107, in &lt;module&gt;
-&nbsp; import cartopy.crs  # noqa: E402  module-level imports
-&nbsp; File "/opt/local/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/cartopy/crs.py", line 27, in &lt;module&gt;
-&nbsp; import cartopy.trace
-&nbsp; File "lib/cartopy/trace.pyx", line 56, in init cartopy.trace
-<span style="COLOR:red">ImportError: cannot import name lgeos</span>
-</pre>
-このエラーは、cartopyのインポート時に内部でインポートされるcartopy.traceでlgeosをインポートできないことを表しています。このlgeosがshapely.geosに含まれていないため、以下でも同じエラーとなります。
-<pre>&gt;&gt;&gt; from shapely.geos import lgeos
-Traceback (most recent call last):
-&nbsp; File "&lt;stdin&gt;", line 1, in &lt;module&gt;
-&nbsp; <span style="COLOR:red">ImportError: cannot import name 'lgeos' from 'shapely.geos' </span> (/opt/local/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/shapely/geos.py)
-</pre>
-解決策としては、shapelyのバージョンを次のように1.8.5に戻します。コマンド中のpy310はpythonのバージョンに合わせて読み替えてください。
-<pre>インストールされているバージョンの確認
-% port installed py310-shapely
-The following ports are currently installed:
-&nbsp; py310-shapely @1.8.5_1
-&nbsp; py310-shapely @2.0.1_1 (active)
-現在のバージョンをdeactivateし、1.8.5_1をactivate
-% sudo port deactivate py310-shapely
-% sudo port activate py310-shapely @1.8.5_1
-確認
-% port installed py310-shapely
-The following ports are currently installed:
-&nbsp; py310-shapely @1.8.5_1 (active)
-&nbsp; py310-shapely @2.0.1_1
-</pre>
-</div>
-<br />
-<br />
+	<div class="text1">
+		2023年5月のアップデートに伴い、MacPortsでインストールされるshapelyのバージョンが1.8.5から2.0.1になりました。このバージョンでは、cartopyy-0.21.0が内部でインポートしているlgeosが含まれないようになったため、以下のようなImportErrorが発生します（Python3.10の場合のエラーメッセージ例）。このエラーは、cartopyインポート時に不可避な部分で発生しており、shapely-2.0.1のアップデートが適用されてしまった場合には、shapelyのバージョンを1.8.5に戻す必要があります。なお、<span style="COLOR:red">2023/06/09にMacPortsで更新されたcartopy-0.21.1で一連の不具合が解消されたため、MacPortsで取得できる最新版への更新をお薦めします</span>。
+		<pre>&gt;&gt;&gt; import cartopy<br />Traceback (most recent call last):<br />&nbsp; File "&lt;stdin&gt;", line 1, in &lt;module&gt;<br />&nbsp; File "/opt/local/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/cartopy/__init__.py", line 107, in &lt;module&gt;<br />&nbsp; import cartopy.crs  # noqa: E402  module-level imports<br />&nbsp; File "/opt/local/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/cartopy/crs.py", line 27, in &lt;module&gt;<br />&nbsp; import cartopy.trace<br />&nbsp; File "lib/cartopy/trace.pyx", line 56, in init cartopy.trace<br /><span style="COLOR:red">ImportError: cannot import name lgeos</span></pre>
+		このエラーは、cartopyのインポート時に内部でインポートされるcartopy.traceでlgeosをインポートできないことを表しています。このlgeosがshapely.geosに含まれていないため、以下でも同じエラーとなります。
+		<pre>&gt;&gt;&gt; from shapely.geos import lgeos<br />Traceback (most recent call last):<br />&nbsp; File "&lt;stdin&gt;", line 1, in &lt;module&gt;<br />&nbsp; <span style="COLOR:red">ImportError: cannot import name 'lgeos' from 'shapely.geos' </span><br />(/opt/local/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/shapely/geos.py)</pre>
+		解決策としては、shapelyのバージョンを次のように1.8.5に戻します。コマンド中のpy310はpythonのバージョンに合わせて読み替えてください。
+		<pre>インストールされているバージョンの確認<br /><br />% port installed py310-shapely<br />The following ports are currently installed:<br />&nbsp; py310-shapely @1.8.5_1<br />&nbsp; py310-shapely @2.0.1_1 (active)<br /><br />現在のバージョンをdeactivateし、1.8.5_1をactivate<br /><br />% sudo port deactivate py310-shapely<br />% sudo port activate py310-shapely @1.8.5_1<br /><br />確認<br /><br />% port installed py310-shapely<br />The following ports are currently installed:<br />&nbsp; py310-shapely @1.8.5_1 (active)<br />&nbsp; py310-shapely @2.0.1_1</pre>
+	</div>
+	<br />
+	<br />
 
 <h2 class="headline-scroll" id="20230409">matplotlibのimportエラー（2023/04/09）</h2>
-<div class="text1">
-MacPortsで導入したPython3.9でmatplotlibをimport（import matplotlib.pyplot）する際に
-<pre><span style="COLOR:red">ModuleNotFoundError: No module named 'importlib_resources'</span></pre>
-が出ることがあります。
-<br />
-<br />
-回避するためには、次のようにimportlib_resourcesを追加します。
-<pre>
-% sudo port install py39-importlib-resources
-</pre>
-</div>
-<br />
-<br />
+	<div class="text1">
+		MacPortsで導入したPython3.9でmatplotlibをimport（import matplotlib.pyplot）する際に
+		<pre><span style="COLOR:red">ModuleNotFoundError: No module named 'importlib_resources'</span></pre>
+		が出ることがあります。
+		<br />
+		<br />
+		回避するためには、次のようにimportlib_resourcesを追加します。
+		<pre>% sudo port install py39-importlib-resources</pre>
+	</div>
+	<br />
+	<br />
 
 <h2 class="headline-scroll" id="20210903">cartopyの地図データ取得時の不具合解消（2021/09/03）</h2>
-<div class="text1">
-cartopyでは、最初に地図を描く際に地理情報データを取得しています。取得する地理情報データは、<a href="https://www.naturalearthdata.com/downloads/">Natural Earth地図データ</a>でですが、データを提供しているサーバへアクセスできない状態になっていたため、新規ダウンロードが発生する場合にはエラーとなっていました。本日、Natural Earth地図データへのアクセスが再開し、現在は正常に描画できるようになりました。
-</div>
-<br />
-<br />
+	<div class="text1">
+		cartopyでは、最初に地図を描く際に地理情報データを取得しています。取得する地理情報データは、<a href="https://www.naturalearthdata.com/downloads/">Natural Earth地図データ</a>でですが、データを提供しているサーバへアクセスできない状態になっていたため、新規ダウンロードが発生する場合にはエラーとなっていました。本日、Natural Earth地図データへのアクセスが再開し、現在は正常に描画できるようになりました。
+	</div>
+	<br />
+	<br />
 
 <h2 class="headline-scroll" id="20210731">Basemapで南極大陸を描く際の不具合について（2021/07/31）</h2>
-<div class="text1">
-Basemap1.2.2で行われた更新後に、一部の図法で南極大陸が描かれないか東半球側にしか描かれない不具合が発生しています。
-現在確認しているものは、正距円筒図法、モルワイデ図法、ロビンソン図法、ランベルト正積円筒図法、ミラー図法です。なお、正射投影図法、ランベルト正角円錐図法、極投影図法、正距方位図法については問題なく作図できています。<br />
-<br />
-回避するためには、次のように経度の中心を-180&deg;とします。2023/01現在、東経／西経180&deg;のみ正常に作図できます。
-<pre>
-m = Basemap(projection='cyl', lon_0=-180)
-</pre>
-（正距円筒図法の場合）
-</div>
-<br />
-<br />
+	<div class="text1">
+		Basemap1.2.2で行われた更新後に、一部の図法で南極大陸が描かれないか東半球側にしか描かれない不具合が発生しています。現在確認しているものは、正距円筒図法、モルワイデ図法、ロビンソン図法、ランベルト正積円筒図法、ミラー図法です。なお、正射投影図法、ランベルト正角円錐図法、極投影図法、正距方位図法については問題なく作図できています。<br />
+		<br />
+		回避するためには、次のように経度の中心を-180&deg;とします。2023/01現在、東経／西経180&deg;のみ正常に作図できます。
+		<pre>m = Basemap(projection='cyl', lon_0=-180)</pre>
+		（正距円筒図法の場合）
+	</div>
+	<br />
+	<br />
 
 <h2 class="headline-scroll" id="20210224">気象庁HP更新に伴うサンプルプログラムの動作確認（2021/02/24）</h2>
-<div class="text1">
-本日13時に気象庁ホームページが大幅に更新され、各種リンクが変更となりました。
-「気象データ解析のためのmatplotlibの使い⽅」の<a href="./met_sample.zip" target="_blank">サンプルプログラム</a>では、気象庁ホームページのデータをスクレイピングしていることから、ホームページリニューアル後に動作確認を行いました。スクレイピングしているアメダスデータのリンクに変更がないため、現時点でサンプルプログラムが正常に動作することを確認できました。<br />
-一方、imshow_sample2.pyに限っては、ひまわりの可視・赤外画像をダウンロードしており、リニューアルに伴うリンク切れにより、現在は正常にダウンロードを行うことができません。
-<br />
-<span style="COLOR:red">＊2021/09/03版時点で地図データ取得時の不具合が解消されました</span>
-</div>
-<br />
-<br />
+	<div class="text1">
+		本日13時に気象庁ホームページが大幅に更新され、各種リンクが変更となりました。
+		「気象データ解析のためのmatplotlibの使い⽅」の<a href="./met_sample.zip" target="_blank">サンプルプログラム</a>では、気象庁ホームページのデータをスクレイピングしていることから、ホームページリニューアル後に動作確認を行いました。スクレイピングしているアメダスデータのリンクに変更がないため、現時点でサンプルプログラムが正常に動作することを確認できました。<br />一方、imshow_sample2.pyに限っては、ひまわりの可視・赤外画像をダウンロードしており、リニューアルに伴うリンク切れにより、現在は正常にダウンロードを行うことができません。<br /><br />
+		<span style="COLOR:red">＊2021/09/03版時点で地図データ取得時の不具合が解消されました</span>
+	</div>
+	<br />
+	<br />
 
 <h2 class="headline-scroll" id="20201127">macOS Big Sur対応について（2020/11/27）</h2>
 <div class="text1">
@@ -411,7 +376,7 @@ elif masked and <span style="COLOR:red">is_scalar_or_string(masked)</span>:<br /
 </article>
 </body>
 <footer>
-<p>最終更新日：2025/02/25</p>
+<p>最終更新日：2025/05/05</p>
 <p>Copyright (C) 2018-2025, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
