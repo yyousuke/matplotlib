@@ -116,21 +116,16 @@
 	<br />
 
 <h2 class="headline-scroll" id="20201127">macOS Big Sur対応について（2020/11/27）</h2>
-<div class="text1">
-macOS Big Sur対応のMacPortsが11/15に提供開始されました。MacPortsを使いpython3.8の更新をテストしていましたが、現時点で「気象データ解析のためのmatplotlibの使い⽅」の<a href="./met_sample.zip" target="_blank">サンプルプログラム</a>の実行に必要な環境が整っていることを確認できました。<br />
-なおBasemapは修正が行われていませんので、<a href="#20200725">コードの修正</a>が必要です。また、次のような警告が出ることがあります。
-<pre>
-/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pyproj/__init__.py:73: UserWarning: Valid PROJ data directory not found. Either set the path using the environmental variable PROJ_LIB or with `pyproj.datadir.set_data_dir`.
-  warnings.warn(str(err))
-</pre>
-この場合には、
-<pre>
-export PROJ_LIB=/opt/local/lib/proj7/share/proj
-</pre>
-を行います。
-</div>
-<br />
-<br />
+	<div class="text1">
+		macOS Big Sur対応のMacPortsが11/15に提供開始されました。MacPortsを使いpython3.8の更新をテストしていましたが、現時点で「気象データ解析のためのmatplotlibの使い⽅」の<a href="./met_sample.zip" target="_blank">サンプルプログラム</a>の実行に必要な環境が整っていることを確認できました。<br />
+		なおBasemapは修正が行われていませんので、<a href="#20200725">コードの修正</a>が必要です。また、次のような警告が出ることがあります。
+		<pre>/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pyproj/__init__.py:73: UserWarning: Valid PROJ data directory not found. Either set the path using the environmental variable PROJ_LIB or with `pyproj.datadir.set_data_dir`.<br />warnings.warn(str(err))</pre>
+		この場合には、
+		<pre>export PROJ_LIB=/opt/local/lib/proj7/share/proj</pre>
+		を行います。
+	</div>
+	<br />
+	<br />
 
 <h2 class="headline-scroll" id="20200725">Basemapをインポートできない不具合の解決方法（2020/07/25）</h2>
 <div class="text1">
