@@ -271,98 +271,63 @@ ax.set_ylim(ax.get_ylim()[::-1])
 <br />
 
 <h2 class="headline-scroll" id="20190822"><small>MacPorts更新後のBasemapでtriオプション使用不可（2019/08/22）</small></h2>
-<div class="text1">
-最近のMacPortsの更新でqhullライブラリが更新され、Basemapとの不整合が生じています。そのために、MacPortsで更新（port upgrade outdated）を行うと、Basemapのm.contour()やm.contorf()等でtri=Trueとした場合、以下のエラーが発生します。現時点ではエラー回避のための更新がMacPortsから提供されていないため、更新は推奨されません。<a href="#20190523">2019年４月頃から発生しているbasemap問題</a>も引き続き発生します。
-<pre>
-QH6249 qh_lib_check: Incorrect qhull library called.  Size of qhT for caller is 2792, but for qhull library is 2896.
-QH6256 qhull internal error (qh_lib_check): Cannot continue due to QH6249..  Library 'qhull 7.3.2 (2019.1 2019/06/21)' should use a static qhT (e.g., libqhull.so).  It may be out-of-date.  Exit with 49
-</pre>
-<ul class="list1">
-<li>既にMacPortsの更新を適用してしまった場合のプログラム変更例
-<ul class="list2">
-<li>変更前（lats、lonsが2次元の緯度、経度配列、dが2次元の気象データの場合）
-<pre>
-m = Basemap(オプション)
-lats_1d= np.ravel(lats)
-lons_1d= np.ravel(lons)
-
-m.contour(lons_1d, lats_1d, d, tri=True, colors='blue', linestyles='-')
-</pre>
-tri=Trueの場合には、緯度、経度データを1次元で与えるので、このようにしている
-</li><br />
-<li>変更後
-<pre>
-m = Basemap(オプション)
-
-m.contour(lons, lats, d, tri=True, colors='blue', linestyles='-')
-</pre>
-tri=Trueオプションを使わないように書き換える（この場合には、緯度、経度の配列を2次元で与える）
-</li>
-</ul></li>
-</ul>
-<span style="COLOR:red">＊basemap1.2.0で不具合が解消された（2019/11/08）</span>
-</div>
-<br />
-<br />
+	<div class="text1">
+		最近のMacPortsの更新でqhullライブラリが更新され、Basemapとの不整合が生じています。そのために、MacPortsで更新（port upgrade outdated）を行うと、Basemapのm.contour()やm.contorf()等でtri=Trueとした場合、以下のエラーが発生します。現時点ではエラー回避のための更新がMacPortsから提供されていないため、更新は推奨されません。<a href="#20190523">2019年４月頃から発生しているbasemap問題</a>も引き続き発生します。
+		<pre>QH6249 qh_lib_check: Incorrect qhull library called.  Size of qhT for caller is 2792, but for qhull library is 2896.<br />QH6256 qhull internal error (qh_lib_check): Cannot continue due to QH6249..  Library 'qhull 7.3.2 (2019.1 2019/06/21)' should use a static qhT (e.g., libqhull.so).<br />It may be out-of-date.  Exit with 49</pre>
+		<ul class="list1">
+			<li>既にMacPortsの更新を適用してしまった場合のプログラム変更例
+				<ul class="list2">
+					<li>変更前（lats、lonsが2次元の緯度、経度配列、dが2次元の気象データの場合）
+						<pre>m = Basemap(オプション)<br />lats_1d= np.ravel(lats)<br />lons_1d= np.ravel(lons)<br /><br />m.contour(lons_1d, lats_1d, d, tri=True, colors='blue', linestyles='-')</pre>
+						tri=Trueの場合には、緯度、経度データを1次元で与えるので、このようにしている
+					</li><br />
+					<li>変更後
+						<pre>m = Basemap(オプション)<br /><br />m.contour(lons, lats, d, tri=True, colors='blue', linestyles='-')</pre>tri=Trueオプションを使わないように書き換える（この場合には、緯度、経度の配列を2次元で与える）
+					</li>
+				</ul></li>
+		</ul>
+		<span style="COLOR:red">＊basemap1.2.0で不具合が解消された（2019/11/08）</span>
+	</div>
+	<br />
+	<br />
 
 <h2 class="headline-scroll" id="20190523">MacPorts更新後のBasemapエラー（2019/05/23）</h2>
-<div class="text1">
-2019年4月頃のpyprojの更新（バージョン2.1.3）の際、内部で使用されるprojのバージョンが5から6に更新され、同時にpyproj.pyproj_datadirが廃止されています。その影響で、MacPortsで更新（port upgrade outdated）を行うと、Basemapの読み込み時に以下のエラーが発生します。現時点ではエラー回避のコードがMacPortsから提供されていないため、更新は推奨されません。
-<pre>
-Traceback (most recent call last):
-&nbsp; File "ファイル名", line 9, in &lt;module&gt;
-&nbsp; from mpl_toolkits.basemap import Basemap
-&nbsp; File "/opt/local/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mpl_toolkits/basemap/__init__.py", line 152, in &lt;module&gt;
-&nbsp; epsgf = open(os.path.join(pyproj.pyproj_datadir,'epsg'))
-AttributeError: module 'pyproj' has no attribute 'pyproj_datadir'
-</pre>
-<ul class="list1">
-<li>問題点
-<ol class="list2">
-<li>コードの問題点（Basemapのコード未更新に伴うもの）：</li>
-pyproj.pyproj_datadirでディレクトリのパスが取得できない（/opt/local/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mpl_toolkits/basemap/__init__.pyの152行目）
-<pre>epsgf = open(os.path.join(pyproj.pyproj_datadir,'epsg'))</pre>
-ディレクトリのパスはpyproj.pyproj_datadirではなく、pyproj.datadir.get_data_dir()で取得するようになったため
-<li>データの問題点（projのバージョン更新に伴うもの）：</li>
-pyproj.datadir.get_data_dir()で取得されるディレクトリは、/opt/local/lib/proj6/share/proj/になる。その場所にはepsgがないため、単にpyproj.pyproj_datadirの代わりにpyproj.datadir.get_data_dir() と書き換えても、ファイル読み込みでエラーが発生する。<br />
-現時点では、proj5の/opt/local/lib/proj5/share/proj/epsgを利用するしかない
-</ol></li>
-<br />
-<li>既にMacPortsの更新を適用してしまった場合の解決策
-<ul class="list2">
-<li>Basemapコードを変更し、proj5のepsgを使う</li>
-<p>% cd /opt/local/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mpl_toolkits/basemap</p>
-<p>% sudo vi __init__.py</p>
-<pre>
-# epsgf = open(os.path.join(pyproj.pyproj_datadir,'epsg')) # 152行目（元のコード）
-# エラー回避のため、proj5のepsgファイルを読み込み
-pyproj_datadir = "/opt/local/lib/proj5/share/proj/"
-epsgf = open(os.path.join(pyproj_datadir,'epsg'))
-</pre>
-</ul></li>
-</ul>
-<span style="COLOR:red">＊basemap1.2.0で不具合が解消された（2019/11/08）</span>
-</div>
-<br />
-<br />
+	<div class="text1">
+		2019年4月頃のpyprojの更新（バージョン2.1.3）の際、内部で使用されるprojのバージョンが5から6に更新され、同時にpyproj.pyproj_datadirが廃止されています。その影響で、MacPortsで更新（port upgrade outdated）を行うと、Basemapの読み込み時に以下のエラーが発生します。現時点ではエラー回避のコードがMacPortsから提供されていないため、更新は推奨されません。
+		<pre>Traceback (most recent call last):<br />&nbsp; File "ファイル名", line 9, in &lt;module&gt;<br />&nbsp; from mpl_toolkits.basemap import Basemap<br />&nbsp; File "/opt/local/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mpl_toolkits/basemap/__init__.py", line 152, in &lt;module&gt;<br />&nbsp; epsgf = open(os.path.join(pyproj.pyproj_datadir,'epsg'))<br />AttributeError: module 'pyproj' has no attribute 'pyproj_datadir'</pre>
+		<ul class="list1">
+			<li>問題点
+				<ol class="list2">
+					<li>コードの問題点（Basemapのコード未更新に伴うもの）：</li>
+					pyproj.pyproj_datadirでディレクトリのパスが取得できない（/opt/local/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mpl_toolkits/basemap/__init__.pyの152行目）
+					<pre>epsgf = open(os.path.join(pyproj.pyproj_datadir,'epsg'))</pre>
+					ディレクトリのパスはpyproj.pyproj_datadirではなく、pyproj.datadir.get_data_dir()で取得するようになったため
+					<li>データの問題点（projのバージョン更新に伴うもの）：</li>
+					pyproj.datadir.get_data_dir()で取得されるディレクトリは、/opt/local/lib/proj6/share/proj/になる。その場所にはepsgがないため、単にpyproj.pyproj_datadirの代わりにpyproj.datadir.get_data_dir() と書き換えても、ファイル読み込みでエラーが発生する。<br />現時点では、proj5の/opt/local/lib/proj5/share/proj/epsgを利用するしかない
+				</ol></li>
+			<br />
+			<li>既にMacPortsの更新を適用してしまった場合の解決策
+				<ul class="list2">
+					<li>Basemapコードを変更し、proj5のepsgを使う</li>
+					<p>% cd /opt/local/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mpl_toolkits/basemap</p>
+					<p>% sudo vi __init__.py</p>
+					<pre># epsgf = open(os.path.join(pyproj.pyproj_datadir,'epsg')) # 152行目（元のコード）<br /># エラー回避のため、proj5のepsgファイルを読み込み<br />pyproj_datadir = "/opt/local/lib/proj5/share/proj/"<br />epsgf = open(os.path.join(pyproj_datadir,'epsg'))</pre>
+				</ul></li>
+		</ul>
+		<span style="COLOR:red">＊basemap1.2.0で不具合が解消された（2019/11/08）</span>
+	</div>
+	<br />
+	<br />
 
 <h2 class="headline-scroll" id="20181218">Basemapでimportエラー（2018/12/18）</h2>
-<div class="text1">
-MacPortを使い2018/10/18現在のmatplotlib最新版（3.0.0）に更新した場合、basemap-1.1.0でmatplotlib.cbook内のis_scalarをimportできない不具合が発生します。<br />
-この更新でmatplotlib.cbook内のis_scalarがis_scalar_or_stringに変更されました。一方で、basemap（ver. 1.1.0）の方ではimportする設定が変更されていない不一致があります。バグfixが出るまでは、以下のようにコードを修正することで対応可能です。<br />
-<p>ファイル：/opt/local/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mpl_toolkits/basemap/__init__.py</p><br />
-<pre>
-17行目<br />
-# from matplotlib.cbook <span style="COLOR:red">import is_scalar</span>, dedent <br />
-from matplotlib.cbook <span style="COLOR:red">import is_scalar_or_string</span>, dedent<br />
-4987行目<br />
-# elif masked and <span style="COLOR:red">is_scalar(masked)</span>:<br />
-elif masked and <span style="COLOR:red">is_scalar_or_string(masked)</span>:<br />
-</pre>
-＊<span style="COLOR:red">basemap1.2.0で不具合が修正された（2019/11/08）</span>
-</div>
-<br />
-<br />
+	<div class="text1">
+		MacPortを使い2018/10/18現在のmatplotlib最新版（3.0.0）に更新した場合、basemap-1.1.0でmatplotlib.cbook内のis_scalarをimportできない不具合が発生します。<br />この更新でmatplotlib.cbook内のis_scalarがis_scalar_or_stringに変更されました。一方で、basemap（ver. 1.1.0）の方ではimportする設定が変更されていない不一致があります。バグfixが出るまでは、以下のようにコードを修正することで対応可能です。<br />
+		<p>ファイル：/opt/local/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/mpl_toolkits/basemap/__init__.py</p><br />
+		<pre>17行目<br /># from matplotlib.cbook <span style="COLOR:red">import is_scalar</span>, dedent <br />from matplotlib.cbook <span style="COLOR:red">import is_scalar_or_string</span>, dedent<br /><br />4987行目<br /># elif masked and <span style="COLOR:red">is_scalar(masked)</span>:<br />elif masked and <span style="COLOR:red">is_scalar_or_string(masked)</span>:<br /></pre>
+		＊<span style="COLOR:red">basemap1.2.0で不具合が修正された（2019/11/08）</span>
+	</div>
+	<br />
+	<br />
 
 <br />
 <br />
@@ -371,7 +336,7 @@ elif masked and <span style="COLOR:red">is_scalar_or_string(masked)</span>:<br /
 </article>
 </body>
 <footer>
-<p>最終更新日：2025/05/05</p>
+<p>最終更新日：2025/05/07</p>
 <p>Copyright (C) 2018-2025, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
