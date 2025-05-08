@@ -128,80 +128,49 @@
 	<br />
 
 <h2 class="headline-scroll" id="20200725">Basemapをインポートできない不具合の解決方法（2020/07/25）</h2>
-<div class="text1">
-2020年7月20日頃のアップデートに伴い、MacPortsでインストールされるmatplotlibがバージョン3.2.2から3.3.0になりました。それに伴いmatplotlib.cbookではdedent関数が削除されました。
-他方、Basemapはバージョン1.2.1のまま更新されないので、mpl_toolkits.basemapをインポートしようとした際に、存在しないdedent関数を呼び出そうとしてエラーが発生します。このエラーはBasemap使用時に不可避な部分で発生しており、<span style="COLOR:red">既にアップデートが適用されてしまった場合には、修正を行わないとBasemapが使用できません</span>。<br />
-以下は、pythonバージョン3.8の場合に出力されるエラーの内容です。バージョン3.6や3.7でも同様のエラーが発生します。
-<pre>
-File"/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/mpl_toolkits/basemap/__init__.py", line 50, in &lt;module&gt;
-from .proj import Proj
-File"/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/mpl_toolkits/basemap/proj.py", line 6, in &lt;module&gt;
-from matplotlib.cbook import dedent
-ImportError: cannot import name 'dedent' from 'matplotlib.cbook' (/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/matplotlib/cbook/__init__.py)
-</pre>
-<ul class="list1">
-<li>解決法１：Basemap1.2.1のコードを修正<br />
-（MacPortsで導入したpython3.8の場合、/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/mpl_toolkits/basemap/proj.py）の6行目
-<pre>from matplotlib.cbook import dedent</pre>
-を以下のように修正します。パスの3.7の部分はpythonのバージョンによって異なり、バージョン3.6.xなら3.6、バージョン3.7.xなら3.7です。
-<pre>
-try:
-&nbsp; &nbsp; from inspect import cleandoc as dedent
-except ImportError:
-&nbsp; &nbsp; from matplotlib.cbook import dedent
-</pre></li><br />
-<li>解決法２：matplotlibをバージョン3.3.0から3.2.2に戻す<br />
-現在インストールされているバージョンを表示（python3.6ならpy36-matplotlib、3.7ならpy37-matplotlibに変える）
-<pre>
-% port installed py38-matplotlib
-The following ports are currently installed:
-py38-matplotlib @3.2.2_0+cairo+webagg
-py38-matplotlib @3.3.0_1+cairo+webagg (active)
-</pre>
-次のようにバージョン3.3.0を deactivateして、バージョン3.2.2をactivateする。
-<pre>
-% sudo port deactivate py38-matplotlib @3.3.0_1+cairo+webagg
-% sudo port activate py38-matplotlib @3.2.2_0+cairo+webagg
-% port installed py38-matplotlib
-The following ports are currently installed:
-py38-matplotlib @3.2.2_0+cairo+webagg (active)
-py38-matplotlib @3.3.0_1+cairo+webagg
-</pre>
-</li></ul>
-<span style="COLOR:red">＊Basemapバージョン1.2.2で修正されました</span>
-</div>
-<br />
-<br />
+	<div class="text1">
+		2020年7月20日頃のアップデートに伴い、MacPortsでインストールされるmatplotlibがバージョン3.2.2から3.3.0になりました。それに伴いmatplotlib.cbookではdedent関数が削除されました。他方、Basemapはバージョン1.2.1のまま更新されないので、mpl_toolkits.basemapをインポートしようとした際に、存在しないdedent関数を呼び出そうとしてエラーが発生します。このエラーはBasemap使用時に不可避な部分で発生しており、<span style="COLOR:red">既にアップデートが適用されてしまった場合には、修正を行わないとBasemapが使用できません</span>。<br />
+		以下は、pythonバージョン3.8の場合に出力されるエラーの内容です。バージョン3.6や3.7でも同様のエラーが発生します。
+		<pre>File"/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/mpl_toolkits/basemap/__init__.py", line 50, in &lt;module&gt;<br />from .proj import Proj<br />File"/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/mpl_toolkits/basemap/proj.py", line 6, in &lt;module&gt;<br />from matplotlib.cbook import dedent<br />ImportError: cannot import name 'dedent' from 'matplotlib.cbook' <br />(/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/matplotlib/cbook/__init__.py)<br /></pre>
+		<ul class="list1">
+			<li>解決法１：Basemap1.2.1のコードを修正<br />
+				（MacPortsで導入したpython3.8の場合、/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/mpl_toolkits/basemap/proj.py）の6行目
+				<pre>from matplotlib.cbook import dedent</pre>
+				を以下のように修正します。パスの3.7の部分はpythonのバージョンによって異なり、バージョン3.6.xなら3.6、バージョン3.7.xなら3.7です。
+				<pre>try:<br />&nbsp; &nbsp; from inspect import cleandoc as dedent<br />except ImportError:<br />&nbsp; &nbsp; from matplotlib.cbook import dedent<br /></pre></li><br />
+			<li>解決法２：matplotlibをバージョン3.3.0から3.2.2に戻す<br />
+				現在インストールされているバージョンを表示（python3.6ならpy36-matplotlib、3.7ならpy37-matplotlibに変える）
+				<pre>% port installed py38-matplotlib<br />The following ports are currently installed:<br />py38-matplotlib @3.2.2_0+cairo+webagg<br />py38-matplotlib @3.3.0_1+cairo+webagg (active)</pre>
+				次のようにバージョン3.3.0を deactivateして、バージョン3.2.2をactivateする。
+				<pre>% sudo port deactivate py38-matplotlib @3.3.0_1+cairo+webagg<br />% sudo port activate py38-matplotlib @3.2.2_0+cairo+webagg<br />% port installed py38-matplotlib<br />The following ports are currently installed:<br />py38-matplotlib @3.2.2_0+cairo+webagg (active)<br />py38-matplotlib @3.3.0_1+cairo+webagg</pre>
+			</li></ul>
+		<span style="COLOR:red">＊Basemapバージョン1.2.2で修正されました</span>
+	</div>
+	<br />
+	<br />
 
 <h2 class="headline-scroll" id="20200205">Pandas1.0.0のDataFrameで.ix廃止（2020/02/05）</h2>
-<div class="text1">
-2020年2月最初のMacPortsで導入されるpandas-1.0.0では、以前のバージョン0.7.3までwarningが出るものの使用できたDataFrameの.ixが廃止されました。 <br />
-それに伴い、pythonで.ixを使うプログラムを実行すると、次のようなエラーが発生します。
-<pre>
-"/opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/pandas/core/generic.py", line 5273, in __getattr__
-&nbsp; return object.__getattribute__(self, name)
-AttributeError: 'DataFrame' object has no attribute 'ix'
-</pre>
-<br />
-＊DataFrameで.ixを利用している場合、<a href="matplotlib.html#matplotlib_2_3">スクリプト実行時のWarning表示を消す</a>に記載された方法で、.locか.ilocに変更する必要があります。<br />
-サンプルプログラムやドキュメントの該当箇所の更新は、しばらくお待ちください。<br />
-<br />
-<span style="COLOR:red">＊2020/02/23版のサンプルプログラムで対応しました</span>
-</div>
-<br />
-<br />
+	<div class="text1">
+		2020年2月最初のMacPortsで導入されるpandas-1.0.0では、以前のバージョン0.7.3までwarningが出るものの使用できたDataFrameの.ixが廃止されました。 <br />
+		それに伴い、pythonで.ixを使うプログラムを実行すると、次のようなエラーが発生します。
+		<pre>"/opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/pandas/core/generic.py", line 5273, in __getattr__<br />&nbsp; return object.__getattribute__(self, name)<br />AttributeError: 'DataFrame' object has no attribute 'ix'</pre>
+		<br />
+		＊DataFrameで.ixを利用している場合、<a href="matplotlib.html#matplotlib_2_3">スクリプト実行時のWarning表示を消す</a>に記載された方法で、.locか.ilocに変更する必要があります。<br />
+		サンプルプログラムやドキュメントの該当箇所の更新は、しばらくお待ちください。<br /><br />
+		<span style="COLOR:red">＊2020/02/23版のサンプルプログラムで対応しました</span>
+	</div>
+	<br />
+	<br />
 
 <h2 class="headline-scroll" id="20200201"><small>解決法：正射投影図法で北緯45度より北側を中心にした場合（2020/02/01）</small></h2>
-<div class="text1">
-<a href="#20191212">2019年12月10日頃から発生している正射投影図法で北緯45度より北側を中心にした場合の不具合</a>について、<a href="https://github.com/matplotlib/basemap/issues/484">GitHub</a>に修正方法が記載されたことを、NOAAの方に教えて頂きました。<br />
-Basemap1.2.1のコード（MacPortsで導入したpython3.8の場合、/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/mpl_toolkits/basemap/__init__.py）について、1428行目と1429行目の間に次の１行を挿入する修正を行います。パスの3.7の部分はpythonのバージョンによって異なり、バージョン3.6.xなら3.6、バージョン3.7.xなら3.7です。
-<pre>
-b = np.where(np.isposinf(np.where(np.isneginf(b),-1.e20,b)),1.e20,b)
-</pre>
-<span style="COLOR:red">＊Basemapバージョン1.2.2で修正されました</span>
-</div>
-<br />
-<br />
+	<div class="text1">
+		<a href="#20191212">2019年12月10日頃から発生している正射投影図法で北緯45度より北側を中心にした場合の不具合</a>について、<a href="https://github.com/matplotlib/basemap/issues/484">GitHub</a>に修正方法が記載されたことを、NOAAの方に教えて頂きました。<br />
+		Basemap1.2.1のコード（MacPortsで導入したpython3.8の場合、/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/mpl_toolkits/basemap/__init__.py）について、1428行目と1429行目の間に次の１行を挿入する修正を行います。パスの3.7の部分はpythonのバージョンによって異なり、バージョン3.6.xなら3.6、バージョン3.7.xなら3.7です。
+		<pre>b = np.where(np.isposinf(np.where(np.isneginf(b),-1.e20,b)),1.e20,b)</pre>
+		<span style="COLOR:red">＊Basemapバージョン1.2.2で修正されました</span>
+	</div>
+	<br />
+	<br />
 
 <h2 class="headline-scroll" id="20191212">正射投影図法で北緯45度より北側を中心にした場合（2019/12/12）</h2>
 <div class="text1">
