@@ -173,71 +173,48 @@
 	<br />
 
 <h2 class="headline-scroll" id="20191212">正射投影図法で北緯45度より北側を中心にした場合（2019/12/12）</h2>
-<div class="text1">
-2019年12月10日頃から、Basemapの正射投影図法で作図を行う際に、中心の緯度（lon_0）を北緯45度より北側に指定すると、次のようなエラーでpythonが落ちるようになっています。なお、テストした際のGEOSはバージョン3.8.0、Basemapは1.2.1です（MacPorsで導入される最新版）。
-<pre>
-GEOS_ERROR: b'IllegalArgumentException: CGAlgorithmsDD::orientationIndex encountered NaN/Inf numbers'
-Segmentation fault: 11
-</pre>
-現在のところ、lon_0の範囲を-90から45までにするしか回避方法はありません。<br />
-<br />
-<span style="COLOR:red">＊Basemapバージョン1.2.2で修正されました</span>
-</div>
-<br />
-<br />
+	<div class="text1">
+		2019年12月10日頃から、Basemapの正射投影図法で作図を行う際に、中心の緯度（lon_0）を北緯45度より北側に指定すると、次のようなエラーでpythonが落ちるようになっています。なお、テストした際のGEOSはバージョン3.8.0、Basemapは1.2.1です（MacPorsで導入される最新版）。
+		<pre>GEOS_ERROR: b'IllegalArgumentException: CGAlgorithmsDD::orientationIndex encountered NaN/Inf numbers'<br />Segmentation fault: 11</pre>
+		現在のところ、lon_0の範囲を-90から45までにするしか回避方法はありません。<br /><br />
+		<span style="COLOR:red">＊Basemapバージョン1.2.2で修正されました</span>
+	</div>
+	<br />
+	<br />
 
 <h2 class="headline-scroll" id="20191108">Basemap1.2.1で一連の不具合解消（2019/11/08）</h2>
-<div class="text1">
-2019年10月から11月始め頃のMacPorts更新の際に適用されるBasemapのバージョンが、1.2.0から1.2.1へ更新されました。それにより、Basemapで発生していた以下の不具合が解消されています。<br />
-<a href="#20190523">2019年4月頃から発生しているepsgファイル読み込みの不具合</a><br />
-<a href="#20190822">2019年8月頃から発生しているtriオプションの問題</a><br>
-現時点の最新版であるmatplotlibバージョン3.1.0＋Basemap1.2.1への更新を推奨します。<br />
-python3.6では、py36-matplotlib、py36-matplotlib-basemapのパッケージ名、python3.7では、py37-matplotlib、py37-matplotlib-basemapのパッケージ名です。
-</div>
-<br />
-<br />
+	<div class="text1">
+		2019年10月から11月始め頃のMacPorts更新の際に適用されるBasemapのバージョンが、1.2.0から1.2.1へ更新されました。それにより、Basemapで発生していた以下の不具合が解消されています。<br />
+		<a href="#20190523">2019年4月頃から発生しているepsgファイル読み込みの不具合</a><br />
+		<a href="#20190822">2019年8月頃から発生しているtriオプションの問題</a><br>
+		現時点の最新版であるmatplotlibバージョン3.1.0＋Basemap1.2.1への更新を推奨します。<br />
+		python3.6では、py36-matplotlib、py36-matplotlib-basemapのパッケージ名、python3.7では、py37-matplotlib、py37-matplotlib-basemapのパッケージ名です。
+	</div>
+	<br />
+	<br />
 
 <h2 class="headline-scroll" id="20190830">ログプロットの不具合がmatplotlib3.1.1で解消（2019/08/30）</h2>
-<div class="text1">
-2019年5月末から6月始め頃のmatplotlibの更新後（バージョン3.1.0）、y軸をログスケールに取りy軸の値を逆転させた場合（例えば、10 hPaを上端、1000 hPaを下端に取る場合）、正しく設定を行なってもy軸の値が逆転しない（10 hPaが下、1000 hPaが上のまま）という問題が発生していました。なお、ログスケールに設定しない場合には問題は発生していません。この問題は、2019年8月末のmatplotlib-3.1.1への更新時に解消されました。バージョン3.1.0で不具合が発生している場合には、バージョン3.1.1へ更新してください。<br />
-なおMacPortsによる自動更新（port upgrade outdated）を行った場合には、<a href="#20190523">2019年4月頃から発生しているbasemapの問題</a>や<a href="#20190822">Basemapでtriオプション使用不可となる問題</a>が引き続き発生するため、自動更新は推奨されません。
-
-<ul class="list1">
-<li>バージョン3.1.0における不具合：以下の設定を行なってもy軸の値が逆転しない
-<ul class="list2">
-<li>例１：ax.invert_yaxis()を使う
-<pre>
-ax.plot(data_x, pres, color='k')
-ax.set_yscale("log")
-ax.invert_yaxis()
-ax.set_ylim([10, 1000])
-</pre>
-data_x：x軸のデータ、pres：y軸の気圧データ(hPa)
-</li><br />
-<li>例２：plt.gca().invert_yaxis()を使う
-<pre>
-ax.plot(data_x, pres, color='k')
-ax.set_yscale("log")
-plt.gca().invert_yaxis()
-ax.set_ylim([10, 1000])
-</pre></li>
-<li>例３：set_ylimで下端（1000 hPa）を先、上端（10 hPa）を後に書く
-<pre>
-ax.plot(data_x, pres, color='k')
-ax.set_yscale("log")
-ax.set_ylim([1000, 10])
-</pre></li>
-<li>例４：ax.set_ylimで上端と下端を逆転させた値を設定
-<pre>
-ax.plot(data_x, pres, color='k')
-ax.set_ylim(ax.get_ylim()[::-1])
-</pre></li>
-</ul>
-</li>
-</ul>
-</div>
-<br />
-<br />
+	<div class="text1">
+		2019年5月末から6月始め頃のmatplotlibの更新後（バージョン3.1.0）、y軸をログスケールに取りy軸の値を逆転させた場合（例えば、10 hPaを上端、1000 hPaを下端に取る場合）、正しく設定を行なってもy軸の値が逆転しない（10 hPaが下、1000 hPaが上のまま）という問題が発生していました。なお、ログスケールに設定しない場合には問題は発生していません。この問題は、2019年8月末のmatplotlib-3.1.1への更新時に解消されました。バージョン3.1.0で不具合が発生している場合には、バージョン3.1.1へ更新してください。<br />なおMacPortsによる自動更新（port upgrade outdated）を行った場合には、<a href="#20190523">2019年4月頃から発生しているbasemapの問題</a>や<a href="#20190822">Basemapでtriオプション使用不可となる問題</a>が引き続き発生するため、自動更新は推奨されません。
+		<ul class="list1">
+			<li>バージョン3.1.0における不具合：以下の設定を行なってもy軸の値が逆転しない
+				<ul class="list2">
+					<li>例１：ax.invert_yaxis()を使う
+						<pre>ax.plot(data_x, pres, color='k')<br />ax.set_yscale("log")<br />ax.invert_yaxis()<br />ax.set_ylim([10, 1000])</pre>
+						data_x：x軸のデータ、pres：y軸の気圧データ(hPa)
+					</li><br />
+					<li>例２：plt.gca().invert_yaxis()を使う
+						<pre>ax.plot(data_x, pres, color='k')<br />ax.set_yscale("log")<br />plt.gca().invert_yaxis()<br />ax.set_ylim([10, 1000])</pre></li>
+					<li>例３：set_ylimで下端（1000 hPa）を先、上端（10 hPa）を後に書く
+						<pre>ax.plot(data_x, pres, color='k')<br />ax.set_yscale("log")<br />ax.set_ylim([1000, 10])</pre></li>
+					<li>例４：ax.set_ylimで上端と下端を逆転させた値を設定
+						<pre>ax.plot(data_x, pres, color='k')<br />ax.set_ylim(ax.get_ylim()[::-1])</pre></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<br />
+	<br />
 
 <h2 class="headline-scroll" id="20190822"><small>MacPorts更新後のBasemapでtriオプション使用不可（2019/08/22）</small></h2>
 	<div class="text1">
@@ -305,7 +282,7 @@ ax.set_ylim(ax.get_ylim()[::-1])
 </article>
 </body>
 <footer>
-<p>最終更新日：2025/05/07</p>
+<p>最終更新日：2025/05/09</p>
 <p>Copyright (C) 2018-2025, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
