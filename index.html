@@ -45,149 +45,143 @@
 </head>
 
 <body>
-<div id="link">
-<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-url="https://yyousuke.github.io/matplotlib/index.html" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v12.0&appId=902607720378666&autoLogAppEvents=1" nonce="nRLaOQCh"></script>
-<div class="fb-share-button" data-href="https://yyousuke.github.io/matplotlib/index.html" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fyyousuke.github.io%2Fmatplotlib%2Findex.html&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">シェア</a></div>
-</div>
-<div id="nesting">
-<a href="/">ホーム</a> &gt; matplotlibの使い方
-</div>
-<article>
-<h1 id="top"><img src="images/header.png" class="size3" alt="気象データ解析のためのmatplotlibの使い方"></h1>
-	<br />
-	
-	<div id="text2">
-		<p>&nbsp; 近年、python上でデータを可視化するためのmatplotlibが普及してきていますが、地図上へのプロットなど、気象分野に必要な情報をまとめたものがほとんどなかったため、このようなページを作成しました。ここでは、pythonやmatplotlibを使ったことがない段階のチュートリアルから始め、matplotlibを使って実際の気象データを使った作図を行うところまで段階的に解説しています。また、matplotlibを使う際のTIPSなども公開しています。このページの情報で、気象分野におけるmatplotlibの普及や効率的な利用が進めば幸いです。</p>
-		<p>作成者：山下陽介（国立環境研究所）</p>
+	<div id="link">
+		<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-url="https://yyousuke.github.io/matplotlib/index.html" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+		<div id="fb-root"></div>
+		<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v12.0&appId=902607720378666&autoLogAppEvents=1" nonce="nRLaOQCh"></script>
+		<div class="fb-share-button" data-href="https://yyousuke.github.io/matplotlib/index.html" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fyyousuke.github.io%2Fmatplotlib%2Findex.html&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">シェア</a></div>
 	</div>
-	<br />
-	<hr />
-
-<h2 id="contents">目次</h2>
-	<div class="contents">
-		<ul class="list1">
-			<li><a href="#matplotlib">気象データ解析のためのmatplotlibの使い方</a></li>
-			<li><a href="#tips">matplotlibのTIPS</a></li>
-			<li><a href="#tutorial">チュートリアル・解説</a></li>
-			<li><a href="#extras">番外編</a></li>
-			<li><a href="#info">更新・エラー情報</a></li>
-		</ul>
+	<div id="nesting">
+		<a href="/">ホーム</a> &gt; matplotlibの使い方
 	</div>
+	<article>
+		<h1 id="top"><img src="images/header.png" class="size3" alt="気象データ解析のためのmatplotlibの使い方"></h1>
+		<br />
+		<div id="text2">
+			<p>&nbsp; 近年、python上でデータを可視化するためのmatplotlibが普及してきていますが、地図上へのプロットなど、気象分野に必要な情報をまとめたものがほとんどなかったため、このようなページを作成しました。ここでは、pythonやmatplotlibを使ったことがない段階のチュートリアルから始め、matplotlibを使って実際の気象データを使った作図を行うところまで段階的に解説しています。また、matplotlibを使う際のTIPSなども公開しています。このページの情報で、気象分野におけるmatplotlibの普及や効率的な利用が進めば幸いです。</p>
+			<p>作成者：山下陽介（国立環境研究所）</p>
+		</div>
+		<br />
+		<hr />
+		<h2 id="contents">目次</h2>
+		<div class="contents">
+			<ul class="list1">
+				<li><a href="#matplotlib">気象データ解析のためのmatplotlibの使い方</a></li>
+				<li><a href="#tips">matplotlibのTIPS</a></li>
+				<li><a href="#tutorial">チュートリアル・解説</a></li>
+				<li><a href="#extras">番外編</a></li>
+				<li><a href="#info">更新・エラー情報</a></li>
+			</ul>
+		</div>
 
-<small><a href="#top">[top]</a></small> <br />
-<br />
-<hr width="105%" />
-<br />
-
-<h3><div class="headline2" id="matplotlib">気象データ解析のためのmatplotlibの使い方</div></h3>
-	<div class="contents">
+		<small><a href="#top">[top]</a></small> <br /><br />
+		<hr width="105%" /><br />
+		
+		<h3><div class="headline2" id="matplotlib">気象データ解析のためのmatplotlibの使い方</div></h3>
+		<div class="contents">
 		<p>（2024年12月8日版）</p>
-		<ul class="list1">
-			<li><a href="./matplotlib-1.pdf" target="_blank">1章　はじめに</a>（PDFファイル）</li>
-			<li><a href="./matplotlib-2.pdf" target="_blank">2章　matplotlibの導入</a>（PDFファイル）</li>
-			<li><a href="./matplotlib-3.pdf" target="_blank">3章　matplotlibの基本</a>（PDFファイル）</li>
-			<li><a href="./matplotlib-4.pdf" target="_blank">4章　折れ線グラフ、棒グラフ、ヒストグラム、散布図</a>（PDFファイル）</li>
-			<li><a href="./matplotlib-5.pdf" target="_blank">5章　様々な1次元・2次元プロット</a>（PDFファイル）</li>
-			<li><a href="./matplotlib-6.pdf " target="_blank">6章　Basemapの利用</a>（PDFファイル）</li>
-			<li><a href="./matplotlib-7.pdf " target="_blank">7章　cartopyの利用</a>（PDFファイル）</li>
-			<li><a href="./met_sample.zip" target="_blank">サンプルプログラム</a>（ZIPファイル）</li>
-		</ul>
-		<p><small>MIT Licenseで公開していますので、著作権表示および<a href="https://github.com/yyousuke/matplotlib/blob/main/LICENSE ">本許諾表示</a>を、ソフトウェアのすべての複製または重要な部分に記載することで、自由に使用、改変、配布等することができます。上記の解説はサンプルプログラムのソフトウェアに付随するものです。授業等で使用する場合にも、MIT Licenseに従えば、改変したものなどを自由に配布して問題ありません。</small></p>
-	</div>
-	<br />
-
-<h3><div class="headline2" id="tips">matplotlibのTIPS</div></h3>
-	<div class="contents">
-		<ul class="list1">
-			<li><a href="./matplotlib.html">グラフ作図のTIPS</a></li>
-			<li><a href="./basemap.html">BasemapのTIPS</a></li>
-			<li><a href="./cartopy.html">cartopyのTIPS</a></li>
-			<li><a href="./metdata.html">気象データ処理のTIPS</a></li>
-			<li><a href="./python.html">PythonのTIPS</a></li>
-		</ul>
-	</div>
-	<br />
-
-<h3><div class="headline2" id="tutorial">チュートリアル・解説</div></h3>
-	<div class="contents">
-		<ul class="list1">
-			<li><a href="./matplotlib-tutorial.html">matplotlibのチュートリアル</a></li>
-			<li><a href="./matplotlib-install.html">matplotlibのインストール</a>（Linux編）</li>
-		</ul>
-	</div>
-	<br />
-
-<h3><div class="headline2" id="extras">番外編</div></h3>
-	<div class="contents">
-		<ul class="list1">
-			<li><a href="./wpr-colab.html">ウィンドプロファイラ作図</a></li>
-			<li><a href="./gpv-convert.html">気象庁GPVデータの変換</a></li>
-		</ul>
-	</div>
-	<br />
-
-<h3><div class="headline2" id="info">更新・エラー情報</div></h3>
-	<div class="contents">
-		<ul class="list1">
-			<li>Jupyter Notebookを使った方法に書き換えました（2024/12/08）</li>
-			<li>macOS Sonoma用にドキュメントを更新しました（2024/12/08）</li>
-			<li>python3.12を利用できるようにドキュメントを更新しました（2024/05/05）</li>
-			<li><a href="./matplotlib-install.html">Linux/Windowsでpython3.12を導入する手順に更新しました</a>（2024/05/05）</li>
-			<li><a href="./info.html#20240401">MacPortsでのXZ Utilsについて</a>（2024/04/01）</li>
-			<li>macOS Sonoma用にドキュメントを更新しました（2023/12/15）</li>
-			<li><a href="./info.html#20230604">cartopyでのlgeosインポートエラー</a>（2023/06/04）</li>
-			<li><a href="./matplotlib-install.html">Linuxでpython3.11を導入する手順を追加しました</a>（2023/05/04）</li>
-			<li>python3.11でサンプルプログラムが動作するようにインストール手順を更新しました（2023/04/30）</li>
-			<li><a href="./info.html#20230409">matplotlibのimportエラー</a>（2023/04/09）</li>
-			<li>cartopyバージョン0.21での変更点を反映しました（2023/01/02）</li>
-			<li>陰影でカラーバーを扱う方法について追記しました（2023/01/02）</li>
-			<li>cartopyで矢印の凡例を表示する方法について追記しました（2022/11/05）</li>
-			<li><a href="./matplotlib-install.html">Linuxでのインストール手順を追加しました</a>（2022/07/31）</li>
-			<li>cartopyバージョン0.20での変更点、図表の更新などを反映しました（2022/07/31）</li>
-			<li>macOS Monterey用にドキュメントを更新しました（2022/03/13）</li>
-			<li>cartopyのサンプルプログラムとドキュメントを更新しました（2021/12/15）</li>
-			<li>python3.9でのサンプルプログラム動作確認を終え、<a href="met_sample.zip" target="_blank">修正版のサンプルプログラム</a>を公開しました（2021/11/21）</li>
-			<li><a href="./info.html#2021903">cartopyの地図データ取得時の不具合解消</a>（2021/09/03）</li>
-			<li><a href="./matplotlib-7.pdf" target="_blank">「7章　cartopyの利用」</a>をバージョン0.18以降向けとし、0.17用を統合（2021/07/31）</li>
-			<li>cartopy0.18、0.19で<a href="met_sample.zip" target="_blank">サンプルプログラム</a>の動作確認（2020/07/31）</li>
-			<li>cartopyバージョン0.18用のドキュメントとサンプルプログラム廃止（2020/07/31）</li>
-			<li><a href="./info.html#20210731">Basemapで南極大陸を描く際の不具合について</a>（2021/07/31）</li>
-			<li>GitHubで暫定的にweb公開を再開しました（2021/05/13）</li>
-			<li><a href="./matplotlib-7_0.18.pdf" target="_blank">「7章　cartopyの利用（バージョン0.18対応）」</a>を追加しました（2021/05/02）</li>
-			<li><a href="./info.html#20210224">気象庁HP更新に伴うサンプルプログラムの動作確認について</a>（2021/02/24）</li>
-			<li><a href="./info.html#20201127">macOS Big Sur対応について</a>（2020/11/27）</li>
-			<li><a href="./matplotlib-tutorial.html">matplotlibのチュートリアル</a>を公開しました（2020/10/03）</li>
-			<li><a href="./info.html#20200725">Basemapをインポートできない不具合の解決方法</a>（2020/07/25）</li>
-			<li><a href="./matplotlib-2.pdf" target="_blank">「2章　matplotlibの導入」</a>をpython3.8用に書き換えました（2020/05/31）</li>
-			<li>cartopyのTIPSを追加しました（2020/03/20）</li>
-			<li><a href="./matplotlib-7.pdf" target="_blank">「7章　cartopyの利用」</a>の暫定版を公開しました（2020/02/23）</li>
-			<li>Pandas1.0.0以降に対応した修正版のサンプルプログラムを公開しました（2020/02/23）</li>
-			<li><a href="./info.html#20200205">Pandas1.0.0のDataFrameで.ix廃止（2020/02/05）</a></li>
-			<li><a href="./info.html#20200201">解決法：正射投影図法で北緯45度より北側を中心にした場合</a>（2020/02/01）</li>
-			<li><a href="./info.html#20191212">正射投影図法で北緯45度より北側を中心にした場合</a>（2019/12/12）</li>
-			<li><a href="./matplotlib-2.pdf" target="_blank">「2章　matplotlibの導入」</a>をMac OSX Catalina+python3.7用に書き換え（2019/12/10）</li>
-			<li>python3.7/3.6での動作確認を終えたサンプルプログラムに更新（2019/12/10）</li>
-			<li><a href="./info.html#20191108">Basemap1.2.1で一連の不具合解消</a>（2019/11/08）</li>
-			<li>気象データ処理のTIPSを追加しました（2019/09/22）</li>
-			<li><a href="./info.html#20190830">ログプロットの不具合がmatplotlib3.1.1で解消</a>（2019/08/30）</li>
-			<li><a href="./info.html#20190822">MacPorts更新後のBasemapでtriオプション使用不可</a>（2019/08/22）</li>
-			<li>BasemapのTIPSを追加しました（2019/06/16）</li>
-			<li><a href="./info.html#20190523">MacPorts更新後のBasemapエラー</a>（2019/05/23）</li>
-			<li><a href="./info.html#20181218">Basemapでimportエラー</a>（2018/12/18）</li>
-		</ul>
-	</div>
-	<br />
-
-
-<small><a href="#top">[top]</a></small> <br />
-<hr />
-
-</article>
-<footer>
-	<p>最終更新日：2025/05/11</p>
-	<p>Copyright (C) 2018-2025, Yousuke Yamashita, CC BY 4.0</p>
-</footer>
+			<ul class="list1">
+				<li><a href="./matplotlib-1.pdf" target="_blank">1章　はじめに</a>（PDFファイル）</li>
+				<li><a href="./matplotlib-2.pdf" target="_blank">2章　matplotlibの導入</a>（PDFファイル）</li>
+				<li><a href="./matplotlib-3.pdf" target="_blank">3章　matplotlibの基本</a>（PDFファイル）</li>
+				<li><a href="./matplotlib-4.pdf" target="_blank">4章　折れ線グラフ、棒グラフ、ヒストグラム、散布図</a>（PDFファイル）</li>
+				<li><a href="./matplotlib-5.pdf" target="_blank">5章　様々な1次元・2次元プロット</a>（PDFファイル）</li>
+				<li><a href="./matplotlib-6.pdf " target="_blank">6章　Basemapの利用</a>（PDFファイル）</li>
+				<li><a href="./matplotlib-7.pdf " target="_blank">7章　cartopyの利用</a>（PDFファイル）</li>
+				<li><a href="./met_sample.zip" target="_blank">サンプルプログラム</a>（ZIPファイル）</li>
+			</ul>
+			<p><small>MIT Licenseで公開していますので、著作権表示および<a href="https://github.com/yyousuke/matplotlib/blob/main/LICENSE ">本許諾表示</a>を、ソフトウェアのすべての複製または重要な部分に記載することで、自由に使用、改変、配布等することができます。上記の解説はサンプルプログラムのソフトウェアに付随するものです。授業等で使用する場合にも、MIT Licenseに従えば、改変したものなどを自由に配布して問題ありません。</small></p>
+		</div>
+		<br />
+		
+		<h3><div class="headline2" id="tips">matplotlibのTIPS</div></h3>
+		<div class="contents">
+			<ul class="list1">
+				<li><a href="./matplotlib.html">グラフ作図のTIPS</a></li>
+				<li><a href="./basemap.html">BasemapのTIPS</a></li>
+				<li><a href="./cartopy.html">cartopyのTIPS</a></li>
+				<li><a href="./metdata.html">気象データ処理のTIPS</a></li>
+				<li><a href="./python.html">PythonのTIPS</a></li>
+			</ul>
+		</div>
+		<br />
+		
+		<h3><div class="headline2" id="tutorial">チュートリアル・解説</div></h3>
+		<div class="contents">
+			<ul class="list1">
+				<li><a href="./matplotlib-tutorial.html">matplotlibのチュートリアル</a></li>
+				<li><a href="./matplotlib-install.html">matplotlibのインストール</a>（Linux編）</li>
+			</ul>
+		</div>
+		<br />
+		
+		<h3><div class="headline2" id="extras">番外編</div></h3>
+		<div class="contents">
+			<ul class="list1">
+				<li><a href="./wpr-colab.html">ウィンドプロファイラ作図</a></li>
+				<li><a href="./gpv-convert.html">気象庁GPVデータの変換</a></li>
+			</ul>
+		</div>
+		<br />
+		
+		<h3><div class="headline2" id="info">更新・エラー情報</div></h3>
+		<div class="contents">
+			<ul class="list1">
+				<li>Jupyter Notebookを使った方法に書き換えました（2024/12/08）</li>
+				<li>macOS Sonoma用にドキュメントを更新しました（2024/12/08）</li>
+				<li>python3.12を利用できるようにドキュメントを更新しました（2024/05/05）</li>
+				<li><a href="./matplotlib-install.html">Linux/Windowsでpython3.12を導入する手順に更新しました</a>（2024/05/05）</li>
+				<li><a href="./info.html#20240401">MacPortsでのXZ Utilsについて</a>（2024/04/01）</li>
+				<li>macOS Sonoma用にドキュメントを更新しました（2023/12/15）</li>
+				<li><a href="./info.html#20230604">cartopyでのlgeosインポートエラー</a>（2023/06/04）</li>
+				<li><a href="./matplotlib-install.html">Linuxでpython3.11を導入する手順を追加しました</a>（2023/05/04）</li>
+				<li>python3.11でサンプルプログラムが動作するようにインストール手順を更新しました（2023/04/30）</li>
+				<li><a href="./info.html#20230409">matplotlibのimportエラー</a>（2023/04/09）</li>
+				<li>cartopyバージョン0.21での変更点を反映しました（2023/01/02）</li>
+				<li>陰影でカラーバーを扱う方法について追記しました（2023/01/02）</li>
+				<li>cartopyで矢印の凡例を表示する方法について追記しました（2022/11/05）</li>
+				<li><a href="./matplotlib-install.html">Linuxでのインストール手順を追加しました</a>（2022/07/31）</li>
+				<li>cartopyバージョン0.20での変更点、図表の更新などを反映しました（2022/07/31）</li>
+				<li>macOS Monterey用にドキュメントを更新しました（2022/03/13）</li>
+				<li>cartopyのサンプルプログラムとドキュメントを更新しました（2021/12/15）</li>
+				<li>python3.9でのサンプルプログラム動作確認を終え、<a href="met_sample.zip" target="_blank">修正版のサンプルプログラム</a>を公開しました（2021/11/21）</li>
+				<li><a href="./info.html#2021903">cartopyの地図データ取得時の不具合解消</a>（2021/09/03）</li>
+				<li><a href="./matplotlib-7.pdf" target="_blank">「7章　cartopyの利用」</a>をバージョン0.18以降向けとし、0.17用を統合（2021/07/31）</li>
+				<li>cartopy0.18、0.19で<a href="met_sample.zip" target="_blank">サンプルプログラム</a>の動作確認（2020/07/31）</li>
+				<li>cartopyバージョン0.18用のドキュメントとサンプルプログラム廃止（2020/07/31）</li>
+				<li><a href="./info.html#20210731">Basemapで南極大陸を描く際の不具合について</a>（2021/07/31）</li>
+				<li>GitHubで暫定的にweb公開を再開しました（2021/05/13）</li>
+				<li><a href="./matplotlib-7_0.18.pdf" target="_blank">「7章　cartopyの利用（バージョン0.18対応）」</a>を追加しました（2021/05/02）</li>
+				<li><a href="./info.html#20210224">気象庁HP更新に伴うサンプルプログラムの動作確認について</a>（2021/02/24）</li>
+				<li><a href="./info.html#20201127">macOS Big Sur対応について</a>（2020/11/27）</li>
+				<li><a href="./matplotlib-tutorial.html">matplotlibのチュートリアル</a>を公開しました（2020/10/03）</li>
+				<li><a href="./info.html#20200725">Basemapをインポートできない不具合の解決方法</a>（2020/07/25）</li>
+				<li><a href="./matplotlib-2.pdf" target="_blank">「2章　matplotlibの導入」</a>をpython3.8用に書き換えました（2020/05/31）</li>
+				<li>cartopyのTIPSを追加しました（2020/03/20）</li>
+				<li><a href="./matplotlib-7.pdf" target="_blank">「7章　cartopyの利用」</a>の暫定版を公開しました（2020/02/23）</li>
+				<li>Pandas1.0.0以降に対応した修正版のサンプルプログラムを公開しました（2020/02/23）</li>
+				<li><a href="./info.html#20200205">Pandas1.0.0のDataFrameで.ix廃止（2020/02/05）</a></li>
+				<li><a href="./info.html#20200201">解決法：正射投影図法で北緯45度より北側を中心にした場合</a>（2020/02/01）</li>
+				<li><a href="./info.html#20191212">正射投影図法で北緯45度より北側を中心にした場合</a>（2019/12/12）</li>
+				<li><a href="./matplotlib-2.pdf" target="_blank">「2章　matplotlibの導入」</a>をMac OSX Catalina+python3.7用に書き換え（2019/12/10）</li>
+				<li>python3.7/3.6での動作確認を終えたサンプルプログラムに更新（2019/12/10）</li>
+				<li><a href="./info.html#20191108">Basemap1.2.1で一連の不具合解消</a>（2019/11/08）</li>
+				<li>気象データ処理のTIPSを追加しました（2019/09/22）</li>
+				<li><a href="./info.html#20190830">ログプロットの不具合がmatplotlib3.1.1で解消</a>（2019/08/30）</li>
+				<li><a href="./info.html#20190822">MacPorts更新後のBasemapでtriオプション使用不可</a>（2019/08/22）</li>
+				<li>BasemapのTIPSを追加しました（2019/06/16）</li>
+				<li><a href="./info.html#20190523">MacPorts更新後のBasemapエラー</a>（2019/05/23）</li>
+				<li><a href="./info.html#20181218">Basemapでimportエラー</a>（2018/12/18）</li>
+			</ul>
+		</div>
+		<br />
+		
+		<small><a href="#top">[top]</a></small> <br /><hr />
+	</article>
+	
+	<footer>
+		<p>最終更新日：2025/05/14</p>
+		<p>Copyright (C) 2018-2025, Yousuke Yamashita, CC BY 4.0</p>
+	</footer>
 </body>
 </html>
