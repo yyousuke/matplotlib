@@ -178,47 +178,39 @@
 <!-- CSVファイル -->
 <h3><div class="headline1" id="csv_1">CSVファイル</div></h3>
 <h4><div class="headline2" id="csv_1_1">CSVファイルの形式</div></h4>
-<div class="text1">
-CSV（Comma-Separated Values）は、カンマ区切りのテキストデータ
-<pre>
-時刻,項目1,項目2,項目3
-時刻1,データ1-1,データ1-2,データ1-3
-時刻2,データ2-1,データ2-2,データ2-3
-...
-</pre>
-＊<a href="#csv_1_4">ヘッダがない場合</a>を扱うことも可能
-</div>
+	<div class="text1">
+		CSV（Comma-Separated Values）は、カンマ区切りのテキストデータ
+		<pre>時刻,項目1,項目2,項目3<br />時刻1,データ1-1,データ1-2,データ1-3<br />時刻2,データ2-1,データ2-2,データ2-3<br />...</pre>
+		＊<a href="#csv_1_4">ヘッダがない場合</a>を扱うことも可能
+	</div>
 
 <h4><div class="headline2" id="csv_1_2">CSVファイルの読み込み</div></h4>
-<div class="text1">
-pandasのread_csvを用いる方法
-<pre>import pandas as pd
-df = pd.read_csv("ファイル名")</pre>
-＊読み込み時にUnicodeDecodeErrorが出る場合は、<a href="#csv_1_9">CSVファイル読み込み時のエラー</a>参照
-</div>
+	<div class="text1">
+		pandasのread_csvを用いる方法
+		<pre>import pandas as pd<br />df = pd.read_csv("ファイル名")</pre>
+		＊読み込み時にUnicodeDecodeErrorが出る場合は、<a href="#csv_1_9">CSVファイル読み込み時のエラー</a>参照
+	</div>
 
 <h4><div class="headline2" id="csv_1_3">CSVファイルの時刻処理</div></h4>
-<div class="text1">
-<ul class="list1">
-<li>例：1列目が時刻データの場合
-<pre>import pandas as pd
-df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0])</pre>
-parse_datesには時刻データとして処理する列、index_colにはindexとして扱う列を指定<br />
-時刻データはdf.indexになる
-</li><br />
-<li>例：1列目が年、2列目が月のように複数列に時刻データが入っている場合
-<pre>df = pd.read_csv("ファイル名", parse_dates=[[0, 1]], index_col=[0])</pre>
-時刻データはdf.indexになり、年、月単独のデータは参照できない
-</li><br />
-<li>例：1列目が月、2列目が年のように並びが逆の場合
-<pre>df = pd.read_csv("ファイル名", parse_dates=[[1, 0]], index_col=[0])</pre>
-</li>
-<li>例：読み込んだ年、月の時刻データも残したい場合
-<pre>df = pd.read_csv("ファイル名", parse_dates=[[0, 1]], index_col=[0], keep_date_col=True)</pre>
-時刻データはdf.index、年、月のデータはdf.year、df.monthなどになる（yearやmonthなどは、ヘッダに記述された名前になる）
-</li>
-</ul>
-</div>
+	<div class="text1">
+		<ul class="list1">
+			<li>例：1列目が時刻データの場合<pre>import pandas as pd<br />df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0])</pre>
+				parse_datesには時刻データとして処理する列、index_colにはindexとして扱う列を指定<br />
+				時刻データはdf.indexになる
+			</li><br />
+			<li>例：1列目が年、2列目が月のように複数列に時刻データが入っている場合
+				<pre>df = pd.read_csv("ファイル名", parse_dates=[[0, 1]], index_col=[0])</pre>
+				時刻データはdf.indexになり、年、月単独のデータは参照できない
+			</li><br />
+			<li>例：1列目が月、2列目が年のように並びが逆の場合
+				<pre>df = pd.read_csv("ファイル名", parse_dates=[[1, 0]], index_col=[0])</pre>
+			</li>
+			<li>例：読み込んだ年、月の時刻データも残したい場合
+				<pre>df = pd.read_csv("ファイル名", parse_dates=[[0, 1]], index_col=[0], keep_date_col=True)</pre>
+				時刻データはdf.index、年、月のデータはdf.year、df.monthなどになる（yearやmonthなどは、ヘッダに記述された名前になる）
+			</li>
+		</ul>
+	</div>
 
 <h4><div class="headline2" id="csv_1_4">CSVファイルの行処理</div></h4>
 <div class="text1">
@@ -1027,7 +1019,7 @@ NEAREST、BOX、BILINEAR、HAMMING、BICUBIC、LANCZOSが指定可能（後の�
 </article>
 </body>
 <footer>
-<p>最終更新日：2025/01/11</p>
+<p>最終更新日：2025/05/18</p>
 <p>Copyright (C) 2018-2025, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
