@@ -213,169 +213,127 @@
 	</div>
 
 <h4><div class="headline2" id="csv_1_4">CSVファイルの行処理</div></h4>
-<div class="text1">
-<ul class="list1">
-<li>例：1行目にヘッダがなく、1行目からデータが入っている場合
-<pre>import pandas as pd
-df = pd.read_csv("ファイル名", header=None)</pre>
-</li>
-<li>例：ヘッダがない場合に、読み込み時に任意のヘッダを付ける
-<pre>df = pd.read_csv("ファイル名", header=None, names=[名前1, 名前2, , ,名前n])</pre>
-namesに与えるリストの要素数は、データの列数に合わせる
-</li><br />
-<li>例：1〜3行目にデータ以外のもの（データの説明など）が入っており、4行目がヘッダの場合
-<pre>df = pd.read_csv("ファイル名", skiprows=[0, 1, 2])</pre>
-</li>
-<li>例：1〜3行目にデータ以外のもの（データの説明など）が入っており、4行目からデータが入っている場合
-<pre>df = pd.read_csv("ファイル名", skiprows=[0, 1, 2], header=None)</pre>
-</li>
-<li>例：最初から50行を読み飛ばしたい場合
-<pre>df = pd.read_csv("ファイル名", skiprows=50)</pre>
-</li>
-</ul>
-</div>
+	<div class="text1">
+		<ul class="list1">
+			<li>例：1行目にヘッダがなく、1行目からデータが入っている場合
+				<pre>import pandas as pd<br />df = pd.read_csv("ファイル名", header=None)</pre>
+			</li>
+			<li>例：ヘッダがない場合に、読み込み時に任意のヘッダを付ける<br />
+				<pre>df = pd.read_csv("ファイル名", header=None, names=[名前1, 名前2, , ,名前n])</pre>namesに与えるリストの要素数は、データの列数に合わせる
+			</li><br />
+			<li>例：1〜3行目にデータ以外のもの（データの説明など）が入っており、4行目がヘッダの場合
+				<pre>df = pd.read_csv("ファイル名", skiprows=[0, 1, 2])</pre>
+			</li>
+			<li>例：1〜3行目にデータ以外のもの（データの説明など）が入っており、4行目からデータが入っている場合
+				<pre>df = pd.read_csv("ファイル名", skiprows=[0, 1, 2], header=None)</pre>
+			</li>
+			<li>例：最初から50行を読み飛ばしたい場合
+				<pre>df = pd.read_csv("ファイル名", skiprows=50)</pre>
+			</li>
+		</ul>
+	</div>
 
 <h4><div class="headline2" id="csv_1_5">CSVファイルの時刻がparse_dates未対応の場合</div></h4>
-<div class="text1">
-日付データへの変換処理をdate_parserに関数で指定
-<pre>import pandas as pd
-df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0], date_parser=parse_dates)</pre>
-parse_datesが関数名
-<ul class="list1">
-<li>例：時刻形式がGrADSで扱われる「00Z03FEB2020」のような形式の場合
-<pre>
-from datetime import datetime
-def parse_dates(x):
-&nbsp; &nbsp; return datetime.strptime(x, "%HZ%d%b%Y")
-
-df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0], date_parser=parse_dates)
-</pre>
-時刻表記の書式については<a href="forms.html#time">時刻表記に用いられる書式指定子一覧</a>参照</li><br />
-<li>例：時刻形式が「2020/02/03 00:00」のような形式の場合
-<pre>
-from datetime import datetime
-def parse_dates(x):
-&nbsp; &nbsp; return datetime.strptime(x, "%Y/%m/%d %H:%M")
-
-df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0], date_parser=parse_dates)
-</pre>
-</li>
-</ul>
-</div>
+	<div class="text1">
+		日付データへの変換処理をdate_parserに関数で指定
+		<pre>import pandas as pd<br />df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0], date_parser=parse_dates)</pre>
+		parse_datesが関数名
+		<ul class="list1">
+			<li>例：時刻形式がGrADSで扱われる「00Z03FEB2020」のような形式の場合
+				<pre>from datetime import datetime<br />def parse_dates(x):<br />&nbsp; &nbsp; return datetime.strptime(x, "%HZ%d%b%Y")<br /><br />df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0], date_parser=parse_dates)</pre>
+				時刻表記の書式については<a href="forms.html#time">時刻表記に用いられる書式指定子一覧</a>参照</li><br /><li>例：時刻形式が「2020/02/03 00:00」のような形式の場合
+			<pre>from datetime import datetime<br />def parse_dates(x):&nbsp; &nbsp; return datetime.strptime(x, "%Y/%m/%d %H:%M")<br /><br />df = pd.read_csv("ファイル名", parse_dates=[0], index_col=[0], date_parser=parse_dates)</pre>
+			</li>
+		</ul>
+	</div>
 
 <h4><div class="headline2" id="csv_1_6">CSVファイルの列処理</div></h4>
-<div class="text1">
-<ul class="list1">
-<li>例：読み込む列を指定する
-<pre>import pandas as pd
-df = pd.read_csv("ファイル名", usecols=[0, 3])
-</pre>
-1列目と4列目を読み込む
-</li><br />
-<li>例：経度データを−180〜180度ではなく0〜360度に
-<pre>
-df = pd.read_csv("ファイル名", オプション)
-lons = np.array([l + 360. if l &lt; 0 else l for l in df.loc[:, "longitude"]])
-</pre>
-経度ラベルがlongitudeの場合<br />
-経度データを読み、0度より小さい場合に360度を足す<br />
-リスト内包表記でリストにしたものを、Numpyのndarrayに変換して格納する（np.arrayをpd.SeriesにするとSeriesになる）
-</li>
-</ul>
-</div>
+	<div class="text1">
+		<ul class="list1">
+			<li>例：読み込む列を指定する
+				<pre>import pandas as pd<br />df = pd.read_csv("ファイル名", usecols=[0, 3])</pre>
+				1列目と4列目を読み込む
+			</li><br />
+			<li>例：経度データを−180〜180度ではなく0〜360度に
+				<pre>df = pd.read_csv("ファイル名", オプション)<br />lons = np.array([l + 360. if l &lt; 0 else l for l in df.loc[:, "longitude"]])</pre>
+				経度ラベルがlongitudeの場合<br />
+				経度データを読み、0度より小さい場合に360度を足す<br />
+				リスト内包表記でリストにしたものを、Numpyのndarrayに変換して格納する（np.arrayをpd.SeriesにするとSeriesになる）
+			</li>
+		</ul>
+	</div>
 
 <h4><div class="headline2" id="csv_1_7">CSVファイルとして書き出す</div></h4>
-<div class="text1">
-pandasのDataFrameを使う場合
-<ul class="list1">
-<li>DataFrameを書き出す
-<pre>import pandas as pd
-pd.DataFrame(d).to_csv("ファイル名")</pre>
-dはlistやnumpyのndarrayなど</li><br />
-<li>indexを無効にしてから書き出す
-<pre>pd.DataFrame(d).to_csv("ファイル名", index=False)</pre>
-1列目に番号などが入らないファイルができる</li><br />
-<li>ヘッダを付けない
-<pre>pd.DataFrame(d).to_csv("ファイル名", header=False)</pre>
-1行目にヘッダ行が入らないファイルができる</li><br />
-<li>indexもヘッダも付けないこともできる
-<pre>pd.DataFrame(d).to_csv("ファイル名", header=False, index=False)</pre>
-データのみのファイルができる</li><br />
-<li>カンマ区切りではなくタブ区切りで出力する（<a href="#tsv_1">TSVファイル</a>にする）
-<pre>pd.DataFrame(d).to_csv("ファイル名", sep='\t')</pre>
-sepで区切り文字をタブにする</li><br />
-<li>複数のndarrayからDataFrameを作成して書き出す
-<pre>
-df = pd.DataFrame(
-&nbsp; &nbsp; {
-&nbsp; &nbsp; &nbsp; &nbsp; 'index': np.array(index),
-&nbsp; &nbsp; &nbsp; &nbsp; 'mean': np.array(dmean),
-&nbsp; &nbsp; &nbsp; &nbsp; 'std': np.array(dstd)
-&nbsp; &nbsp; },
-&nbsp; &nbsp; dtype='float')
-df.to_csv("ファイル名")</pre>
-indexは時刻データ、meanは平均値、stdは標準偏差の場合で、ヘッダ行ありで書き出す<br />
-書き出す際にndarrayに変換しているので、元のindex、dmean、dstdはリスト、タプル、1次元の配列、pandasのSeriesなどに対応（サイズが異なるとエラー）</li><br />
-<li>CSVをbz2圧縮して書き出す
-<pre>import bz2
-df.to_csv("圧縮後のファイル.bz2", compression='bz2')
-</pre>
-</li><br />
-<li>CSVファイルの末尾に行を追記する
-<pre>
-df.to_csv("ファイル名")  # 新しいファイルを作成
-df2.to_csv("ファイル名", mode='a', header=False)  # 追記
-</pre>
-mode='a'が追記を表す（デフォルトはmode='w'で、存在しない場合は新規作成、存在する場合は上書き）<br />
-追記する場合、CSVファイルの途中にヘッダが入らないようにheader=Falseとする
-</li><br />
-</ul>
-</div>
+	<div class="text1">
+		pandasのDataFrameを使う場合
+		<ul class="list1">
+			<li>DataFrameを書き出す
+				<pre>import pandas as pd<br />pd.DataFrame(d).to_csv("ファイル名")</pre>
+				dはlistやnumpyのndarrayなど</li><br />
+			<li>indexを無効にしてから書き出す
+				<pre>pd.DataFrame(d).to_csv("ファイル名", index=False)</pre>
+				1列目に番号などが入らないファイルができる</li><br />
+			<li>ヘッダを付けない
+				<pre>pd.DataFrame(d).to_csv("ファイル名", header=False)</pre>
+				1行目にヘッダ行が入らないファイルができる</li><br />
+			<li>indexもヘッダも付けないこともできる
+				<pre>pd.DataFrame(d).to_csv("ファイル名", header=False, index=False)</pre>
+				データのみのファイルができる</li><br />
+			<li>カンマ区切りではなくタブ区切りで出力する（<a href="#tsv_1">TSVファイル</a>にする）
+				<pre>pd.DataFrame(d).to_csv("ファイル名", sep='\t')</pre>
+				sepで区切り文字をタブにする</li><br />
+			<li>複数のndarrayからDataFrameを作成して書き出す
+				<pre>
+				df = pd.DataFrame(<br />&nbsp; &nbsp; {<br />&nbsp; &nbsp; &nbsp; &nbsp; 'index': np.array(index),<br />&nbsp; &nbsp; &nbsp; &nbsp; 'mean': np.array(dmean),<br />&nbsp; &nbsp; &nbsp; &nbsp; 'std': np.array(dstd)<br />&nbsp; &nbsp; },<br />&nbsp; &nbsp; dtype='float')<br />df.to_csv("ファイル名")</pre>
+				indexは時刻データ、meanは平均値、stdは標準偏差の場合で、ヘッダ行ありで書き出す<br />
+				書き出す際にndarrayに変換しているので、元のindex、dmean、dstdはリスト、タプル、1次元の配列、pandasのSeriesなどに対応（サイズが異なるとエラー）</li><br />
+			<li>CSVをbz2圧縮して書き出す
+				<pre>import bz2<br />df.to_csv("圧縮後のファイル.bz2", compression='bz2')</pre>
+			</li><br />
+			<li>CSVファイルの末尾に行を追記する<pre>df.to_csv("ファイル名")  # 新しいファイルを作成<br />df2.to_csv("ファイル名", mode='a', header=False)  # 追記</pre>
+				mode='a'が追記を表す（デフォルトはmode='w'で、存在しない場合は新規作成、存在する場合は上書き）<br />
+				追記する場合、CSVファイルの途中にヘッダが入らないようにheader=Falseとする
+			</li><br />
+		</ul>
+	</div>
 
 <h4><div class="headline2" id="csv_1_8">CSVデータの文字列を数値に変換する</div></h4>
-<div class="text1">
-文字列のまま一度書き出し、再読み込みを行うと数値データに変換される
-<ul class="list1">
-<li>ファイルを利用する方法
-<pre>
-df.to_csv("tmp.csv", index=False)
-df = pd.read_csv("tmp.csv")
-</pre>
-dfはpandasのDataFrame
-</li><br />
-<li>StringIOを利用する方法
-<pre>
-from io import StringIO
-csv = df.to_csv(index=False)
-df = pd.read_csv(StringIO(csv))
-</pre>
-行の読み飛ばしオプションにも対応（<a href="#csv_1_4">CSVファイルの行処理</a>参照）
-</li><br />
-</ul>
-</div>
+	<div class="text1">
+		文字列のまま一度書き出し、再読み込みを行うと数値データに変換される
+		<ul class="list1">
+			<li>ファイルを利用する方法
+				<pre>df.to_csv("tmp.csv", index=False)<br />df = pd.read_csv("tmp.csv")</pre>
+				dfはpandasのDataFrame
+			</li><br />
+			<li>StringIOを利用する方法
+				<pre>from io import StringIO<br />csv = df.to_csv(index=False)<br />df = pd.read_csv(StringIO(csv))</pre>
+				行の読み飛ばしオプションにも対応（<a href="#csv_1_4">CSVファイルの行処理</a>参照）
+			</li><br />
+		</ul>
+	</div>
 
 <h4><div class="headline2" id="csv_1_9">CSVファイル読み込み時のエラー</div></h4>
-<div class="text1">
-読み込み時にUnicodeDecodeErrorが出る場合（UTF-8でない場合には、文字化けではなくエラーとなる）
-<pre>df = pd.read_csv("ファイル名", encoding='shift_jis')</pre>
-＊WindowsのShift JISで読み込む
-</div>
+	<div class="text1">
+		読み込み時にUnicodeDecodeErrorが出る場合（UTF-8でない場合には、文字化けではなくエラーとなる）
+		<pre>df = pd.read_csv("ファイル名", encoding='shift_jis')</pre>
+		＊WindowsのShift JISで読み込む
+	</div>
 
 <h4><div class="headline2" id="csv_1_10">圧縮されたCSVファイルの読み込み</div></h4>
-<div class="text1">
- pd.read_csvのcompressionオプションは、デフォルトで'infer'なので、ファイルの拡張子を見て圧縮ファイルかどうか判断してくれる
-<pre>df = pd.read_csv("ファイル名")</pre>
-具体的に圧縮形式を指定する場合、 pd.read_csvにcompressionオプションを付ける。
-<pre>df = pd.read_csv("ファイル名", compression="bz2")</pre>
-＊bz2で圧縮されたCSVファイルを読み込む
-</div>
+	<div class="text1">
+		pd.read_csvのcompressionオプションは、デフォルトで'infer'なので、ファイルの拡張子を見て圧縮ファイルかどうか判断してくれる
+		<pre>df = pd.read_csv("ファイル名")</pre>
+		具体的に圧縮形式を指定する場合、 pd.read_csvにcompressionオプションを付ける。
+		<pre>df = pd.read_csv("ファイル名", compression="bz2")</pre>
+		＊bz2で圧縮されたCSVファイルを読み込む
+	</div>
 
 <h4><div class="headline2" id="csv_1_11">CSVファイルを圧縮して書き出し</div></h4>
-<div class="text1">
-pandasのDataFrameの書き出しの際にcompressionオプションを付ける
-<pre>df.to_csv("ファイル名.gz", compression='gzip')</pre>
-＊gzipで圧縮したCSVファイルを書き出す
-</div>
+	<div class="text1">
+		pandasのDataFrameの書き出しの際にcompressionオプションを付ける
+		<pre>df.to_csv("ファイル名.gz", compression='gzip')</pre>
+		＊gzipで圧縮したCSVファイルを書き出す
+	</div>
 
 
 <!-- TSVファイル -->
@@ -1019,7 +977,7 @@ NEAREST、BOX、BILINEAR、HAMMING、BICUBIC、LANCZOSが指定可能（後の�
 </article>
 </body>
 <footer>
-<p>最終更新日：2025/05/18</p>
+<p>最終更新日：2025/05/19</p>
 <p>Copyright (C) 2018-2025, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
