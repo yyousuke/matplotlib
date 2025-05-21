@@ -339,76 +339,58 @@
 <!-- TSVファイル -->
 <h3><div class="headline1" id="tsv_1">TSVファイル</div></h3>
 <h4><div class="headline2" id="tsv_1_1">TSVファイルの形式</div></h4>
-<div class="text1">
-TSV（Tab-Separated Values）は、タブ区切りのテキストデータ
-<pre>
-時刻&lt;tab&gt;項目&lt;tab&gt;項目2&lt;tab&gt;項目3
-時刻1&lt;tab&gt;データ1-1&lt;tab&gt;データ1-2&lt;tab&gt;データ1-3
-時刻2&lt;tab&gt;データ2-1&lt;tab&gt;データ2-2&lt;tab&gt;データ2-3
-...
-</pre>
-＊&lt;tab&gt;は制御文字のHT（Horizontal Tabulation：水平タブ）を表す
-</div>
+	<div class="text1">
+		TSV（Tab-Separated Values）は、タブ区切りのテキストデータ
+		<pre>時刻&lt;tab&gt;項目&lt;tab&gt;項目2&lt;tab&gt;項目3<br />時刻1&lt;tab&gt;データ1-1&lt;tab&gt;データ1-2&lt;tab&gt;データ1-3<br />時刻2&lt;tab&gt;データ2-1&lt;tab&gt;データ2-2&lt;tab&gt;データ2-3<br />...</pre>
+		＊&lt;tab&gt;は制御文字のHT（Horizontal Tabulation：水平タブ）を表す
+	</div>
 
 <h4><div class="headline2" id="tsv_1_2">TSVファイルの読み込み</div></h4>
-<div class="text1">
-pandasのread_csvにsepオプションを与える
-<ul class="list1">
-<li>ヘッダ有りの場合
-<pre>df = pd.read_csv("ファイル名", sep='\t')</pre>
-CSVファイルのセパレータがタブであることを指定<br />
-ヘッダが列の名前になる</li><br />
-<li>ヘッダ無しの場合
-<pre>df = pd.read_csv("ファイル名", sep='\t', header=None)</pre>
-</li>
-<li>ヘッダ無しのファイルを読み込み列の名前を付ける場合
-<pre>df = pd.read_csv("ファイル名", sep='\t', header=None, names=('列1の名前', '列2の名前'))</pre>
-</li>
-</ul>
-＊読み込み時にUnicodeDecodeErrorが出る場合は、<a href="#csv_1_9">CSVファイル読み込み時のエラー</a>参照
-</div>
+	<div class="text1">
+		pandasのread_csvにsepオプションを与える
+		<ul class="list1">
+			<li>ヘッダ有りの場合
+				<pre>df = pd.read_csv("ファイル名", sep='\t')</pre>
+				CSVファイルのセパレータがタブであることを指定<br />
+				ヘッダが列の名前になる</li><br />
+			<li>ヘッダ無しの場合
+				<pre>df = pd.read_csv("ファイル名", sep='\t', header=None)</pre>
+			</li>
+			<li>ヘッダ無しのファイルを読み込み列の名前を付ける場合
+				<pre>df = pd.read_csv("ファイル名", sep='\t', header=None, names=('列1の名前', '列2の名前'))</pre>
+			</li>
+		</ul>
+		＊読み込み時にUnicodeDecodeErrorが出る場合は、<a href="#csv_1_9">CSVファイル読み込み時のエラー</a>参照
+	</div>
 
 <h4><div class="headline2" id="tsv_1_3">TSVファイルとして書き出す</div></h4>
-<div class="text1">
-pandasのDataFrameを使う場合
-<ul class="list1">
-<li>DataFrameを書き出す
-<pre>pd.DataFrame(d).to_csv("ファイル名", sep='\t')</pre>
-dはlistやnumpyのndarrayなど</li><br />
-<li>indexを無効にしてから書き出す
-<pre>pd.DataFrame(d).to_csv("ファイル名", sep='\t', index=False)</pre>
-1列目に番号などが入らないファイルができる</li><br />
-<li>ヘッダを付けない
-<pre>pd.DataFrame(d).to_csv("ファイル名", sep='\t', header=False)</pre>
-1行目にヘッダ行が入らないファイルができる</li>
-</ul>
-</div>
+	<div class="text1">
+		pandasのDataFrameを使う場合
+		<ul class="list1">
+			<li>DataFrameを書き出す
+				<pre>pd.DataFrame(d).to_csv("ファイル名", sep='\t')</pre>
+				dはlistやnumpyのndarrayなど</li><br />
+			<li>indexを無効にしてから書き出す
+				<pre>pd.DataFrame(d).to_csv("ファイル名", sep='\t', index=False)</pre>
+				1列目に番号などが入らないファイルができる</li><br />
+			<li>ヘッダを付けない
+				<pre>pd.DataFrame(d).to_csv("ファイル名", sep='\t', header=False)</pre>
+				1行目にヘッダ行が入らないファイルができる</li>
+		</ul>
+	</div>
 
 <h4><div class="headline2" id="tsv_1_4">LTSVファイル</div></h4>
-<div class="text1">
-TSVファイルの中には、Labeled Tab-separated Values（LTSV）形式のものがある
-。各列にラベルを付けることで、データが欠損になった場合やデータが追加になった場合にも柔軟に対応できる。
-<ul class="list1">
-<li>LTSV形式のファイルの形式
-<pre>
-time:時刻1&lt;tab&gt; lat:緯度1&lt;tab&gt; lon:経度1&lt;tab&gt; t:気温1&lt;tab&gt; p:気圧1
-time:時刻2&lt;tab&gt; lat:緯度2&lt;tab&gt; lon:経度2&lt;tab&gt; t:気温2&lt;tab&gt; p:気圧2
-...
-</pre>
-</li><br />
-<li>LTSV形式のファイルを読み込む
-<pre>
-from collections import OrderedDict
- with open(path_to_file) as f:
-&nbsp; &nbsp; df = pd.DataFrame([
-&nbsp; &nbsp; &nbsp; &nbsp; OrderedDict(
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cell.split(':', 1) for cell in line.rstrip('\r\n').split('\t'))
-&nbsp; &nbsp; &nbsp; &nbsp; for line in f
-&nbsp; &nbsp; ])
-</pre>
-</li><br />
-</ul>
-</div>
+	<div class="text1">
+		TSVファイルの中には、Labeled Tab-separated Values（LTSV）形式のものがある。各列にラベルを付けることで、データが欠損になった場合やデータが追加になった場合にも柔軟に対応できる。
+		<ul class="list1">
+			<li>LTSV形式のファイルの形式
+				<pre>time:時刻1&lt;tab&gt; lat:緯度1&lt;tab&gt; lon:経度1&lt;tab&gt; t:気温1&lt;tab&gt; p:気圧1<br />time:時刻2&lt;tab&gt; lat:緯度2&lt;tab&gt; lon:経度2&lt;tab&gt; t:気温2&lt;tab&gt; p:気圧2<br />...</pre>
+			</li><br />
+			<li>LTSV形式のファイルを読み込む
+				<pre>from collections import OrderedDict<br />with open(path_to_file) as f:<br />&nbsp; &nbsp; df = pd.DataFrame([<br />&nbsp; &nbsp; &nbsp; &nbsp; OrderedDict(<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cell.split(':', 1) for cell in line.rstrip('\r\n').split('\t'))<br />&nbsp; &nbsp; &nbsp; &nbsp; for line in f<br />&nbsp; &nbsp; ])</pre>
+			</li><br />
+		</ul>
+	</div>
 
 
 <!-- SSVファイル -->
@@ -977,7 +959,7 @@ NEAREST、BOX、BILINEAR、HAMMING、BICUBIC、LANCZOSが指定可能（後の�
 </article>
 </body>
 <footer>
-<p>最終更新日：2025/05/19</p>
+<p>最終更新日：2025/05/21</p>
 <p>Copyright (C) 2018-2025, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
