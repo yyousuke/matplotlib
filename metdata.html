@@ -396,113 +396,83 @@
 <!-- SSVファイル -->
 <h3><div class="headline1" id="ssv_1">SSVファイル</div></h3>
 <h4><div class="headline2" id="ssv_1_1">SSVファイルの形式</div></h4>
-<div class="text1">
-SSV（Space-Separated Values）は、スペース区切りのテキストデータ
-<pre>
-時刻 &nbsp;項目 &nbsp;項目2 &nbsp;項目3
-時刻1 &nbsp;データ1-1 &nbsp;データ1-2 &nbsp;データ1-3
-時刻2 &nbsp;データ2-1 &nbsp;データ2-2 &nbsp;データ2-3
-...
-</pre>
-</div>
+	<div class="text1">
+		SSV（Space-Separated Values）は、スペース区切りのテキストデータ
+		<pre>時刻 &nbsp;項目 &nbsp;項目2 &nbsp;項目3<br />時刻1 &nbsp;データ1-1 &nbsp;データ1-2 &nbsp;データ1-3<br />時刻2 &nbsp;データ2-1 &nbsp;データ2-2 &nbsp;データ2-3<br />...</pre>
+	</div>
 
 <h4><div class="headline2" id="ssv_1_2">SSVファイルの読み込み</div></h4>
-<div class="text1">
-pandasのread_csvにsepオプションを与える
-<ul class="list1">
-<li>ヘッダ有りの場合
-<pre>df = pd.read_csv("ファイル名", sep='\s+')</pre>
-CSVファイルのセパレータがスペース（連続する任意の文字数のスペース）であることを指定する<br />
-ヘッダが列の名前になる</li><br />
-<li>ヘッダ無しの場合
-<pre>df = pd.read_csv("ファイル名", sep='\s+', header=None)</pre>
-</li>
-<li>ヘッダ無しのファイルを読み込み列の名前を付ける場合
-<pre>df = pd.read_csv("ファイル名", sep='\s+', header=None, names=('列1の名前', '列2の名前'))</pre>
-</li><br />
-<li>固定長のSSVファイルの場合
-<pre>df = pd.read_fwf("ファイル名")</pre>
-個々のレコードが記述されている列が、ファイル全体で不変の場合
-</li><br />
-<li>ヘッダ無しの場合
-<pre>df = pd.read_fwf("ファイル名", header=None)</pre>
-</li>
-</ul>
-＊読み込み時にUnicodeDecodeErrorが出る場合は、<a href="#csv_1_9">CSVファイル読み込み時のエラー</a>参照
-</div>
+	<div class="text1">
+		pandasのread_csvにsepオプションを与える
+		<ul class="list1">
+			<li>ヘッダ有りの場合
+				<pre>df = pd.read_csv("ファイル名", sep='\s+')</pre>
+				CSVファイルのセパレータがスペース（連続する任意の文字数のスペース）であることを指定する<br />
+				ヘッダが列の名前になる</li><br />
+			<li>ヘッダ無しの場合
+				<pre>df = pd.read_csv("ファイル名", sep='\s+', header=None)</pre>
+			</li>
+			<li>ヘッダ無しのファイルを読み込み列の名前を付ける場合
+				<pre>df = pd.read_csv("ファイル名", sep='\s+', header=None, names=('列1の名前', '列2の名前'))</pre>
+			</li><br />
+			<li>固定長のSSVファイルの場合
+				<pre>df = pd.read_fwf("ファイル名")</pre>
+				個々のレコードが記述されている列が、ファイル全体で不変の場合
+			</li><br />
+			<li>ヘッダ無しの場合
+				<pre>df = pd.read_fwf("ファイル名", header=None)</pre>
+			</li>
+		</ul>
+		＊読み込み時にUnicodeDecodeErrorが出る場合は、<a href="#csv_1_9">CSVファイル読み込み時のエラー</a>参照
+	</div>
 
 <h4><div class="headline2" id="ssv_1_3">SSVファイルとして書き出す</div></h4>
-<div class="text1">
-pandasのDataFrameを使う場合
-<ul class="list1">
-<li>DataFrameを書き出す
-<pre>pd.DataFrame(d).to_csv("ファイル名", sep=' ')</pre>
-dはlistやnumpyのndarrayなど</li><br />
-<li>indexを無効にしてから書き出す
-<pre>pd.DataFrame(d).to_csv("ファイル名", sep=' ', index=False)</pre>
-1列目に番号などが入らないファイルができる</li><br />
-<li>ヘッダを付けない
-<pre>pd.DataFrame(d).to_csv("ファイル名", sep=' ', header=False)</pre>
-1行目にヘッダ行が入らないファイルができる</li>
-</ul>
-</div>
+	<div class="text1">
+		pandasのDataFrameを使う場合
+		<ul class="list1">
+			<li>DataFrameを書き出す
+				<pre>pd.DataFrame(d).to_csv("ファイル名", sep=' ')</pre>
+				dはlistやnumpyのndarrayなど</li><br />
+			<li>indexを無効にしてから書き出す
+				<pre>pd.DataFrame(d).to_csv("ファイル名", sep=' ', index=False)</pre>
+				1列目に番号などが入らないファイルができる</li><br />
+			<li>ヘッダを付けない
+				<pre>pd.DataFrame(d).to_csv("ファイル名", sep=' ', header=False)</pre>
+				1行目にヘッダ行が入らないファイルができる</li>
+		</ul>
+	</div>
 
 
 
 <!-- JSONファイル -->
 <h3><div class="headline1" id="json_1">JSONファイル</div></h3>
 <h4><div class="headline2" id="json_1_1">JSONファイルの形式</div></h4>
-<div class="text1">
-データの名前（キー）とデータの組み合わせを決められたフォーマットで記述し、階層構造を持たせたテキストデータ
-<pre>
-{"時刻1":{
-&nbsp; &nbsp; {"キー1":"データ1"},
-&nbsp; &nbsp; {"キー2":"データ2"},
-&nbsp; &nbsp; {"キー3":["データ3-1","データ3-2","データ3-3"]},
-&nbsp; &nbsp; ...},
-"時刻2":{
-&nbsp; &nbsp; {"キー1":"データ1"},
-&nbsp; &nbsp; {"キー2":"データ2"},
-&nbsp; &nbsp; {"キー3":["データ3-1","データ3-2","データ3-3"]},
-&nbsp; &nbsp; ...},
-...
-}
-</pre>
-＊時刻毎に複数のデータが入っている場合
-</div>
+	<div class="text1">
+		データの名前（キー）とデータの組み合わせを決められたフォーマットで記述し、階層構造を持たせたテキストデータ
+		<pre>{"時刻1":{<br />&nbsp; &nbsp; {"キー1":"データ1"},<br />&nbsp; &nbsp; {"キー2":"データ2"},<br />&nbsp; &nbsp; {"キー3":["データ3-1","データ3-2","データ3-3"]},<br />&nbsp; &nbsp; ...},<br />"時刻2":{<br />&nbsp; &nbsp; {"キー1":"データ1"},<br />&nbsp; &nbsp; {"キー2":"データ2"},<br />&nbsp; &nbsp; {"キー3":["データ3-1","データ3-2","データ3-3"]},<br />&nbsp; &nbsp; ...},<br />...<br />}</pre>
+		＊時刻毎に複数のデータが入っている場合
+	</div>
 
 <h4><div class="headline2" id="json_1_2">JSONファイルの読み込み</div></h4>
-<div class="text1">
-<ul class="list1">
-<li>jsonモジュールを使う
-<pre>import pandas as pd
-import json
-with open('ファイル名', 'rt') as fin:
-&nbsp; &nbsp; data = fin.read()
-df = pd.DataFrame(json.loads(data))</pre>
-データの名前を指定する場合
-<pre>obj = json.loads(data)
-df = pd.DataFrame(obj['データ名'])</pre>
-</li><br />
-<li>Pandasで直接読み込み
-<pre>import pandas as pd
-df = pd.read_json('ファイル名')
-</pre>
-</li><br />
-</ul>
-</div>
+	<div class="text1">
+		<ul class="list1">
+			<li>jsonモジュールを使う
+				<pre>import pandas as pd<br />import json<br />with open('ファイル名', 'rt') as fin:<br />&nbsp; &nbsp; data = fin.read()<br />df = pd.DataFrame(json.loads(data))</pre>
+				データの名前を指定する場合
+				<pre>obj = json.loads(data)<br />df = pd.DataFrame(obj['データ名'])</pre>
+			</li><br />
+			<li>Pandasで直接読み込み
+				<pre>import pandas as pd<br />df = pd.read_json('ファイル名')</pre>
+			</li><br />
+		</ul>
+	</div>
 
 <h4><div class="headline2" id="json_1_3">JSONファイルの書き出し</div></h4>
-<div class="text1">
-jsonモジュールを使う
-<pre>
-import json
-d = ...
-with open('ファイル名', 'w') as fout:
-&nbsp; &nbsp; json.dump(d, fout)
-df = pd.DataFrame(json.loads(data))</pre>
-データの形式については、<a href="#json_1_1">JSONファイルの形式</a>参照
-</div>
+	<div class="text1">
+		jsonモジュールを使う
+		<pre>import json<br />d = ...<br />with open('ファイル名', 'w') as fout:<br />&nbsp; &nbsp; json.dump(d, fout)<br />df = pd.DataFrame(json.loads(data))</pre>
+		データの形式については、<a href="#json_1_1">JSONファイルの形式</a>参照
+	</div>
 
 
 <!--  バイナリファイル -->
@@ -959,7 +929,7 @@ NEAREST、BOX、BILINEAR、HAMMING、BICUBIC、LANCZOSが指定可能（後の�
 </article>
 </body>
 <footer>
-<p>最終更新日：2025/05/21</p>
+<p>最終更新日：2025/05/22</p>
 <p>Copyright (C) 2018-2025, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
