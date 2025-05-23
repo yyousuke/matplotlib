@@ -478,164 +478,108 @@
 <!--  バイナリファイル -->
 <h3><div class="headline1" id="bin_1">バイナリファイル</div></h3>
 <h4><div class="headline2" id="bin_1_1">バイナリファイルの形式</div></h4>
-<div class="text1">
-ここでは、GrADS等で用いられる下記の形式の単純なバイナリファイルについて記載している。<a href="#bin_2">NumPy独自のバイナリ（npy、npz）</a>とは異なる。<br />
-4バイト浮動小数点数（単精度）のデータや8バイト浮動小数点数（倍精度）のデータを改行コード無しで並べた単純バイナリ形式<br />
-<ul class="list1">
-<li>例：単精度で経度、緯度方向とも10度の等間隔データの場合
-<pre>
-t=0： | 0E, 90N | 10E, 90N | ... | 350E, 90N |
-t=0： | 0E, 80N | 10E, 80N | ... | 350E, 80N |
-...
-t=1： | 0E, 90S | 10E, 80N | ... | 350E, 80N |
-t=1： | 0E, 90N | 10E, 90N | ... | 350E, 90N |
-t=1： | 0E, 80N | 10E, 80N | ... | 350E, 80N |
-...
-t=1： | 0E, 90S | 10E, 80N | ... | 350E, 80N |
-</pre>
-| |で囲まれた部分がデータを表していて、1つのサイズが4バイト<br />
-</li>
-</ul>
-</div>
+	<div class="text1">
+		ここでは、GrADS等で用いられる下記の形式の単純なバイナリファイルについて記載している。<a href="#bin_2">NumPy独自のバイナリ（npy、npz）</a>とは異なる。<br />
+		4バイト浮動小数点数（単精度）のデータや8バイト浮動小数点数（倍精度）のデータを改行コード無しで並べた単純バイナリ形式<br />
+		<ul class="list1">
+			<li>例：単精度で経度、緯度方向とも10度の等間隔データの場合
+				<pre>t=0： | 0E, 90N | 10E, 90N | ... | 350E, 90N |<br />t=0： | 0E, 80N | 10E, 80N | ... | 350E, 80N |<br />...<br />t=1： | 0E, 90S | 10E, 80N | ... | 350E, 80N |<br />t=1： | 0E, 90N | 10E, 90N | ... | 350E, 90N |<br />t=1： | 0E, 80N | 10E, 80N | ... | 350E, 80N |<br />...<br />t=1： | 0E, 90S | 10E, 80N | ... | 350E, 80N |</pre>
+				| |で囲まれた部分がデータを表していて、1つのサイズが4バイト<br />
+			</li>
+		</ul>
+	</div>
 
 <h4><div class="headline2" id="bin_1_2">バイナリファイルのエンディアン</div></h4>
-<div class="text1">
-エンディアン：2バイト以上のデータを保存する場合の保存順序の規則<br />
-ビックエンディアン（Big Endian）とリトルエンディアン（Little endian）の２種類
-<ul class="list1">
-<li>例：4バイトの場合
-<pre>
-データ：AABBCCDD
-
-ビックエンディアン：AABBCCDD（上位から保存）
-リトルエンディアン：DDCCBBAA（下位から保存）
-</pre>
-</li>
-</ul>
-</div>
+	<div class="text1">
+		エンディアン：2バイト以上のデータを保存する場合の保存順序の規則<br />
+		ビックエンディアン（Big Endian）とリトルエンディアン（Little endian）の２種類
+		<ul class="list1">
+			<li>例：4バイトの場合
+				<pre>データ：AABBCCDD<br /><br />ビックエンディアン：AABBCCDD（上位から保存）<br />リトルエンディアン：DDCCBBAA（下位から保存）</pre>
+			</li>
+		</ul>
+	</div>
 
 
 <h4><div class="headline2" id="bin_1_3">バイナリファイルの読み込み</div></h4>
-<div class="text1">
-<ul class="list1">
-<li>Numpyを使った方法（先頭からdatasize分だけ読み込み）
-<pre>
-import numpy as np
+	<div class="text1">
+		<ul class="list1">
+			<li>Numpyを使った方法（先頭からdatasize分だけ読み込み）
 
-endian = 'big'
-idim = 288 # 経度方向のサイズ（整数）
-jdim = 145 # 緯度方向のサイズ（整数）
-num_rec = 3 # データの個数（整数）
-datasize = idim * jdim * num_rec # 読み込むデータサイズ（個数）
-if endian == 'big':
-&nbsp; &nbsp; din = np.fromfile('読み込むファイル名', dtype='&gt;f4', count=datasize)
-else:
-&nbsp; &nbsp; din = np.fromfile('読み込むファイル名', dtype='&lt;f4', count=datasize)
-d = din.reshape(num_rec, jdim, idim)
-</pre>
-ビックエンディアンの単精度（4バイト）浮動小数点数の場合がdtype='&gt;f4'の書式に対応<br />
-リトルエンディアンの場合にはdtype='&lt;f4'となる<br />
-書式の一覧は<a href="numpy.html#dtype_2">Numpyバイナリデータ読み書きの書式一覧</a>参照
-</li><br />
-<li>arrayを使った方法（指定した時刻データを切り出す）<br />
-np.fromfileではメモリサイズ不足の場合など
-<pre>
-import array
-import sys
-
-idim = 288 # 経度方向のサイズ（整数）
-jdim = 145 # 緯度方向のサイズ（整数）
-tsta = 5 # 開始データ番号（整数、データの先頭番号は１）
-tend = 7 # 終了データ番号（整数、データの先頭番号は１）
-datasize = idim * jdim # 水平方向のデータサイズ（個数）
-with open('読み込むファイル名', 'rb') as fin:
-&nbsp; &nbsp; fin.seek(4 * datasize * (tsta - 1), 0) # 開始データの前まで読み飛ばす（単位：byte）
-&nbsp; &nbsp; buf = array.array('f') # 4バイト浮動小数点数
-&nbsp; &nbsp; buf.fromfile(fin, datasize * (tend - tsta + 1)) # データの読み込み
-&nbsp; &nbsp; if sys.byteorder == 'little':
-&nbsp; &nbsp; &nbsp; &nbsp; buf.byteswap()
-# bufからlistに変換し、x-, y-の配列に
-d = np.array(buf.tolist()).reshape(jdim, idim)
-</pre>
-4バイト浮動小数点数の場合のarray書式（'f'）<br />
-sys.byteorderを使い、ビックエンディアンとリトルエンディアンを判定（システムがリトルエンディアンの場合にビックエンディアンとして読み込むようにしている）<br />
-ここではデータの先頭番号が１としているが、先頭番号を0としたい場合には、tsta - 1をtstaに、tend - tsta + 1をtend - tstaに変える<br />
-8バイト浮動小数点数の場合、array書式（'d'）となり、fin.seekで読み飛ばすサイズは8*datasize*レコード数（byte）、となる
-</li>
-</ul>
-</div>
+				<pre>import numpy as np<br /><br />endian = 'big'<br />idim = 288 # 経度方向のサイズ（整数）<br />jdim = 145 # 緯度方向のサイズ（整数）<br />num_rec = 3 # データの個数（整数）<br />datasize = idim * jdim * num_rec # 読み込むデータサイズ（個数）<br />if endian == 'big':<br />&nbsp; &nbsp; din = np.fromfile('読み込むファイル名', dtype='&gt;f4', count=datasize)<br />else:<br />&nbsp; &nbsp; din = np.fromfile('読み込むファイル名', dtype='&lt;f4', count=datasize)<br />d = din.reshape(num_rec, jdim, idim)<br /></pre>
+				ビックエンディアンの単精度（4バイト）浮動小数点数の場合がdtype='&gt;f4'の書式に対応<br />
+				リトルエンディアンの場合にはdtype='&lt;f4'となる<br />
+				書式の一覧は<a href="numpy.html#dtype_2">Numpyバイナリデータ読み書きの書式一覧</a>参照
+			</li><br />
+			<li>arrayを使った方法（指定した時刻データを切り出す）<br />
+				np.fromfileではメモリサイズ不足の場合など
+				<pre>import array<br />import sys<br /><br />idim = 288 # 経度方向のサイズ（整数）<br />jdim = 145 # 緯度方向のサイズ（整数）<br />tsta = 5 # 開始データ番号（整数、データの先頭番号は１）<br />tend = 7 # 終了データ番号（整数、データの先頭番号は１）<br />datasize = idim * jdim # 水平方向のデータサイズ（個数）<br />with open('読み込むファイル名', 'rb') as fin:<br />&nbsp; &nbsp; fin.seek(4 * datasize * (tsta - 1), 0) # 開始データの前まで読み飛ばす（単位：byte）<br />&nbsp; &nbsp; buf = array.array('f') # 4バイト浮動小数点数<br />&nbsp; &nbsp; buf.fromfile(fin, datasize * (tend - tsta + 1)) # データの読み込み<br />&nbsp; &nbsp; if sys.byteorder == 'little':<br />&nbsp; &nbsp; &nbsp; &nbsp; buf.byteswap()<br /># bufからlistに変換し、x-, y-の配列に<br />d = np.array(buf.tolist()).reshape(jdim, idim)</pre>
+				4バイト浮動小数点数の場合のarray書式（'f'）<br />
+				sys.byteorderを使い、ビックエンディアンとリトルエンディアンを判定（システムがリトルエンディアンの場合にビックエンディアンとして読み込むようにしている）<br />
+				ここではデータの先頭番号が１としているが、先頭番号を0としたい場合には、tsta - 1をtstaに、tend - tsta + 1をtend - tstaに変える<br />
+				8バイト浮動小数点数の場合、array書式（'d'）となり、fin.seekで読み飛ばすサイズは8*datasize*レコード数（byte）、となる
+			</li>
+		</ul>
+	</div>
 
 <h4><div class="headline2" id="bin_1_4">バイナリファイルの書き出し</div></h4>
-<div class="text1">
-<ul class="list1">
-<li>Numpyを使った方法（ndarrayのメソッドを使って書き出す）
-<pre>
-np.array(d).tofile("ファイル名")
-</pre>
-dはlistやnumpyのndarray、pandasのDataFrameなど<br />
-書き出されるデータのエンディアンはマシン依存</li><br />
-<li>データの型を指定する場合
-<pre>
-np.array(d).tofile("ファイル名", dtype=np.float32)
-</pre>
-単精度（4バイト）浮動小数点型で書き出す場合</li><br />
-<li>データをbig endianで書き出す場合
-<pre>
-np.array(d).astype('&gt;f4').tofile("ファイル名")
-</pre></li>
-<li>データをlittle endianで書き出す場合
-<pre>
-np.array(d).astype('&lt;f4').tofile("ファイル名")
-</pre></li>
-<li>データを倍精度（8バイト）浮動小数点型のlittle endianで書き出す場合
-<pre>
-np.array(d).astype('&lt;f8').tofile("ファイル名")
-</pre>
-書式の一覧は<a href="numpy.html#dtype_2">Numpyバイナリデータ読み書きの書式一覧</a>参照</li>
-</ul>
-</div>
+	<div class="text1">
+		<ul class="list1">
+			<li>Numpyを使った方法（ndarrayのメソッドを使って書き出す）
+				<pre>np.array(d).tofile("ファイル名")</pre>dはlistやnumpyのndarray、pandasのDataFrameなど<br />
+				書き出されるデータのエンディアンはマシン依存</li><br />
+			<li>データの型を指定する場合
+				<pre>np.array(d).tofile("ファイル名", dtype=np.float32)</pre>
+				単精度（4バイト）浮動小数点型で書き出す場合</li><br />
+			<li>データをbig endianで書き出す場合
+				<pre>np.array(d).astype('&gt;f4').tofile("ファイル名")</pre></li>
+			<li>データをlittle endianで書き出す場合
+				<pre>np.array(d).astype('&lt;f4').tofile("ファイル名")</pre></li>
+			<li>データを倍精度（8バイト）浮動小数点型のlittle endianで書き出す場合
+				<pre>np.array(d).astype('&lt;f8').tofile("ファイル名")</pre>
+				書式の一覧は<a href="numpy.html#dtype_2">Numpyバイナリデータ読み書きの書式一覧</a>参照</li>
+
+		</ul>
+	</div>
 
 
 <!--  Numpy独自のバイナリファイル -->
 <h3><div class="headline1" id="bin_2">Numpy独自のバイナリファイル</div></h3>
 <h4><div class="headline2" id="bin_2_1">Numpy独自のバイナリファイルの形式</div></h4>
-<div class="text1">
-Numpyでは、内部で使われている配列ndarrayをNumpy独自のバイナリファイル（npy、npz）として保存できる。配列のデータ型や形状を保持でき、npyでは1つの配列、npzでは複数の配列を保存できる。このバイナリ形式はNumpy独自であり機種依存性もあるため、基本的には同じマシンでNumpyを利用して読み書きを行う。
-</div>
+	<div class="text1">
+		Numpyでは、内部で使われている配列ndarrayをNumpy独自のバイナリファイル（npy、npz）として保存できる。配列のデータ型や形状を保持でき、npyでは1つの配列、npzでは複数の配列を保存できる。このバイナリ形式はNumpy独自であり機種依存性もあるため、基本的には同じマシンでNumpyを利用して読み書きを行う。
+	</div>
 
 <h4><div class="headline2" id="bin_2_2">Numpy独自のバイナリファイルの読み書き</div></h4>
-<div class="text1">
-モジュールをインポートする
-<pre>import numpy as np</pre><br />
-<ul class="list1">
-<li>Numpyを使って読み込む（npy、npz共通）
-<pre>d = np.load('ファイルへのパス')</pre>
-</li><br />
-<li>Numpyを使って書き出す（npy）
-<pre>np.save('ファイルへのパス', d)</pre>
-＊dは配列ndarray
-</li><br />
-<li>Numpyを使って書き出す（npz）
-<pre>np.savez('ファイルへのパス', d1, d2)</pre>
-＊d1, d2は配列ndarray
-</li><br />
-<li>Numpyを使って書き出す（npz、キーワードあり）
-<pre>np.savez('ファイルへのパス', data=d, lons=lons, lats=lats)</pre>
-＊d、lons、latsは配列ndarray
-</li><br />
-<li>Numpyを使って書き出す（npz、キーワードあり、圧縮）
-<pre>np.savez_compressed('ファイルへのパス', data=d, lons=lons, lats=lats)</pre>
-</li><br />
-<li>Numpyを使って読み込む（npz、キーワードあり）
-<pre>d = np.load('ファイルへのパス')
-lons = d['lons']
-lats = d['lats']
-data = d['data']
-</pre>
-＊lons、lats、dataに保存した配列が入る
-</li><br />
-</ul>
-</div>
+	<div class="text1">
+		モジュールをインポートする
+		<pre>import numpy as np</pre>
+		<ul class="list1">
+			<li>Numpyを使って読み込む（npy、npz共通）
+				<pre>d = np.load('ファイルへのパス')</pre>
+			</li><br />
+			<li>Numpyを使って書き出す（npy）
+				<pre>np.save('ファイルへのパス', d)</pre>
+				＊dは配列ndarray
+			</li><br />
+			<li>Numpyを使って書き出す（npz）
+				<pre>np.savez('ファイルへのパス', d1, d2)</pre>
+				＊d1, d2は配列ndarray
+			</li><br />
+			<li>Numpyを使って書き出す（npz、キーワードあり）
+				<pre>np.savez('ファイルへのパス', data=d, lons=lons, lats=lats)</pre>
+				＊d、lons、latsは配列ndarray
+			</li><br />
+			<li>Numpyを使って書き出す（npz、キーワードあり、圧縮）
+				<pre>np.savez_compressed('ファイルへのパス', data=d, lons=lons, lats=lats)</pre>
+			</li><br />
+			<li>Numpyを使って読み込む（npz、キーワードあり）
+				<pre>d = np.load('ファイルへのパス')<br />
+				lons = d['lons']<br />lats = d['lats']<br />data = d['data']</pre>
+				＊lons、lats、dataに保存した配列が入る
+			</li><br />
+		</ul>
+	</div>
 
 
 <!--  NetCDFファイル -->
@@ -929,7 +873,7 @@ NEAREST、BOX、BILINEAR、HAMMING、BICUBIC、LANCZOSが指定可能（後の�
 </article>
 </body>
 <footer>
-<p>最終更新日：2025/05/22</p>
+<p>最終更新日：2025/05/23</p>
 <p>Copyright (C) 2018-2025, Yousuke Yamashita, CC BY 4.0</p>
 </footer>
 </html>
