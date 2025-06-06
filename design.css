@@ -77,7 +77,7 @@ h2{
 	padding-left:0.5em;
 	margin-left:0.5em;
 	margin-top:1em;
-	margin-bottom:1em;
+	margin-bottom:0em;
 	}
 
 h3{
@@ -110,7 +110,7 @@ h4{
 	padding-left:0.5em;
 	margin-left:0.5em;
 	margin-top:1em;
-	margin-bottom:1em;
+	margin-bottom:0.1em;
 	border-bottom-style:solid;
 	border-bottom-color:#cccccc;
 	border-bottom-width:1px;
@@ -123,10 +123,10 @@ h4{
 	border-left:solid 0.4em #0000ff;
 	padding-left:0.5em;
 	padding-top:0.2em;
-	padding-bottom:0.2em;
+	padding-bottom:0.3em;
 	margin-left:1em;
 	margin-top:0.8em;
-	margin-bottom:0.8em;
+	margin-bottom:0.1em;
 }
 
 .headline-scroll {
@@ -135,7 +135,7 @@ h4{
 	width:800px;
 	border-left:solid 0.4em #0000ff;
 	padding-top:0.2em;
-	padding-bottom:0.5em;
+	padding-bottom:0.8em;
 	padding-left:0.5em;
 	margin-left:0.5em;
 	margin-top:1em;
@@ -298,12 +298,12 @@ h4{
 .headline-scroll {
         height:21px;
         width:95%;
-        padding-top:0.0em;
-        padding-bottom:0.0em;
+        padding-top: 0.0em;
+        padding-bottom:0.8em;
         padding-left:0.5em;
         margin-left:0.0em;
         margin-top:0.5em;
-        margin-bottom:0.5em;
+        margin-bottom:0.7em;
         box-sizing: border-box;
         white-space: pre;
         white-space: pre-line;
